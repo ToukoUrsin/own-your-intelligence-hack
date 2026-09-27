@@ -97,7 +97,7 @@ export async function handleTicket(ticket: string, hint?: string): Promise<Trace
       // The model occasionally ends a turn without text; ask once more for the customer reply.
       if (!reply.trim() && modelCalls < 12) {
         messages.pop(); // drop the empty assistant turn
-        const last = messages[messages.length - 1];
+        const last = messages[messages.length - 1]!;
         const nudge = { type: "text" as const, text: "Write the reply to the customer now." };
         last.content = typeof last.content === "string" ? [{ type: "text", text: last.content }, nudge] : [...last.content, nudge];
         continue;
