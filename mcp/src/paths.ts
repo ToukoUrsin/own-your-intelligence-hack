@@ -63,10 +63,10 @@ export async function savePath(task: string, toolCalls: ToolCall[]) {
   const normalized = await memory.normalize(task);
   const r = await memory.recall(normalized.request);
   if (r.procedure && (r.similarity >= 0.95)) {
-    const { procedure } = await memory.saveProcedure({ sessionId: "qm-chat", normalized, steps, harness: "kettle-support-agent-qm" });
+    const { procedure } = await memory.saveProcedure({ sessionId: "qm-chat", normalized, steps, harness: "northwind-support-agent-qm" });
     return { saved: false, reason: "already known (reinforced)", id: procedure?.id ?? r.procedure.id, title: procedure?.title ?? r.procedure.title };
   }
-  const { procedure, created } = await memory.saveProcedure({ sessionId: "qm-chat", normalized, steps, embedding: r.embedding, harness: "kettle-support-agent-qm" });
+  const { procedure, created } = await memory.saveProcedure({ sessionId: "qm-chat", normalized, steps, embedding: r.embedding, harness: "northwind-support-agent-qm" });
   return { saved: created, id: procedure?.id, title: procedure?.title, steps: procedure?.path, calls: steps.length, callsFrom: source, normalizer: normalized.source };
 }
 

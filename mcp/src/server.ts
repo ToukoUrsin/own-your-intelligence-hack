@@ -1,4 +1,4 @@
-// Kettle & Co support tools as a Streamable-HTTP MCP server (stateless, JSON responses) for QM.
+// Northwind Outfitters support tools as a Streamable-HTTP MCP server (stateless, JSON responses) for QM.
 // Exposes the support agent's tools (mirrored in tools.ts) plus recall_path / save_path.
 // Every tools/call is logged with timing to mcp/logs/calls.jsonl.
 import { appendFileSync, mkdirSync } from "node:fs";
@@ -42,7 +42,7 @@ async function dispatch(name: string, args: any): Promise<unknown> {
 }
 
 function build() {
-  const server = new Server({ name: "kettle-support", version: "0.2.0" }, { capabilities: { tools: {} } });
+  const server = new Server({ name: "northwind-support", version: "0.2.0" }, { capabilities: { tools: {} } });
   server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: allTools }));
   server.setRequestHandler(CallToolRequestSchema, async (req) => {
     const { name } = req.params;
@@ -78,4 +78,4 @@ Bun.serve({
     return transport.handleRequest(req);
   },
 });
-console.log(`kettle-support MCP on http://127.0.0.1:${PORT}/mcp (${allTools.length} tools)`);
+console.log(`northwind-support MCP on http://127.0.0.1:${PORT}/mcp (${allTools.length} tools)`);

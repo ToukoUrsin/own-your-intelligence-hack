@@ -8,3 +8,5 @@ event/photos/
 event/audio/
 .brain-home/
 data/.seed_shopify.log
+replay/demo-procedures.jsonl
+.memorable-home/
