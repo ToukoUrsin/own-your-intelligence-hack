@@ -35,7 +35,8 @@ Hackathon agenda
 - Teams up to 5; capacity 225.
 - Garry Tan: "build and own your own intelligence: your own agent, your own models, your own memory."
 - River AI gives out training-API credits at the event.
-- Not published (ask at opening): judges, prizes, rubric, pre-existing-code rule, submission format.
+- Rules: must use GBrain; no prebuilt projects or forks of existing projects; build during hackathon hours.
+- Submit by 17:00: public GitHub URL, video, team name, emails, description, side quests. Details in [event/NOTES.md](event/NOTES.md).
 
 ## Framework
 
