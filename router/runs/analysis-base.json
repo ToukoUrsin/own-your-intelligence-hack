@@ -1,0 +1,2876 @@
+{
+ "target": "base",
+ "replay_tickets": {
+  "accuracy": 0.31,
+  "mean_confidence": 0.672,
+  "mean_nll": 0.465,
+  "library": [
+   {
+    "min_conf": 0,
+    "workflows": 31,
+    "workflows_correct_key": 18,
+    "explored": 199,
+    "reuse_rate": 0.502,
+    "correct_reuse_rate": 0.375,
+    "wrong_reuse_rate": 0.128
+   },
+   {
+    "min_conf": 0.5,
+    "workflows": 28,
+    "workflows_correct_key": 18,
+    "explored": 258,
+    "reuse_rate": 0.355,
+    "correct_reuse_rate": 0.278,
+    "wrong_reuse_rate": 0.077
+   },
+   {
+    "min_conf": 0.8,
+    "workflows": 18,
+    "workflows_correct_key": 13,
+    "explored": 339,
+    "reuse_rate": 0.152,
+    "correct_reuse_rate": 0.128,
+    "wrong_reuse_rate": 0.025
+   }
+  ]
+ },
+ "val": {
+  "accuracy": 0.227,
+  "mean_confidence": 0.737,
+  "mean_nll": 0.354,
+  "gate": [
+   {
+    "min_conf": 0,
+    "coverage": 1.0,
+    "accuracy_when_routed": 0.227
+   },
+   {
+    "min_conf": 0.5,
+    "coverage": 0.847,
+    "accuracy_when_routed": 0.201
+   },
+   {
+    "min_conf": 0.7,
+    "coverage": 0.607,
+    "accuracy_when_routed": 0.198
+   },
+   {
+    "min_conf": 0.8,
+    "coverage": 0.46,
+    "accuracy_when_routed": 0.174
+   },
+   {
+    "min_conf": 0.9,
+    "coverage": 0.27,
+    "accuracy_when_routed": 0.235
+   },
+   {
+    "min_conf": 0.95,
+    "coverage": 0.167,
+    "accuracy_when_routed": 0.18
+   }
+  ]
+ },
+ "rows": [
+  {
+   "id": "T0001",
+   "gold": "status",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.6554
+  },
+  {
+   "id": "T0002",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.4893
+  },
+  {
+   "id": "T0003",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8116
+  },
+  {
+   "id": "T0004",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9263
+  },
+  {
+   "id": "T0005",
+   "gold": "reset_2fa",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.8409
+  },
+  {
+   "id": "T0006",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.4929
+  },
+  {
+   "id": "T0007",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.9829
+  },
+  {
+   "id": "T0008",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.6197
+  },
+  {
+   "id": "T0009",
+   "gold": "manage_payment_method",
+   "raw": "manage_account",
+   "intent": "none",
+   "confidence": 0.832
+  },
+  {
+   "id": "T0010",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.8026
+  },
+  {
+   "id": "T0011",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.5951
+  },
+  {
+   "id": "T0012",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9954
+  },
+  {
+   "id": "T0013",
+   "gold": "status_due_date",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.752
+  },
+  {
+   "id": "T0014",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.904
+  },
+  {
+   "id": "T0015",
+   "gold": "manage",
+   "raw": "none",
+   "intent": "none",
+   "confidence": 0.9917
+  },
+  {
+   "id": "T0016",
+   "gold": "bad_price_yesterday",
+   "raw": "bad_price_yesterday",
+   "intent": "bad_price_yesterday",
+   "confidence": 0.9168
+  },
+  {
+   "id": "T0017",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.998
+  },
+  {
+   "id": "T0018",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.6726
+  },
+  {
+   "id": "T0019",
+   "gold": "status",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.8766
+  },
+  {
+   "id": "T0020",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.9563
+  },
+  {
+   "id": "T0021",
+   "gold": "bad_price_competitor",
+   "raw": "purchase_dispute: bad_price_competitor",
+   "intent": "bad_price_competitor",
+   "confidence": 0.3488
+  },
+  {
+   "id": "T0022",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8602
+  },
+  {
+   "id": "T0023",
+   "gold": "status_active",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.7383
+  },
+  {
+   "id": "T0024",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.8898
+  },
+  {
+   "id": "T0025",
+   "gold": "manage_change_phone",
+   "raw": "manage_change_phone",
+   "intent": "manage_change_phone",
+   "confidence": 0.6758
+  },
+  {
+   "id": "T0026",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6377
+  },
+  {
+   "id": "T0027",
+   "gold": "status",
+   "raw": "order_issue: status_shipping_question",
+   "intent": "status_shipping_question",
+   "confidence": 0.4944
+  },
+  {
+   "id": "T0028",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.653
+  },
+  {
+   "id": "T0029",
+   "gold": "policy",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.977
+  },
+  {
+   "id": "T0030",
+   "gold": "status_delivery_time",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6676
+  },
+  {
+   "id": "T0031",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9977
+  },
+  {
+   "id": "T0032",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.4869
+  },
+  {
+   "id": "T0033",
+   "gold": "status_due_date",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.878
+  },
+  {
+   "id": "T0034",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.8763
+  },
+  {
+   "id": "T0035",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.7747
+  },
+  {
+   "id": "T0036",
+   "gold": "status",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.5224
+  },
+  {
+   "id": "T0037",
+   "gold": "manage_pay_bill",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.8031
+  },
+  {
+   "id": "T0038",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9959
+  },
+  {
+   "id": "T0039",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9857
+  },
+  {
+   "id": "T0040",
+   "gold": "manage",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.2564
+  },
+  {
+   "id": "T0041",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.4542
+  },
+  {
+   "id": "T0042",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.7515
+  },
+  {
+   "id": "T0043",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.3686
+  },
+  {
+   "id": "T0044",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.712
+  },
+  {
+   "id": "T0045",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.6425
+  },
+  {
+   "id": "T0046",
+   "gold": "return_color",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.435
+  },
+  {
+   "id": "T0047",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.577
+  },
+  {
+   "id": "T0048",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.7956
+  },
+  {
+   "id": "T0049",
+   "gold": "refund_update",
+   "raw": "refund_update",
+   "intent": "refund_update",
+   "confidence": 0.9257
+  },
+  {
+   "id": "T0050",
+   "gold": "status_service_removed",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.5251
+  },
+  {
+   "id": "T0051",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.6969
+  },
+  {
+   "id": "T0052",
+   "gold": "status_due_date",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.8744
+  },
+  {
+   "id": "T0053",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9982
+  },
+  {
+   "id": "T0054",
+   "gold": "membership",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.9094
+  },
+  {
+   "id": "T0055",
+   "gold": "status",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.3267
+  },
+  {
+   "id": "T0056",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.8155
+  },
+  {
+   "id": "T0057",
+   "gold": "status_service_added",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.8383
+  },
+  {
+   "id": "T0058",
+   "gold": "missing",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.6276
+  },
+  {
+   "id": "T0059",
+   "gold": "cost",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.9132
+  },
+  {
+   "id": "T0060",
+   "gold": "reset_2fa",
+   "raw": "manage_change_phone",
+   "intent": "manage_change_phone",
+   "confidence": 0.8812
+  },
+  {
+   "id": "T0061",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.7849
+  },
+  {
+   "id": "T0062",
+   "gold": "manage",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.8755
+  },
+  {
+   "id": "T0063",
+   "gold": "bad_price_yesterday",
+   "raw": "bad_price_yesterday",
+   "intent": "bad_price_yesterday",
+   "confidence": 0.9294
+  },
+  {
+   "id": "T0064",
+   "gold": "out_of_stock_general",
+   "raw": "out_of_stock_one_item",
+   "intent": "out_of_stock_one_item",
+   "confidence": 0.5433
+  },
+  {
+   "id": "T0065",
+   "gold": "manage_dispute_bill",
+   "raw": "purchase_dispute",
+   "intent": "none",
+   "confidence": 0.242
+  },
+  {
+   "id": "T0066",
+   "gold": "promo_code_invalid",
+   "raw": "purchase_dispute",
+   "intent": "none",
+   "confidence": 0.6435
+  },
+  {
+   "id": "T0067",
+   "gold": "bad_price_yesterday",
+   "raw": "bad_price_yesterday",
+   "intent": "bad_price_yesterday",
+   "confidence": 0.9195
+  },
+  {
+   "id": "T0068",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.5587
+  },
+  {
+   "id": "T0069",
+   "gold": "status",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.6002
+  },
+  {
+   "id": "T0070",
+   "gold": "missing",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.2352
+  },
+  {
+   "id": "T0071",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9038
+  },
+  {
+   "id": "T0072",
+   "gold": "missing",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.6909
+  },
+  {
+   "id": "T0073",
+   "gold": "status",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.5915
+  },
+  {
+   "id": "T0074",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.7021
+  },
+  {
+   "id": "T0075",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.8046
+  },
+  {
+   "id": "T0076",
+   "gold": "manage",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9827
+  },
+  {
+   "id": "T0077",
+   "gold": "missing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.6382
+  },
+  {
+   "id": "T0078",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.4946
+  },
+  {
+   "id": "T0079",
+   "gold": "status",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.9828
+  },
+  {
+   "id": "T0080",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.6425
+  },
+  {
+   "id": "T0081",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.8371
+  },
+  {
+   "id": "T0082",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.7521
+  },
+  {
+   "id": "T0083",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.72
+  },
+  {
+   "id": "T0084",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.6179
+  },
+  {
+   "id": "T0085",
+   "gold": "mistimed_billing_already_returned",
+   "raw": "product_defect: refund_status",
+   "intent": "refund_status",
+   "confidence": 0.3937
+  },
+  {
+   "id": "T0086",
+   "gold": "reset_2fa",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.8445
+  },
+  {
+   "id": "T0087",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.6208
+  },
+  {
+   "id": "T0088",
+   "gold": "status_service_added",
+   "raw": "manage_account",
+   "intent": "none",
+   "confidence": 0.5669
+  },
+  {
+   "id": "T0089",
+   "gold": "shopping_cart",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.6216
+  },
+  {
+   "id": "T0090",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.5153
+  },
+  {
+   "id": "T0091",
+   "gold": "jeans",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.937
+  },
+  {
+   "id": "T0092",
+   "gold": "missing",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.4549
+  },
+  {
+   "id": "T0093",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.7563
+  },
+  {
+   "id": "T0094",
+   "gold": "refund_initiate",
+   "raw": "order_issue: manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.9551
+  },
+  {
+   "id": "T0095",
+   "gold": "status",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.4719
+  },
+  {
+   "id": "T0096",
+   "gold": "jacket",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.9778
+  },
+  {
+   "id": "T0097",
+   "gold": "status_quantity",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.9125
+  },
+  {
+   "id": "T0098",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.602
+  },
+  {
+   "id": "T0099",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.449
+  },
+  {
+   "id": "T0100",
+   "gold": "status_delivery_time",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.5299
+  },
+  {
+   "id": "T0101",
+   "gold": "status",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.4577
+  },
+  {
+   "id": "T0102",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.3838
+  },
+  {
+   "id": "T0103",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9539
+  },
+  {
+   "id": "T0104",
+   "gold": "status_due_amount",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.7799
+  },
+  {
+   "id": "T0105",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9958
+  },
+  {
+   "id": "T0106",
+   "gold": "status",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.5309
+  },
+  {
+   "id": "T0107",
+   "gold": "refund_status",
+   "raw": "product_defect: refund_status",
+   "intent": "refund_status",
+   "confidence": 0.6107
+  },
+  {
+   "id": "T0108",
+   "gold": "status",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.8778
+  },
+  {
+   "id": "T0109",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.5892
+  },
+  {
+   "id": "T0110",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9942
+  },
+  {
+   "id": "T0111",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5326
+  },
+  {
+   "id": "T0112",
+   "gold": "refund_status",
+   "raw": "account_access: recover_username",
+   "intent": "recover_username",
+   "confidence": 0.5281
+  },
+  {
+   "id": "T0113",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.4273
+  },
+  {
+   "id": "T0114",
+   "gold": "manage_change_name",
+   "raw": "manage_change_name",
+   "intent": "manage_change_name",
+   "confidence": 0.7296
+  },
+  {
+   "id": "T0115",
+   "gold": "status",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.4365
+  },
+  {
+   "id": "T0116",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.5223
+  },
+  {
+   "id": "T0117",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5216
+  },
+  {
+   "id": "T0118",
+   "gold": "status",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.418
+  },
+  {
+   "id": "T0119",
+   "gold": "status_delivery_time",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.5362
+  },
+  {
+   "id": "T0120",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9881
+  },
+  {
+   "id": "T0121",
+   "gold": "manage_create",
+   "raw": "order_issue: manage_create",
+   "intent": "manage_create",
+   "confidence": 0.6132
+  },
+  {
+   "id": "T0122",
+   "gold": "status",
+   "raw": "order_issue: status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.1679
+  },
+  {
+   "id": "T0123",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.4558
+  },
+  {
+   "id": "T0124",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.4797
+  },
+  {
+   "id": "T0125",
+   "gold": "reset_2fa",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5774
+  },
+  {
+   "id": "T0126",
+   "gold": "status",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.3203
+  },
+  {
+   "id": "T0127",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6264
+  },
+  {
+   "id": "T0128",
+   "gold": "pricing",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.6587
+  },
+  {
+   "id": "T0129",
+   "gold": "status_mystery_fee",
+   "raw": "order_issue: status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.8862
+  },
+  {
+   "id": "T0130",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5219
+  },
+  {
+   "id": "T0131",
+   "gold": "boots",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.9906
+  },
+  {
+   "id": "T0132",
+   "gold": "promo_code_invalid",
+   "raw": "purchase_dispute",
+   "intent": "none",
+   "confidence": 0.4311
+  },
+  {
+   "id": "T0133",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.7324
+  },
+  {
+   "id": "T0134",
+   "gold": "status_delivery_time",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.5653
+  },
+  {
+   "id": "T0135",
+   "gold": "status_delivery_time",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.4685
+  },
+  {
+   "id": "T0136",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.4149
+  },
+  {
+   "id": "T0137",
+   "gold": "status_credit_missing",
+   "raw": "manage_account",
+   "intent": "none",
+   "confidence": 0.8011
+  },
+  {
+   "id": "T0138",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.6022
+  },
+  {
+   "id": "T0139",
+   "gold": "policy",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.9813
+  },
+  {
+   "id": "T0140",
+   "gold": "status",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.1763
+  },
+  {
+   "id": "T0141",
+   "gold": "out_of_stock_general",
+   "raw": "out_of_stock_general",
+   "intent": "out_of_stock_general",
+   "confidence": 0.9116
+  },
+  {
+   "id": "T0142",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.4095
+  },
+  {
+   "id": "T0143",
+   "gold": "reset_2fa",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.7201
+  },
+  {
+   "id": "T0144",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.3565
+  },
+  {
+   "id": "T0145",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9906
+  },
+  {
+   "id": "T0146",
+   "gold": "jeans",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.9584
+  },
+  {
+   "id": "T0147",
+   "gold": "status_credit_missing",
+   "raw": "manage_account",
+   "intent": "none",
+   "confidence": 0.846
+  },
+  {
+   "id": "T0148",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.4585
+  },
+  {
+   "id": "T0149",
+   "gold": "status_delivery_time",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.5824
+  },
+  {
+   "id": "T0150",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9806
+  },
+  {
+   "id": "T0151",
+   "gold": "missing",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.6306
+  },
+  {
+   "id": "T0152",
+   "gold": "refund_update",
+   "raw": "refund_update",
+   "intent": "refund_update",
+   "confidence": 0.9654
+  },
+  {
+   "id": "T0153",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.9442
+  },
+  {
+   "id": "T0154",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.6195
+  },
+  {
+   "id": "T0155",
+   "gold": "recover_password",
+   "raw": "account_access: recover_password",
+   "intent": "recover_password",
+   "confidence": 0.4861
+  },
+  {
+   "id": "T0156",
+   "gold": "recover_password",
+   "raw": "account_access: recover_password",
+   "intent": "recover_password",
+   "confidence": 0.4201
+  },
+  {
+   "id": "T0157",
+   "gold": "refund_initiate",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.4581
+  },
+  {
+   "id": "T0158",
+   "gold": "recover_password",
+   "raw": "account_access: recover_password",
+   "intent": "recover_password",
+   "confidence": 0.4373
+  },
+  {
+   "id": "T0159",
+   "gold": "manage_payment_method",
+   "raw": "manage_account",
+   "intent": "none",
+   "confidence": 0.8232
+  },
+  {
+   "id": "T0160",
+   "gold": "status_mystery_fee",
+   "raw": "order_issue: status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.6072
+  },
+  {
+   "id": "T0161",
+   "gold": "refund_initiate",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.4434
+  },
+  {
+   "id": "T0162",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8355
+  },
+  {
+   "id": "T0163",
+   "gold": "credit_card",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.809
+  },
+  {
+   "id": "T0164",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.6726
+  },
+  {
+   "id": "T0165",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.6552
+  },
+  {
+   "id": "T0166",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.4823
+  },
+  {
+   "id": "T0167",
+   "gold": "promo_code_invalid",
+   "raw": "purchase_dispute: promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.3449
+  },
+  {
+   "id": "T0168",
+   "gold": "status_payment_method",
+   "raw": "order_issue: status_payment_method",
+   "intent": "status_payment_method",
+   "confidence": 0.6623
+  },
+  {
+   "id": "T0169",
+   "gold": "status_shipping_question",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.5274
+  },
+  {
+   "id": "T0170",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.3031
+  },
+  {
+   "id": "T0171",
+   "gold": "missing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.7826
+  },
+  {
+   "id": "T0172",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9885
+  },
+  {
+   "id": "T0173",
+   "gold": "missing",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.7248
+  },
+  {
+   "id": "T0174",
+   "gold": "status",
+   "raw": "order_issue: status_shipping_question",
+   "intent": "status_shipping_question",
+   "confidence": 0.1229
+  },
+  {
+   "id": "T0175",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9956
+  },
+  {
+   "id": "T0176",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9973
+  },
+  {
+   "id": "T0177",
+   "gold": "status",
+   "raw": "order_issue: status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.1976
+  },
+  {
+   "id": "T0178",
+   "gold": "status",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6041
+  },
+  {
+   "id": "T0179",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.8594
+  },
+  {
+   "id": "T0180",
+   "gold": "missing",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.4638
+  },
+  {
+   "id": "T0181",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.9752
+  },
+  {
+   "id": "T0182",
+   "gold": "credit_card",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.8284
+  },
+  {
+   "id": "T0183",
+   "gold": "status_active",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.8483
+  },
+  {
+   "id": "T0184",
+   "gold": "timing",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.5016
+  },
+  {
+   "id": "T0185",
+   "gold": "manage_upgrade",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.7141
+  },
+  {
+   "id": "T0186",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.4006
+  },
+  {
+   "id": "T0187",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.5745
+  },
+  {
+   "id": "T0188",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.5604
+  },
+  {
+   "id": "T0189",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.28
+  },
+  {
+   "id": "T0190",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.7782
+  },
+  {
+   "id": "T0191",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.8607
+  },
+  {
+   "id": "T0192",
+   "gold": "missing",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.4029
+  },
+  {
+   "id": "T0193",
+   "gold": "boots",
+   "raw": "none",
+   "intent": "none",
+   "confidence": 0.7126
+  },
+  {
+   "id": "T0194",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9476
+  },
+  {
+   "id": "T0195",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.5366
+  },
+  {
+   "id": "T0196",
+   "gold": "status",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.4618
+  },
+  {
+   "id": "T0197",
+   "gold": "timing",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.8166
+  },
+  {
+   "id": "T0198",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.7256
+  },
+  {
+   "id": "T0199",
+   "gold": "manage_pay_bill",
+   "raw": "subscription_inquiry: status_active",
+   "intent": "status_active",
+   "confidence": 0.5227
+  },
+  {
+   "id": "T0200",
+   "gold": "recover_username",
+   "raw": "account_access: recover_username",
+   "intent": "recover_username",
+   "confidence": 0.308
+  },
+  {
+   "id": "T0201",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.9107
+  },
+  {
+   "id": "T0202",
+   "gold": "status",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.7263
+  },
+  {
+   "id": "T0203",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.521
+  },
+  {
+   "id": "T0204",
+   "gold": "status_delivery_time",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.5044
+  },
+  {
+   "id": "T0205",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.4271
+  },
+  {
+   "id": "T0206",
+   "gold": "status",
+   "raw": "purchase_dispute",
+   "intent": "none",
+   "confidence": 0.415
+  },
+  {
+   "id": "T0207",
+   "gold": "policy",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.8449
+  },
+  {
+   "id": "T0208",
+   "gold": "status_quantity",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.8211
+  },
+  {
+   "id": "T0209",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.4153
+  },
+  {
+   "id": "T0210",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6436
+  },
+  {
+   "id": "T0211",
+   "gold": "manage_downgrade",
+   "raw": "manage",
+   "intent": "manage",
+   "confidence": 0.5123
+  },
+  {
+   "id": "T0212",
+   "gold": "recover_password",
+   "raw": "account_access: recover_password",
+   "intent": "recover_password",
+   "confidence": 0.5904
+  },
+  {
+   "id": "T0213",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.5569
+  },
+  {
+   "id": "T0214",
+   "gold": "cost",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.9153
+  },
+  {
+   "id": "T0215",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.7921
+  },
+  {
+   "id": "T0216",
+   "gold": "missing",
+   "raw": "shipping_issue: missing",
+   "intent": "missing",
+   "confidence": 0.7343
+  },
+  {
+   "id": "T0217",
+   "gold": "status_payment_method",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.5218
+  },
+  {
+   "id": "T0218",
+   "gold": "search_results",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.8741
+  },
+  {
+   "id": "T0219",
+   "gold": "shirt",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.991
+  },
+  {
+   "id": "T0220",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.6692
+  },
+  {
+   "id": "T0221",
+   "gold": "manage_extension",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.5733
+  },
+  {
+   "id": "T0222",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.6824
+  },
+  {
+   "id": "T0223",
+   "gold": "recover_password",
+   "raw": "account_access: recover_password",
+   "intent": "recover_password",
+   "confidence": 0.4406
+  },
+  {
+   "id": "T0224",
+   "gold": "status_due_amount",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.9091
+  },
+  {
+   "id": "T0225",
+   "gold": "mistimed_billing_never_bought",
+   "raw": "purchase_dispute",
+   "intent": "none",
+   "confidence": 0.5147
+  },
+  {
+   "id": "T0226",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.4219
+  },
+  {
+   "id": "T0227",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.7462
+  },
+  {
+   "id": "T0228",
+   "gold": "status",
+   "raw": "none",
+   "intent": "none",
+   "confidence": 0.3392
+  },
+  {
+   "id": "T0229",
+   "gold": "search_results",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.8916
+  },
+  {
+   "id": "T0230",
+   "gold": "status",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.5595
+  },
+  {
+   "id": "T0231",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.5213
+  },
+  {
+   "id": "T0232",
+   "gold": "timing",
+   "raw": "purchase_dispute: promo_code_out_of_date",
+   "intent": "promo_code_out_of_date",
+   "confidence": 0.2234
+  },
+  {
+   "id": "T0233",
+   "gold": "status_shipping_question",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.6753
+  },
+  {
+   "id": "T0234",
+   "gold": "reset_2fa",
+   "raw": "account_access: reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.4753
+  },
+  {
+   "id": "T0235",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9633
+  },
+  {
+   "id": "T0236",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.998
+  },
+  {
+   "id": "T0237",
+   "gold": "missing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.6004
+  },
+  {
+   "id": "T0238",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.5708
+  },
+  {
+   "id": "T0239",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.2262
+  },
+  {
+   "id": "T0240",
+   "gold": "status",
+   "raw": "status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.3828
+  },
+  {
+   "id": "T0241",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.7005
+  },
+  {
+   "id": "T0242",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.5534
+  },
+  {
+   "id": "T0243",
+   "gold": "status",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.4548
+  },
+  {
+   "id": "T0244",
+   "gold": "cost",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.8858
+  },
+  {
+   "id": "T0245",
+   "gold": "credit_card",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.7233
+  },
+  {
+   "id": "T0246",
+   "gold": "out_of_stock_one_item",
+   "raw": "out_of_stock_one_item",
+   "intent": "out_of_stock_one_item",
+   "confidence": 0.7582
+  },
+  {
+   "id": "T0247",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.4844
+  },
+  {
+   "id": "T0248",
+   "gold": "status_delivery_time",
+   "raw": "order_issue",
+   "intent": "none",
+   "confidence": 0.3307
+  },
+  {
+   "id": "T0249",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.2688
+  },
+  {
+   "id": "T0250",
+   "gold": "bad_price_yesterday",
+   "raw": "bad_price_yesterday",
+   "intent": "bad_price_yesterday",
+   "confidence": 0.9691
+  },
+  {
+   "id": "T0251",
+   "gold": "manage_change_name",
+   "raw": "manage_change_name",
+   "intent": "manage_change_name",
+   "confidence": 0.7754
+  },
+  {
+   "id": "T0252",
+   "gold": "refund_update",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.7486
+  },
+  {
+   "id": "T0253",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6348
+  },
+  {
+   "id": "T0254",
+   "gold": "shirt",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.9611
+  },
+  {
+   "id": "T0255",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9859
+  },
+  {
+   "id": "T0256",
+   "gold": "return_size",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.5824
+  },
+  {
+   "id": "T0257",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.5001
+  },
+  {
+   "id": "T0258",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_change",
+   "intent": "none",
+   "confidence": 0.3861
+  },
+  {
+   "id": "T0259",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.4242
+  },
+  {
+   "id": "T0260",
+   "gold": "status",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.9154
+  },
+  {
+   "id": "T0261",
+   "gold": "refund_initiate",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.3973
+  },
+  {
+   "id": "T0262",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9945
+  },
+  {
+   "id": "T0263",
+   "gold": "status",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.8128
+  },
+  {
+   "id": "T0264",
+   "gold": "jacket",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.9386
+  },
+  {
+   "id": "T0265",
+   "gold": "out_of_stock_one_item",
+   "raw": "out_of_stock_general",
+   "intent": "out_of_stock_general",
+   "confidence": 0.6961
+  },
+  {
+   "id": "T0266",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9481
+  },
+  {
+   "id": "T0267",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9418
+  },
+  {
+   "id": "T0268",
+   "gold": "refund_update",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.6394
+  },
+  {
+   "id": "T0269",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9939
+  },
+  {
+   "id": "T0270",
+   "gold": "status",
+   "raw": "status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.2677
+  },
+  {
+   "id": "T0271",
+   "gold": "missing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.5002
+  },
+  {
+   "id": "T0272",
+   "gold": "manage",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9784
+  },
+  {
+   "id": "T0273",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5938
+  },
+  {
+   "id": "T0274",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.3499
+  },
+  {
+   "id": "T0275",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.7117
+  },
+  {
+   "id": "T0276",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5283
+  },
+  {
+   "id": "T0277",
+   "gold": "shopping_cart",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.7538
+  },
+  {
+   "id": "T0278",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9914
+  },
+  {
+   "id": "T0279",
+   "gold": "manage_change_phone",
+   "raw": "manage_account: manage_change_phone",
+   "intent": "manage_change_phone",
+   "confidence": 0.2429
+  },
+  {
+   "id": "T0280",
+   "gold": "status_delivery_time",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.5267
+  },
+  {
+   "id": "T0281",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.8814
+  },
+  {
+   "id": "T0282",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.6278
+  },
+  {
+   "id": "T0283",
+   "gold": "timing",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.9424
+  },
+  {
+   "id": "T0284",
+   "gold": "manage_create",
+   "raw": "order_issue: manage_create",
+   "intent": "manage_create",
+   "confidence": 0.5349
+  },
+  {
+   "id": "T0285",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.6803
+  },
+  {
+   "id": "T0286",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.7995
+  },
+  {
+   "id": "T0287",
+   "gold": "status_due_date",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.7714
+  },
+  {
+   "id": "T0288",
+   "gold": "cost",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.7649
+  },
+  {
+   "id": "T0289",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.3389
+  },
+  {
+   "id": "T0290",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.7387
+  },
+  {
+   "id": "T0291",
+   "gold": "status",
+   "raw": "order_issue: status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.2807
+  },
+  {
+   "id": "T0292",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.5124
+  },
+  {
+   "id": "T0293",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.5707
+  },
+  {
+   "id": "T0294",
+   "gold": "jacket",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.9922
+  },
+  {
+   "id": "T0295",
+   "gold": "promo_code_out_of_date",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.6738
+  },
+  {
+   "id": "T0296",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9975
+  },
+  {
+   "id": "T0297",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.8239
+  },
+  {
+   "id": "T0298",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.4417
+  },
+  {
+   "id": "T0299",
+   "gold": "missing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.6911
+  },
+  {
+   "id": "T0300",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.5159
+  },
+  {
+   "id": "T0301",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.7409
+  },
+  {
+   "id": "T0302",
+   "gold": "promo_code_invalid",
+   "raw": "purchase_dispute: promo_code_out_of_date",
+   "intent": "promo_code_out_of_date",
+   "confidence": 0.349
+  },
+  {
+   "id": "T0303",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.8328
+  },
+  {
+   "id": "T0304",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.3017
+  },
+  {
+   "id": "T0305",
+   "gold": "shopping_cart",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.951
+  },
+  {
+   "id": "T0306",
+   "gold": "jeans",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.9374
+  },
+  {
+   "id": "T0307",
+   "gold": "bad_price_competitor",
+   "raw": "purchase_dispute: bad_price_competitor",
+   "intent": "bad_price_competitor",
+   "confidence": 0.5183
+  },
+  {
+   "id": "T0308",
+   "gold": "promo_code_out_of_date",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.7913
+  },
+  {
+   "id": "T0309",
+   "gold": "manage_upgrade",
+   "raw": "order_issue: manage_upgrade",
+   "intent": "manage_upgrade",
+   "confidence": 0.9729
+  },
+  {
+   "id": "T0310",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9951
+  },
+  {
+   "id": "T0311",
+   "gold": "cost",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.9288
+  },
+  {
+   "id": "T0312",
+   "gold": "manage",
+   "raw": "order_issue: manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.2354
+  },
+  {
+   "id": "T0313",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.6846
+  },
+  {
+   "id": "T0314",
+   "gold": "shopping_cart",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.8162
+  },
+  {
+   "id": "T0315",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6378
+  },
+  {
+   "id": "T0316",
+   "gold": "refund_status",
+   "raw": "product_defect: refund_status",
+   "intent": "refund_status",
+   "confidence": 0.6146
+  },
+  {
+   "id": "T0317",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9838
+  },
+  {
+   "id": "T0318",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.7884
+  },
+  {
+   "id": "T0319",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.5965
+  },
+  {
+   "id": "T0320",
+   "gold": "manage_pay_bill",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.7195
+  },
+  {
+   "id": "T0321",
+   "gold": "manage",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9713
+  },
+  {
+   "id": "T0322",
+   "gold": "policy",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.6889
+  },
+  {
+   "id": "T0323",
+   "gold": "status_delivery_time",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.7868
+  },
+  {
+   "id": "T0324",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.2918
+  },
+  {
+   "id": "T0325",
+   "gold": "missing",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.5906
+  },
+  {
+   "id": "T0326",
+   "gold": "status_delivery_time",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.779
+  },
+  {
+   "id": "T0327",
+   "gold": "timing",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.7032
+  },
+  {
+   "id": "T0328",
+   "gold": "manage_extension",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.8305
+  },
+  {
+   "id": "T0329",
+   "gold": "manage_dispute_bill",
+   "raw": "purchase_dispute",
+   "intent": "none",
+   "confidence": 0.556
+  },
+  {
+   "id": "T0330",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9949
+  },
+  {
+   "id": "T0331",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.9183
+  },
+  {
+   "id": "T0332",
+   "gold": "mistimed_billing_never_bought",
+   "raw": "purchase_dispute",
+   "intent": "none",
+   "confidence": 0.8103
+  },
+  {
+   "id": "T0333",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9919
+  },
+  {
+   "id": "T0334",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.8543
+  },
+  {
+   "id": "T0335",
+   "gold": "status",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.7744
+  },
+  {
+   "id": "T0336",
+   "gold": "missing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.5817
+  },
+  {
+   "id": "T0337",
+   "gold": "reset_2fa",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.8218
+  },
+  {
+   "id": "T0338",
+   "gold": "membership",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.6757
+  },
+  {
+   "id": "T0339",
+   "gold": "manage",
+   "raw": "order_issue: manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.3416
+  },
+  {
+   "id": "T0340",
+   "gold": "status_due_amount",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.7519
+  },
+  {
+   "id": "T0341",
+   "gold": "slow_speed",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.9544
+  },
+  {
+   "id": "T0342",
+   "gold": "membership",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.8019
+  },
+  {
+   "id": "T0343",
+   "gold": "status",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.3325
+  },
+  {
+   "id": "T0344",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.6346
+  },
+  {
+   "id": "T0345",
+   "gold": "missing",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.8275
+  },
+  {
+   "id": "T0346",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.8814
+  },
+  {
+   "id": "T0347",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9247
+  },
+  {
+   "id": "T0348",
+   "gold": "boots",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.5095
+  },
+  {
+   "id": "T0349",
+   "gold": "mistimed_billing_already_returned",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.7419
+  },
+  {
+   "id": "T0350",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.6068
+  },
+  {
+   "id": "T0351",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8325
+  },
+  {
+   "id": "T0352",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5523
+  },
+  {
+   "id": "T0353",
+   "gold": "missing",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.335
+  },
+  {
+   "id": "T0354",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5842
+  },
+  {
+   "id": "T0355",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9412
+  },
+  {
+   "id": "T0356",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9849
+  },
+  {
+   "id": "T0357",
+   "gold": "recover_username",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.5774
+  },
+  {
+   "id": "T0358",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.4217
+  },
+  {
+   "id": "T0359",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.7436
+  },
+  {
+   "id": "T0360",
+   "gold": "status",
+   "raw": "shipping_issue: status",
+   "intent": "status",
+   "confidence": 0.461
+  },
+  {
+   "id": "T0361",
+   "gold": "status_service_removed",
+   "raw": "subscription_inquiry",
+   "intent": "none",
+   "confidence": 0.9125
+  },
+  {
+   "id": "T0362",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9903
+  },
+  {
+   "id": "T0363",
+   "gold": "refund_status",
+   "raw": "product_defect: refund_status",
+   "intent": "refund_status",
+   "confidence": 0.63
+  },
+  {
+   "id": "T0364",
+   "gold": "manage_downgrade",
+   "raw": "order_issue: manage_upgrade",
+   "intent": "manage_upgrade",
+   "confidence": 0.2952
+  },
+  {
+   "id": "T0365",
+   "gold": "pricing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.3487
+  },
+  {
+   "id": "T0366",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.4159
+  },
+  {
+   "id": "T0367",
+   "gold": "missing",
+   "raw": "shipping_issue: missing",
+   "intent": "missing",
+   "confidence": 0.5203
+  },
+  {
+   "id": "T0368",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9035
+  },
+  {
+   "id": "T0369",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.8945
+  },
+  {
+   "id": "T0370",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.4294
+  },
+  {
+   "id": "T0371",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.5237
+  },
+  {
+   "id": "T0372",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.7212
+  },
+  {
+   "id": "T0373",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9702
+  },
+  {
+   "id": "T0374",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6762
+  },
+  {
+   "id": "T0375",
+   "gold": "credit_card",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.9268
+  },
+  {
+   "id": "T0376",
+   "gold": "manage_cancel",
+   "raw": "order_issue: manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.3832
+  },
+  {
+   "id": "T0377",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.7464
+  },
+  {
+   "id": "T0378",
+   "gold": "missing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.4546
+  },
+  {
+   "id": "T0379",
+   "gold": "status",
+   "raw": "single_item_query",
+   "intent": "none",
+   "confidence": 0.4061
+  },
+  {
+   "id": "T0380",
+   "gold": "pricing",
+   "raw": "storewide_query",
+   "intent": "none",
+   "confidence": 0.4224
+  },
+  {
+   "id": "T0381",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9988
+  },
+  {
+   "id": "T0382",
+   "gold": "search_results",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.7053
+  },
+  {
+   "id": "T0383",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.996
+  },
+  {
+   "id": "T0384",
+   "gold": "missing",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.2336
+  },
+  {
+   "id": "T0385",
+   "gold": "status",
+   "raw": "order_issue: status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.6232
+  },
+  {
+   "id": "T0386",
+   "gold": "missing",
+   "raw": "shipping_issue: missing",
+   "intent": "missing",
+   "confidence": 0.6081
+  },
+  {
+   "id": "T0387",
+   "gold": "recover_password",
+   "raw": "account_access",
+   "intent": "none",
+   "confidence": 0.7066
+  },
+  {
+   "id": "T0388",
+   "gold": "status",
+   "raw": "order_issue: status_shipping_question",
+   "intent": "status_shipping_question",
+   "confidence": 0.1907
+  },
+  {
+   "id": "T0389",
+   "gold": "status",
+   "raw": "order_issue: manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.1911
+  },
+  {
+   "id": "T0390",
+   "gold": "status_delivery_time",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.5981
+  },
+  {
+   "id": "T0391",
+   "gold": "status",
+   "raw": "order_issue: status_payment_method",
+   "intent": "status_payment_method",
+   "confidence": 0.2475
+  },
+  {
+   "id": "T0392",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9987
+  },
+  {
+   "id": "T0393",
+   "gold": "refund_update",
+   "raw": "refund_update",
+   "intent": "refund_update",
+   "confidence": 0.974
+  },
+  {
+   "id": "T0394",
+   "gold": "return_size",
+   "raw": "product_defect",
+   "intent": "none",
+   "confidence": 0.5514
+  },
+  {
+   "id": "T0395",
+   "gold": "status",
+   "raw": "order_issue: status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.5478
+  },
+  {
+   "id": "T0396",
+   "gold": "cost",
+   "raw": "shipping_issue",
+   "intent": "none",
+   "confidence": 0.9011
+  },
+  {
+   "id": "T0397",
+   "gold": "status",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.7482
+  },
+  {
+   "id": "T0398",
+   "gold": "slow_speed",
+   "raw": "troubleshoot_site",
+   "intent": "none",
+   "confidence": 0.9492
+  },
+  {
+   "id": "T0399",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.512
+  },
+  {
+   "id": "T0400",
+   "gold": "status",
+   "raw": "order_issue: status_shipping_question",
+   "intent": "status_shipping_question",
+   "confidence": 0.3571
+  }
+ ]
+}

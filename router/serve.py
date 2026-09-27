@@ -9,6 +9,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--run", required=True)
 ap.add_argument("--step", help="checkpoint step (default: latest)")
 ap.add_argument("--port", type=int, default=8789)
+ap.add_argument("--min-confidence", type=float, default=0.5, help="below this, answer none (caller explores); 0.5 beat no gate on hit and wrong recall in eval_recall.ts")
 args = ap.parse_args()
 
 import river_client as river
@@ -35,7 +36,8 @@ class H(BaseHTTPRequestHandler):
             if not isinstance(text, str) or not text.strip():
                 return self.reply(400, {"error": "text required"})
             p = classify(session, rend, [text], checkpoint=ckpt, timeout=12)[0]
-            self.reply(200, {"intent": p["intent"], "confidence": p["confidence"], "model": f"river:{args.run}@{step}"})
+            intent = p["intent"] if (p["confidence"] or 0) >= args.min_confidence else "none"
+            self.reply(200, {"intent": intent, "confidence": p["confidence"], "predicted": p["intent"], "model": f"river:{args.run}@{step}"})
         except Exception as e:  # the caller falls back to raw text on any non-200
             self.reply(502, {"error": type(e).__name__})
 
@@ -43,7 +45,7 @@ class H(BaseHTTPRequestHandler):
         print(fmt % a, flush=True)
 
 
-print(f"router on http://127.0.0.1:{args.port}/route  ({args.run} step {step})", flush=True)
+print(f"router on http://127.0.0.1:{args.port}/route  ({args.run} step {step}, min confidence {args.min_confidence})", flush=True)
 try:
     ThreadingHTTPServer(("127.0.0.1", args.port), H).serve_forever()
 finally:
