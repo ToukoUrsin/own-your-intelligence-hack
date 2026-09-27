@@ -1,0 +1,217 @@
+{
+  "run": "gate check (warm): starts from the final run's learned procedure store + plans (copies in replay/gate-check/); 42 hard + last 100 normal tickets of the final run's order; concurrency 8; recall backend local store (exact key, then cosine) so the shared Memorable store is not modified; baseline = same tickets, full agent, no memory",
+  "gate": {
+    "confidenceThreshold": 0.7,
+    "multiRequest": "regex on request clauses (two things/also/while I have you/…) or >=3 question marks",
+    "onGate": "full agent (EXPLORED), nothing learned, row carries gate_reason"
+  },
+  "calibration": {
+    "note": "threshold picked on data/heldout.jsonl (River label vs gold): 0.7 keeps 75/77 correct routes and drops 13 of 23 misrouted; the final-run slice columns are post hoc",
+    "curve": [
+      {
+        "threshold": 0.5,
+        "heldout": {
+          "pass": 0.95,
+          "routerPrecision": 0.811,
+          "correctKept": 1
+        },
+        "finalRunSlice": {
+          "correctNormalRecallsKept": 0.952,
+          "wrongNormalRecallsKept": 0.833,
+          "hardReusesStillPassing": 0.912
+        }
+      },
+      {
+        "threshold": 0.6,
+        "heldout": {
+          "pass": 0.89,
+          "routerPrecision": 0.843,
+          "correctKept": 0.974
+        },
+        "finalRunSlice": {
+          "correctNormalRecallsKept": 0.903,
+          "wrongNormalRecallsKept": 0.778,
+          "hardReusesStillPassing": 0.765
+        }
+      },
+      {
+        "threshold": 0.7,
+        "heldout": {
+          "pass": 0.85,
+          "routerPrecision": 0.882,
+          "correctKept": 0.974
+        },
+        "finalRunSlice": {
+          "correctNormalRecallsKept": 0.887,
+          "wrongNormalRecallsKept": 0.722,
+          "hardReusesStillPassing": 0.765
+        }
+      },
+      {
+        "threshold": 0.8,
+        "heldout": {
+          "pass": 0.78,
+          "routerPrecision": 0.91,
+          "correctKept": 0.922
+        },
+        "finalRunSlice": {
+          "correctNormalRecallsKept": 0.839,
+          "wrongNormalRecallsKept": 0.667,
+          "hardReusesStillPassing": 0.706
+        }
+      },
+      {
+        "threshold": 0.9,
+        "heldout": {
+          "pass": 0.73,
+          "routerPrecision": 0.932,
+          "correctKept": 0.883
+        },
+        "finalRunSlice": {
+          "correctNormalRecallsKept": 0.806,
+          "wrongNormalRecallsKept": 0.5,
+          "hardReusesStillPassing": 0.618
+        }
+      }
+    ]
+  },
+  "hard": {
+    "n": 42,
+    "sentToFullAgent": 0.262,
+    "gateReasons": [
+      [
+        "low_confidence",
+        7
+      ],
+      [
+        "multi_request",
+        4
+      ]
+    ],
+    "wrongProcedure": {
+      "gated": 0.238,
+      "ungatedFinalRun": 0.476
+    },
+    "reused": {
+      "gated": 31,
+      "ungatedFinalRun": 34
+    },
+    "gated": {
+      "recalled": {
+        "n": 28,
+        "exactActionMatch": 0.154,
+        "meanJaccard": 0.534,
+        "judgeYes": 0.286,
+        "costPerTicket": 0.0508
+      },
+      "compiled": {
+        "n": 3,
+        "exactActionMatch": 0,
+        "meanJaccard": 0.567,
+        "judgeYes": 0.667,
+        "costPerTicket": 0.0003
+      },
+      "explored": {
+        "n": 11,
+        "exactActionMatch": 0.111,
+        "meanJaccard": 0.597,
+        "judgeYes": 0.636,
+        "costPerTicket": 0.267
+      }
+    },
+    "gatedAll": {
+      "n": 42,
+      "exactActionMatch": 0.132,
+      "meanJaccard": 0.552,
+      "judgeYes": 0.405,
+      "costPerTicket": 0.1038
+    },
+    "ungatedFinalRun": {
+      "n": 42,
+      "exactActionMatch": 0.132,
+      "meanJaccard": 0.485,
+      "judgeYes": 0.357,
+      "costPerTicket": 0.0855
+    },
+    "baseline": {
+      "n": 42,
+      "exactActionMatch": 0.184,
+      "meanJaccard": 0.548,
+      "judgeYes": 0.381,
+      "costPerTicket": 0.2227
+    }
+  },
+  "normal": {
+    "n": 100,
+    "reusedShare": {
+      "gated": 0.87,
+      "ungatedFinalRun": 1
+    },
+    "gatedCount": 10,
+    "tiers": {
+      "gated": {
+        "recalled": 60,
+        "compiled": 27,
+        "explored": 13
+      },
+      "ungatedFinalRun": {
+        "recalled": 80,
+        "compiled": 20,
+        "explored": 0
+      }
+    },
+    "wrongProcedure": {
+      "gated": 0.13,
+      "ungatedFinalRun": 0.18
+    },
+    "gated": {
+      "recalled": {
+        "n": 60,
+        "exactActionMatch": 0.017,
+        "meanJaccard": 0.437,
+        "judgeYes": 0.217,
+        "costPerTicket": 0.0559
+      },
+      "compiled": {
+        "n": 27,
+        "exactActionMatch": 0.407,
+        "meanJaccard": 0.652,
+        "judgeYes": 0.37,
+        "costPerTicket": 0.0003
+      },
+      "explored": {
+        "n": 13,
+        "exactActionMatch": 0.154,
+        "meanJaccard": 0.513,
+        "judgeYes": 0.462,
+        "costPerTicket": 0.2353
+      }
+    },
+    "gatedAll": {
+      "n": 100,
+      "exactActionMatch": 0.14,
+      "meanJaccard": 0.505,
+      "judgeYes": 0.29,
+      "costPerTicket": 0.0642
+    },
+    "ungatedFinalRun": {
+      "n": 100,
+      "exactActionMatch": 0.13,
+      "meanJaccard": 0.515,
+      "judgeYes": 0.27,
+      "costPerTicket": 0.0463
+    },
+    "baseline": {
+      "n": 100,
+      "exactActionMatch": 0.21,
+      "meanJaccard": 0.579,
+      "judgeYes": 0.26,
+      "costPerTicket": 0.1982
+    }
+  },
+  "caveats": [
+    "warm run on tickets the final run already saw (store learned from them), so reuse is optimistic",
+    "ungated numbers are the final run's rows for the same tickets (cold-start run, Memorable key recall), not a rerun",
+    "judge sees ticket, reply, policy and the human agent's actions, not the shop database"
+  ]
+}

@@ -1,0 +1,142 @@
+H001 recalled  0.9876 $0.019
+H008 recalled  0.9987 $0.040
+H002 recalled  0.9976 $0.039
+H007 recalled  0.996 $0.038
+H003 recalled  0.9913 $0.056
+H005 recalled  0.9667 $0.036
+H006 recalled  0.91 $0.116
+H004 recalled  0.9838 $0.049
+H011 recalled  0.9509 $0.015
+H009 recalled  0.7311 $0.043
+H014 recalled  0.9877 $0.016
+H012 recalled  0.9124 $0.054
+H013 recalled  0.9805 $0.017
+H015 recalled  0.7456 $0.054
+H022 compiled  0.9613 $0.000
+H010 recalled  0.9983 $0.090
+H021 recalled  0.9941 $0.059
+H024 recalled  0.9938 $0.031
+H023 recalled  0.9428 $0.055
+H020 explored low_confidence:0.43<0.7 0.4275 $0.220
+H025 compiled  0.777 $0.000
+H016 explored multi_request 0.8881 $0.168
+H017 explored multi_request 0.4293 $0.287
+H019 explored low_confidence:0.56<0.7 0.5603 $0.162
+H018 explored multi_request 0.8853 $0.223
+H028 compiled  0.9791 $0.000
+H027 recalled  0.9111 $0.056
+H026 recalled  0.9502 $0.062
+H031 recalled  0.9926 $0.060
+H030 explored low_confidence:0.34<0.7 0.339 $0.177
+H029 recalled  0.9381 $0.059
+H032 recalled  0.9961 $0.048
+H037 recalled  0.8972 $0.032
+H034 explored low_confidence:0.56<0.7 0.5598 $0.161
+H039 recalled  0.9471 $0.059
+T0301 compiled  0.9954 $0.000
+H041 recalled  0.9936 $0.040
+H040 explored low_confidence:0.51<0.7 0.5124 $0.208
+H038 recalled  0.997 $0.147
+H042 recalled  0.9985 $0.034
+T0303 compiled  0.9924 $0.000
+T0304 compiled  0.9864 $0.000
+H033 explored multi_request 0.9809 $0.448
+H036 explored low_confidence:0.57<0.7 0.5726 $0.340
+T0302 recalled  0.7887 $0.056
+T0305 recalled  0.9979 $0.037
+T0310 compiled  0.9744 $0.000
+H035 explored low_confidence:0.59<0.7 0.5863 $0.545
+T0309 recalled  0.9655 $0.035
+T0306 recalled  0.9897 $0.069
+T0308 recalled  0.8577 $0.058
+T0315 compiled  0.9849 $0.000
+T0316 compiled  0.8744 $0.000
+T0307 recalled  0.9794 $0.085
+T0317 compiled  0.9419 $0.000
+T0312 recalled  0.9907 $0.017
+T0318 compiled  0.9935 $0.000
+T0314 recalled  0.9987 $0.042
+T0313 recalled  0.9736 $0.074
+T0311 recalled  0.9308 $0.117
+T0320 recalled  0.9545 $0.033
+T0321 explored   $0.066
+T0324 compiled  0.9918 $0.000
+T0322 recalled  0.9949 $0.039
+T0319 recalled  0.9738 $0.056
+T0323 recalled  0.988 $0.045
+T0327 recalled  0.9991 $0.011
+T0331 compiled  0.9918 $0.000
+T0330 compiled  0.9188 $0.000
+T0333 compiled  0.9411 $0.000
+T0328 recalled  0.9324 $0.044
+T0329 recalled  0.9884 $0.060
+T0335 recalled  0.9455 $0.066
+T0338 recalled  0.9404 $0.017
+T0337 recalled  0.9988 $0.033
+T0326 explored low_confidence:0.57<0.7 0.5712 $0.206
+T0332 recalled  0.9983 $0.092
+T0334 explored   $0.175
+T0336 recalled  0.9963 $0.066
+T0344 compiled  0.9365 $0.000
+T0341 recalled  0.9884 $0.034
+T0342 recalled  0.943 $0.019
+T0325 explored low_confidence:0.59<0.7 0.5903 $0.434
+T0347 compiled  0.9404 $0.000
+T0340 explored low_confidence:0.66<0.7 0.6575 $0.153
+T0350 compiled  0.9934 $0.000
+T0345 recalled  0.9945 $0.053
+T0348 recalled  0.957 $0.075
+T0349 recalled  0.9968 $0.032
+T0343 recalled  0.975 $0.103
+T0352 compiled  0.9842 $0.000
+T0346 recalled  0.9449 $0.057
+T0355 compiled  0.9573 $0.000
+T0356 compiled  0.9458 $0.000
+T0354 recalled  0.9922 $0.016
+T0339 explored low_confidence:0.60<0.7 0.597 $0.613
+T0357 recalled  0.9152 $0.017
+T0351 explored low_confidence:0.68<0.7 0.6831 $0.110
+T0358 recalled  0.9816 $0.048
+T0363 compiled  0.973 $0.000
+T0359 recalled  0.9629 $0.037
+T0353 recalled  0.8799 $0.085
+T0361 recalled  0.7079 $0.061
+T0364 recalled  0.9461 $0.047
+T0365 recalled  0.9451 $0.028
+T0362 recalled  0.9696 $0.197
+T0367 recalled  0.9961 $0.067
+T0371 recalled  0.9667 $0.023
+T0360 explored   $0.276
+T0373 compiled  0.8999 $0.000
+T0368 explored low_confidence:0.30<0.7 0.298 $0.193
+T0369 recalled  0.937 $0.155
+T0366 recalled  0.7012 $0.119
+T0377 recalled  0.7692 $0.020
+T0375 recalled  0.9973 $0.038
+T0372 recalled  0.9702 $0.057
+T0378 recalled  0.9969 $0.037
+T0370 explored low_confidence:0.58<0.7 0.5836 $0.229
+T0374 recalled  0.9875 $0.098
+T0381 compiled  0.9202 $0.000
+T0379 recalled  0.9017 $0.084
+T0383 compiled  0.9222 $0.000
+T0380 recalled  0.8557 $0.029
+T0385 compiled  0.9764 $0.000
+T0387 compiled  0.8875 $0.000
+T0382 recalled  0.9968 $0.038
+T0388 compiled  0.9713 $0.000
+T0386 recalled  0.9951 $0.038
+T0376 explored low_confidence:0.67<0.7 0.6677 $0.229
+T0393 compiled  0.9967 $0.000
+T0389 recalled  0.8041 $0.043
+T0392 recalled  0.8357 $0.017
+T0390 recalled  0.99 $0.068
+T0384 explored low_confidence:0.46<0.7 0.4593 $0.202
+T0394 recalled  0.957 $0.057
+T0395 recalled  0.9965 $0.040
+T0400 compiled  0.9788 $0.000
+T0399 recalled  0.939 $0.021
+T0396 recalled  0.9916 $0.056
+T0391 explored multi_request 0.4096 $0.174
+T0398 recalled  0.9874 $0.033
+T0397 recalled  0.9183 $0.153
