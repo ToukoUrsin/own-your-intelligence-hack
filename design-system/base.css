@@ -1,0 +1,88 @@
+/* Page foundation: canvas wash, type defaults, focus. Import after tokens.css. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--ui-font-body);
+  font-size: var(--ui-text-base);
+  line-height: var(--ui-leading-body);
+  color: var(--ui-color-fg);
+  /* Glass needs something to refract: a quiet two-hue wash over the canvas. */
+  background: var(--ui-wash-canvas), var(--ui-color-canvas);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--ui-font-display);
+  font-weight: var(--ui-weight-regular);
+  letter-spacing: var(--ui-tracking-display);
+  line-height: var(--ui-leading-tight);
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--ui-font-mono);
+  font-size: 0.92em;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--ui-color-border-strong);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+::selection {
+  background: var(--ui-color-accent-soft);
+  color: var(--ui-color-fg);
+}
+
+:focus-visible {
+  outline: var(--ui-focus-width) solid var(--ui-color-focus);
+  outline-offset: 2px;
+}
+
+.ui-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.ui-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

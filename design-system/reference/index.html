@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Support AGI · UI reference</title>
+    <meta name="description" content="Specimen of the Support AGI design system: light liquid-glass cards, route chips, metrics, tables, path traces." />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="stylesheet" href="./reference.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-explored" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="m15.5 8.5-2 5-5 2 2-5z" /></symbol>
+      <symbol id="i-recalled" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l3 2" /></symbol>
+      <symbol id="i-compiled" viewBox="0 0 24 24"><path d="M8 4H6a2 2 0 0 0-2 2v4l-2 2 2 2v4a2 2 0 0 0 2 2h2" /><path d="M16 4h2a2 2 0 0 1 2 2v4l2 2-2 2v4a2 2 0 0 1-2 2h-2" /><path d="m10 12 1.5 1.5L14.5 10" /></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="m8.5 12 2.5 2.5 4.5-5" /></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" /><path d="M12 9v4" /><path d="M12 17h.01" /></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="m7 7 10 10" /><path d="M17 7v10H7" /></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 16v-4" /><path d="M12 8h.01" /></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></symbol>
+    </svg>
+
+    <div class="ref-page">
+      <header class="ui-bar">
+        <div class="ui-bar__brand">Support AGI <small>Northwind Outfitters</small></div>
+        <div class="ui-bar__spacer"></div>
+        <div class="ui-segmented ref-hide-sm" role="group" aria-label="Section">
+          <button type="button" aria-pressed="true" data-jump="paths">Paths</button>
+          <button type="button" aria-pressed="false" data-jump="components">Components</button>
+          <button type="button" aria-pressed="false" data-jump="tokens">Tokens</button>
+        </div>
+        <button class="ui-btn ui-btn--glass ui-btn--icon" type="button" id="theme" aria-label="Switch to dark theme">
+          <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-moon" /></svg>
+        </button>
+      </header>
+
+      <main>
+        <section class="ref-hero" id="paths">
+          <p class="ui-eyebrow">Paths · learning curve</p>
+          <h1>Routes that compile themselves.</h1>
+          <p class="ref-lead">Every ticket takes the cheapest route that works: explored, then recalled, then compiled into a deterministic program with zero model calls.</p>
+          <div class="ui-notice ui-notice--info ref-specimen">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-info" /></svg>
+            <span>Specimen page. Every number here is example data for the design system, not a measured result.</span>
+          </div>
+        </section>
+
+        <section class="ref-metrics ui-glows" aria-label="Summary">
+          <article class="ui-card">
+            <div class="ui-metric">
+              <span class="ui-metric__label">Cost per ticket</span>
+              <span class="ui-metric__value">$0.07</span>
+              <span class="ui-metric__delta" data-good="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-down" /></svg>62% vs no memory</span>
+            </div>
+          </article>
+          <article class="ui-card">
+            <div class="ui-metric">
+              <span class="ui-metric__label">Median time</span>
+              <span class="ui-metric__value">6.2<small>s</small></span>
+              <span class="ui-metric__delta" data-good="true"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-down" /></svg>10.2 s faster</span>
+            </div>
+          </article>
+          <article class="ui-card">
+            <div class="ui-metric">
+              <span class="ui-metric__label">Model calls per ticket</span>
+              <span class="ui-metric__value">1.4</span>
+              <span class="ui-metric__delta">Baseline 5.0</span>
+            </div>
+          </article>
+          <article class="ui-card">
+            <div class="ui-metric">
+              <span class="ui-metric__label">Compiled share</span>
+              <span class="ui-metric__value ui-metric__value--accent">38%</span>
+              <div class="ui-meter" role="img" aria-label="Last 50 tickets: 14% explored, 48% recalled, 38% compiled">
+                <span data-route="explored" style="flex-grow: 14"></span>
+                <span data-route="recalled" style="flex-grow: 48"></span>
+                <span data-route="compiled" style="flex-grow: 38"></span>
+              </div>
+              <span class="ui-metric__delta">Last 50 tickets</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="ref-work ui-glows ref-glows-alt">
+          <article class="ui-card ui-card--solid ui-card--flush ref-tickets">
+            <div class="ui-card__header ref-toolbar">
+              <div>
+                <h2 class="ui-card__title">Tickets</h2>
+                <p class="ui-card__meta" id="count">8 of 8</p>
+              </div>
+              <div class="ref-filters">
+                <label class="ref-search">
+                  <span class="ui-visually-hidden">Search tickets</span>
+                  <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-search" /></svg>
+                  <input class="ui-input" id="search" type="search" placeholder="Search requests" autocomplete="off" />
+                </label>
+                <div class="ui-segmented" role="group" aria-label="Route filter" id="route-filter">
+                  <button type="button" aria-pressed="true" data-route="all">All</button>
+                  <button type="button" aria-pressed="false" data-route="explored">Explored</button>
+                  <button type="button" aria-pressed="false" data-route="recalled">Recalled</button>
+                  <button type="button" aria-pressed="false" data-route="compiled">Compiled</button>
+                </div>
+              </div>
+            </div>
+            <div class="ui-table-wrap">
+              <table class="ui-table" aria-label="Tickets">
+                <thead>
+                  <tr>
+                    <th scope="col">Ticket</th>
+                    <th scope="col">Request</th>
+                    <th scope="col">Route</th>
+                    <th scope="col">Outcome</th>
+                    <th scope="col" data-align="end" class="ref-col-opt">Time</th>
+                    <th scope="col" data-align="end">Cost</th>
+                  </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+            <div class="ref-empty-slot" id="empty" hidden>
+              <div class="ui-empty">
+                <strong>No tickets match “<span id="empty-q"></span>”.</strong>
+                <span>Search looks at the request text and ticket ID.</span>
+                <button class="ui-btn ui-btn--glass ui-btn--sm" type="button" id="clear">Clear search</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="ui-card ref-path" aria-live="polite">
+            <div class="ui-card__header">
+              <div>
+                <p class="ui-eyebrow" id="p-id">T0075</p>
+                <h2 class="ui-card__title" id="p-title">Remove one item from an order</h2>
+              </div>
+              <span id="p-route"></span>
+            </div>
+            <div class="ref-canonical">
+              <span class="ui-field__label">Canonical request</span>
+              <code id="p-canonical"></code>
+            </div>
+            <ol class="ui-steps" id="p-steps"></ol>
+            <div class="ui-card__footer">
+              <span id="p-outcome"></span>
+              <span class="ui-num" id="p-cost"></span>
+            </div>
+            <button class="ui-btn ui-btn--glass ui-btn--sm ref-why" type="button" id="why">Why this route?</button>
+          </article>
+        </section>
+
+        <article class="ui-card ref-curve">
+          <div class="ui-card__header">
+            <div>
+              <h2 class="ui-card__title">Route share by ticket</h2>
+              <p class="ui-card__meta">Replay of 400 tickets in order, 50 per bar</p>
+            </div>
+            <div class="ref-legend" aria-hidden="true">
+              <span class="ui-chip ui-chip--explored ui-chip--dot">Explored</span>
+              <span class="ui-chip ui-chip--recalled ui-chip--dot">Recalled</span>
+              <span class="ui-chip ui-chip--compiled ui-chip--dot">Compiled</span>
+            </div>
+          </div>
+          <div class="ref-chart" id="chart"></div>
+          <details class="ref-table-view">
+            <summary>View as table</summary>
+            <div class="ui-table-wrap"><table class="ui-table" id="chart-table"></table></div>
+          </details>
+        </article>
+
+        <section class="ref-section" id="components">
+          <div class="ref-section__head">
+            <p class="ui-eyebrow">Components</p>
+            <h2>Clean cards, liquid glass.</h2>
+          </div>
+
+          <div class="ref-grid">
+            <article class="ui-card">
+              <h3 class="ui-card__title">Actions</h3>
+              <div class="ref-row">
+                <button class="ui-btn ui-btn--primary" type="button">Approve refund</button>
+                <button class="ui-btn ui-btn--glass" type="button">Open in QM</button>
+                <button class="ui-btn ui-btn--ghost" type="button">Details</button>
+                <button class="ui-btn ui-btn--danger" type="button">Discard path</button>
+                <button class="ui-btn ui-btn--glass" type="button" disabled>Unavailable</button>
+                <button class="ui-btn ui-btn--glass ui-btn--icon" type="button" aria-label="Add">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plus" /></svg>
+                </button>
+              </div>
+              <p class="ui-card__meta">Pills. One primary per view, in ink. Secondary actions are glass.</p>
+            </article>
+
+            <article class="ui-card">
+              <h3 class="ui-card__title">Route and outcome</h3>
+              <div class="ref-row" id="chip-specimen"></div>
+              <p class="ui-card__meta">Route (how it ran) and outcome (what happened) are separate chips. Always a glyph plus a word.</p>
+            </article>
+
+            <article class="ui-card">
+              <h3 class="ui-card__title">Fields</h3>
+              <div class="ref-fields">
+                <label class="ui-field">
+                  <span class="ui-field__label">Router endpoint</span>
+                  <input class="ui-input" type="url" placeholder="https://river.example/route" />
+                  <span class="ui-field__hint">POST {text} returns {canonical, rendered}.</span>
+                </label>
+                <label class="ui-field">
+                  <span class="ui-field__label">Recall threshold</span>
+                  <input class="ui-input" type="text" value="1.4" aria-invalid="true" aria-describedby="thr-err" />
+                  <span class="ui-field__error" id="thr-err">Use a value between 0 and 1.</span>
+                </label>
+                <label class="ui-field">
+                  <span class="ui-field__label">Model</span>
+                  <input class="ui-input" type="text" value="Set by the harness" disabled />
+                </label>
+              </div>
+            </article>
+
+            <article class="ui-card">
+              <h3 class="ui-card__title">States</h3>
+              <div class="ui-empty">
+                <strong>No compiled paths yet.</strong>
+                <span>A path compiles after three successful recalls.</span>
+                <button class="ui-btn ui-btn--glass ui-btn--sm" type="button">Run replay</button>
+              </div>
+              <div class="ref-skeletons" aria-label="Loading example" role="status">
+                <span class="ui-skeleton" style="width: 42%"></span>
+                <span class="ui-skeleton" style="width: 78%"></span>
+                <span class="ui-skeleton" style="width: 64%"></span>
+              </div>
+              <div class="ui-notice ui-notice--warning">
+                <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-alert" /></svg>
+                <span>Router unavailable. Using the Haiku stand-in; hit rates are not River's.</span>
+              </div>
+            </article>
+
+            <article class="ui-card ui-card--interactive" tabindex="0">
+              <p class="ui-eyebrow">Interactive card</p>
+              <h3 class="ui-card__title">manage_cancel</h3>
+              <p class="ui-card__meta">9 steps · recalled 14 times · compiled</p>
+              <div class="ui-card__footer"><span>Last used 2 min ago</span><span class="ui-kbd">↵</span></div>
+            </article>
+
+            <article class="ui-card ui-card--solid">
+              <p class="ui-eyebrow">Solid card</p>
+              <h3 class="ui-card__title">For dense data and prose</h3>
+              <p class="ui-card__meta">Same shape and rim, no blur. Use it for tables, long text and anything read closely.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="ref-section" id="tokens">
+          <div class="ref-section__head">
+            <p class="ui-eyebrow">Tokens</p>
+            <h2>Colour, type, radius.</h2>
+          </div>
+          <div class="ref-swatches" id="swatches"></div>
+          <article class="ui-card ref-type">
+            <p class="ref-type__hero">Aa Funnel Display</p>
+            <p class="ref-type__body">Funnel Sans for interface text. Titles stay regular weight; labels and buttons use 500.</p>
+            <p class="ref-type__mono">Fragment Mono · offer_refund · T0075 · $0.07</p>
+            <div class="ref-radii">
+              <span style="border-radius: var(--ui-radius-sm)">sm 6</span>
+              <span style="border-radius: var(--ui-radius-md)">md 10</span>
+              <span style="border-radius: var(--ui-radius-lg)">lg 16</span>
+              <span style="border-radius: var(--ui-radius-xl)">xl 22</span>
+              <span style="border-radius: var(--ui-radius-pill)">pill</span>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="ref-footer">
+        <span>design-system/ · tokens.json is the source · <code>node design-system/build-tokens.mjs --check</code></span>
+      </footer>
+    </div>
+
+    <dialog class="ui-dialog" id="why-dialog" aria-labelledby="why-title">
+      <div class="ui-card">
+        <div class="ui-card__header">
+          <h2 class="ui-card__title" id="why-title">Why this route?</h2>
+          <button class="ui-btn ui-btn--ghost ui-btn--icon ui-btn--sm" type="button" id="why-close" aria-label="Close">
+            <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-x" /></svg>
+          </button>
+        </div>
+        <p id="why-body"></p>
+        <div class="ref-row" style="justify-content: flex-end">
+          <button class="ui-btn ui-btn--primary" type="button" id="why-ok">Done</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./reference.js" type="module"></script>
+  </body>
+</html>

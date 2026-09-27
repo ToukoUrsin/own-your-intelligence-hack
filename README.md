@@ -41,3 +41,7 @@ Hackathon agenda
 ## Framework
 
 [framework/](framework/) holds the hackathon playbook, checklist and postmortem template.
+
+## Design
+
+[DESIGN.md](DESIGN.md) is the UI contract (light, clean cards, liquid glass); tokens, CSS, fonts and a runnable reference are in [design-system/](design-system/README.md).
