@@ -1,5 +1,23 @@
 # Video script: Support AGI (target ~2:00, hard limit 2:20)
 
+## Copy-paste (primary pair #2; run `mcp/demo.sh` first; each in a NEW chat)
+Tab 1, ticket A (explore, $64 Gale shirt, order 7780111249):
+```
+From: joycewu709@example.com
+I got a shirt for my husband, but he doesn't like it, so now I need to take it off my order. Can you help me do that? I don't want to cancel the whole order, just the men's Gale shirt portion No, but it says it's out for delivery.
+```
+Tab 2, ticket B (recall, $54 Mercer boots, order 3536918602, no follow-up):
+```
+From: normanbouc398@example.com
+Hey! I placed a two item order, but I want to remove the second item. I totally chose the wrong size. Norman Bouchard
+```
+Tab 3, compiled (refund status):
+```
+From: crystalm392@example.com
+I am looking for the status of my refund. Crystal Minh
+```
+Retake pair #3 and spare compiled tickets: `video/DEMO_TICKETS.md`. Type "From: …" then Shift+Enter, then the text.
+
 A walkthrough of the real UI: QM chat + Paths panel + Shopify admin. No slides. Touko records with macOS Cmd+Shift+5
 (full screen, own voice). Ticket texts and expected results: `video/DEMO_TICKETS.md`. Graphs: `video/graphs/*.png`
 (rebuild with `uv run --with matplotlib video/make_graphs.py` after the final run).
@@ -9,7 +27,7 @@ A walkthrough of the real UI: QM chat + Paths panel + Shopify admin. No slides. 
 2. **QM chat B**: http://localhost:8084, second new chat.
 3. **QM chat C** (compiled ticket): third new chat.
 4. **Learning curve**: http://localhost:8084/?paths&run=label-run (switch to `run=` of the final run once it is complete).
-5. **Shopify admin**: Orders → order 3609246296 (ticket A), ready to refresh.
+5. **Shopify admin**: Orders → order 7780111249 (ticket A, Joyce Wu), ready to refresh.
 6. (Optional flash) `video/graphs/cost-per-ticket.png` in Preview, full screen.
 
 Fallback for the compiled shot: a Terminal window at the repo root, font ~20 pt, cleared, with `video/compiled-demo.sh` typed.
@@ -29,9 +47,9 @@ Fallback for the compiled shot: a Terminal window at the repo root, font ~20 pt,
 | # | Time | Screen and clicks | Say |
 |---|---|---|---|
 | 1 | 0:00–0:15 | Tab 1 (QM chat A, empty), Paths panel visible. Slowly point at the chat, then the panel. | "We're Support AGI. This is a support agent for an online clothing shop. Every ticket takes the cheapest route that works: the agent explores new problems, recalls paths it has learned, and runs the most reused ones as compiled code with no model at all." |
-| 2 | 0:15–0:40 | Paste ticket A (Norman, Gale jeans), Enter. While it runs, point at the Paths panel tool calls. Wait for **EXPLORED + saved new path**. | "A customer wants jeans removed from an order. River turns the message into a standardized request. No saved path yet, so the agent explores: account, policy in GBrain, shipping status, refund. When it's done, Memorable saves the path." |
-| 3 | 0:40–0:50 | Tab 5 (Shopify admin), Cmd+R on order 3609246296, point at the $54 refund. | "And that's a real fifty-four dollar refund in Shopify." |
-| 4 | 0:50–1:15 | Tab 2, paste ticket B (Joseph, two jackets), Enter. Panel: **RECALLED PATH**, point at the matched path and the lower call count and cost. Paste "The Harbor jacket please", Enter. | "Different customer, different words, same task. This time the path is recalled: the agent follows the steps it learned, no policy search, fewer calls, and a fraction of the cost." |
+| 2 | 0:15–0:40 | Paste ticket A (Joyce, Gale shirt), Enter. Takes ~45 s (rehearsal 41 s; Memorable save ~8 s): talk over it or trim. While it runs, point at the Paths panel tool calls. Wait for **EXPLORED + saved new path**. | "A customer wants jeans removed from an order. River turns the message into a standardized request. No saved path yet, so the agent explores: account, policy in GBrain, shipping status, refund. When it's done, Memorable saves the path." |
+| 3 | 0:40–0:50 | Tab 5 (Shopify admin), Cmd+R on order 7780111249, point at the $64 refund. | "And that's a real sixty-four dollar refund in Shopify." |
+| 4 | 0:50–1:15 | Tab 2, paste ticket B (Norman, second item), Enter. ~20–25 s. Panel: **RECALLED PATH**, "found in Memorable memory", point at the learned path vs this ticket and the lower cost. No follow-up needed ($54 Mercer boots refunded). | "Different customer, different words, same task. This time the path is recalled: the agent follows the steps it learned, no policy search, fewer calls, and a fraction of the cost." |
 | 5 | 1:15–1:35 | Tab 3, **new chat**, paste the compiled ticket (Crystal, refund status), Enter. Reply lands in ~1 s; Paths panel: **COMPILED**, `plan-refund-status`, 0 ms-ish, $0.00, **0 model calls**, 3 steps all ✓; click "Compiled program" to open the plan JSON. *Backup only if QM misbehaves:* Terminal `video/compiled-demo.sh`. | "Refund status is one we've seen forty-six times, so it compiled into a plan: look up the account, find the refund, check the guards, fill in the reply. Zero model calls. If any check fails, the ticket goes back to the agent." |
 | 6 | 1:35–1:50 | Tab 4 (learning curve). Hover over the first and last buckets. (Optional: flash `cost-per-ticket.png` for 3 s.) | "Across four hundred real support tickets, exploring drops from three quarters of tickets to almost none, and cost per ticket goes down as it learns." |
 | 7 | 1:50–2:00 | Back to tab 1 (the finished explored chat), hold still. | "The agent's attention goes to the tickets that need it. The code is on GitHub." |
@@ -47,8 +65,16 @@ Expected: pull_up_account → get_refunds → validate_purchase; reply "refund f
 
 Note (15:30): QM now runs the compiled tier in chat. With `COMPILED_ROUTES=1` (default in `hack/up.sh`), each user message is first POSTed to the MCP `/try_compiled` (rule match, then the River/Haiku normalizer); a promoted plan answers without the model and the turn is recorded as recall_path + plan steps. Anything else goes to the agent as before. Turn off: `COMPILED_ROUTES=0 hack/up.sh`. Needs the MCP restarted after 15:25 (`mcp/demo.sh`, which also picks up River on :8789).
 
+## Rehearsal timings and gotchas (27 Sep 15:26–15:31)
+- A explored in 32.6 s panel / ~41 s wall ($0.19, 9 calls); B recalled 19.8 s / ~24 s ($0.12); compiled ~1 s, plan JSON expander opens.
+- The Paths panel keeps showing the previous chat's ticket until the new message is sent; that's expected.
+- Reloading a finished chat shows "Send a ticket to see how it was handled" in the panel: don't reload tabs after the run.
+- A replay run is in progress (learning curve card on the ticket view shows "Run in progress"); use `?paths&run=label-run` for the finished curve.
+- `mcp/demo.sh` now reads the finished label-run store (replay/procedures.jsonl is being rewritten by that run) and recalls via Memorable.
+- Vague "remove an item" tickets make the agent ask which item; the chosen tickets name the item or say "second item".
+
 ## Retake notes
-- **A/B already refunded**: use T0123 (sanyaafzal812@example.com, Kline jeans $69) and T0293 (normanbouc398@example.com, Mercer boots $54) once seeded in `data/shopify-map.json`; rerun `mcp/demo.sh` before each take so A explores again.
+- **A/B already refunded**: use retake pair #3 in DEMO_TICKETS.md (T0124 Alessandro + T0298 David); rerun `mcp/demo.sh` before each take so A explores again.
 - **A recalls instead of exploring**: `mcp/demo.sh` wasn't rerun; rerun, new chat.
 - **Compiled backups** (same plan, one refund each, checked with `compiled-demo.sh`):
   - T0053 `crystalm123@example.com`: "I was getting a refund on my order and I just want to check on the status of it. Crystal Minh"

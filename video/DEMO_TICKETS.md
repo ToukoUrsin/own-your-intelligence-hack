@@ -5,35 +5,67 @@ Both orders are seeded in the Shopify dev store (data/shopify-map.json). Paste e
 
 ## Setup before recording
 1. `hack/up.sh` in the QM fork (already running on :8081/8082/8084).
-2. `mcp/demo.sh` in this repo: restarts the MCP (SHOP_BACKEND=shopify, fresh Shopify cache) on `replay/demo-procedures.jsonl`,
-   a copy of the replay's procedure store without `manage_cancel`. The full replay learns every tickets.jsonl subflow, so
-   without this A would recall instead of explore. Rerun it to reset between takes.
+2. `mcp/demo.sh` in this repo: restarts the MCP (SHOP_BACKEND=shopify, fresh Shopify cache, River normalizer, RECALL_BACKEND=memorable)
+   on `replay/demo-procedures.jsonl` = the finished label-run store without `manage_cancel`, plus `.memorable-home-demo`
+   (Memorable home copy whose slug map drops manage_cancel). A explores and saves into Memorable; B recalls. Rerun to reset
+   between takes. `MEMORABLE=0 mcp/demo.sh` = local store only (if Memorable 429s again; recall falls back to local anyway).
 3. QM branding: Northwind Support / Northwind Outfitters; MCP registered as `northwind` (tools `northwind_*`).
 
-## Ticket A — explore (T0093, Norman Bouchard, bronze, order in transit)
+## Primary pair (#2) — all orders verified unrefunded in Shopify at 15:32
+### A — explore (T0366, Joyce Wu, order 7780111249 out for delivery: Gale shirt $64 + Kline jacket $84)
 ```
-From: normanbouc506@example.com
-Hello I would like to remove a pair of Gale jeans from my order! I added them on accident.
+From: joycewu709@example.com
+I got a shirt for my husband, but he doesn't like it, so now I need to take it off my order. Can you help me do that? I don't want to cancel the whole order, just the men's Gale shirt portion No, but it says it's out for delivery.
 ```
-Expected: Paths panel **EXPLORED + saved new path** (~25 s, ~$0.23, 9 calls: recall_path miss → pull_up_account, search_kb,
-verify_identity, shipping_status, find_orders, membership, offer_refund, save_path). Reply: order in transit, bronze member,
-$54 refunded to PayPal now, return label when it arrives. Shopify: refund $54 on order 3609246296.
+Expected: **EXPLORED** → "New path saved to Memorable: manage_cancel"; $64 refund on 7780111249.
 
-## Ticket B — recall (T0075, Joseph Banter, bronze, order not shipped)
+### B — recall (T0293, Norman Bouchard, order 3536918602 out for delivery: Mercer shirt $99 + Mercer boots $54)
 ```
-From: josephbant522@example.com
-I recently ordered 2 jackets and need to have one of them removed from my order. Joseph Banter
+From: normanbouc398@example.com
+Hey! I placed a two item order, but I want to remove the second item. I totally chose the wrong size. Norman Bouchard
 ```
-Expected: **RECALLED PATH** (~15 s, ~$0.09, 6 calls, no search_kb). Agent lists Harbor $94 / Mercer $69 and asks which one.
-Follow-up in the same chat:
-```
-The Harbor jacket please
-```
-Expected: one `offer_refund` call (turn stays RECALLED PATH), $94 refunded. Shopify: refund $94 on order 1086743837.
+Expected: **RECALLED PATH** (found in Memorable memory), $54 refund on 3536918602, no follow-up needed ("second item").
 
-## Verified run (27 Sep, 14:44–14:47 PDT)
-A = EXPLORED (saved proc manage_cancel), B = RECALLED PATH; Shopify refunds 1110045622640 ($54) and 1110045852016 ($94).
-Caveat for re-takes: these orders are now refunded (3609246296 has only $10 left; an earlier test also refunded $74 there, a
-wrong catalog price since fixed in the soul). A re-take needs fresh manage_cancel orders, e.g. T0123 (sanyaafzal812@example.com,
-second item Kline jeans $69) and T0293 (normanbouc398@example.com, Mercer boots $54) once seeded; check data/shopify-map.json,
-then rerun `mcp/demo.sh`.
+## Retake pair (#3) — verified unrefunded 15:32
+A (T0124, Alessandro Phoenix, 7494854496: Mercer jeans $69 + Gale shirt $99 → removes Gale shirt $99):
+```
+From: alessandro390@example.com
+Hi, I just placed an order but I need to remove the 2nd thing on my order. I think i chose the wrong size. yes, it's Alessandro Phoenix
+```
+B (T0298, David Williams, 7889212367: Kline jeans $49 + Kline shirt $49 → Kline shirt $49):
+```
+From: davidwilli700@example.com
+Hi, want to remove a second it my order I accidentally choose the wrong size David Williams
+```
+Rerun `mcp/demo.sh` before the retake so A explores again.
+
+## Compiled tickets (refund status, plan-refund-status, 0 model calls)
+Primary (T0003):
+```
+From: crystalm392@example.com
+I am looking for the status of my refund. Crystal Minh
+```
+Spares (T0053, T0038):
+```
+From: crystalm123@example.com
+I was getting a refund on my order and I just want to check on the status of it. Crystal Minh
+```
+```
+From: sanyaafzal525@example.com
+Hey, can I check on the status of my refund? Thanks! Sanya Afzal
+```
+
+## Rehearsal (27 Sep 15:26–15:30 PDT, pair #1, real QM UI)
+| Shot | Ticket | Result | Panel | Wall clock |
+|---|---|---|---|---|
+| A | T0123 Sanya (8028265568) | EXPLORED, saved manage_cancel, $69 Kline jeans refunded | 32.6 s · $0.19 · 9 calls | ~41 s to reply |
+| B | T0376 Chloe (0867025956) | RECALLED PATH, sim 1.00, no search_kb, $94 Harbor shirt refunded, no follow-up | 19.8 s · $0.12 · 9 calls | ~24 s |
+| C | T0003 Crystal | COMPILED, 0 model calls, 3 steps ✓, plan JSON expander opens | 1 ms · $0.00 | ~1 s |
+Shopify refunds: 1110046966128 ($69), 1110046998896 ($94). That rehearsal ran on the local store (Memorable was 429).
+At 15:31 `mcp/demo.sh` switched to Memorable recall (quota back): check pair T0289 → EXPLORED ("searched Memorable memory",
+recall_path ~5 s, save_path ~8 s via Memorable ingest; T0289 asks which item, so it needed a follow-up), then T0370 →
+RECALLED PATH "found in Memorable memory". Expect A ~45 s with Memorable (ingest adds ~8 s).
+
+## Consumed orders (refunded; do not use)
+T0093 3609246296, T0075 1086743837, T0123 8028265568, T0376 0867025956, T0289 3350562053. T0370 5653262410 was left
+mid-question (unrefunded) but its chat exists; skip it.
