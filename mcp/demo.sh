@@ -14,6 +14,9 @@ keep = [r for r in rows if r.get("intent") != intent]
 open(dst, "w").write("".join(json.dumps(r) + "\n" for r in keep))
 print(f"demo store: {len(keep)} of {len(rows)} procedures (without {intent})")
 PY
+# Marc's River router standardizes live tickets when it is up locally (override with ROUTER_URL=, empty = Haiku stand-in).
+if [ -z "${ROUTER_URL+x}" ] && lsof -ti tcp:8789 -sTCP:LISTEN >/dev/null; then export ROUTER_URL=http://127.0.0.1:8789/route; fi
+echo "normalizer: ${ROUTER_URL:-haiku stand-in}"
 lsof -ti tcp:8790 -sTCP:LISTEN | xargs kill 2>/dev/null || true
 sleep 1
 MEMORY_STORE="$(cd .. && pwd)/replay/demo-procedures.jsonl" nohup ./start.sh > logs/server.log 2>&1 &

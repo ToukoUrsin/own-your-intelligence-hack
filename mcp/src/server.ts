@@ -8,6 +8,28 @@ import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { recallPath, savePath } from "./paths";
 import { runShopTool, shopTools } from "./tools";
+import { lastFallback, loadPlans, tryCompiled } from "../../agent/src/compiled";
+import { activeNormalizer, normalize } from "../../agent/src/memory";
+
+// Compiled tier for QM's pre-turn hook: regex task first (no model), then the memory.ts normalizer (NORMALIZER, never
+// Memorable). Returns {served:true, reply, planId, steps, ms, plan} or {served:false, why}.
+async function tryCompiledRoute(text: string) {
+  const t0 = performance.now();
+  let normalizer = "regex";
+  let r = await tryCompiled(null, text).catch(() => null);
+  if (!r && process.env.TRY_COMPILED_NORMALIZE !== "0" && activeNormalizer() !== "raw") {
+    normalizer = activeNormalizer();
+    const n = await normalize(text).catch(() => undefined);
+    if (n?.standardized) r = await tryCompiled(n, text).catch(() => null);
+  }
+  const ms = Math.round(performance.now() - t0);
+  const out = r
+    ? { served: true, reply: r.reply, planId: r.planId, risk: r.risk, steps: r.steps, ms, modelCalls: 0, normalizer, plan: loadPlans().find((p) => p.id === r!.planId) }
+    : { served: false, why: lastFallback, ms, normalizer };
+  appendFileSync(LOG, JSON.stringify({ ts: new Date().toISOString(), tool: "try_compiled", args: { text: text.slice(0, 200) }, ms, ok: true, output: JSON.stringify({ ...out, plan: undefined }).slice(0, 4000) }) + "\n");
+  console.log(`try_compiled ${ms}ms ${r ? `served ${r.planId}` : `fallback: ${lastFallback}`}`);
+  return out;
+}
 
 const PORT = Number(process.env.MCP_PORT ?? 8790);
 const LOG_DIR = join(import.meta.dir, "../logs");
@@ -72,6 +94,10 @@ Bun.serve({
   async fetch(req) {
     const url = new URL(req.url);
     if (url.pathname === "/health") return Response.json({ ok: true, tools: allTools.length });
+    if (url.pathname === "/try_compiled" && req.method === "POST") {
+      const body = (await req.json().catch(() => ({}))) as { text?: string };
+      return Response.json(await tryCompiledRoute(String(body.text ?? "")));
+    }
     if (url.pathname !== "/mcp") return new Response("not found", { status: 404 });
     const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
     await build().connect(transport);
