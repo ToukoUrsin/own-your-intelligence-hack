@@ -1,9 +1,9 @@
-# River router: state of training (27 Sep, 15:17 PDT, run `r1` in progress)
+# River router: state of training (27 Sep, 15:55 PDT; `r1` and `r2` finished)
 
 Task (data/ROUTER.md): customer's opening message → one of 55 ABCD subflows (the saved-path key).
 Metric: label accuracy on `data/heldout.jsonl` (100 tickets, ABCD test, 1–2 per label) = path hit rate for an exact-key library.
 
-## Results so far
+## Results
 
 Same system prompt (label list) for every row; greedy decoding. Rows in `runs/r1/report.json`; `rescore.py r1` recomputes from raw outputs.
 
@@ -13,27 +13,80 @@ Same system prompt (label list) for every row; greedy decoding. Rows in `runs/r1
 | Qwen3.6-35B-A3B base, zero-shot | 0.23 | 0.22 |
 | Claude Haiku 4.5, label mode (team's `replay/router-eval.json`) | 0.64–0.66 | – |
 | **River LoRA, step 20** | **0.72** | **0.82** |
-| **River LoRA, step 50** | **0.77** | **0.887** |
+| **River LoRA, step 50 (served)** | **0.77** | **0.887** |
+| River LoRA, step 87 (final, time limit) | 0.76 | 0.867 |
+| River r2 (balanced sampling + LR decay), step 30 | 0.76 | 0.87 |
+| River r2, step 60 | 0.79 | 0.89 |
+| River r2, step 74 (final, time limit) | 0.81 | 0.88 |
 
 Base-model misses are mostly flow-only answers (`troubleshoot_site`, `single_item_query`) that cannot select a path.
-Step-50 heldout errors are near-neighbours: `promo_code_invalid`↔`promo_code_out_of_date` (2), `refund_update`→`refund_status` (2), shipping `cost`→`status` (2).
+Step 50 is served: best on validation (chosen on val, not heldout); step 50→87 is flat within noise. Step-50 heldout errors are near-neighbours: `promo_code_invalid`↔`promo_code_out_of_date` (2), `refund_update`→`refund_status` (2), shipping `cost`→`status` (2).
+
+## Team recall harness (Memorable bge-m3 embeddings, `eval_recall.ts` = River-only `replay/eval_router.ts`)
+
+Library = first replay ticket per intent, filed under the router's key; 100 held-out tickets recalled against it.
+
+| Normalizer | lib | hit | wrong recall | miss |
+|---|---|---|---|---|
+| raw text (team's run) | 55 | 0.08 | 0.05 | 0.87 |
+| Haiku 4.5 (team's run) | 44 | 0.53 | 0.30 | 0.17 |
+| River step 50, no gate | 47 | 0.65 | 0.25 | 0.10 |
+| **River step 50, gate 0.5 (serve.py default)** | 47 | **0.67** | **0.15** | 0.18 |
+| River step 50, gate 0.8 | 44 | 0.58 | 0.09 | 0.33 |
+| River r2 step 74, gate 0.5 | 49 | 0.66 | 0.16 | 0.18 |
+
+Gate: below `--min-confidence` the router answers `none` and the agent explores (confidence = probability of the label tokens).
+0.5 beats no gate on both hit and wrong recall. 0.8 is the cautious setting (fewest wrong replays).
+Wrong recall mostly comes from a mislabelled *first* ticket filing its workflow under another intent's key (47 of 55 keys created).
+
+## Workflow stability without Memorable (`analyze.py`, 400 replay tickets in order, exact-key library)
+
+| Router | accuracy | mean confidence | workflows (correct key) | correct reuse | wrong reuse |
+|---|---|---|---|---|---|
+| Qwen base | 0.31 | 0.67 | 31 (18) | 0.375 | 0.128 |
+| River step 50 | 0.865 | 0.89 | 52 (42) | 0.733 | 0.133 |
+| River step 50, gate 0.5 | – | – | 52 (45) | 0.72 | 0.09 |
+| River step 50, gate 0.8 | – | – | 51 (47) | 0.657 | 0.04 |
+| River r2 step 60 | 0.905 | 0.85 | 53 (47) | 0.713 | 0.155 |
+| River r2 step 74 | 0.902 | 0.90 | 53 (44) | 0.695 | 0.172 |
+| River r2 step 74, gate 0.5 | – | – | 53 (46) | 0.69 | 0.145 |
+| **River step 50, create ≥0.8, reuse ≥0.5** | – | – | 51 (47) | **0.718** | **0.062** |
+
+Validation gate curve (step 50): gate 0.5 routes 96% at 0.92 accuracy; 0.8 routes 86% at 0.953; 0.9 routes 77% at 0.97.
+
+## Verdict (15:55)
+
+- r2 is more accurate per ticket (heldout 0.81 vs 0.77, replay 0.90 vs 0.865) but not better for workflows: tie on the
+  Memorable harness (0.66/0.16 vs 0.67/0.15) and more wrong reuse in simulation. **Served: r1 step 50, gate 0.5.**
+- What moves workflow quality now is the library, not the router: a mislabelled first ticket files a workflow under the
+  wrong key. Saving a *new* workflow only when router confidence ≥ 0.8 (reuse still at ≥ 0.5) cuts simulated wrong reuse
+  0.09 → 0.062 at the same correct reuse (0.72). That is an app-side rule on the `confidence` field the router returns.
+
+## Independent test + fixes (16:13)
+
+A separate agent wrote 78 new tickets (all 55 labels): 0.885 accuracy (0.94 without its 10 debatable golds); all REPORT numbers
+recomputed from the JSON and matched; isolation confirmed. Fixed in `serve.py`: bad/non-JSON body → 400 (was 502);
+instruction-like text ("ignore previous instructions", snake_case labels) → `none` (injection was routed at 0.97);
+River call retried once inside the 15 s caller budget (2 of 78 calls had hit River's 12 s timeout).
+Not fixable by training: ABCD `promo_code_invalid` and `promo_code_out_of_date` openings are indistinguishable
+(both say "invalid", 77 vs 72 of train; neither says "expired") — the agent learns which it is later in the chat.
+River-side: per-call checkpoint load (~4 s, occasional >8 s) and ±0.08 confidence jitter at temperature 0.
 
 ## Run
 
 - Base `Qwen/Qwen3.6-35B-A3B-FP8`, LoRA rank 16, lr 2e-4, batch 64, cross-entropy on the label tokens only (~329 tokens/example).
 - Data: 8,316 ABCD train+dev openings (same opening/label/genericize rules as `data/build.py`); every `tickets.jsonl` and `heldout.jsonl` conversation excluded; ABCD test unused for training.
 - Speed: ~14 s/step (first step 30 s); checkpoint eval of 400 prompts ~20 s.
-- Cost so far: 1.35M training tokens ≈ $1.35 at the console rate of $1.00/M (estimate, not a billed figure).
-- Stop: 100 steps or 25 min of training, whichever first; at the current pace the final checkpoint lands around step 85–90 (~15:23).
+- Cost: 1.83M training tokens ≈ $1.83 at the console rate of $1.00/M (estimate, not a billed figure).
+- Stopped by the 25-minute limit after step 87 (~0.67 epoch). Checkpoints: steps 20, 50, 87.
 - Isolation from `river/` (canonical-v1 normalizer, branch `codex/river-normalizer`): separate branch and directory, River session tag `experiment=claude-router`, checkpoint names `claude-router-*`, port 8789. Same hsec key `riverai-api-key`.
 
 ## Endpoint
 
-`serve.py --run r1 --step 50` is live on `http://127.0.0.1:8789/route` (Marc's Mac): `POST {"text"}` → `{"intent","confidence"}`,
+`serve.py --run r1 --step 50` (gate 0.5 default) is live on `http://127.0.0.1:8789/route` (Marc's Mac): `POST {"text"}` → `{"intent","confidence"}`,
 the shape `agent/src/memory.ts` accepts. ~4 s per call (checkpoint load per request), 8 parallel calls in ~6 s.
 Use `ROUTER_URL=http://127.0.0.1:8789/route`.
 
 ## Open
 
-- Recall eval through the team harness (`eval_recall.ts`, River-only copy of `replay/eval_router.ts`) is blocked: the Memorable key hit its 5,000 requests/day quota (HTTP 429) at 15:11. Rerun when it clears.
-- Final checkpoint eval and switching the endpoint to it.
+- r2 cost 1.56M training tokens ≈ $1.56 (estimate); stopped by its 22-minute limit at step 74.

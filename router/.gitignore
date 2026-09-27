@@ -4,3 +4,4 @@ data/
 runs/*/log.txt
 runs/*/*.tmp
 __pycache__/
+runs/*/serve.log

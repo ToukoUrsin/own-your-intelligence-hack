@@ -90,9 +90,8 @@ async function evaluate(which: Normalizer, librarySource: Ticket[], label: strin
   return res;
 }
 
-const runs = [
-  await evaluate("river", firstPerIntent, "first ticket per intent"),
-  await evaluate("river", tickets, "all 400 replay tickets (kNN)"),
-];
+// LIBRARIES=first skips the 400-ticket kNN library (saves ~500 Memorable embed calls).
+const runs = [await evaluate("river", firstPerIntent, "first ticket per intent")];
+if (process.env.LIBRARIES !== "first") runs.push(await evaluate("river", tickets, "all 400 replay tickets (kNN)"));
 await Bun.write(OUT, JSON.stringify({ generatedAt: new Date().toISOString(), threshold: THRESHOLD, router: process.env.ROUTER_URL,
   results: runs.map(({ rows, ...r }) => r), rows: Object.fromEntries(runs.map((r) => [`${r.normalizer}:${r.library}`, r.rows])) }, null, 2) + "\n");
