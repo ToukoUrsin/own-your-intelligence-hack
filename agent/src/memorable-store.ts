@@ -71,7 +71,7 @@ export const memorableStore: ProcedureStore = {
     // Lines look like: "0.673  procedures/<slug>  [lexical,semantic]"; the first is Memorable's pick.
     const top = /^\s*([\d.]+)\s+(\S+)\s+\[([^\]]*)\]/m.exec(r.out);
     if (!top) return { similarity: 0 };
-    const [, score, slug, tiers] = top;
+    const [, score, slug, tiers] = top as unknown as [string, string, string, string];
     return { procedure: loadMap()[slug], similarity: Number(score), slug, tiers: tiers.split(",") };
   },
 };
