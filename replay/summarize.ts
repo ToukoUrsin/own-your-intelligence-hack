@@ -1,7 +1,7 @@
 // Summaries for the replay runs: summary.json (memory run, results.jsonl, compared with baseline.jsonl) and
 // summary-baseline.json. Run on its own after both runs: bun replay/summarize.ts [--bucket 25]
 import { join } from "node:path";
-import { agreement } from "./abcd_map";
+import { agreement, expressible } from "./abcd_map";
 
 type Row = {
   i: number; id: string; intent?: string; recalled: boolean; procedureIntent?: string; procedureTools?: string[]; tools?: string[]; goldActions?: string[]; learned?: string; reinforced?: string; revised?: string;
@@ -62,8 +62,9 @@ export async function summarize(bucket = 25) {
   const lastIds = new Set(m.ok.slice(-bucket).map((r) => r.id));
   const normalizers = [...new Set(m.ok.map((r) => r.normalizer))].reduce((o, k) => ({ ...o, [k]: m.ok.filter((r) => r.normalizer === k).length }), {} as Record<string, number>);
   // Gold-workflow agreement (ABCD): does the recalled procedure's action set match the human agent's actions?
+  const scope = expressible([...m.ok, ...b.ok].flatMap((r) => [...(r.tools ?? []), ...(r.procedureTools ?? [])]));
   const agree = (xs: Row[], f: (r: Row) => string[] | undefined) => {
-    const a = xs.map((r) => agreement(f(r), r.goldActions)).filter((x) => x !== undefined);
+    const a = xs.map((r) => agreement(f(r), r.goldActions, scope)).filter((x) => x !== undefined);
     if (!a.length) return undefined;
     const miss = new Map<string, number>(), extra = new Map<string, number>();
     for (const x of a) { for (const m of x!.missing) miss.set(m, (miss.get(m) ?? 0) + 1); for (const e of x!.extra) extra.set(e, (extra.get(e) ?? 0) + 1); }
@@ -71,6 +72,8 @@ export async function summarize(bucket = 25) {
     return { n: a.length, exactMatch: +(a.filter((x) => x!.exact).length / a.length).toFixed(3), meanJaccard: +(a.reduce((s, x) => s + x!.jaccard, 0) / a.length).toFixed(3), topMissing: top(miss), topExtra: top(extra) };
   };
   const goldAgreement = m.ok.some((r) => r.goldActions?.length) ? {
+    method: "tool names mapped to ABCD actions (replay/abcd_map.ts); exactMatch = path action set equals the human agent's actions restricted to those our tools can express",
+    expressibleActions: [...scope].sort(),
     recalledPaths: agree(rec, (r) => r.procedureTools), // learned procedure vs this ticket's human workflow
     executedTraces: agree(m.ok, (r) => r.tools), // what the agent actually did on every ticket
     ...(base.length ? { baselineTraces: agree(b.ok, (r) => r.tools) } : {}),

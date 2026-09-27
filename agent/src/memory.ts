@@ -67,7 +67,9 @@ function loadLabels(): { labels: string[]; gloss: Record<string, string> } {
       if (!inLabels || !line.trim().startsWith("|") || /^\|[\s:-]+\|/.test(line)) continue;
       const cells = line.split("|").slice(1, -1).map((c) => c.replace(/`/g, "").trim());
       if (cells.length >= 2 && isLabel(cells[0]!) && !cells[1]!.includes(",") && !isLabel(cells[1]!)) { add(cells[0]!, cells.slice(1).join(" — ")); continue; }
-      for (const c of cells) for (const tok of c.split(/,\s*/)) if (isLabel(tok.trim())) add(tok.trim());
+      // Group row: first cell is the group (flow/category), the rest list labels. The group names the label's context.
+      const group = cells[0]!, words = (x: string) => x.replace(/_/g, " ");
+      for (const c of cells.slice(1)) for (const tok of c.split(/,\s*/)) if (isLabel(tok.trim())) add(tok.trim(), /^[a-z_]+$/.test(group) ? `${words(group)}: ${words(tok.trim())}` : undefined);
     }
   } catch {}
   return labels.length >= 5 ? { labels, gloss } : { labels: [...BITEXT_INTENTS], gloss: {} };
@@ -108,7 +110,7 @@ const RENDERED: Record<(typeof BITEXT_INTENTS)[number], string> = {
 };
 // Labels without a hand-written sentence (e.g. ABCD subflows) render from their description or name.
 export const renderIntent = (intent: string): string =>
-  (RENDERED as Record<string, string>)[intent] ?? `Task 1: ${(LOADED.gloss[intent] ?? intent.replace(/_/g, " ")).replace(/\.$/, "")}.`;
+  (!LOADED.gloss[intent] && (RENDERED as Record<string, string>)[intent]) || `Task 1: ${(LOADED.gloss[intent] ?? intent.replace(/_/g, " ")).replace(/\.$/, "")}.`;
 const INTENT_OF = new Map<string, string>([...INTENTS.map((i) => [i, i] as const), ...INTENTS.map((i) => [renderIntent(i), i] as const)]);
 
 let procedures: Procedure[] | null = null;
@@ -199,8 +201,36 @@ const GLOSS: Record<string, string> = {
   change_shipping_address: "change the delivery address", set_up_shipping_address: "add/set up a new shipping address",
   newsletter_subscription: "subscribe/unsubscribe newsletter",
 };
+
+// ABCD subflows (data/ROUTER.md label set when the dataset is ABCD): what the customer's opening message is about.
+const ABCD_GLOSS: Record<string, string> = {
+  recover_username: "forgot username", recover_password: "forgot password / can't log in", reset_2fa: "two-factor / verification code problem, lost phone for 2FA",
+  status_service_added: "charged for a service/subscription they did not add", status_service_removed: "a service was removed from the account, wants it back",
+  status_shipping_question: "question about shipping settings on the account (e.g. free/premium shipping)", status_credit_missing: "store credit or promo credit missing from account",
+  manage_change_address: "update the address on the account", manage_change_name: "change the name on the account", manage_change_phone: "change the phone number on the account",
+  manage_payment_method: "change/update the payment method on the account",
+  status_mystery_fee: "unexpected/unknown fee or charge on an order", status_delivery_time: "when will my order arrive / delivery date of an order",
+  status_payment_method: "change how an order was paid", status_quantity: "wrong quantity in an order / ordered too many",
+  manage_upgrade: "upgrade shipping on an existing order", manage_downgrade: "downgrade/cheaper shipping on an existing order",
+  manage_create: "wants to place a new order through the agent", manage_cancel: "cancel an order",
+  refund_initiate: "start a refund for a purchase", refund_update: "change the refund method or amount of an existing refund",
+  refund_status: "where is my refund / refund status", return_stain: "return an item that is stained/damaged",
+  return_color: "return an item because of the wrong/unwanted color", return_size: "return an item because of the wrong size / doesn't fit",
+  bad_price_competitor: "found it cheaper at a competitor, wants price match", bad_price_yesterday: "price dropped after buying, wants the difference",
+  out_of_stock_general: "general complaint that items are out of stock", out_of_stock_one_item: "a specific item is out of stock, wants to buy it",
+  promo_code_invalid: "promo code does not work", promo_code_out_of_date: "promo code expired",
+  mistimed_billing_already_returned: "billed for an item already returned", mistimed_billing_never_bought: "billed for something never bought",
+  status: "check the shipping status of an order / has it shipped", manage: "change shipping details (address/method) of an order in transit",
+  missing: "order arrived with an item missing / package never arrived", cost: "question about or dispute of shipping cost",
+  boots: "question about boots (product info)", shirt: "question about shirts (product info)", jeans: "question about jeans (product info)", jacket: "question about jackets (product info)",
+  pricing: "general pricing questions", membership: "membership levels and benefits", timing: "store hours, shipping times, general timing questions", policy: "store policies (returns, exchanges, etc.)",
+  status_active: "is my subscription active", status_due_amount: "how much is due on my subscription bill", status_due_date: "when is my subscription bill due",
+  manage_pay_bill: "pay the subscription bill", manage_extension: "extend the subscription / more time to pay", manage_dispute_bill: "dispute a subscription charge",
+  credit_card: "credit card not accepted at checkout on the site", shopping_cart: "shopping cart not working/updating on the site",
+  search_results: "site search returns wrong/no results", slow_speed: "website is slow/not loading",
+};
 const HAIKU_SYSTEM = `You route customer-support tickets for an online shop. Reply with exactly one intent label from this list and nothing else:
-${INTENTS.map((i) => (LOADED.gloss[i] ?? GLOSS[i] ? `${i}: ${LOADED.gloss[i] ?? GLOSS[i]}` : i)).join("\n")}
+${INTENTS.map((i) => { const g = [LOADED.gloss[i], ABCD_GLOSS[i] ?? (LOADED.gloss[i] ? undefined : GLOSS[i])].filter(Boolean).join(" — "); return g ? `${i}: ${g}` : i; }).join("\n")}
 none: only if no label fits at all`;
 
 async function haiku(text: string): Promise<Normalized | undefined> {
@@ -282,19 +312,23 @@ function toPath(steps: Step[]): { path: string[]; knowledge: { slug: string; tex
 // the write actions and the reply go to the model.
 function prefetch(ticket: string, p: Procedure): Step[] {
   const email = ticket.match(/[\w.+-]+@[\w-]+\.[\w.]+/)?.[0];
-  const orderId = ticket.match(/\bKC-\d+\b/i)?.[0];
+  const orderId = ticket.match(/\bKC-\d+\b/i)?.[0] ?? ticket.match(/\b\d{10}\b/)?.[0];
   const want = new Set(p.tools);
   const steps: Step[] = [];
   const run = (tool: string, input: any, fn: () => unknown) => { const output = fn(); steps.push({ tool, input, output }); return output; };
+  const q = orderId ? { orderId } : { email };
+  const has = (fn: string) => typeof (shop as any)[fn] === "function";
+  // ABCD tool set (Northwind): read-only lookups only; verify/validate/record steps stay with the model.
+  if (want.has("pull_up_account") && email && has("pullUpAccount")) run("pull_up_account", { email }, () => (shop as any).pullUpAccount({ email }));
+  if (want.has("subscription_status") && email && has("subscriptionStatus")) run("subscription_status", { email }, () => (shop as any).subscriptionStatus(email));
+  // Earlier (Kettle) tool set.
   if (want.has("find_customer") && email) run("find_customer", { email }, () => shop.findCustomer({ email }));
   let orders: shop.Order[] = [];
-  if (want.has("find_orders") && (orderId || email)) {
-    const q = orderId ? { orderId } : { email };
-    orders = run("find_orders", q, () => shop.findOrders(q)) as shop.Order[];
-  }
-  if (want.has("get_refunds") && (orderId || email)) { const q = orderId ? { orderId } : { email }; run("get_refunds", q, () => shop.getRefunds(q)); }
-  if (want.has("get_invoices") && (orderId || email)) { const q = orderId ? { orderId } : { email }; run("get_invoices", q, () => shop.getInvoices(q)); }
-  if (want.has("get_tracking")) for (const o of orders.slice(0, 3)) if (o.tracking) run("get_tracking", { trackingNumber: o.tracking }, () => shop.getTracking(o.tracking!));
+  if (want.has("find_orders") && (orderId || email)) orders = run("find_orders", q, () => shop.findOrders(q)) as shop.Order[];
+  if (want.has("shipping_status") && orderId && has("shippingStatus")) run("shipping_status", { orderId }, () => (shop as any).shippingStatus(orderId));
+  if (want.has("get_refunds") && (orderId || email)) run("get_refunds", q, () => shop.getRefunds(q));
+  if (want.has("get_invoices") && (orderId || email) && has("getInvoices")) run("get_invoices", q, () => (shop as any).getInvoices(q));
+  if (want.has("get_tracking")) for (const o of (Array.isArray(orders) ? orders : []).slice(0, 3)) if (o.tracking) run("get_tracking", { trackingNumber: o.tracking }, () => shop.getTracking(o.tracking!));
   return steps;
 }
 
@@ -358,7 +392,7 @@ const succeeded = (t: Trace) => t.reply.trim().length > 0 && t.steps.length > 0;
 
 // The replay was abandoned when the agent went back to the brain for policy (the hint says to do that only
 // for a different case) and none of the path's own action tools were used.
-const LOOKUPS = new Set(["search_kb", "read_page", "find_customer", "find_orders", "get_tracking", "get_refunds", "get_invoices", "list_products"]);
+const LOOKUPS = new Set(["search_kb", "read_page", "find_customer", "find_orders", "get_tracking", "get_refunds", "get_invoices", "list_products", "pull_up_account", "shipping_status", "subscription_status"]);
 function abandonedPath(p: Procedure, modelSteps: Step[]) {
   const searched = modelSteps.some((s) => (s.tool === "search_kb" || s.tool === "read_page") && !isCustomer((s.input as any)?.slug) && !JSON.stringify(s.output ?? "").includes('"customers/'));
   if (!searched) return false;

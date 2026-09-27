@@ -23,7 +23,7 @@ const PRICE_IN = 5 / 1e6, PRICE_OUT = 25 / 1e6; // Claude Opus 5, $ per token
 const NORM_IN = 1 / 1e6, NORM_OUT = 5 / 1e6; // claude-haiku-4-5 normalizer, $ per token
 const N = Number(a.n), C = Number(a.concurrency), BUCKET = Number(a.bucket), memoryOn = !a["no-memory"];
 
-type Ticket = { id: string; text: string; intent?: string; email?: string; actions?: string[] };
+type Ticket = { id: string; text: string; intent?: string; email?: string; actions?: (string | { action: string })[] };
 const tickets: Ticket[] = (await Bun.file(a.tickets!).text()).split("\n").filter(Boolean).map((l) => JSON.parse(l)).slice(0, N);
 if (!a.keep) await resetMemory();
 await Bun.write(a.out!, "");
@@ -42,7 +42,7 @@ async function worker() {
       const normCost = (s.normalized.inputTokens ?? 0) * NORM_IN + (s.normalized.outputTokens ?? 0) * NORM_OUT;
       row = {
         i, id: t.id, intent: t.intent, recalled: s.recalled, similarity: +s.similarity.toFixed(3), procedure: s.procedureTitle, procedureId: s.procedureId,
-        procedureIntent: s.procedureIntent, procedureTools: s.procedureTools, goldActions: t.actions, learned: s.learned, reinforced: s.reinforced, revised: s.revised, abandoned: s.abandoned, library: s.library,
+        procedureIntent: s.procedureIntent, procedureTools: s.procedureTools, goldActions: t.actions?.map((x) => (typeof x === "string" ? x : x.action)), learned: s.learned, reinforced: s.reinforced, revised: s.revised, abandoned: s.abandoned, library: s.library,
         normalizer: memoryOn ? s.normalized.source : "none", normalized: s.normalized.request, normCost: +normCost.toFixed(6),
         steps: s.steps.length, tools: s.steps.map((x) => x.tool), modelCalls: s.modelCalls, ms: s.ms,
         inputTokens: s.inputTokens, outputTokens: s.outputTokens, cost: +(s.inputTokens * PRICE_IN + s.outputTokens * PRICE_OUT + normCost).toFixed(5), reply: s.reply,
