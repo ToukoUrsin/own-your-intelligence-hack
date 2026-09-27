@@ -1,17 +1,18 @@
-# Router spec (for Marc / River)
+# River normalizer spec (for Marc)
 
-**Task:** map one raw customer ticket text to one standardized request label (the saved-path key in Memorable). Keep `CANONICAL_REQUEST_V1.md` in mind: the label is the ABCD subflow; subjects/operations can be derived from it (e.g. `refund_status` → retrieve/refund, `refund_initiate` → request/refund, `return_size` → request/return, `status` → retrieve/delivery, FAQ subflows → explain/product_information or policy).
+River implements **Marc's own contract, [`CANONICAL_REQUEST_V1.md`](../CANONICAL_REQUEST_V1.md)**. It does not classify tickets into intents, subflows or workflows.
 
-- **Data:** ABCD (ASAPP, MIT), `data/abcd/raw/abcd_v1.1.json.gz` — 10,042 human-human conversations for an online clothing retailer (train 8,034 / dev 1,004 / test 1,004). Labels in `scenario.flow` / `scenario.subflow`.
-- **Input:** `text` from `tickets.jsonl` / `heldout.jsonl` = the customer's opening message(s) (customer turns before the agent's first action, max 3; brand names genericized, emails → `@example.com`). Ignore `email`.
-- **Output:** exactly one subflow label below (optionally a confidence). Unknown/other → `none` (full exploration).
-- **Label normalization:** FAQ subflows collapse to their topic (`timing_1`…`timing_4` → `timing`, `boots_how_2` → `boots`); ABCD v1.1 aliases `status_questions` → `status_active`, `status_delivery_date` → `status_delivery_time`. Use `label()` in `data/build.py`.
-- **Train:** ABCD `train` (and `dev`) conversations; `tickets.jsonl` comes from `train` (`convo_id` field), so exclude those convo_ids if you want a clean replay. `heldout.jsonl` comes from `test` only — never train on it.
-- **Evaluate:** accuracy (= path hit rate) on `heldout.jsonl` (100 tickets, 1–2 per label), vs raw-text embedding match and the base model zero-shot.
-- **Gold workflow:** every ticket carries `actions` (ABCD action sequence with slot values), for comparing the learned path with the human agent's workflow.
-- **Endpoint:** HTTP `POST /route {"text": "..."}` → `{"intent": "refund_status", "confidence": 0.93}`.
+- **Input:** the customer's messages: `text` from `tickets.jsonl` / `heldout.jsonl` (the opening customer turns of an ABCD conversation, max 3; brand names genericized, emails → `@example.com`). The harness keeps the originals, identity and context.
+- **Output:** one canonical request v1 JSON object (`version`, `tasks`, `entities`, `unresolved`) exactly as in the contract: operations `retrieve|explain|assess|troubleshoot|request`, subject vocabulary, entities with exact bindings, reported/conditions/prohibitions predicates, no confidence, no workflow ids, no tools.
+- **Endpoint:** `POST /route {"text": "..."}` → `{"canonical": {...v1...}, "rendered": "Task 1: Retrieve refund information for order_1.\nRequested outputs: status."}`. `rendered` is optional; if absent the app renders `canonical` with its deterministic renderer (`agent/src/canonical.ts`). Set `ROUTER_URL` and `agent/src/memory.ts` uses it for every ticket.
+- **How it is used:** `rendered` is the only text sent to Memorable recall and stored as the procedure's request. Reuse is considered only between requests with the same goal signature (operation:subject per task); any `unresolved` item other than `missing_reference` sends the ticket to normal solving.
+- **Registry:** the app's field registry (subjects, outputs, predicate fields, attributes) is in `agent/src/canonical.ts`, seeded from the demo domain (clothing retailer). Unknown operation/subject/kind → invalid → normal solving; unknown outputs/fields/attributes are dropped and counted.
+- **Stand-in until River exists:** `NORMALIZER=haiku` ("Haiku stand-in for River"): claude-haiku-4-5 prompted with the contract emits the same v1 JSON; the same validator and renderer apply. Every result row records which normalizer served it.
+- **Data:** ABCD (ASAPP, MIT), `data/abcd/raw/abcd_v1.1.json.gz` — 10,042 human-human conversations (train 8,034 / dev 1,004 / test 1,004). `tickets.jsonl` comes from `train` (`convo_id`), `heldout.jsonl` from `test` only: never train on it. Label v1 records first and derive text with the renderer, per the contract.
+- **Evaluate:** `bun replay/eval_router.ts` on `heldout.jsonl` (100 tickets): recall hit rate = the recalled procedure was learned from a ticket of the same gold subflow; also wrong-recall and miss rates. Compared against raw-text recall and the Haiku stand-in; River is added automatically when `ROUTER_URL` is set. Results in `replay/router-eval.json`.
+- **Gold workflow:** every ticket carries `actions` (the human agent's ABCD action sequence), used to score learned paths (`goldAgreement` in `replay/summary.json`).
 
-## Label set (55 subflows in 10 flows)
+## Evaluation labels (55 ABCD subflows in 10 flows; scoring only, never a River output)
 | Flow | Subflows |
 |---|---|
 | account_access | recover_username, recover_password, reset_2fa |

@@ -7,7 +7,7 @@ export const TOOL_TO_ABCD: Record<string, string[]> = {
   check_system: ["ask-the-oracle"], update_subscription: ["update-account"], troubleshoot_step: ["try-again", "log-out-in"],
   // Earlier Kettle tool set:
   find_customer: ["pull-up-account"],
-  get_tracking: ["ask-the-oracle"], get_refunds: ["ask-the-oracle"], get_invoices: ["ask-the-oracle"],
+  get_tracking: ["ask-the-oracle"], get_invoices: ["ask-the-oracle"],
   cancel_order: ["update-order"], edit_order: ["update-order"], change_shipping_address: ["update-order"],
   update_account: ["update-account"], change_plan: ["update-account"], set_newsletter: ["update-account"],
   create_account: ["update-account"], request_account_deletion: ["update-account"],

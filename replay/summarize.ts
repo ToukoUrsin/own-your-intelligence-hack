@@ -5,7 +5,7 @@ import { agreement, expressible } from "./abcd_map";
 
 type Row = {
   i: number; id: string; intent?: string; recalled: boolean; procedureIntent?: string; procedureTools?: string[]; tools?: string[]; goldActions?: string[]; learned?: string; reinforced?: string; revised?: string;
-  library: number; normalizer: string; steps: number; modelCalls: number; ms: number; cost: number; normCost?: number; error?: string;
+  library: number; tier?: string; backend?: string; normalizer: string; steps: number; modelCalls: number; ms: number; cost: number; normCost?: number; error?: string;
 };
 
 const DIR = import.meta.dir;
@@ -14,6 +14,7 @@ const read = async (f: string): Promise<Row[]> => {
   if (!(await file.exists())) return [];
   return (await file.text()).split("\n").filter(Boolean).map((l) => JSON.parse(l)).sort((a: Row, b: Row) => a.i - b.i);
 };
+const tierOf = (r: Row) => r.tier ?? (r.recalled ? "recalled" : "explored");
 const avg = (xs: Row[], f: (r: Row) => number) => (xs.length ? xs.reduce((s, r) => s + f(r), 0) / xs.length : 0);
 const pct = (a: number, b: number) => (b ? `${Math.round(((a - b) / b) * 100)}%` : "n/a");
 
@@ -33,6 +34,8 @@ function stats(rows: Row[], bucket: number) {
       toolCallsPerTicket: +avg(xs, (r) => r.steps).toFixed(1),
       modelCallsPerTicket: +avg(xs, (r) => r.modelCalls).toFixed(1),
       libraryAtEnd: Math.max(0, ...xs.map((r) => r.library ?? 0)),
+      tierShare: Object.fromEntries(["explored", "recalled", "compiled"].map((t) => [t, +(xs.filter((r) => tierOf(r) === t).length / xs.length).toFixed(2)])),
+      costByTier: Object.fromEntries(["explored", "recalled", "compiled"].map((t) => { const ys = xs.filter((r) => tierOf(r) === t); return [t, ys.length ? +avg(ys, (r) => r.cost).toFixed(4) : null]; })),
     });
   }
   return { ok, buckets };
@@ -75,6 +78,9 @@ export async function summarize(bucket = 25) {
     method: "tool names mapped to ABCD actions (replay/abcd_map.ts); exactMatch = path action set equals the human agent's actions restricted to those our tools can express",
     expressibleActions: [...scope].sort(),
     recalledPaths: agree(rec, (r) => r.procedureTools), // learned procedure vs this ticket's human workflow
+    recalledTraces: agree(m.ok.filter((r) => tierOf(r) === "recalled"), (r) => r.tools),
+    exploredTraces: agree(m.ok.filter((r) => tierOf(r) === "explored"), (r) => r.tools),
+    compiledTraces: agree(m.ok.filter((r) => tierOf(r) === "compiled"), (r) => r.tools),
     executedTraces: agree(m.ok, (r) => r.tools), // what the agent actually did on every ticket
     ...(base.length ? { baselineTraces: agree(b.ok, (r) => r.tools) } : {}),
   } : undefined;
@@ -86,6 +92,9 @@ export async function summarize(bucket = 25) {
     totalCost: +m.ok.reduce((s, r) => s + r.cost, 0).toFixed(3),
     normalizerCost: +m.ok.reduce((s, r) => s + (r.normCost ?? 0), 0).toFixed(4),
     recalled: rec.length,
+    tiers: Object.fromEntries(["explored", "recalled", "compiled"].map((t) => { const ys = m.ok.filter((r) => tierOf(r) === t); return [t, { n: ys.length, costPerTicket: ys.length ? +avg(ys, (r) => r.cost).toFixed(4) : null }]; })),
+    backends: m.ok.reduce((o, r) => ({ ...o, [r.backend ?? "n/a"]: (o[r.backend ?? "n/a"] ?? 0) + 1 }), {} as Record<string, number>),
+    normalizedShare: +avg(m.ok, (r) => +((r as any).signature != null)).toFixed(3),
     recallPrecision: +avg(rec, (r) => +(r.procedureIntent === r.intent)).toFixed(3),
     recalledCost: +avg(rec, (r) => r.cost).toFixed(4),
     exploredCost: +avg(m.ok.filter((r) => !r.recalled), (r) => r.cost).toFixed(4),

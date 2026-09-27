@@ -6,6 +6,7 @@ import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } fr
 import Anthropic from "@anthropic-ai/sdk";
 import { dirname, join } from "node:path";
 import { handleTicket, type Step, type Trace } from "./agent";
+import { haikuCanonical, render, signature, validate, type Canonical } from "./canonical";
 import * as shop from "./shop";
 
 const API = process.env.MEMORABLE_API_URL ?? "https://memorable-extraction-api.memorable.workers.dev";
@@ -14,6 +15,7 @@ const STORE = process.env.MEMORY_STORE ?? join(import.meta.dir, "../../replay/pr
 
 export type Procedure = {
   id: string;
+  signature?: string; // canonical goal signature (operation:subject per task); reuse only within the same goals
   key?: string; // standardized request (intent label) the path is filed under; raw-text procedures have none
   goldIntent?: string; // dataset label of the ticket it was learned from (evaluation only, never used for routing)
   uses?: number; // times recalled and replayed successfully
@@ -35,12 +37,13 @@ export type Normalizer = "river" | "haiku" | "raw";
 // `request` is the standardized request used for recall and as the procedure key: River's `rendered` description,
 // or for Haiku the fixed rendered sentence of its intent label. Raw text when nothing standardized it.
 export type Normalized = {
-  request: string; standardized: boolean; intent?: string; canonical?: unknown; confidence?: number; source: Normalizer;
+  request: string; standardized: boolean; intent?: string; canonical?: unknown; signature?: string; why?: string; confidence?: number; source: Normalizer;
   inputTokens?: number; outputTokens?: number;
 };
 export type Solved = Trace & {
   recalled: boolean; procedureId?: string; procedureTitle?: string; procedureIntent?: string; procedureTools?: string[]; similarity: number; normalized: Normalized;
   learned?: string; reinforced?: string; revised?: string; abandoned?: boolean; library: number;
+  tier: "explored" | "recalled" | "compiled"; backend?: string; planId?: string;
 };
 
 // 27 Bitext intents (data/ROUTER.md). A standardized request is one of these labels.
@@ -173,6 +176,14 @@ export function activeNormalizer(): Normalizer {
   return process.env.NORMALIZER === "haiku" ? "haiku" : "raw";
 }
 
+// "Haiku stand-in for River": claude-haiku-4-5 emits CANONICAL_REQUEST_V1 JSON, the app validates and renders it.
+async function haikuStandIn(text: string): Promise<Normalized> {
+  const h = await haikuCanonical(text);
+  const usage = { inputTokens: h.inputTokens, outputTokens: h.outputTokens };
+  if (!h.rendered) return { request: text, standardized: false, canonical: h.canonical, why: h.why, source: "haiku", ...usage };
+  return { request: h.rendered, standardized: true, canonical: h.canonical, signature: h.sig, source: "haiku", ...usage };
+}
+
 async function river(text: string): Promise<Normalized | undefined> {
   const r = await fetch(process.env.ROUTER_URL!, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }), signal: AbortSignal.timeout(15000) });
   if (!r.ok) return;
@@ -181,9 +192,10 @@ async function river(text: string): Promise<Normalized | undefined> {
   const intentRaw = str(j.intent);
   const intent = intentRaw && INTENT_SET.has(intentRaw) ? intentRaw : undefined;
   if (Array.isArray(j.canonical?.unresolved) && j.canonical.unresolved.length) return; // contract: unresolved → normal solving
-  const request = str(j.rendered) ?? str(j.request) ?? (intent ? renderIntent(intent) : undefined);
+  const v = j.canonical ? validate(j.canonical) : undefined;
+  const request = str(j.rendered) ?? (v?.ok ? render(v.canonical!) : undefined) ?? str(j.request) ?? (intent ? renderIntent(intent) : undefined);
   if (!request) return;
-  return { request, standardized: true, intent: intent ?? INTENT_OF.get(request), canonical: j.canonical, confidence: j.confidence, source: "river" };
+  return { request, standardized: true, intent: intent ?? INTENT_OF.get(request), canonical: j.canonical, signature: v?.ok ? signature(v.canonical!) : undefined, confidence: j.confidence, source: "river" };
 }
 
 let anthropic: Anthropic | undefined;
@@ -252,7 +264,7 @@ async function haiku(text: string): Promise<Normalized | undefined> {
 
 export async function normalize(text: string, which: Normalizer = activeNormalizer()): Promise<Normalized> {
   try {
-    const n = which === "river" ? await river(text) : which === "haiku" ? await haiku(text) : undefined;
+    const n = which === "river" ? await river(text) : which === "haiku" ? (process.env.NORMALIZER_MODE === "label" ? await haiku(text) : await haikuStandIn(text)) : undefined;
     if (n) return n;
   } catch {}
   return { request: text, standardized: false, source: "raw" };
@@ -261,20 +273,45 @@ export async function normalize(text: string, which: Normalizer = activeNormaliz
 // The ticket text without the "(from: …)" line, so raw-text similarity is not driven by the sender.
 const body = (ticket: string) => ticket.replace(/\n*\(from: [^)]*\)\s*$/i, "").trim();
 
-// Exact standardized-request key first (similarity 1), else nearest embedding. Two different known intents never match.
-export async function recall(query: string): Promise<{ procedure?: Procedure; similarity: number; embedding: number[]; keyed?: boolean }> {
+// Procedure store behind a small interface: local JSONL + bge-m3 cosine (default), or Memorable itself
+// (RECALL_BACKEND=memorable, agent/src/memorable-store.ts), with the local store as fallback when Memorable errors.
+export type Recalled = { procedure?: Procedure; similarity: number; embedding: number[]; keyed?: boolean; backend: string };
+const BACKEND = process.env.RECALL_BACKEND === "memorable" ? "memorable" : "local";
+const MEMORABLE_THRESHOLD = Number(process.env.MEMORABLE_RECALL_THRESHOLD ?? 0.6);
+let remote: any;
+async function memorableStore() {
+  if (remote === undefined) remote = await import("./memorable-store").then((m) => m.memorableStore).catch(() => null);
+  return remote;
+}
+export const recallThreshold = (backend: string) => (backend === "memorable" ? MEMORABLE_THRESHOLD : THRESHOLD);
+
+// Exact rendered request first (similarity 1), else nearest embedding; only between requests with the same canonical
+// goal signature (and never across two different known eval labels when label mode is used).
+export async function recall(query: string, sig?: string): Promise<Recalled> {
   const all = await load();
-  const keyed = all.find((p) => p.key === query);
   const embedding = await embed(query);
-  if (keyed) return { procedure: keyed, similarity: 1, embedding, keyed: true };
+  if (BACKEND === "memorable") {
+    const store = await memorableStore();
+    const r = store ? await store.recall(query).catch(() => undefined) : undefined;
+    if (r) {
+      const local = r.procedure && all.find((p) => p.id === r.procedure.id || p.key === r.procedure.key);
+      const procedure = local ?? r.procedure;
+      if (procedure && sig && procedure.signature && procedure.signature !== sig) return { similarity: r.similarity, embedding, backend: "memorable" };
+      return { procedure, similarity: r.similarity, embedding, backend: "memorable" };
+    }
+  }
+  const same = (p: Procedure) => !sig || !p.signature || p.signature === sig;
+  const keyed = all.find((p) => p.key === query && same(p));
+  if (keyed) return { procedure: keyed, similarity: 1, embedding, keyed: true, backend: "local" };
   const qIntent = INTENT_OF.get(query);
   let best: Procedure | undefined, similarity = 0;
   for (const p of all) {
+    if (!same(p)) continue;
     if (qIntent && p.intent && p.intent !== qIntent) continue;
     const s = cosine(embedding, p.embedding);
     if (s > similarity) { similarity = s; best = p; }
   }
-  return { procedure: best, similarity, embedding };
+  return { procedure: best, similarity, embedding, backend: "local" };
 }
 
 function persist() {
@@ -367,7 +404,8 @@ export async function saveProcedure(args: {
   const p: Procedure = {
     id: `proc-${procedures!.length + 1}`,
     key,
-    title: (normalized.intent ?? d?.title ?? normalized.request).slice(0, 120),
+    signature: normalized.signature,
+    title: (normalized.intent ?? d?.title ?? normalized.request.split("\n")[0]!).slice(0, 120),
     task: normalized.request,
     intent: normalized.intent,
     goldIntent: args.goldIntent,
@@ -385,6 +423,7 @@ export async function saveProcedure(args: {
   procedures!.push(p);
   mkdirSync(dirname(STORE), { recursive: true });
   appendFileSync(STORE, JSON.stringify(p) + "\n");
+  if (BACKEND === "memorable") { const store = await memorableStore(); await store?.save(p).catch(() => undefined); }
   return { procedure: p, created: true };
 }
 
@@ -401,24 +440,48 @@ function abandonedPath(p: Procedure, modelSteps: Step[]) {
   return actions.length === 0 ? true : !actions.some((t) => used.has(t));
 }
 
+// Optional compiled tier (agent/src/compiled.ts, another workstream): deterministic plans with zero model calls.
+let compiledMod: any;
+async function compiled() {
+  if (compiledMod === undefined) compiledMod = await import("./compiled" + "").catch(() => null);
+  return compiledMod;
+}
+
+// Replaying a recalled path: only the path's tools plus brain fallback, and low effort.
+const REPLAY_EFFORT = (process.env.REPLAY_EFFORT ?? "low") as "low" | "medium" | "high";
+const replayTools = (p: Procedure) => [...new Set([...p.tools, "search_kb", "read_page", "pull_up_account"])];
+
 export async function solve(ticket: string, opts: { id?: string; learn?: boolean; recall?: boolean; goldIntent?: string } = {}): Promise<Solved> {
   if (opts.recall === false && opts.learn === false) {
     const t = await handleTicket(ticket);
-    return { ...t, recalled: false, similarity: 0, normalized: { request: body(ticket), standardized: false, source: "raw" }, library: 0 };
+    return { ...t, recalled: false, similarity: 0, normalized: { request: body(ticket), standardized: false, source: "raw" }, library: 0, tier: "explored" };
   }
   const n = await normalize(body(ticket));
   const normalized = n.standardized ? n : { ...n, request: body(ticket) };
-  const r = opts.recall === false ? { similarity: 0, embedding: await embed(normalized.request) } as Awaited<ReturnType<typeof recall>> : await recall(normalized.request);
-  const hit = r.procedure && r.similarity >= THRESHOLD ? r.procedure : undefined;
+
+  // Tier 1: compiled plan.
+  const cm = await compiled();
+  if (cm?.tryCompiled && normalized.standardized) {
+    const c = await cm.tryCompiled(normalized, ticket).catch(() => null);
+    if (c) return { ticket, ...c, recalled: false, similarity: 1, normalized, library: (await load()).length, tier: "compiled", planId: c.planId };
+  }
+
+  // Tier 2: recalled path. Tier 3: explore.
+  const r: Recalled = opts.recall === false || !normalized.standardized
+    ? { similarity: 0, embedding: await embed(normalized.request), backend: "none" }
+    : await recall(normalized.request, normalized.signature);
+  const hit = r.procedure && r.similarity >= recallThreshold(r.backend) ? r.procedure : undefined;
   const done = hit ? prefetch(ticket, hit) : [];
-  const t = await handleTicket(ticket, hit ? hintFor(hit, r.similarity, done) : undefined);
+  const t = hit
+    ? await handleTicket(ticket, hintFor(hit, r.similarity, done), { tools: replayTools(hit), effort: REPLAY_EFFORT })
+    : await handleTicket(ticket);
   const trace: Trace = { ...t, steps: [...done, ...t.steps] };
 
   // Library hygiene: a new procedure only when nothing matched, or when the recalled one was abandoned under a
   // different key. A matched path is reinforced (uses++); an abandoned same-key path is rewritten in place.
   let learned: string | undefined, reinforced: string | undefined, revised: string | undefined;
   const abandoned = !!hit && abandonedPath(hit, t.steps);
-  if (opts.learn !== false && succeeded(trace)) {
+  if (opts.learn !== false && succeeded(trace) && normalized.standardized) {
     const sameKey = hit && hit.key && hit.key === normalized.request;
     if (!hit || (abandoned && !sameKey)) {
       const saved = await saveProcedure({ sessionId: opts.id ?? "adhoc", normalized, steps: trace.steps, ticket: body(ticket), embedding: r.embedding, goldIntent: opts.goldIntent }).catch(() => undefined);
@@ -433,10 +496,12 @@ export async function solve(ticket: string, opts: { id?: string; learn?: boolean
       for (const tool of new Set(trace.steps.map((s) => s.tool))) if (!hit.tools.includes(tool) && LOOKUPS.has(tool)) hit.tools.push(tool);
       reinforced = hit.id;
       persist();
+      if (cm?.maybeCompile) await cm.maybeCompile(hit, trace, normalized).catch(() => {});
     }
   }
   return {
     ...trace, recalled: !!hit, procedureId: hit?.id, procedureTitle: hit?.title, procedureIntent: hit?.goldIntent ?? hit?.intent, procedureTools: hit ? [...hit.tools] : undefined,
     similarity: r.similarity, normalized, learned, reinforced, revised, abandoned, library: (await load()).length,
+    tier: hit ? "recalled" : "explored", backend: r.backend,
   };
 }

@@ -77,7 +77,10 @@ async function runTool(name: string, input: any): Promise<unknown> {
 export type Step = { tool: string; input: unknown; output: unknown };
 export type Trace = { ticket: string; steps: Step[]; reply: string; ms: number; inputTokens: number; outputTokens: number; modelCalls: number };
 
-export async function handleTicket(ticket: string, hint?: string): Promise<Trace> {
+// opts (used when replaying a recalled path): restrict the tool list to the path's tools, and lower the effort.
+export type HandleOpts = { tools?: string[]; effort?: "low" | "medium" | "high" };
+
+export async function handleTicket(ticket: string, hint?: string, opts: HandleOpts = {}): Promise<Trace> {
   const started = Date.now();
   const steps: Step[] = [];
   let inputTokens = 0, outputTokens = 0, modelCalls = 0;
@@ -85,7 +88,11 @@ export async function handleTicket(ticket: string, hint?: string): Promise<Trace
   const messages: Anthropic.MessageParam[] = [{ role: "user", content }];
 
   while (true) {
-    const response = await client.messages.create({ model: MODEL, max_tokens: 16000, system: SYSTEM, tools, messages });
+    const toolset = opts.tools ? tools.filter((t) => opts.tools!.includes(t.name)) : tools;
+    const params = { model: MODEL, max_tokens: 16000, system: SYSTEM, tools: toolset, messages };
+    const response = opts.effort
+      ? await client.messages.create({ ...params, output_config: { effort: opts.effort } }).catch(() => client.messages.create(params))
+      : await client.messages.create(params);
     modelCalls++;
     inputTokens += response.usage.input_tokens;
     outputTokens += response.usage.output_tokens;

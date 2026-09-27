@@ -1,0 +1,326 @@
+{
+  "memory": true,
+  "normalizers": {
+    "haiku": 400
+  },
+  "tickets": 400,
+  "errors": 0,
+  "totalCost": 55.311,
+  "normalizerCost": 0.5017,
+  "recalled": 335,
+  "recallPrecision": 0.633,
+  "recalledCost": 0.1231,
+  "exploredCost": 0.2165,
+  "library": {
+    "size": 58,
+    "created": 58,
+    "reinforced": 327,
+    "revised": 15,
+    "distinctGoldIntents": 55
+  },
+  "goldAgreement": {
+    "method": "tool names mapped to ABCD actions (replay/abcd_map.ts); exactMatch = path action set equals the human agent's actions restricted to those our tools can express",
+    "expressibleActions": [
+      "ask-the-oracle",
+      "enter-details",
+      "log-out-in",
+      "make-password",
+      "make-purchase",
+      "membership",
+      "notify-team",
+      "offer-refund",
+      "promo-code",
+      "pull-up-account",
+      "record-reason",
+      "send-link",
+      "shipping-status",
+      "subscription-status",
+      "try-again",
+      "update-account",
+      "update-order",
+      "validate-purchase",
+      "verify-identity"
+    ],
+    "recalledPaths": {
+      "n": 335,
+      "exactMatch": 0.081,
+      "meanJaccard": 0.535,
+      "topMissing": {
+        "update-order": 53,
+        "verify-identity": 52,
+        "enter-details": 42,
+        "ask-the-oracle": 30,
+        "make-password": 29,
+        "record-reason": 24,
+        "validate-purchase": 19,
+        "update-account": 16
+      },
+      "topExtra": {
+        "shipping-status": 97,
+        "ask-the-oracle": 68,
+        "record-reason": 40,
+        "pull-up-account": 37,
+        "update-order": 30,
+        "membership": 28,
+        "validate-purchase": 25,
+        "enter-details": 20
+      }
+    },
+    "executedTraces": {
+      "n": 400,
+      "exactMatch": 0.105,
+      "meanJaccard": 0.566,
+      "topMissing": {
+        "verify-identity": 59,
+        "update-order": 57,
+        "make-password": 29,
+        "ask-the-oracle": 29,
+        "validate-purchase": 25,
+        "record-reason": 24,
+        "enter-details": 23,
+        "update-account": 20
+      },
+      "topExtra": {
+        "shipping-status": 82,
+        "ask-the-oracle": 74,
+        "record-reason": 52,
+        "pull-up-account": 49,
+        "update-order": 39,
+        "membership": 38,
+        "enter-details": 33,
+        "validate-purchase": 28
+      }
+    },
+    "baselineTraces": {
+      "n": 100,
+      "exactMatch": 0.19,
+      "meanJaccard": 0.634,
+      "topMissing": {
+        "update-order": 16,
+        "verify-identity": 12,
+        "enter-details": 12,
+        "record-reason": 8,
+        "offer-refund": 7,
+        "validate-purchase": 6,
+        "shipping-status": 5,
+        "make-password": 5
+      },
+      "topExtra": {
+        "ask-the-oracle": 14,
+        "shipping-status": 10,
+        "enter-details": 10,
+        "update-order": 9,
+        "membership": 6,
+        "pull-up-account": 6,
+        "record-reason": 5,
+        "verify-identity": 3
+      }
+    }
+  },
+  "buckets": [
+    {
+      "tickets": "1-25",
+      "n": 25,
+      "recallRate": 0.24,
+      "recallPrecision": 0.83,
+      "costPerTicket": 0.1783,
+      "secondsPerTicket": 15.1,
+      "toolCallsPerTicket": 4.8,
+      "modelCallsPerTicket": 3.9,
+      "libraryAtEnd": 16
+    },
+    {
+      "tickets": "26-50",
+      "n": 25,
+      "recallRate": 0.52,
+      "recallPrecision": 0.77,
+      "costPerTicket": 0.1691,
+      "secondsPerTicket": 16.1,
+      "toolCallsPerTicket": 5.4,
+      "modelCallsPerTicket": 4.1,
+      "libraryAtEnd": 26
+    },
+    {
+      "tickets": "51-75",
+      "n": 25,
+      "recallRate": 0.76,
+      "recallPrecision": 0.58,
+      "costPerTicket": 0.1794,
+      "secondsPerTicket": 17.1,
+      "toolCallsPerTicket": 5.7,
+      "modelCallsPerTicket": 4.1,
+      "libraryAtEnd": 31
+    },
+    {
+      "tickets": "76-100",
+      "n": 25,
+      "recallRate": 0.8,
+      "recallPrecision": 0.6,
+      "costPerTicket": 0.1711,
+      "secondsPerTicket": 17.6,
+      "toolCallsPerTicket": 5.7,
+      "modelCallsPerTicket": 4,
+      "libraryAtEnd": 36
+    },
+    {
+      "tickets": "101-125",
+      "n": 25,
+      "recallRate": 0.84,
+      "recallPrecision": 0.62,
+      "costPerTicket": 0.1733,
+      "secondsPerTicket": 14.7,
+      "toolCallsPerTicket": 4.8,
+      "modelCallsPerTicket": 3.3,
+      "libraryAtEnd": 43
+    },
+    {
+      "tickets": "126-150",
+      "n": 25,
+      "recallRate": 0.76,
+      "recallPrecision": 0.47,
+      "costPerTicket": 0.1259,
+      "secondsPerTicket": 13.5,
+      "toolCallsPerTicket": 4.5,
+      "modelCallsPerTicket": 3.2,
+      "libraryAtEnd": 45
+    },
+    {
+      "tickets": "151-175",
+      "n": 25,
+      "recallRate": 0.84,
+      "recallPrecision": 0.81,
+      "costPerTicket": 0.1033,
+      "secondsPerTicket": 12.3,
+      "toolCallsPerTicket": 3.8,
+      "modelCallsPerTicket": 2.9,
+      "libraryAtEnd": 49
+    },
+    {
+      "tickets": "176-200",
+      "n": 25,
+      "recallRate": 0.92,
+      "recallPrecision": 0.65,
+      "costPerTicket": 0.1271,
+      "secondsPerTicket": 14.2,
+      "toolCallsPerTicket": 4.6,
+      "modelCallsPerTicket": 3.1,
+      "libraryAtEnd": 51
+    },
+    {
+      "tickets": "201-225",
+      "n": 25,
+      "recallRate": 0.88,
+      "recallPrecision": 0.5,
+      "costPerTicket": 0.1725,
+      "secondsPerTicket": 17.8,
+      "toolCallsPerTicket": 5.4,
+      "modelCallsPerTicket": 3.8,
+      "libraryAtEnd": 54
+    },
+    {
+      "tickets": "226-250",
+      "n": 25,
+      "recallRate": 0.92,
+      "recallPrecision": 0.57,
+      "costPerTicket": 0.129,
+      "secondsPerTicket": 14.8,
+      "toolCallsPerTicket": 4.8,
+      "modelCallsPerTicket": 3.2,
+      "libraryAtEnd": 56
+    },
+    {
+      "tickets": "251-275",
+      "n": 25,
+      "recallRate": 1,
+      "recallPrecision": 0.6,
+      "costPerTicket": 0.106,
+      "secondsPerTicket": 12.4,
+      "toolCallsPerTicket": 4.2,
+      "modelCallsPerTicket": 2.7,
+      "libraryAtEnd": 56
+    },
+    {
+      "tickets": "276-300",
+      "n": 25,
+      "recallRate": 1,
+      "recallPrecision": 0.68,
+      "costPerTicket": 0.1047,
+      "secondsPerTicket": 13.5,
+      "toolCallsPerTicket": 4.2,
+      "modelCallsPerTicket": 2.8,
+      "libraryAtEnd": 56
+    },
+    {
+      "tickets": "301-325",
+      "n": 25,
+      "recallRate": 0.96,
+      "recallPrecision": 0.67,
+      "costPerTicket": 0.105,
+      "secondsPerTicket": 11.7,
+      "toolCallsPerTicket": 4.4,
+      "modelCallsPerTicket": 3,
+      "libraryAtEnd": 57
+    },
+    {
+      "tickets": "326-350",
+      "n": 25,
+      "recallRate": 0.96,
+      "recallPrecision": 0.58,
+      "costPerTicket": 0.1266,
+      "secondsPerTicket": 13.3,
+      "toolCallsPerTicket": 4.7,
+      "modelCallsPerTicket": 3,
+      "libraryAtEnd": 58
+    },
+    {
+      "tickets": "351-375",
+      "n": 25,
+      "recallRate": 1,
+      "recallPrecision": 0.8,
+      "costPerTicket": 0.1035,
+      "secondsPerTicket": 12.5,
+      "toolCallsPerTicket": 4.4,
+      "modelCallsPerTicket": 2.8,
+      "libraryAtEnd": 58
+    },
+    {
+      "tickets": "376-400",
+      "n": 25,
+      "recallRate": 1,
+      "recallPrecision": 0.56,
+      "costPerTicket": 0.1377,
+      "secondsPerTicket": 15.7,
+      "toolCallsPerTicket": 5.3,
+      "modelCallsPerTicket": 3.3,
+      "libraryAtEnd": 58
+    }
+  ],
+  "headline": {
+    "costPerTicketFirstBucket": 0.1783,
+    "costPerTicketLastBucket": 0.1377,
+    "costFirstVsLast": "-23%",
+    "timeFirstVsLast": "4%",
+    "toolCallsFirstVsLast": "10%",
+    "recalledInLastBucket": "100%",
+    "librarySize": 58,
+    "recallPrecision": 0.633,
+    "recalledPathsMatchingHumanWorkflow": "8%",
+    "baselineCostPerTicket": 0.1832,
+    "lastBucketVsBaseline": "-25%",
+    "sameTicketsVsBaseline": {
+      "tickets": 100,
+      "memoryCost": 0.1745,
+      "baselineCost": 0.1832,
+      "change": "-5%"
+    },
+    "lastBucketBaselineOverlap": 0
+  },
+  "baseline": {
+    "tickets": 100,
+    "errors": 0,
+    "costPerTicket": 0.1832,
+    "secondsPerTicket": 16.4,
+    "toolCallsPerTicket": 5,
+    "totalCost": 18.318
+  }
+}

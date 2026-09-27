@@ -28,7 +28,7 @@ const tickets: Ticket[] = (await Bun.file(a.tickets!).text()).split("\n").filter
 if (!a.keep) await resetMemory();
 await Bun.write(a.out!, "");
 
-type Row = { i: number; id: string; intent?: string; recalled: boolean; similarity: number; procedure?: string; procedureId?: string; procedureIntent?: string; procedureTools?: string[]; goldActions?: string[]; learned?: string; reinforced?: string; revised?: string; abandoned?: boolean; library: number; normalizer: string; normalized: string; normCost?: number; steps: number; tools: string[]; modelCalls: number; ms: number; inputTokens: number; outputTokens: number; cost: number; reply: string; error?: string };
+type Row = { i: number; id: string; intent?: string; recalled: boolean; similarity: number; procedure?: string; procedureId?: string; procedureIntent?: string; procedureTools?: string[]; goldActions?: string[]; learned?: string; reinforced?: string; revised?: string; abandoned?: boolean; library: number; tier: string; backend?: string; planId?: string; signature?: string; normWhy?: string; normalizer: string; normalized: string; normCost?: number; steps: number; tools: string[]; modelCalls: number; ms: number; inputTokens: number; outputTokens: number; cost: number; reply: string; error?: string };
 const rows: Row[] = [];
 let next = 0;
 
@@ -42,17 +42,17 @@ async function worker() {
       const normCost = (s.normalized.inputTokens ?? 0) * NORM_IN + (s.normalized.outputTokens ?? 0) * NORM_OUT;
       row = {
         i, id: t.id, intent: t.intent, recalled: s.recalled, similarity: +s.similarity.toFixed(3), procedure: s.procedureTitle, procedureId: s.procedureId,
-        procedureIntent: s.procedureIntent, procedureTools: s.procedureTools, goldActions: t.actions?.map((x) => (typeof x === "string" ? x : x.action)), learned: s.learned, reinforced: s.reinforced, revised: s.revised, abandoned: s.abandoned, library: s.library,
+        procedureIntent: s.procedureIntent, procedureTools: s.procedureTools, goldActions: t.actions?.map((x) => (typeof x === "string" ? x : x.action)), learned: s.learned, reinforced: s.reinforced, revised: s.revised, abandoned: s.abandoned, library: s.library, tier: s.tier, backend: s.backend, planId: s.planId, signature: s.normalized.signature, normWhy: s.normalized.why,
         normalizer: memoryOn ? s.normalized.source : "none", normalized: s.normalized.request, normCost: +normCost.toFixed(6),
         steps: s.steps.length, tools: s.steps.map((x) => x.tool), modelCalls: s.modelCalls, ms: s.ms,
         inputTokens: s.inputTokens, outputTokens: s.outputTokens, cost: +(s.inputTokens * PRICE_IN + s.outputTokens * PRICE_OUT + normCost).toFixed(5), reply: s.reply,
       };
     } catch (e) {
-      row = { i, id: t.id, intent: t.intent, recalled: false, similarity: 0, library: 0, normalizer: "error", normalized: t.text, steps: 0, tools: [], modelCalls: 0, ms: 0, inputTokens: 0, outputTokens: 0, cost: 0, reply: "", error: String(e) };
+      row = { i, id: t.id, intent: t.intent, recalled: false, similarity: 0, library: 0, tier: "error", normalizer: "error", normalized: t.text, steps: 0, tools: [], modelCalls: 0, ms: 0, inputTokens: 0, outputTokens: 0, cost: 0, reply: "", error: String(e) };
     }
     rows.push(row);
     appendFileSync(a.out!, JSON.stringify(row) + "\n");
-    console.log(`${row.id} ${(row.intent ?? "").padEnd(24)} ${row.error ? "ERROR " + row.error.slice(0, 80) : `${row.recalled ? "RECALL" : "explore"} [${row.normalized.slice(0, 24)}] sim=${row.similarity} steps=${row.steps} ${(row.ms / 1000).toFixed(1)}s $${row.cost.toFixed(4)} lib=${row.library}${row.learned ? " +" + row.learned : ""}${row.reinforced ? " ^" + row.reinforced : ""}${row.revised ? " ~" + row.revised : ""}`}`);
+    console.log(`${row.id} ${(row.intent ?? "").padEnd(24)} ${row.error ? "ERROR " + row.error.slice(0, 80) : `${row.tier.toUpperCase().slice(0, 8)} [${row.normalized.slice(0, 24)}] sim=${row.similarity} steps=${row.steps} ${(row.ms / 1000).toFixed(1)}s $${row.cost.toFixed(4)} lib=${row.library}${row.learned ? " +" + row.learned : ""}${row.reinforced ? " ^" + row.reinforced : ""}${row.revised ? " ~" + row.revised : ""}`}`);
   }
 }
 await Promise.all(Array.from({ length: C }, worker));
