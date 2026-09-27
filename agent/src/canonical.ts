@@ -100,8 +100,8 @@ export function render(c: Canonical): string {
   return lines.join("\n");
 }
 
-// Goal signature (operation:subject per task): reuse is only considered between requests with the same goals.
-export const signature = (c: Canonical) => c.tasks.map((t) => `${t.operation}:${t.subject}`).join("|");
+// Goal signature (operation:subject of the primary task): reuse is only considered between requests with the same goals.
+export const signature = (c: Canonical) => (c.tasks[0] ? `${c.tasks[0].operation}:${c.tasks[0].subject}` : ""); // primary goal
 
 const SYSTEM = `You normalize one customer-support message for an online clothing retailer into a compact JSON record (canonical request v1). Output only JSON, no prose.
 Shape: {"version":1,"tasks":[{"id":"t1","operation":...,"subject":...,"target":"<entity id or omit>","outputs":[...],"reported":[predicate...],"conditions":[predicate...],"prohibitions":[{"operation":...,"subject":...,"target":...}],"depends_on":[]}],"entities":{"order_1":{"kind":...,"bindings":{},"attributes":{}}},"unresolved":[]}

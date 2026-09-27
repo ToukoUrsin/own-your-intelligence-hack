@@ -7,7 +7,7 @@ import { join } from "node:path";
 import { cosine, embed, normalize, type Normalized, type Normalizer } from "../agent/src/memory";
 
 const THRESHOLD = Number(process.env.RECALL_THRESHOLD ?? 0.8);
-const C = 8;
+const C = Number(process.env.EVAL_CONCURRENCY ?? 3);
 type Ticket = { id: string; text: string; intent: string };
 const readJsonl = async (f: string): Promise<Ticket[]> => (await Bun.file(join(import.meta.dir, f)).text()).split("\n").filter(Boolean).map((l) => JSON.parse(l));
 const tickets = await readJsonl("../data/tickets.jsonl");

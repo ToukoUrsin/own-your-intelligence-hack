@@ -44,6 +44,7 @@ export type Solved = Trace & {
   recalled: boolean; procedureId?: string; procedureTitle?: string; procedureIntent?: string; procedureTools?: string[]; similarity: number; normalized: Normalized;
   learned?: string; reinforced?: string; revised?: string; abandoned?: boolean; library: number;
   tier: "explored" | "recalled" | "compiled"; backend?: string; planId?: string;
+  shadow?: { planId: string; agree: boolean; trial: number; promoted: boolean; why?: string }; shadowCost?: number;
 };
 
 // 27 Bitext intents (data/ROUTER.md). A standardized request is one of these labels.
@@ -151,8 +152,9 @@ async function memorable(path: string, body: unknown): Promise<any> {
       signal: AbortSignal.timeout(30000),
     }).catch((e) => e as Error);
     if (!(r instanceof Error) && r.ok) return r.json();
-    if (attempt >= 2) throw new Error(`memorable ${path}: ${r instanceof Error ? r.message : r.status}`);
-    await Bun.sleep(500 * (attempt + 1));
+    const limited = !(r instanceof Error) && r.status === 429;
+    if (attempt >= (limited ? 6 : 2)) throw new Error(`memorable ${path}: ${r instanceof Error ? r.message : r.status}`);
+    await Bun.sleep((limited ? 1500 : 500) * (attempt + 1));
   }
 }
 
@@ -447,6 +449,42 @@ async function compiled() {
   return compiledMod;
 }
 
+// ---- shadow promotion of compiled plans ----
+type Shadow = { trials: number; agree: number; promoted: boolean; rejected: boolean };
+const shadows = new Map<string, Shadow>();
+const SHADOW_LOG = join(import.meta.dir, "../../replay/shadow.jsonl");
+function shadowState(id: string): Shadow {
+  if (!shadows.has(id)) shadows.set(id, { trials: 0, agree: 0, promoted: false, rejected: false });
+  return shadows.get(id)!;
+}
+function planFor(cm: any, task: { operation: string; subject: string }) {
+  const same = (cm.loadPlans() as any[]).filter((p) => p.enabled !== false && p.match.operation === task.operation && p.match.subject === task.subject);
+  return same.length === 1 ? same[0] : undefined; // canonical goals must pick exactly one plan
+}
+async function runShadow(cm: any, plan: any, task: any, ticket: string, trace: Trace) {
+  const st = shadowState(plan.id);
+  if (st.trials >= 3) return;
+  const c = await cm.execute(plan, task, ticket, { dryRun: true }).catch(() => null);
+  let agree = false, why = "plan could not run", cost = 0;
+  if (c) {
+    anthropic ??= new Anthropic();
+    const r = await anthropic.messages.create({
+      model: process.env.NORMALIZER_MODEL ?? "claude-haiku-4-5", max_tokens: 5,
+      system: "Two support replies to the same customer message. Answer yes if the compiled reply gives the same outcome and facts as the agent reply (same action taken or information given, no contradiction), else no. One word.",
+      messages: [{ role: "user", content: `Customer: ${body(ticket).slice(0, 800)}\n\nAgent reply: ${trace.reply.slice(0, 1500)}\n\nCompiled reply: ${c.reply.slice(0, 1500)}` }],
+    });
+    cost = r.usage.input_tokens / 1e6 + (r.usage.output_tokens * 5) / 1e6;
+    agree = /^\s*yes/i.test(r.content.map((b: any) => b.text ?? "").join(""));
+    why = agree ? "agrees with agent" : "differs from agent";
+  }
+  st.trials++;
+  if (agree) st.agree++;
+  if (st.agree >= 2) st.promoted = true;
+  else if (st.trials >= 3) st.rejected = true;
+  try { appendFileSync(SHADOW_LOG, JSON.stringify({ at: new Date().toISOString(), plan: plan.id, ticket: body(ticket).slice(0, 200), agreed: agree, why, ...st }) + "\n"); } catch {}
+  return { shadow: { planId: plan.id, agree, trial: st.trials, promoted: st.promoted, why }, cost };
+}
+
 // Replaying a recalled path: only the path's tools plus brain fallback, and low effort.
 const REPLAY_EFFORT = (process.env.REPLAY_EFFORT ?? "low") as "low" | "medium" | "high";
 const replayTools = (p: Procedure) => [...new Set([...p.tools, "search_kb", "read_page", "pull_up_account"])];
@@ -459,11 +497,14 @@ export async function solve(ticket: string, opts: { id?: string; learn?: boolean
   const n = await normalize(body(ticket));
   const normalized = n.standardized ? n : { ...n, request: body(ticket) };
 
-  // Tier 1: compiled plan.
+  // Tier 1: compiled plan, matched on the canonical primary goal (operation + subject). A plan serves only after it
+  // graduated in shadow: run next to the agent on 3 matching tickets, promoted when >= 2 agree with the agent.
   const cm = await compiled();
-  if (cm?.tryCompiled && normalized.standardized) {
-    const c = await cm.tryCompiled(normalized, ticket).catch(() => null);
-    if (c) return { ticket, ...c, recalled: false, similarity: 1, normalized, library: (await load()).length, tier: "compiled", planId: c.planId };
+  const task = cm?.toTask && normalized.standardized ? cm.toTask(normalized, ticket) : null;
+  const plan = task ? planFor(cm, task) : undefined;
+  if (plan && shadowState(plan.id).promoted) {
+    const c = await cm.execute(plan, task, ticket).catch(() => null);
+    if (c) return { ...c, ticket, recalled: false, similarity: 1, normalized, library: (await load()).length, tier: "compiled", planId: c.planId };
   }
 
   // Tier 2: recalled path. Tier 3: explore.
@@ -496,12 +537,16 @@ export async function solve(ticket: string, opts: { id?: string; learn?: boolean
       for (const tool of new Set(trace.steps.map((s) => s.tool))) if (!hit.tools.includes(tool) && LOOKUPS.has(tool)) hit.tools.push(tool);
       reinforced = hit.id;
       persist();
-      if (cm?.maybeCompile) await cm.maybeCompile(hit, trace, normalized).catch(() => {});
     }
+  }
+  let shadow: Solved["shadow"], shadowCost = 0;
+  if (plan && !shadowState(plan.id).promoted && !shadowState(plan.id).rejected && succeeded(trace)) {
+    const r2 = await runShadow(cm, plan, task, ticket, trace).catch(() => undefined);
+    if (r2) ({ shadow, cost: shadowCost } = r2);
   }
   return {
     ...trace, recalled: !!hit, procedureId: hit?.id, procedureTitle: hit?.title, procedureIntent: hit?.goldIntent ?? hit?.intent, procedureTools: hit ? [...hit.tools] : undefined,
     similarity: r.similarity, normalized, learned, reinforced, revised, abandoned, library: (await load()).length,
-    tier: hit ? "recalled" : "explored", backend: r.backend,
+    tier: hit ? "recalled" : "explored", backend: r.backend, shadow, shadowCost,
   };
 }
