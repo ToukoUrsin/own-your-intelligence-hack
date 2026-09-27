@@ -1,0 +1,43 @@
+{
+  "memory": true,
+  "tickets": 60,
+  "errors": 0,
+  "totalCost": 4.219,
+  "recalled": 18,
+  "recalledCost": 0.0489,
+  "exploredCost": 0.0795,
+  "buckets": [
+    {
+      "tickets": "1-25",
+      "n": 25,
+      "recallRate": 0.16,
+      "costPerTicket": 0.076,
+      "secondsPerTicket": 10.4,
+      "toolCallsPerTicket": 4,
+      "modelCallsPerTicket": 2.8
+    },
+    {
+      "tickets": "26-50",
+      "n": 25,
+      "recallRate": 0.24,
+      "costPerTicket": 0.0743,
+      "secondsPerTicket": 9.9,
+      "toolCallsPerTicket": 3.7,
+      "modelCallsPerTicket": 2.7
+    },
+    {
+      "tickets": "51-60",
+      "n": 10,
+      "recallRate": 0.8,
+      "costPerTicket": 0.0462,
+      "secondsPerTicket": 7,
+      "toolCallsPerTicket": 3,
+      "modelCallsPerTicket": 1.6
+    }
+  ],
+  "firstVsLast": {
+    "cost": "-39%",
+    "time": "-33%",
+    "toolCalls": "-25%"
+  }
+}
