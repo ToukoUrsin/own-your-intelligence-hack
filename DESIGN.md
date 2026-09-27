@@ -4,7 +4,7 @@ The UI contract for Support AGI (QM Paths panel, dashboards, video cards). Files
 
 ## Look
 
-**Light, clean cards, liquid glass.** Warm off-white canvas with a quiet amber-and-sky wash. Content sits on glass cards: translucent, blurred, lit from the top-left, with a soft cast shadow. Chrome floats. Titles are regular weight in Funnel Display; interface text is Funnel Sans; identifiers and tool names are Fragment Mono. Dark is opt-in (`data-theme="dark"`), never the default.
+**Light, clean cards, liquid glass.** Warm off-white canvas with a quiet amber-and-sky wash. Content sits on glass cards: translucent, blurred, lit from the top-left, with a soft cast shadow. Chrome floats. Type is Geist throughout, titles at regular weight; identifiers and tool names are Geist Mono. Dark is opt-in (`data-theme="dark"`), never the default.
 
 ## Use it
 

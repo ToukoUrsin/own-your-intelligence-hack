@@ -17,7 +17,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory design-system
 | `tokens.css` | Generated custom properties, `--ui-*`. Light on `:root`, dark on `[data-theme="dark"]`, OS-following on `[data-theme="system"]`. |
 | `tokens.ts` | Generated typed tokens and `cssVar("color", "accent")`. |
 | `tailwind.theme.css` | Generated Tailwind v4 `@theme inline` mapping. |
-| `fonts.css`, `fonts/` | Self-hosted Funnel Display, Funnel Sans (variable 300–800) and Fragment Mono, Latin subsets, SIL OFL. |
+| `fonts.css`, `fonts/` | Self-hosted Geist and Geist Mono (variable 100–900), Latin subsets, SIL OFL. |
 | `base.css` | Canvas wash, type defaults, focus ring, `[hidden]`, `.ui-num`, `.ui-visually-hidden`. |
 | `components.css` | Glass material, cards, bar, buttons, segmented control, chips, metric, meter, fields, table, steps, empty/skeleton/notice, dialog, kbd, fallbacks. |
 | `index.css` | Imports fonts → tokens → base → components. |

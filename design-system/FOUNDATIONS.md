@@ -46,9 +46,8 @@ The three marks pass the dataviz categorical checks (lightness band, chroma, col
 | `metric` | 44px | One number per card |
 | `hero` | 44–72px fluid | Marketing or video title |
 
-- **Funnel Display** for titles and numbers, weight 400–440, tracking −0.025em (hero −0.045em), line-height 1.02–1.1.
-- **Funnel Sans** for everything else. 400 body; 500 for labels, buttons, card titles. No bold headings.
-- **Fragment Mono** for ticket IDs, tool names, canonical requests, code. Ligatures off.
+- **Geist** for everything: titles and numbers at 400 with tracking −0.025em (hero −0.04em) and line-height 1.02–1.1; body 400; 500 for labels, buttons and card titles. No bold headings. `--ui-font-display` and `--ui-font-body` are separate tokens so a display face can be swapped in later without touching components.
+- **Geist Mono** for ticket IDs, tool names, canonical requests, code. Ligatures off. It is designed alongside Geist, so mono and sans share proportions and x-height.
 - Tabular numbers wherever values stack (`.ui-num`, tables, metrics).
 
 ## Space, size, radius

@@ -2,9 +2,9 @@
 export const tokens = {
   "base": {
     "font": {
-      "display": "\"Funnel Display\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
-      "body": "\"Funnel Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
-      "mono": "\"Fragment Mono\", ui-monospace, SFMono-Regular, Menlo, monospace"
+      "display": "\"Geist\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "body": "\"Geist\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "mono": "\"Geist Mono\", ui-monospace, SFMono-Regular, Menlo, monospace"
     },
     "text": {
       "label": "0.6875rem",
@@ -21,7 +21,7 @@ export const tokens = {
     },
     "weight": {
       "regular": "400",
-      "display": "440",
+      "display": "400",
       "medium": "500",
       "semibold": "600"
     },
@@ -33,7 +33,7 @@ export const tokens = {
       "relaxed": "1.65"
     },
     "tracking": {
-      "hero": "-0.045em",
+      "hero": "-0.04em",
       "display": "-0.025em",
       "tight": "-0.01em",
       "label": "0.08em"
