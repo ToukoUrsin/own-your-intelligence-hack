@@ -95,6 +95,12 @@ const ORDER_FIELDS = `id name email tags note processedAt cancelledAt statusPage
   refunds(first: 20) { id createdAt note totalRefundedSet { shopMoney { amount } } }
   transactions(first: 20) { id kind status gateway amountSet { shopMoney { amount } } }`;
 
+// Fields Shopify has no place for (username, account id, membership, subscription, gift packaging, ...) come from the
+// fixture record with the same email / order id; everything Shopify holds (name, address, items, totals, payment,
+// fulfilment, tracking, refunds) comes from Shopify and wins.
+const fxCustomers: Record<string, any> = Object.fromEntries((fixtures.customers as any[]).map((c) => [c.email, c]));
+const fxOrders: Record<string, any> = Object.fromEntries((fixtures.orders as any[]).map((o) => [o.id, o]));
+
 const day = (iso?: string | null) => iso?.slice(0, 10);
 const attr = (list: { key: string; value: string }[] | undefined, key: string) => list?.find((a) => a.key === key)?.value;
 
@@ -102,9 +108,11 @@ function toCustomer(c: any): Customer & { shopifyId: string } {
   const tags: string[] = c.tags ?? [];
   const tag = (p: string) => tags.find((t) => t.startsWith(p))?.slice(p.length);
   const pm = /Payment methods: (.*)/.exec(c.note ?? "")?.[1];
+  const fx = fxCustomers[c.email?.toLowerCase()] ?? {};
   return {
+    ...fx,
     email: c.email?.toLowerCase(), name: [c.firstName, c.lastName].filter(Boolean).join(" "),
-    plan: (tag("plan:") ?? "Standard") as Customer["plan"], since: tag("since:") ?? day(c.createdAt)!,
+    plan: (tag("plan:") ?? fx.plan ?? "Standard") as Customer["plan"], since: tag("since:") ?? fx.since ?? day(c.createdAt)!,
     defaultAddress: formatAddress(c.defaultAddress), paymentMethods: pm ? pm.split("; ") : [],
     newsletter: c.emailMarketingConsent?.marketingState === "SUBSCRIBED",
     status: tags.includes("pending_deletion") ? "pending_deletion" : tags.includes("unverified") ? "unverified" : "active",
@@ -125,7 +133,11 @@ function toOrder(o: any) {
     const serial = attr(li.customAttributes, "serial");
     return { sku: li.sku, name: li.title, price: Number(li.originalUnitPriceSet.shopMoney.amount), ...(serial ? { serial } : {}) };
   }));
+  const fx = fxOrders[id] ?? {};
+  const shippingStatus = status === "delivered" ? "delivered" : status === "cancelled" ? "cancelled"
+    : fx.status === status && fx.shippingStatus ? fx.shippingStatus : status === "shipped" ? "in transit" : "order received";
   const order: Order & { shopifyId: string; statusPageUrl: string } = {
+    ...fx, shippingStatus,
     id, email: o.email?.toLowerCase(), items, total: Number(o.totalPriceSet.shopMoney.amount), status,
     placedAt: day(o.processedAt)!, shipTo: formatAddress(o.shippingAddress),
     payment: { method: attr(o.customAttributes, "payment_method") ?? "card", status: payStatus },
@@ -139,7 +151,7 @@ function toOrder(o: any) {
     id: r.id.split("/").pop(), orderId: id, amount: Number(r.totalRefundedSet.shopMoney.amount), reason: r.note ?? "",
     status: "sent", createdAt: day(r.createdAt)!, sentAt: day(r.createdAt), method: order.payment.method,
   }));
-  (order as any)._transactions = o.transactions;
+  Object.defineProperty(order, "_transactions", { value: o.transactions, enumerable: false }); // internal: sale ids for refunds
   return order;
 }
 const txns = (o: Order): any[] => (o as any)._transactions ?? [];
@@ -199,6 +211,14 @@ export function getInvoices(query: { invoiceId?: string; orderId?: string; email
 }
 
 // ---------- writes (async Shopify mutations) ----------
+// Dev stores rate-limit order creation (about 5 per minute); retry for up to ~90 s.
+async function createOrderRetrying(q: string, v: Record<string, unknown>) {
+  for (let i = 0; ; i++) {
+    const d = await gql(q, v);
+    if (i < 6 && d.orderCreate.userErrors.some((e: any) => /too many attempts/i.test(e.message))) { await Bun.sleep(15000); continue; }
+    return d;
+  }
+}
 export async function placeOrder(email: string, items: { sku: string; qty?: number }[]) {
   const c = customers[norm(email)!];
   if (!c) return { ok: false, error: "no account for this email" };
@@ -206,11 +226,15 @@ export async function placeOrder(email: string, items: { sku: string; qty?: numb
   if (!lines.length) return { ok: false, error: "no valid SKUs" };
   const subtotal = lines.reduce((s, l) => s + l.price * l.qty, 0);
   const shipping = c.plan !== "Standard" || subtotal > 60 ? 0 : 6;
-  const id = `KC-${12000 + Object.keys(orders).length}`;
+  // New order ids follow the dataset's format (10-digit numbers for ABCD, KC-nnnnn before).
+  const numeric = /^\d+$/.test(Object.keys(fxOrders)[0] ?? "");
+  let n = 9000000000 + Object.keys(orders).length;
+  while (orders[String(n)]) n++;
+  const id = numeric ? String(n) : `KC-${12000 + Object.keys(orders).length}`;
   const money = (n: number) => ({ shopMoney: { amount: n.toFixed(2), currencyCode: "USD" } });
   const paid = c.paymentMethods.length > 0;
   try {
-    const d = await gql(`mutation($order: OrderCreateOrderInput!, $options: OrderCreateOptionsInput) { orderCreate(order: $order, options: $options) { order { ${ORDER_FIELDS} } userErrors { field message } } }`, {
+    const d = await createOrderRetrying(`mutation($order: OrderCreateOrderInput!, $options: OrderCreateOptionsInput) { orderCreate(order: $order, options: $options) { order { ${ORDER_FIELDS} } userErrors { field message } } }`, {
       options: { sendReceipt: false, sendFulfillmentReceipt: false },
       order: {
         name: id, email: c.email, tags: [TAG, id], currency: "USD",
@@ -218,7 +242,7 @@ export async function placeOrder(email: string, items: { sku: string; qty?: numb
         shippingAddress: { ...parseAddress(c.defaultAddress), ...splitName(c.name) },
         lineItems: lines.map((l) => ({ title: l.name, sku: l.sku, quantity: l.qty, priceSet: money(l.price), requiresShipping: true })),
         ...(shipping ? { shippingLines: [{ title: "Standard shipping", priceSet: money(shipping) }] } : {}),
-        customAttributes: [{ key: "kc_id", value: id }, { key: "invoice_id", value: `INV-${id.slice(3)}` }, { key: "payment_method", value: c.paymentMethods[0] ?? "none" }, ...(paid ? [] : [{ key: "payment_status", value: "failed" }])],
+        customAttributes: [{ key: "kc_id", value: id }, { key: "invoice_id", value: `INV-${id.replace(/\D/g, "").slice(-6)}` }, { key: "payment_method", value: c.paymentMethods[0] ?? "none" }, ...(paid ? [] : [{ key: "payment_status", value: "failed" }])],
         ...(paid ? { transactions: [{ kind: "SALE", status: "SUCCESS", gateway: "manual", authorizationCode: `agent-${id}`, test: true, amountSet: money(subtotal + shipping) }] } : { financialStatus: "PENDING" }),
       },
     });

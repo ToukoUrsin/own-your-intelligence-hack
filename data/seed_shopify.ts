@@ -11,9 +11,17 @@ const map: { store: string; products: Record<string, string | null>; customers: 
 map.store = "kettle-and-co-support-hack.myshopify.com";
 const save = () => Bun.write(MAP_PATH, JSON.stringify(map, null, 2) + "\n");
 
-const BRAND: string = (fixtures as any).brand ?? (fixtures as any).shop?.name ?? "Northwind Outfitters";
+const BRAND: string = (fixtures as any).company ?? (fixtures as any).brand ?? "Northwind Outfitters";
 const money = (n: number) => ({ shopMoney: { amount: n.toFixed(2), currencyCode: "USD" } });
 const exists = async (gid?: string) => !!gid && !!(await gql(`query($id: ID!) { node(id: $id) { id } }`, { id: gid })).node;
+
+const COPY: Record<string, string> = {
+  boots: "Full-grain leather boots with a cushioned footbed and a grippy rubber sole, built to be resoled.",
+  jacket: "A water-resistant shell with a soft lining, taped seams and deep hand pockets for everyday weather.",
+  jeans: "12 oz denim with a touch of stretch, a mid rise and a straight leg that breaks in, not down.",
+  shirt: "A soft cotton button-up with a relaxed fit, reinforced seams and a collar that keeps its shape.",
+};
+const copy = (p: any) => `${p.line ? `The ${p.line} line. ` : ""}${COPY[p.type] ?? `${p.name} from ${BRAND}.`} Free returns within 30 days.`;
 
 // Catalog: needs write_products (the current app token has read_products only, so this is skipped until the scope is added).
 // Creates/updates the brand's products by handle and archives Shopify's generated sample products.
@@ -27,7 +35,7 @@ async function seedCatalog() {
   const brandTag = brand.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   const slug = (x: string) => x.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   for (const p of fixtures.products as any[]) {
-    const type = p.category ?? p.type ?? "Apparel", handle = p.handle ?? slug(p.name);
+    const type = (p.category ?? p.type ?? "Apparel").replace(/^./, (x: string) => x.toUpperCase()), handle = p.handle ?? slug(p.name);
     const opt = p.variants?.length ? (p.optionName ?? "Size") : "Title";
     const vals: [string, string, number][] = p.variants?.length ? p.variants.map((v: any) => [v.name ?? v.size, v.sku, v.price ?? p.price]) : [["Default Title", p.sku, p.price]];
     const images: string[] = p.images ?? (p.image ? [p.image] : []);
@@ -35,7 +43,7 @@ async function seedCatalog() {
       identifier: { handle },
       input: {
         title: p.name, handle, vendor: brand, productType: type, status: "ACTIVE", tags: [brandTag, slug(type)],
-        descriptionHtml: `<p>${p.description ?? `${p.name} from ${brand}.`}</p>`,
+        descriptionHtml: `<p>${p.description ?? copy(p)}</p>`,
         productOptions: [{ name: opt, values: vals.map(([n]) => ({ name: n })) }],
         variants: vals.map(([n, sku, price]) => ({ optionValues: [{ optionName: opt, name: n }], sku, price: Number(price).toFixed(2) })),
         ...(images.length ? { files: images.map((u) => ({ originalSource: u, contentType: "IMAGE", alt: p.name })) } : {}),
@@ -56,15 +64,16 @@ async function seedCatalog() {
 for (const p of fixtures.products) {
   const d = await gql(`query($q: String!) { productVariants(first: 1, query: $q) { nodes { id } } }`, { q: `sku:${p.sku}` });
   map.products[p.sku] = d.productVariants.nodes[0]?.id ?? null;
+  await save();
 }
 
-// Background customers and orders (deterministic, never referenced by tickets).
-const extra = background();
-const allCustomers = [...fixtures.customers, ...extra.customers];
+// Optional synthetic background orders (SEED_BACKGROUND=1) for datasets with few orders.
+const extra = process.env.SEED_BACKGROUND ? background() : { customers: [] as any[], orders: [] as any[], refunds: [] as any[] };
+const allCustomers: any[] = [...fixtures.customers, ...extra.customers];
 
-// Customers
-for (const c of allCustomers) {
-  if (await exists(map.customers[c.email])) continue;
+// Customers are created lazily, just before their first order (dev stores rate-limit orders, so seeding is incremental).
+async function ensureCustomer(c: any) {
+  if (map.customers[c.email] && (await exists(map.customers[c.email]))) return map.customers[c.email]!;
   const found = await gql(`query($q: String!) { customers(first: 1, query: $q) { nodes { id } } }`, { q: `email:${c.email}` });
   let id: string | undefined = found.customers.nodes[0]?.id;
   if (id) { // reused (e.g. retired by an earlier dataset): make sure the backend's tag is on it
@@ -82,11 +91,12 @@ for (const c of allCustomers) {
     id = check(d.customerCreate, `customerCreate ${c.email}`).customer.id as string;
     const a = await gql(`mutation($id: ID!, $address: MailingAddressInput!) { customerAddressCreate(customerId: $id, address: $address, setAsDefault: true) { address { id } userErrors { field message } } }`,
       { id, address: { ...parseAddress(c.defaultAddress), ...splitName(c.name) } });
-    check(a.customerAddressCreate, `customerAddressCreate ${c.email}`);
+    if (a.customerAddressCreate.userErrors.length) console.log(`  address not saved for ${c.email}: ${a.customerAddressCreate.userErrors.map((e: any) => e.message).join("; ")}`);
     console.log(`+ customer ${c.email} ${id}`);
   }
   map.customers[c.email] = id;
   await save();
+  return id;
 }
 
 // Fulfilment with tracking (orderCreate's own fulfillment input needs a location id, which needs read_locations).
@@ -101,7 +111,7 @@ async function fulfil(id: string, o: any) {
     f = check(r.fulfillmentCreate, `fulfillmentCreate ${o.id}`).fulfillment;
     console.log(`  fulfilled ${o.id} ${o.tracking}`);
   }
-  const want = o.status === "delivered" ? "DELIVERED" : "IN_TRANSIT";
+  const want = o.status === "delivered" ? "DELIVERED" : o.shippingStatus === "out for delivery" ? "OUT_FOR_DELIVERY" : "IN_TRANSIT";
   if (f.displayStatus !== want) {
     const at = o.status === "delivered" ? o.deliveredAt : o.shippedAt;
     const r = await gql(`mutation($e: FulfillmentEventInput!) { fulfillmentEventCreate(fulfillmentEvent: $e) { fulfillmentEvent { id } userErrors { field message } } }`,
@@ -121,15 +131,35 @@ async function createOrder(q: string, v: Record<string, unknown>) {
 
 // Orders: the fixtures (they match the tickets) plus deterministic background orders from other customers,
 // so the store looks like a real shop with ~65 orders over the last 30 days.
-const carrier = (t: string) => (t.startsWith("DHL") ? "DHL Express" : "UPS");
-for (const o of [...fixtures.orders, ...extra.orders] as any[]) {
-  if (await exists(map.orders[o.id])) continue;
+const carrier = (t: string) => (t.startsWith("DHL") ? "DHL Express" : t.startsWith("1Z") ? "UPS" : "USPS");
+// Priority: orders referenced by tickets (in ticket order), then the rest, newest first. SEED_LIMIT caps new orders per run.
+const ticketText = await Bun.file(new URL("./tickets.jsonl", import.meta.url).pathname).text().catch(() => "");
+const allOrders: any[] = [...fixtures.orders, ...extra.orders];
+const rank = (o: any) => { const i = ticketText.indexOf(o.id); return i < 0 ? Infinity : i; };
+allOrders.sort((a, b) => rank(a) - rank(b) || b.placedAt.localeCompare(a.placedAt));
+let created = 0;
+const limit = Number(process.env.SEED_LIMIT ?? Infinity);
+for (const o of allOrders) {
+  if (map.orders[o.id]) {
+    const e = (await gql(`query($id: ID!) { order(id: $id) { totalPriceSet { shopMoney { amount } } tags } }`, { id: map.orders[o.id] })).order;
+    if (e && e.tags.includes(TAG) && Math.abs(Number(e.totalPriceSet.shopMoney.amount) - o.total) < 0.01) { if (o.tracking) await fulfil(map.orders[o.id]!, o); continue; }
+    if (e) { // wrong total from an earlier seeder bug: take it out of the backend's view (untag + close), then recreate
+      await gql(`mutation($id: ID!) { tagsRemove(id: $id, tags: ["${TAG}", "${o.id}"]) { userErrors { message } } }`, { id: map.orders[o.id] });
+      await gql(`mutation($id: ID!) { tagsAdd(id: $id, tags: ["superseded"]) { userErrors { message } } }`, { id: map.orders[o.id] });
+      await gql(`mutation($id: ID!) { orderClose(input: { id: $id }) { userErrors { message } } }`, { id: map.orders[o.id] });
+      console.log(`  superseded ${o.id}`);
+    }
+    delete map.orders[o.id];
+  }
+  if (created >= limit) break;
+  created++;
+  await ensureCustomer(allCustomers.find((x) => x.email === o.email)!);
   const found = await gql(`query($q: String!) { orders(first: 1, query: $q) { nodes { id } } }`, { q: `tag:${TAG} AND tag:'${o.id}'` });
   let id: string | undefined = found.orders.nodes[0]?.id;
   if (!id) {
     const c = allCustomers.find((x) => x.email === o.email)!;
     const bySku = new Map<string, any[]>();
-    for (const it of o.items) bySku.set(it.sku, [...(bySku.get(it.sku) ?? []), it]);
+    for (const it of o.items) bySku.set(`${it.sku}@${it.price}`, [...(bySku.get(`${it.sku}@${it.price}`) ?? []), it]); // same SKU can carry different prices
     const subtotal = o.items.reduce((s: number, i: any) => s + i.price, 0);
     const shipping = o.total - subtotal;
     // Orders that were paid (including ones later cancelled/refunded) get a successful test sale on the manual gateway (with an authorization code, so it can be refunded).
