@@ -2,15 +2,28 @@
 
 Checked 27 September 2026, 15:42 PDT against saved outputs. These are separate preliminary experiments, not a demonstrated combined production result.
 
+## Final run (supersedes the replay numbers below)
+
+The final cold-start run (commit `7120996`, 15:43 PDT) replaced `replay/results.jsonl` and `replay/baseline.jsonl`, so the paired-replay rows below describe an earlier run whose files are only in git history (`7120996^`). Recomputed from the files on main:
+
+| Measure | Result | Scope |
+|---|---|---|
+| Same tickets vs no-memory agent | $0.1832 → $0.0996 per ticket, **46% lower** | First 100 of the 400 replay tickets, while the path library was still filling. Agent-model inference plus router cost estimate. |
+| Learning curve | $0.1389 first 25 → $0.0469 last 25, **66% lower** | One run, so the buckets are different tickets. |
+| Agent-model calls | 4.21 → 3.04 per ticket on the same 100 | Compiled plans make zero agent-model calls; the router still runs. |
+| Recorded agent-stage time | 16,416 ms → 10,867 ms on the same 100 | Agent trace only, not end-to-end latency. |
+
+99 of the 100 matched memory rows used River `r1@50` as the router (1 fell back to raw text). Answer-quality parity is from the separate gate check in `replay/SUMMARY.md` (Haiku judge), not from this pairing.
+
 ## Product and cost scope
 
 The intended product uses a shared, fine-tuned generalist across customers. Customers do not need a separately trained model. The comparison measures ongoing inference/serving cost per task; training is outside this metric.
 
 ## Recommended pitch wording
 
-> 8.37¢ → 5.65¢ so 32% lower inference cost.
+> 18.3¢ → 10.0¢ on the same 100 tickets, 46% lower inference cost; 66% lower by the end of a 400-ticket run.
 
-This is concrete enough for an honest preliminary-results slide or discovery email. Do not add “with no loss of quality,” “customer savings,” or “the combined fine-tuned system saved 32%”: those conclusions have not been established by these artifacts.
+The earlier wording, 8.37¢ → 5.65¢ so 32%, came from the superseded replay. This is concrete enough for an honest preliminary-results slide or discovery email. Do not add “with no loss of quality,” “customer savings,” or “the combined fine-tuned system saved 32%”: those conclusions have not been established by these artifacts.
 
 ## Checked numbers
 
@@ -34,7 +47,7 @@ The separate canonical-v1 experiment in `river/evidence/clothing-pilot/RESULTS.m
 
 Hi, I’m Marc, building at today’s YC hackathon. We’re building a platform that uses a shared, fine-tuned generalist, memory and reusable workflows to reduce inference costs. It does not require training a separate model for each customer.
 
-8.37¢ → 5.65¢ so 32% lower inference cost. We’d like to test this on a real recurring workload.
+On the same support tickets we measured 46% lower inference cost, and 66% lower by the end of a 400-ticket run. We’d like to test this on a real recurring workload.
 
 Have you spent engineering time reducing the cost of repeated tasks in your product? What have you tried, and what remains expensive?
 
@@ -42,9 +55,10 @@ This copy is prepared, **not sent**. The earlier 45 emails did not include these
 
 ## Evidence identity
 
-- Paired memory records: `replay/results.jsonl`, SHA-256 `9b7c0bc5db5a7039c366c2e3e7634ef234ac11204b30f174762f9a7a81588a9d`.
-- Baseline records: `replay/baseline.jsonl`, SHA-256 `0457f9e360e84fd2f011bd63b77897c2bdeec5d7a801690b9392ecdc8e009c87`.
-- Router outputs: `router/runs/r1/report.json`, SHA-256 `2241d4ad8a57ba3a54e0693af21ef077d91751cea73a7935eacd672df540cc25`; checkpoint `claude-router-r1-step50` in River session `4dadc93c-d38c-40c2-b7b7-d86412059eb3`.
+- Final run (current main): `replay/results.jsonl` SHA-256 `68a7b319d03d6fdaed967e02deb2734a525b2eb79b66d604f5235432d505e6d9`; `replay/baseline.jsonl` SHA-256 `292781f0ce11d3fa7280b2703cd422a35503b93623a3e1301bb16fc52b710dc5`; `replay/summary.json` SHA-256 `437d47dea67dfe526355a70475de0da0ef7906d476c99ab4604c43bf0994589f`.
+- Earlier paired memory records (superseded): `replay/results.jsonl` at `7120996^`, SHA-256 `9b7c0bc5db5a7039c366c2e3e7634ef234ac11204b30f174762f9a7a81588a9d`.
+- Earlier baseline records (superseded): `replay/baseline.jsonl` at `7120996^`, SHA-256 `0457f9e360e84fd2f011bd63b77897c2bdeec5d7a801690b9392ecdc8e009c87`.
+- Router outputs: `router/runs/r1/report.json`, SHA-256 `2241d4ad8a57ba3a54e0693af21ef077d91751cea73a7935eacd672df540cc25` when checked (on main it is `2aecec35026ed750f9aeab1c65c022fd667833df9bddd9ec3f90345d3d782099`; `python3 router/rescore.py r1` still gives 23%, 72% and 77%); checkpoint `claude-router-r1-step50` in River session `4dadc93c-d38c-40c2-b7b7-d86412059eb3`.
 - Compiled evaluation: `replay/compiled-eval.json`, SHA-256 `4e8c5e74a758102f3d7a1e51b74a07880cf332e917a07385ea6cbde7debe56af`; generated `2026-09-27T21:56:45.420Z`.
 - Canonical model report: `/Users/marcsmeds/.codex/worktrees/river-normalizer/YC-hackathon-27-sept-2026/river/evidence/clothing-pilot/RESULTS.md`.
 

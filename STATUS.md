@@ -1,18 +1,20 @@
 # Status — 27 Sep, 15:20 PDT
 
+Snapshot at 15:20. Final numbers are in `README.md` (Results).
+
 Team **Support AGI** (Touko, Marc) · company **Northwind Outfitters** (online clothing retailer) · submission due 17:00.
 
 ## Update 15:20
 - **Compiled routes built** (`agent/src/compiled.ts`, `replay/plans/`, `replay/compiled-eval.json`): 31 plans, 6 promoted; on their tickets 94% correct with 0 model calls (~$0.001, <3 ms vs $0.06–0.43, 6–26 s). New plans must shadow-match the agent on 3 tickets before serving.
 - **Memorable is the real store**: 57 procedures ingested via the CLI (`agent/src/memorable-store.ts`, `RECALL_BACKEND=memorable`). QM fork now consults Memorable on every turn.
 - **QM fork published**: https://github.com/ToukoUrsin/qm-support-agi (branch `support-agi`): Paths panel (matched path, its steps vs this run, EXPLORED / RECALLED / COMPILED, learning curve), Memorable provider fix, Northwind persona.
-- **Hard tickets**: `data/hard_tickets.jsonl` (42; 15 real ABCD, 27 constructed). Expected to stay with the full agent.
+- **Hard tickets**: `data/hard_tickets.jsonl` (42; 15 from ABCD, 27 constructed). Expected to stay with the full agent.
 - **Blocker**: Memorable `/v1/embed` rate limits (429) broke the final replay; restarting with a rate limiter, embedding cache and exact-key matching first. Target ≥200 clean tickets + hard tickets + baseline by 16:00. Asked Memorable to raise the limit.
 - **Submission**: no slide deck. The video walks through the real UI (QM chat, Paths panel, Shopify) with 2–3 graph images; README has results placeholders until 16:00.
 - **River (Marc)**: still needed — endpoint `POST {text}` → `{canonical, rendered}` per `CANONICAL_REQUEST_V1.md`, plus hit rate on `data/heldout.jsonl`. It also fills the inputs for compiled routes.
 
 ## Headline: routes that compile themselves
-Every ticket takes the cheapest route that works: **explored** (agent solves from scratch; Memorable saves the path) → **recalled** (agent replays a learned path) → **compiled** (a path reused successfully ≥3 times becomes a deterministic JSON program: bindings from River's canonical request, tool calls, guards from GBrain policy, reply template; zero model calls). Guard failure or missing data falls back to the agent. Not everything compiles; the system learns to compile as much as it safely can. Plans live in `replay/plans/`.
+Every ticket takes the cheapest route that works: **explored** (agent solves from scratch; Memorable saves the path) → **recalled** (agent replays a learned path) → **compiled** (a path reused successfully ≥3 times becomes a deterministic JSON program: bindings from River's canonical request, tool calls, guards from GBrain policy, reply template; zero agent model calls, only the router runs). Guard failure or missing data falls back to the agent. Not everything compiles; the system learns to compile as much as it safely can. Plans live in `replay/plans/`.
 
 ## Working now
 | Piece | State |

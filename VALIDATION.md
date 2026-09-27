@@ -10,9 +10,9 @@ Use a shared, fine-tuned generalist with memory and reusable workflows to reduce
 
 ## Measured result
 
-> **8.37¢ → 5.65¢ so 32% lower inference cost.**
+> **18.3¢ → 10.0¢ on the same 100 support tickets, 46% lower inference cost.** Across the full 400-ticket run, cost per ticket fell **66%**, from 13.9¢ for the first 25 tickets to 4.7¢ for the last 25.
 
-This is the average estimated inference cost per ticket across **100 matched support tickets** in a mock-store replay, comparing the baseline with workflow reuse. The estimate includes agent-model inference and normalization.
+These come from the final cold-start replay on a mock store (`replay/summary.json`). The 46% compares the no-memory agent with workflow reuse on the same first 100 tickets, while the path library was still filling. The 66% is the learning curve within one run, so its two buckets are different tickets. The estimate includes agent-model inference and the router. An earlier replay measured 8.37¢ → 5.65¢ (32%); the final run supersedes it.
 
 Separately, fine-tuning improved a **55-label router from 23% to 77% accuracy** on a 100-case evaluation.
 
@@ -43,7 +43,7 @@ Sent **45 individual emails to 45 companies** from **marc@heliosone.fi**, coveri
 
 Poke acknowledged receipt. Duckbill said it forwarded the request to its support team. Neither answered the questions about inference costs or expressed buying interest. Sent records establish submission, not delivery or demand.
 
-The emails asked about past efforts to reduce recurring agent costs and requested a quick reply or five-minute call. **The 32% result was checked afterward and was not included in those emails.** No further outreach was sent after the cutoff.
+The emails asked about past efforts to reduce recurring agent costs and requested a quick reply or five-minute call. **No measured cost result was included in those emails**; the earlier 32% figure was checked afterward. No further outreach was sent after the cutoff.
 
 The short response window does not establish rejection of the idea. It also gives us no basis to claim customer demand.
 
@@ -51,7 +51,7 @@ The short response window does not establish rejection of the idea. It also give
 
 At Hogpatch or in a founder conversation, ask:
 
-> We measured 32% lower inference cost. Do you have a recurring agent task we could test this on?
+> On the same support tickets we measured 46% lower inference cost, and 66% lower by the end of a 400-ticket run. Do you have a recurring agent task we could test this on?
 
 The next concrete signal is **one founder agreeing to a test**, with a named workflow, a small sanitized sample, a success criterion and a date. Compare inference cost and correct outcomes against their current setup. This would establish whether the measured improvement matters to a potential customer.
 

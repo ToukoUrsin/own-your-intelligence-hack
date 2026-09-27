@@ -5,7 +5,7 @@
 **Why:** the replay set is mostly routine. These tickets are the long tail, where one template or router label is not enough. They should go to the full agent, which can read the shop data, apply policy and escalate. Use them to check that the router or cheap path hands them off instead of confidently misrouting them.
 
 ## ABCD (15, `source: "abcd"`)
-Real conversations from `abcd/raw/abcd_v1.1.json.gz`. None are in `tickets.jsonl` or `heldout.jsonl`. Each is from a customer whose email already exists in `shop.json`. `text` is built with `opening()` from `build.py`, and `actions` holds ABCD's gold actions.
+ABCD conversations from `abcd/raw/abcd_v1.1.json.gz`. None are in `tickets.jsonl` or `heldout.jsonl`. Each is from a customer whose email already exists in `shop.json`. `text` is built with `opening()` from `build.py`, and `actions` holds ABCD's gold actions.
 - `long_conversation` (5): the longest chats, 44–54 turns.
 - `request_change` (5): the agent's actions go well beyond the labeled subflow's standard sequence, meaning the customer changed or added requests partway through.
 - `rare_subflow` (5): the least frequent subflows, one each.

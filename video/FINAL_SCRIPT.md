@@ -4,7 +4,7 @@ Setup: clean Chrome window (maximised), QuickTime camera window bottom-right, Cm
 
 ## 0. Customer view (~15 s) — storefront
 Store https://kettle-and-co-support-hack.myshopify.com (password on request), chat bubble, email `crystalm392@example.com`, ask: "did my refund go through?" → instant answer, COMPILED badge.
-> "This is Northwind Outfitters, a real Shopify store. A customer asks where her refund is and gets an answer in a second, with no model call. Here's what's behind it."
+> "This is Northwind Outfitters, a real Shopify store. A customer asks where her refund is and gets an answer in a second, without the agent model running. Here's what's behind it."
 
 ## 1. Intro (~12 s) — QM, empty chat, Paths panel
 > "We're Support AGI. The agent runs in QM, YC's open-source harness. We forked it and built this Paths view to show how every ticket is handled."
@@ -25,7 +25,7 @@ From: normanbouc398@example.com
 Hey! I placed a two item order, but I want to remove the second item. I totally chose the wrong size. Norman Bouchard
 ```
 > "A different customer, in completely different words. River maps it to the same request, Memorable hands back the path it just learned, and the agent follows it: no policy search, fewer steps, lower cost."
-> "Matching messy messages to the right path is the hard part. Our River model gets it right 65% of the time on held-out tickets, against 56% for Claude Haiku, and it cost about a dollar to train."
+> "Matching messy messages to the right path is the hard part. Our River model gets it right 65% of the time on held-out tickets, against 56% for Claude Haiku, and it cost under two dollars to train."
 
 ## 5. Compiled (~15 s) — QM tab 3
 ```
@@ -33,10 +33,10 @@ From: crystalm123@example.com
 I was getting a refund on my order and I just want to check on the status of it. Crystal Minh
 ```
 (fallback: `From: crystalm392@example.com` / "I am looking for the status of my refund. Crystal Minh")
-> "Remember that refund answer on the store? This is what ran: a path that graduated into a plain JSON program. Zero model calls — and if any check fails, the ticket goes back to the agent."
+> "Remember that refund answer on the store? This is what ran: a path that graduated into a plain JSON program. Zero agent model calls, only our router — and if any check fails, the ticket goes back to the agent."
 
 ## 6. Learning curve (~20 s) — scroll down in the Paths panel
-> "We replayed 400 real support conversations from the ABCD dataset. Cost per ticket falls from 14 cents to under 5, against 18 cents for an agent without memory. By the end almost every ticket reuses a path or runs as code. And when a ticket is uncertain or asks for several things, it goes to the full agent."
+> "We replayed 400 support conversations from the ABCD dataset. Cost per ticket falls 66%, from 14 cents to under 5, against 18 cents for an agent without memory. By the end almost every ticket reuses a path or runs as code. And when a ticket is uncertain or asks for several things, it goes to the full agent."
 
 ## 7. Close (~10 s)
 > "GBrain knows the business, Memorable remembers how, River is our own model, and QM runs it all. The paths, the programs and the model are ours. That's owning your intelligence."

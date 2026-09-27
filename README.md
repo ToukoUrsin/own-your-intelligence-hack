@@ -2,7 +2,9 @@
 
 Team **Support AGI**: Touko Ursin, Marc Smeds · Own Your Intelligence Hackathon, YC San Francisco, 27 September 2026.
 
-A customer-support agent that gets cheaper the more tickets it handles. The first time a kind of request arrives, the agent solves it from scratch with company knowledge from GBrain and the shop's tools, and Memorable stores the path it took. The next similar request is standardized into a fixed request structure and recalls that path, so the agent replays it in a few steps. Once a path has been reused successfully enough times, it compiles into a deterministic plan that runs with **zero model calls**. Anything a plan's guards cannot handle falls back to the agent. Not every ticket compiles; the system compiles what it safely can.
+A customer-support agent that gets cheaper the more tickets it handles: it remembers how it solved each kind of request, replays that path next time, and compiles well-proven paths into plans that answer without calling the agent model. Replaying 400 ABCD support conversations, cost per ticket fell 66% from the first 25 tickets to the last 25.
+
+The first time a kind of request arrives, the agent solves it from scratch with company knowledge from GBrain and the shop's tools, and Memorable stores the path it took. The next similar request is standardized into a fixed request structure and recalls that path, so the agent replays it in a few steps. Once a path has been reused successfully enough times, it compiles into a deterministic plan that runs with **zero agent model calls** (only the router runs). Anything a plan's guards cannot handle falls back to the agent. Not every ticket compiles; the system compiles what it safely can.
 
 ## Three tiers
 
@@ -12,7 +14,7 @@ A customer-support agent that gets cheaper the more tickets it handles. The firs
 flowchart LR
     T[Customer ticket] --> N[Request normalizer<br/>CANONICAL_REQUEST_V1]
     N --> P{Compiled plan<br/>for this request?}
-    P -- yes, guards pass --> C[Compiled<br/>JSON plan, 0 model calls]
+    P -- yes, guards pass --> C[Compiled<br/>JSON plan, 0 agent model calls]
     P -- no / guard fails --> M{Memorable recall<br/>finds a path?}
     M -- yes --> R[Recalled<br/>agent replays the path]
     M -- no --> E[Explored<br/>agent solves from scratch]
@@ -26,9 +28,9 @@ flowchart LR
 |---|---|---|
 | Explored | Claude agent + GBrain + shop tools, no prior path | Full agent loop |
 | Recalled | Claude agent follows a procedure recalled from Memorable | Fewer steps |
-| Compiled | JSON program: bindings from the canonical request, tool calls, guards from GBrain policy, reply template | None |
+| Compiled | JSON program: bindings from the canonical request, tool calls, guards from GBrain policy, reply template | None after the router |
 
-Compiled plans are promoted in shadow first: a plan is checked against the agent's own result on real tickets before it is allowed to answer.
+Compiled plans are promoted in shadow first: a plan is checked against the agent's own result on incoming tickets before it is allowed to answer.
 
 ## How each host is used
 
@@ -40,9 +42,9 @@ Compiled plans are promoted in shadow first: a plan is checked against the agent
 
 ## Data
 
-- **ABCD** (Action-Based Conversations Dataset, ASAPP Research, MIT): human-to-human support conversations for an online clothing retailer, each with the **action sequence the human agent took**. We use 400 tickets for replay and 100 held out for evaluation, and score our agent's tool calls against the human actions. See `DATASET.md`.
+- **ABCD** (Action-Based Conversations Dataset, ASAPP Research, MIT): human-to-human support chats for an online clothing retailer, role-played through ASAPP's Expert Live Chat rather than taken from live customers, each with the **action sequence the human agent took**. We use 400 tickets for replay and 100 held out for evaluation, and score our agent's tool calls against the human actions. See `DATASET.md`.
 - **Shopify dev store** "Northwind Outfitters": 16 products (Unsplash photos, `data/PHOTO_CREDITS.md`) and test orders seeded from the ABCD customers (`data/seed_shopify.ts`). The live QM demo runs against it.
-- **Hard tickets** (`data/HARD_TICKETS.md`): 42 tickets from the long tail — 15 real ABCD conversations (longest, changed requests, rarest intents) and 27 constructed edge cases (multiple requests, missing identifiers, contradictions, policy edges, angry customers, must-escalate, non-English, typos). They should stay with the full agent, not a cheap path.
+- **Hard tickets** (`data/HARD_TICKETS.md`): 42 tickets from the long tail — 15 ABCD conversations (longest, changed requests, rarest intents) and 27 constructed edge cases (multiple requests, missing identifiers, contradictions, policy edges, angry customers, must-escalate, non-English, typos). They should stay with the full agent, not a cheap path.
 
 ## Results
 
@@ -56,7 +58,8 @@ Final cold-start run: 400 ABCD tickets in order plus 42 hard tickets interleaved
 | Cost per ticket, first 25 → last 25 | **$0.139 → $0.047 (−66%)** |
 | Cost per ticket, no-memory baseline | $0.183 |
 | Tier share, last 25 (explored / recalled / compiled) | 0% / 88% / 12% |
-| Cost per ticket by tier | explored $0.191 · recalled $0.059 · compiled ~$0.0003 (router only, 0 model calls) |
+| Cost per ticket by tier | explored $0.191 · recalled $0.059 · compiled ~$0.0003 (router only, 0 agent model calls) |
+| Same tickets vs no-memory baseline | $0.100 vs $0.183 per ticket (−46%) on the first 100 tickets, while the path library was still filling |
 | Compiled-plan accuracy | 94% (33 of 35) reply agreement with the agent in the offline Haiku-judged eval (`compiled-eval.json`); in the final run plans answer only after 2 of 3 shadow agreements |
 | Router path hit rate, 100 held-out tickets | River 65% · Haiku 56% · raw text 8% |
 | Hard tickets (42), tier they ended in | 8 explored · 33 recalled · 1 compiled; 20 recalls used the wrong subflow |
@@ -82,7 +85,8 @@ Raw outputs: `replay/summary.json`, `replay/summary-baseline.json`, `replay/gate
 
 ## What's real vs simulated
 
-- **Real:** the Claude agent, GBrain, Memorable API calls, the QM fork, the Shopify dev store and its API calls, ABCD conversations and human action sequences, all measured costs and times.
+- **Real:** the Claude agent, GBrain, Memorable API calls, the QM fork, the Shopify dev store and its API calls, all measured costs and times.
+- **Dataset:** ABCD conversations and their human action sequences are role-played by ASAPP's collectors (Expert Live Chat), not live customer tickets.
 - **Test data:** the Shopify store is a development store with test orders; no real customers or payments.
 - **Mock shop for replay:** the 400-ticket replay uses a local mock of the same shop data (`agent/src/shop.ts`) so it can run fast and repeatably; the live demo uses Shopify.
 - **Constructed:** 27 of the 42 hard tickets were written by us and are labeled `source: "constructed"`.
@@ -97,7 +101,7 @@ All code was written during hacking hours (13:15–17:00 PDT). No prior projects
 |---|---|
 | 13:00–13:40 | Setup and docs: hackathon brief, rules, notes |
 | 13:56 | Core idea; first code: support agent on GBrain with shop tools and step traces |
-| 14:12–14:27 | Real support data; Memorable layer and replay harness; MCP server for QM; Shopify backend; switch to ABCD |
+| 14:12–14:27 | Support dataset; Memorable layer and replay harness; MCP server for QM; Shopify backend; switch to ABCD |
 | 14:31–14:49 | Northwind Outfitters brain, catalog and seeding; QM MCP tools on Shopify; Memorable-backed procedure store |
 | 14:54 | Canonical request v1 normalizer (Haiku stand-in for River) |
 | 14:56 | Compiled paths: reused procedures become deterministic JSON plans |

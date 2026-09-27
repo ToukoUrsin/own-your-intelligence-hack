@@ -1,6 +1,6 @@
 # How each platform was used
 
-Support AGI routes every support ticket to the cheapest tier that works: **explored** (Claude solves it from scratch), **recalled** (Claude replays a learned path) or **compiled** (a deterministic JSON plan, zero model calls). Four hosted platforms each own one part of that loop.
+Support AGI routes every support ticket to the cheapest tier that works: **explored** (Claude solves it from scratch), **recalled** (Claude replays a learned path) or **compiled** (a deterministic JSON plan, zero agent model calls; only the router runs). Four hosted platforms each own one part of that loop.
 
 | Platform | Role in the loop | Main code |
 |---|---|---|
@@ -102,7 +102,7 @@ GBrain was also the event's mandatory host integration.
 
 - `recall_path`: normalizes the request (River), applies the reuse gate and returns the saved steps with their policy text, or `found: false` with instructions to explore;
 - `save_path`: saves the path from the calls the server actually logged for the session (`mcp/logs/calls.jsonl`), not from the agent's own report;
-- `POST /try_compiled`: QM's pre-turn hook. If a promoted plan's guards pass, QM replies with zero model calls.
+- `POST /try_compiled`: QM's pre-turn hook. If a promoted plan's guards pass, QM replies with zero agent model calls.
 
 **Fork changes** (all 27 Sep):
 
