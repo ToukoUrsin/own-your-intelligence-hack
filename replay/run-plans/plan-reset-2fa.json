@@ -1,0 +1,68 @@
+{
+  "id": "plan-reset-2fa",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "account",
+    "topic": "reset_2fa",
+    "key": "Task 1: account access: reset 2fa."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "-",
+        "details": "reset 2fa"
+      }
+    },
+    {
+      "id": "send_link",
+      "tool": "send_link",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "kind": "reset 2fa"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, I've emailed you the link at {{s.send_link.sentTo}}. Is there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-2",
+    "intent": "reset_2fa",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "fallback"
+  },
+  "compiledAt": "2026-09-27T22:35:52.188Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

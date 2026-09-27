@@ -1,0 +1,49 @@
+{
+  "id": "plan-return-color",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "request",
+    "subject": "return",
+    "topic": "return_color",
+    "key": "Task 1: product defect: return color."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out!\n\nI've found your order {{s.find_orders.0.id}} \u2014 {{s.find_orders.0.items.0.name}}, {{s.find_orders.0.total|money}}, placed {{s.find_orders.0.placedAt}} and delivered {{s.find_orders.0.deliveredAt}}. As a {{s.pull_up_account.account.membership}} member, it's eligible for return, so I can get that started for you.\n\nJust two quick things:\n1. How would you like to return it \u2014 by mail (we'll email a prepaid label to {{s.pull_up_account.account.email}}), in store, or at a drop-off center?\n2. Where should the {{s.find_orders.0.total|money}} refund go \u2014 back to your original payment method ({{s.find_orders.0.payment.method}}), as account credit, a gift card, or a paper check? Gift cards and checks would be mailed to {{s.pull_up_account.account.defaultAddress}}.\n\nRefunds typically appear 5\u20137 business days after they're issued.\n\nLet me know and I'll set it up right away \u2014 is there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-6",
+    "intent": "return_color",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:31:20.601Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

@@ -1,0 +1,60 @@
+{
+  "id": "plan-shopping-cart",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "troubleshoot",
+    "subject": "site",
+    "topic": "shopping_cart",
+    "key": "Task 1: troubleshoot site: shopping cart."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "troubleshoot_step",
+      "tool": "troubleshoot_step",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "step": "log out and back in, clear cache, try again"
+      }
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "-",
+        "details": "shopping cart"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}! Sorry about the cart trouble — let's try a few quick things:\n\n1. Refresh the product page and add the item again.\n2. If it still says empty, log out of your account and log back in, then retry.\n3. Check the bottom left-hand side of the product page to see if the item is listed as Out-of-Stock — that would stop it from being added.\n\nIf none of those work, just let me know which item you'd like and I can place the purchase for you. 😊\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-13",
+    "intent": "shopping_cart",
+    "uses": 3,
+    "examples": 1,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:40:41.783Z",
+  "enabled": false,
+  "shadowPending": true
+}

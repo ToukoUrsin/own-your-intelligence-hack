@@ -1,0 +1,84 @@
+{
+  "id": "plan-promo-code-out-of-date",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "troubleshoot",
+    "subject": "promo_code",
+    "topic": "promo_code_out_of_date",
+    "key": "Task 1: purchase dispute: promo code out of date."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's promo code out of date claim a company error?"
+      }
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "promo_rule",
+      "tool": "policy_check",
+      "args": {
+        "rule": "promo_allowed",
+        "level": "$.s.membership.level",
+        "answer": "$.s.check_system.answer"
+      }
+    },
+    {
+      "id": "promo_code",
+      "tool": "promo_code",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "reason": "promo code out of date",
+        "percent": 10
+      },
+      "guards": [
+        {
+          "ref": "$.s.promo_rule.ok",
+          "op": "true",
+          "why": "policies/membership: level may get a new code and system confirms company error"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}!\n\nThanks for flagging this. I looked into the promo code on your account \u2014 our promotions only run for 7 days from the date they're issued, so the code you were trying had passed its expiration window.\n\nGood news: I've issued you a new one. Your replacement code is **{{s.promo_code.code}}** for {{s.promo_code.percent}}% off, valid through {{s.promo_code.expires}}. Just enter it at checkout and the discount will apply to your order.\n\nSorry for the hassle! Is there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-12",
+    "intent": "promo_code_out_of_date",
+    "uses": 4,
+    "examples": 4,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:35:28.279Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

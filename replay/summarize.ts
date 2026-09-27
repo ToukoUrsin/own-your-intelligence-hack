@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { agreement, expressible } from "./abcd_map";
 
 type Row = {
+  hard?: boolean; hardKind?: string;
   i: number; id: string; intent?: string; recalled: boolean; procedureIntent?: string; procedureTools?: string[]; tools?: string[]; goldActions?: string[]; learned?: string; reinforced?: string; revised?: string;
   library: number; tier?: string; backend?: string; normalizer: string; steps: number; modelCalls: number; ms: number; cost: number; normCost?: number; error?: string;
 };
@@ -56,7 +57,8 @@ export async function summarize(bucket = 25) {
   if (baseline) await Bun.write(join(DIR, "summary-baseline.json"), JSON.stringify(baseline, null, 2) + "\n");
   if (!mem.length) return;
 
-  const m = stats(mem, bucket);
+  const hardRows = mem.filter((r) => r.hard && !r.error);
+  const m = stats(mem.filter((r) => !r.hard), bucket);
   const first = m.buckets[0]!, last = m.buckets.at(-1)!;
   const rec = m.ok.filter((r) => r.recalled);
   // Same tickets in the baseline, so "vs baseline" compares like with like.
@@ -88,7 +90,9 @@ export async function summarize(bucket = 25) {
     memory: true,
     normalizers,
     tickets: mem.length,
-    errors: mem.length - m.ok.length,
+    mainTickets: m.ok.length,
+    errors: mem.filter((r) => r.error).length,
+    run: "cold start (no procedures or plans); River router r1@50 normalizer; Memorable extract + store, exact standardized key first; compiled plans graduate after 2/3 shadow agreement",
     totalCost: +m.ok.reduce((s, r) => s + r.cost, 0).toFixed(3),
     normalizerCost: +m.ok.reduce((s, r) => s + (r.normCost ?? 0), 0).toFixed(4),
     recalled: rec.length,
@@ -106,6 +110,14 @@ export async function summarize(bucket = 25) {
       distinctGoldIntents: new Set(m.ok.map((r) => r.intent)).size,
     },
     ...(goldAgreement ? { goldAgreement } : {}),
+    ...(hardRows.length ? { hardTickets: {
+      n: hardRows.length,
+      note: "data/hard_tickets.jsonl interleaved ~1 in 10; excluded from buckets and headline",
+      tiers: Object.fromEntries(["explored", "recalled", "compiled"].map((t) => { const ys = hardRows.filter((r) => tierOf(r) === t); return [t, { n: ys.length, costPerTicket: ys.length ? +avg(ys, (r) => r.cost).toFixed(4) : null }]; })),
+      costPerTicket: +avg(hardRows, (r) => r.cost).toFixed(4),
+      recalledWrongIntent: hardRows.filter((r) => r.recalled && r.procedureIntent !== r.intent).length,
+      byKind: hardRows.reduce((o, r) => { const k = r.hardKind ?? "?"; o[k] ??= { n: 0, explored: 0, recalled: 0, compiled: 0 }; o[k].n++; o[k][tierOf(r)]++; return o; }, {} as Record<string, any>),
+    } } : {}),
     buckets: m.buckets,
     headline: {
       costPerTicketFirstBucket: first.costPerTicket,

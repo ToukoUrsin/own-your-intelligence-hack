@@ -1,54 +1,94 @@
 {
   "tickets": 100,
   "errors": 0,
-  "costPerTicket": 0.0837,
-  "secondsPerTicket": 10.3,
-  "toolCallsPerTicket": 4,
-  "totalCost": 8.367,
+  "costPerTicket": 0.1832,
+  "secondsPerTicket": 16.4,
+  "toolCallsPerTicket": 5,
+  "totalCost": 18.318,
   "buckets": [
     {
       "tickets": "1-25",
       "n": 25,
       "recallRate": 0,
       "recallPrecision": null,
-      "costPerTicket": 0.0833,
-      "secondsPerTicket": 10.4,
-      "toolCallsPerTicket": 4.1,
-      "modelCallsPerTicket": 3.2,
-      "libraryAtEnd": 0
+      "costPerTicket": 0.148,
+      "secondsPerTicket": 14.3,
+      "toolCallsPerTicket": 4.6,
+      "modelCallsPerTicket": 3.8,
+      "libraryAtEnd": 0,
+      "tierShare": {
+        "explored": 1,
+        "recalled": 0,
+        "compiled": 0
+      },
+      "costByTier": {
+        "explored": 0.148,
+        "recalled": null,
+        "compiled": null
+      }
     },
     {
       "tickets": "26-50",
       "n": 25,
       "recallRate": 0,
       "recallPrecision": null,
-      "costPerTicket": 0.0859,
-      "secondsPerTicket": 10.4,
-      "toolCallsPerTicket": 4,
-      "modelCallsPerTicket": 3.2,
-      "libraryAtEnd": 0
+      "costPerTicket": 0.1668,
+      "secondsPerTicket": 16.3,
+      "toolCallsPerTicket": 5,
+      "modelCallsPerTicket": 4.2,
+      "libraryAtEnd": 0,
+      "tierShare": {
+        "explored": 1,
+        "recalled": 0,
+        "compiled": 0
+      },
+      "costByTier": {
+        "explored": 0.1668,
+        "recalled": null,
+        "compiled": null
+      }
     },
     {
       "tickets": "51-75",
       "n": 25,
       "recallRate": 0,
       "recallPrecision": null,
-      "costPerTicket": 0.081,
-      "secondsPerTicket": 10.3,
-      "toolCallsPerTicket": 3.9,
-      "modelCallsPerTicket": 3.1,
-      "libraryAtEnd": 0
+      "costPerTicket": 0.2217,
+      "secondsPerTicket": 18.6,
+      "toolCallsPerTicket": 5.7,
+      "modelCallsPerTicket": 4.7,
+      "libraryAtEnd": 0,
+      "tierShare": {
+        "explored": 1,
+        "recalled": 0,
+        "compiled": 0
+      },
+      "costByTier": {
+        "explored": 0.2217,
+        "recalled": null,
+        "compiled": null
+      }
     },
     {
       "tickets": "76-100",
       "n": 25,
       "recallRate": 0,
       "recallPrecision": null,
-      "costPerTicket": 0.0845,
-      "secondsPerTicket": 10.3,
-      "toolCallsPerTicket": 4.1,
-      "modelCallsPerTicket": 3.2,
-      "libraryAtEnd": 0
+      "costPerTicket": 0.1962,
+      "secondsPerTicket": 16.5,
+      "toolCallsPerTicket": 5,
+      "modelCallsPerTicket": 4.2,
+      "libraryAtEnd": 0,
+      "tierShare": {
+        "explored": 1,
+        "recalled": 0,
+        "compiled": 0
+      },
+      "costByTier": {
+        "explored": 0.1962,
+        "recalled": null,
+        "compiled": null
+      }
     }
   ]
 }

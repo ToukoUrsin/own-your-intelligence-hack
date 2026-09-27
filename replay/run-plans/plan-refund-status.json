@@ -1,0 +1,87 @@
+{
+  "id": "plan-refund-status",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "refund",
+    "topic": "refund_status",
+    "key": "Task 1: product defect: refund status."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": true
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "get_refunds",
+      "tool": "get_refunds",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.get_refunds",
+          "op": "len_eq",
+          "value": 1,
+          "why": "exactly one refund on the order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for checking in!\n\nI pulled up your refund for order {{s.pick_order.id}} ({{s.pick_order.items.0.name}}). Here are the details:\n\n- Refund ID: {{s.get_refunds.0.id}}\n- Amount: {{s.get_refunds.0.amount|money}}\n- Status: {{s.get_refunds.0.status}}\n- Started on: {{s.get_refunds.0.createdAt}}\n- Reason: {{s.get_refunds.0.reason}}\n- Being returned to: {{s.get_refunds.0.method}}\n\nOnce it's completed, the funds typically post to your {{s.get_refunds.0.method}} within a few business days.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-1",
+    "intent": "refund_status",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:29:48.145Z",
+  "enabled": true
+}

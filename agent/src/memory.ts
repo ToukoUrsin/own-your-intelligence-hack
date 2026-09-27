@@ -37,7 +37,7 @@ export type Normalizer = "river" | "haiku" | "raw";
 // `request` is the standardized request used for recall and as the procedure key: River's `rendered` description,
 // or for Haiku the fixed rendered sentence of its intent label. Raw text when nothing standardized it.
 export type Normalized = {
-  request: string; standardized: boolean; intent?: string; canonical?: unknown; signature?: string; why?: string; confidence?: number; source: Normalizer;
+  request: string; standardized: boolean; intent?: string; canonical?: unknown; signature?: string; why?: string; confidence?: number; source: Normalizer; model?: string;
   inputTokens?: number; outputTokens?: number;
 };
 export type Solved = Trace & {
@@ -141,10 +141,25 @@ export async function listProcedures() {
   return load();
 }
 
+// Global pacing for Memorable API calls (all paths): at most one request per MEMORABLE_MIN_MS.
+let nextSlot = 0;
+async function pace() {
+  const gap = Number(process.env.MEMORABLE_MIN_MS ?? 400);
+  const now = Date.now(), at = Math.max(now, nextSlot);
+  nextSlot = at + gap;
+  if (at > now) await Bun.sleep(at - now);
+}
+
+// MEMORABLE_OFFLINE=1 (e.g. daily quota exhausted): no Memorable API calls; exact-key recall and procedures built
+// locally from the tool trace. Also switches on automatically after a quota 429.
+let offline = process.env.MEMORABLE_OFFLINE === "1";
+export const memorableOffline = () => offline;
 async function memorable(path: string, body: unknown): Promise<any> {
+  if (offline) throw new Error("memorable offline");
   const key = process.env.MEMORABLE_API_KEY;
   if (!key) throw new Error("MEMORABLE_API_KEY missing");
   for (let attempt = 0; ; attempt++) {
+    await pace();
     const r = await fetch(new URL(path, API), {
       method: "POST",
       headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
@@ -153,14 +168,30 @@ async function memorable(path: string, body: unknown): Promise<any> {
     }).catch((e) => e as Error);
     if (!(r instanceof Error) && r.ok) return r.json();
     const limited = !(r instanceof Error) && r.status === 429;
-    if (attempt >= (limited ? 6 : 2)) throw new Error(`memorable ${path}: ${r instanceof Error ? r.message : r.status}`);
-    await Bun.sleep((limited ? 1500 : 500) * (attempt + 1));
+    if (limited && attempt >= 2) { offline = true; throw new Error(`memorable ${path}: 429 (quota) → offline`); }
+    if (attempt >= 3) throw new Error(`memorable ${path}: ${r instanceof Error ? r.message : r.status}`);
+    await Bun.sleep(Math.min(20000, (limited ? 1000 : 500) * 2 ** attempt) * (0.5 + Math.random()));
   }
 }
 
-export async function embed(text: string): Promise<number[]> {
-  const j = await memorable("/v1/embed", { text: text.slice(0, 8000), input_type: "query" });
-  return j.embedding;
+// Embeddings: cached per text and rate-limited (Memorable returns 429 under parallel replay load).
+const embedCache = new Map<string, Promise<number[]>>();
+let embedActive = 0;
+const EMBED_MAX = Number(process.env.EMBED_CONCURRENCY ?? 2);
+export function embed(text: string): Promise<number[]> {
+  const key = text.slice(0, 8000);
+  if (!embedCache.has(key)) {
+    const p = (async () => {
+      while (embedActive >= EMBED_MAX) await Bun.sleep(50 + Math.random() * 100);
+      embedActive++;
+      try { return (await memorable("/v1/embed", { text: key, input_type: "query" })).embedding as number[]; }
+      catch { return [] as number[]; } // offline/quota: no embedding, exact-key recall only
+      finally { embedActive--; }
+    })();
+    p.catch(() => embedCache.delete(key));
+    embedCache.set(key, p);
+  }
+  return embedCache.get(key)!;
 }
 
 export function cosine(a: number[], b: number[]) {
@@ -187,7 +218,7 @@ async function haikuStandIn(text: string): Promise<Normalized> {
 }
 
 async function river(text: string): Promise<Normalized | undefined> {
-  const r = await fetch(process.env.ROUTER_URL!, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }), signal: AbortSignal.timeout(15000) });
+  const r = await fetch(process.env.ROUTER_URL!, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ text }), signal: AbortSignal.timeout(30000) });
   if (!r.ok) return;
   const j: any = await r.json();
   const str = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim() : undefined);
@@ -197,7 +228,7 @@ async function river(text: string): Promise<Normalized | undefined> {
   const v = j.canonical ? validate(j.canonical) : undefined;
   const request = str(j.rendered) ?? (v?.ok ? render(v.canonical!) : undefined) ?? str(j.request) ?? (intent ? renderIntent(intent) : undefined);
   if (!request) return;
-  return { request, standardized: true, intent: intent ?? INTENT_OF.get(request), canonical: j.canonical, signature: v?.ok ? signature(v.canonical!) : undefined, confidence: j.confidence, source: "river" };
+  return { request, standardized: true, intent: intent ?? INTENT_OF.get(request), canonical: j.canonical, signature: v?.ok ? signature(v.canonical!) : undefined, confidence: j.confidence, source: "river", model: str(j.model) ? `river:${String(j.model).replace(/^river:/, "")}` : "river" };
 }
 
 let anthropic: Anthropic | undefined;
@@ -291,20 +322,24 @@ export const recallThreshold = (backend: string) => (backend === "memorable" ? M
 // goal signature (and never across two different known eval labels when label mode is used).
 export async function recall(query: string, sig?: string): Promise<Recalled> {
   const all = await load();
-  const embedding = await embed(query);
-  if (BACKEND === "memorable") {
+  const exact = all.find((p) => p.key === query && (!sig || !p.signature || p.signature === sig));
+  if (exact) return { procedure: exact, similarity: 1, embedding: [], keyed: true, backend: BACKEND === "memorable" ? "memorable:key" : "local:key" };
+  if (BACKEND === "memorable" && !offline) {
     const store = await memorableStore();
     const r = store ? await store.recall(query).catch(() => undefined) : undefined;
-    if (r) {
+    if (r && r.similarity > 0) {
       const local = r.procedure && all.find((p) => p.id === r.procedure.id || p.key === r.procedure.key);
       const procedure = local ?? r.procedure;
-      if (procedure && sig && procedure.signature && procedure.signature !== sig) return { similarity: r.similarity, embedding, backend: "memorable" };
-      return { procedure, similarity: r.similarity, embedding, backend: "memorable" };
+      if (procedure && sig && procedure.signature && procedure.signature !== sig) return { similarity: r.similarity, embedding: [], backend: "memorable" };
+      if (procedure && procedure.intent && INTENT_OF.get(query) && procedure.intent !== INTENT_OF.get(query)) return { similarity: r.similarity, embedding: [], backend: "memorable" }; // different standardized request
+      return { procedure, similarity: r.similarity, embedding: [], backend: "memorable" };
     }
   }
   const same = (p: Procedure) => !sig || !p.signature || p.signature === sig;
   const keyed = all.find((p) => p.key === query && same(p));
-  if (keyed) return { procedure: keyed, similarity: 1, embedding, keyed: true, backend: "local" };
+  if (keyed) return { procedure: keyed, similarity: 1, embedding: [], keyed: true, backend: "local" };
+  const embedding = await embed(query);
+  if (!embedding.length) return { similarity: 0, embedding, backend: "local" };
   const qIntent = INTENT_OF.get(query);
   let best: Procedure | undefined, similarity = 0;
   for (const p of all) {
@@ -402,7 +437,7 @@ export async function saveProcedure(args: {
   }).catch(() => null);
   const d = res?.draft;
   if (known()) return reinforce(known()!); // a concurrent worker filed this key while we were extracting
-  const embedding = args.embedding ?? (await embed(normalized.request));
+  const embedding = args.embedding?.length ? args.embedding : await embed(normalized.request);
   const p: Procedure = {
     id: `proc-${procedures!.length + 1}`,
     key,
@@ -425,7 +460,7 @@ export async function saveProcedure(args: {
   procedures!.push(p);
   mkdirSync(dirname(STORE), { recursive: true });
   appendFileSync(STORE, JSON.stringify(p) + "\n");
-  if (BACKEND === "memorable") { const store = await memorableStore(); await store?.save(p).catch(() => undefined); }
+  if (BACKEND === "memorable" && !offline) { const store = await memorableStore(); await store?.save(p).catch(() => undefined); }
   return { procedure: p, created: true };
 }
 
@@ -453,12 +488,16 @@ async function compiled() {
 type Shadow = { trials: number; agree: number; promoted: boolean; rejected: boolean };
 const shadows = new Map<string, Shadow>();
 const SHADOW_LOG = join(import.meta.dir, "../../replay/shadow.jsonl");
-function shadowState(id: string): Shadow {
-  if (!shadows.has(id)) shadows.set(id, { trials: 0, agree: 0, promoted: false, rejected: false });
+// Plans enabled when the run starts (validated offline) serve right away; plans compiled during the run start in shadow.
+function shadowState(id: string, plan?: any): Shadow {
+  if (!shadows.has(id)) { const pre = !!plan && plan.enabled !== false && !plan.shadowPending; shadows.set(id, { trials: 0, agree: 0, promoted: pre, rejected: !!plan?.shadowRejected }); }
   return shadows.get(id)!;
 }
-function planFor(cm: any, task: { operation: string; subject: string }) {
-  const same = (cm.loadPlans() as any[]).filter((p) => p.enabled !== false && p.match.operation === task.operation && p.match.subject === task.subject);
+function planFor(cm: any, task: { operation: string; subject: string; topic?: string }) {
+  const live = (cm.loadPlans() as any[]).filter((p) => p.enabled !== false || p.shadowPending);
+  for (const p of live) shadowState(p.id, p);
+  if (task.topic) return live.find((p) => p.match.topic === task.topic);
+  const same = live.filter((p) => p.match.operation === task.operation && p.match.subject === task.subject);
   return same.length === 1 ? same[0] : undefined; // canonical goals must pick exactly one plan
 }
 async function runShadow(cm: any, plan: any, task: any, ticket: string, trace: Trace) {
@@ -479,8 +518,8 @@ async function runShadow(cm: any, plan: any, task: any, ticket: string, trace: T
   }
   st.trials++;
   if (agree) st.agree++;
-  if (st.agree >= 2) st.promoted = true;
-  else if (st.trials >= 3) st.rejected = true;
+  if (st.agree >= 2) { st.promoted = true; plan.enabled = true; delete plan.shadowPending; cm.savePlan(plan); }
+  else if (st.trials >= 3) { st.rejected = true; plan.shadowRejected = true; cm.savePlan(plan); }
   try { appendFileSync(SHADOW_LOG, JSON.stringify({ at: new Date().toISOString(), plan: plan.id, ticket: body(ticket).slice(0, 200), agreed: agree, why, ...st }) + "\n"); } catch {}
   return { shadow: { planId: plan.id, agree, trial: st.trials, promoted: st.promoted, why }, cost };
 }
@@ -509,7 +548,7 @@ export async function solve(ticket: string, opts: { id?: string; learn?: boolean
 
   // Tier 2: recalled path. Tier 3: explore.
   const r: Recalled = opts.recall === false || !normalized.standardized
-    ? { similarity: 0, embedding: await embed(normalized.request), backend: "none" }
+    ? { similarity: 0, embedding: [], backend: "none" }
     : await recall(normalized.request, normalized.signature);
   const hit = r.procedure && r.similarity >= recallThreshold(r.backend) ? r.procedure : undefined;
   const done = hit ? prefetch(ticket, hit) : [];
@@ -537,6 +576,10 @@ export async function solve(ticket: string, opts: { id?: string; learn?: boolean
       for (const tool of new Set(trace.steps.map((s) => s.tool))) if (!hit.tools.includes(tool) && LOOKUPS.has(tool)) hit.tools.push(tool);
       reinforced = hit.id;
       persist();
+      if (cm?.maybeCompile && hit.intent) {
+        const np = await cm.maybeCompile(hit, trace).catch(() => undefined);
+        if (np) { np.enabled = false; np.shadowPending = true; cm.savePlan(np); shadows.set(np.id, { trials: 0, agree: 0, promoted: false, rejected: false }); }
+      }
     }
   }
   let shadow: Solved["shadow"], shadowCost = 0;

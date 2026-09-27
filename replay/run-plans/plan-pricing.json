@@ -1,0 +1,47 @@
+{
+  "id": "plan-pricing",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "policy",
+    "topic": "pricing",
+    "key": "Task 1: storewide query: pricing."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/pricing"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there! Thanks for reaching out about pricing — happy to explain how this works.\n\nHere's our policy on {{s.select_faq.question}}: {{s.select_faq.answer}}\n\nThat's the rate that applies to orders placed through our site, and I'm glad to help you place one or answer any questions about sizes and availability.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-18",
+    "intent": "pricing",
+    "uses": 3,
+    "examples": 1,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T22:41:55.306Z",
+  "enabled": false,
+  "shadowPending": true
+}

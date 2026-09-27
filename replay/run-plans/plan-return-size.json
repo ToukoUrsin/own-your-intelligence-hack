@@ -1,0 +1,91 @@
+{
+  "id": "plan-return-size",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "return",
+    "topic": "return_size",
+    "key": "Task 1: product defect: return size."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "details": "return size"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} \u2014 good news! I verified your order #{{s.pick_order.id}} ({{s.pick_order.items.0.name}}, {{s.pick_order.total|money}}, placed {{s.pick_order.placedAt}}), and as a {{s.membership.level}} member your return is approved.\n\nJust let me know two things and I'll finish setting it up:\n1. How you'd like to return it \u2014 by mail (we'll email you a prepaid label), in store, or at a drop-off center.\n2. How you'd like your {{s.pick_order.total|money}} refund \u2014 back to your original payment method, as account credit, a gift card, or a paper check.\n\nRefunds appear 5\u20137 business days after they're issued. Anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-4",
+    "intent": "return_size",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:32:30.664Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

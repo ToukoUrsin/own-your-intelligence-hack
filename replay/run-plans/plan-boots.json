@@ -1,0 +1,47 @@
+{
+  "id": "plan-boots",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "product_information",
+    "topic": "boots",
+    "key": "Task 1: single item query: boots."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/boots"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there, thanks for reaching out!\n\nHere's what we recommend regarding {{s.select_faq.question}}: {{s.select_faq.answer}}\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-27",
+    "intent": "boots",
+    "uses": 3,
+    "examples": 1,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T22:42:10.077Z",
+  "enabled": false,
+  "shadowPending": true
+}

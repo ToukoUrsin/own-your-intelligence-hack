@@ -1,0 +1,74 @@
+{
+  "id": "plan-recover-username",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "account",
+    "topic": "recover_username",
+    "key": "Task 1: account access: recover username."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} — thanks for reaching out, and sorry for the trouble getting into your account!\n\nI was able to locate your account using the details you provided ({{s.pull_up_account.account.email}}). Before I can share your username, I just need one more piece of information to finish verifying your identity — could you confirm either of the following?\n\n- The zip code on the account\n- The phone number on file\n\nAs soon as you send that over, I'll pass along your username right away.\n\nIs there anything else I can help you with in the meantime?",
+  "source": {
+    "procedureId": "proc-33",
+    "intent": "recover_username",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:37:48.744Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

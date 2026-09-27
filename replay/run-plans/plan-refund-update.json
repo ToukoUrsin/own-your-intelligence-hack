@@ -1,0 +1,88 @@
+{
+  "id": "plan-refund-update",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "refund",
+    "topic": "refund_update",
+    "key": "Task 1: product defect: refund update."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": true
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "get_refunds",
+      "tool": "get_refunds",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.get_refunds",
+          "op": "len_eq",
+          "value": 1,
+          "why": "exactly one refund on the order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} — thanks for reaching out!\n\nI've verified your account and order {{s.pick_order.id}} ({{s.pick_order.items.0.name}}, {{s.pick_order.total|money}}). Here's where your refund stands:\n\n- Refund ID: {{s.get_refunds.0.id}}\n- Amount: {{s.get_refunds.0.amount|money}}\n- Status: {{s.get_refunds.0.status}}\n- Opened on: {{s.get_refunds.0.createdAt}}\n- Refunded to: {{s.get_refunds.0.method}}\n\nIf you'd like to add another item to this refund, just send me the brand and type of item, the price you paid, and the reason for the return, and I'll take care of it.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-22",
+    "intent": "refund_update",
+    "uses": 3,
+    "examples": 2,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:43:03.347Z",
+  "enabled": false,
+  "shadowPending": true
+}

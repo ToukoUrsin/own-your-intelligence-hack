@@ -1,0 +1,121 @@
+{
+  "id": "plan-status-due-amount",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "retrieve",
+    "subject": "subscription",
+    "topic": "status_due_amount",
+    "key": "Task 1: subscription inquiry: status due amount."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "subscription_status",
+      "tool": "subscription_status",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.subscription_status.ok",
+          "op": "true",
+          "why": "subscription found"
+        }
+      ]
+    },
+    {
+      "id": "send_link",
+      "tool": "send_link",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "kind": "status due amount"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "details": "status due amount"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} — your {{s.subscription_status.plan}} subscription is {{s.subscription_status.status}}. The annual fee is {{s.subscription_status.annualFee|money}}, with {{s.subscription_status.dueAmount|money}} due on {{s.subscription_status.dueDate}}. I've also emailed you a link to your subscription/billing page so you can view the details anytime.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-11",
+    "intent": "status_due_amount",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:34:14.706Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

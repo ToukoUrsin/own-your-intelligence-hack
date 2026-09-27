@@ -1,0 +1,105 @@
+{
+  "id": "plan-status-delivery-time",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "delivery",
+    "topic": "status_delivery_time",
+    "key": "Task 1: order issue: status delivery time."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's status delivery time claim a company error?"
+      },
+      "guards": [
+        {
+          "ref": "$.s.check_system.answer",
+          "op": "eq",
+          "value": "no",
+          "why": "system reports no company error (else an order fix is needed → agent)"
+        }
+      ]
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}},\n\nThanks for reaching out! I verified your account and pulled up order {{s.pick_order.id}} ({{s.pick_order.items.0.name}}), placed on {{s.pick_order.placedAt}}. Its current shipping status is \"{{s.shipping_status.shippingStatus}}\".\n\nOur system also confirms the delivery time issue was on our end, not yours — sorry about that. I've requested the earliest available delivery slot for this order at no charge to you, and any change will show up in your tracking.\n\nAnything else I can help with?",
+  "source": {
+    "procedureId": "proc-21",
+    "intent": "status_delivery_time",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:35:30.035Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

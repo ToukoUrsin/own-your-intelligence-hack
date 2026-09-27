@@ -1,0 +1,60 @@
+{
+  "id": "plan-credit-card",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "troubleshoot",
+    "subject": "site",
+    "topic": "credit_card",
+    "key": "Task 1: troubleshoot site: credit card."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "troubleshoot_step",
+      "tool": "troubleshoot_step",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "step": "log out and back in, clear cache, try again"
+      }
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "-",
+        "details": "credit card"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, sorry about the trouble at checkout! Let's try these steps in order:\n\n1. Re-enter your credit card details carefully and submit again — a typo or autofill glitch is the most common cause.\n2. If it still fails, log out of your account and log back in, then retry the purchase.\n3. Check the card's expiration date — an expired card will be rejected.\n\nIf none of those work, just reply here and I can place the order for you directly through this ticket.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-47",
+    "intent": "credit_card",
+    "uses": 3,
+    "examples": 2,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:42:46.735Z",
+  "enabled": false,
+  "shadowPending": true
+}

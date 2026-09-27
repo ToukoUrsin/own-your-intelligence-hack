@@ -1,0 +1,89 @@
+{
+  "id": "plan-return-stain",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "return",
+    "topic": "return_stain",
+    "key": "Task 1: product defect: return stain."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "details": "return stain"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} — sorry about the stained item! I verified your order {{s.pick_order.id}} (placed {{s.pick_order.placedAt}}, delivered {{s.pick_order.deliveredAt}}), and it falls within the return window for your {{s.membership.level}} membership, so your return is approved.\n\nI've logged the details, and return instructions plus a shipping label will arrive by email at {{s.pull_up_account.account.email}} shortly. Once we receive the item, your refund will be issued to the {{s.pick_order.payment.method}} used for the purchase.\n\nAnything else I can help with?",
+  "source": {
+    "procedureId": "proc-14",
+    "intent": "return_stain",
+    "uses": 4,
+    "examples": 2,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:40:22.071Z",
+  "enabled": true
+}

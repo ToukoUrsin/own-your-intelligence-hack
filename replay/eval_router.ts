@@ -87,21 +87,18 @@ async function evaluate(which: Normalizer, librarySource: Ticket[], label: strin
   return res;
 }
 
-const runs = [
-  await evaluate("raw", firstPerIntent, "first ticket per intent"),
-  await evaluate("raw", tickets, "all 400 replay tickets (kNN)"),
-  await evaluate("haiku", firstPerIntent, "first ticket per intent"),
-  await evaluate("haiku", tickets, "all 400 replay tickets (kNN)"),
-];
-if (process.env.ROUTER_URL) {
-  runs.push(await evaluate("river", firstPerIntent, "first ticket per intent"));
-  runs.push(await evaluate("river", tickets, "all 400 replay tickets (kNN)"));
-}
+// EVAL_KNN=1 adds the 400-ticket kNN libraries (many more embedding / router calls).
+const knn = process.env.EVAL_KNN === "1";
+const runs = [];
+if (process.env.ROUTER_URL) runs.push(await evaluate("river", firstPerIntent, "first ticket per intent"));
+runs.push(await evaluate("haiku", firstPerIntent, "first ticket per intent"));
+runs.push(await evaluate("raw", firstPerIntent, "first ticket per intent"));
+if (knn) { runs.push(await evaluate("raw", tickets, "all 400 replay tickets (kNN)")); runs.push(await evaluate("haiku", tickets, "all 400 replay tickets (kNN)")); }
 
 const out = {
   generatedAt: new Date().toISOString(),
   threshold: THRESHOLD,
-  normalizers: { raw: "ticket text", haiku: "Haiku stand-in for River (claude-haiku-4-5 → CANONICAL_REQUEST_V1 JSON → app renderer → rendered)", river: "ROUTER_URL" },
+  normalizers: { raw: "ticket text", haiku: process.env.NORMALIZER_MODE === "label" ? "claude-haiku-4-5 zero-shot subflow label" : "Haiku stand-in for River (claude-haiku-4-5 → CANONICAL_REQUEST_V1 JSON → app renderer → rendered)", river: process.env.ROUTER_URL ? `River router at ${process.env.ROUTER_URL}` : "not set" },
   metric: "hitRate = recalled procedure's intent == gold intent on data/heldout.jsonl (100 tickets); recall = exact standardized key, else cosine >= threshold on Memorable bge-m3 embeddings",
   river: process.env.ROUTER_URL ? "evaluated" : "ROUTER_URL not set",
   results: runs.map(({ rows, ...r }) => r),

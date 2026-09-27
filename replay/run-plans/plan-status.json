@@ -1,0 +1,128 @@
+{
+  "id": "plan-status",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "delivery",
+    "topic": "status",
+    "key": "Task 1: shipping issue: status."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's status claim a company error?"
+      },
+      "guards": [
+        {
+          "ref": "$.s.check_system.answer",
+          "op": "eq",
+          "value": "no",
+          "why": "system reports no company error (else an order fix is needed \u2192 agent)"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} \u2014 thanks for reaching out, and sorry for any confusion!\n\nI verified your identity and pulled up order {{s.pick_order.id}} (placed {{s.pick_order.placedAt}}, {{s.pick_order.total|money}}, paid by {{s.pick_order.payment.method}}). Here's where things stand:\n\n\u2022 Shipping status: {{s.shipping_status.shippingStatus}}\n\u2022 Shipping to: {{s.pick_order.shipTo}}\n\u2022 Address on file: {{s.pull_up_account.account.defaultAddress}}\n\nI also checked this against our system, and it confirms your account: {{s.check_system.meaning}} \u2014 so nothing is needed on your side, and we've noted it on the order.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-3",
+    "intent": "status",
+    "uses": 4,
+    "examples": 2,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:29:44.691Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

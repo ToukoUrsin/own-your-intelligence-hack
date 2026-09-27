@@ -1,0 +1,84 @@
+{
+  "id": "plan-missing",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "troubleshoot",
+    "subject": "delivery",
+    "topic": "missing",
+    "key": "Task 1: shipping issue: missing."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "record_reason",
+      "tool": "record_reason",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "reason": "missing"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} \u2014 thanks for your patience! I pulled up order {{s.pick_order.id}} (tracking {{s.pick_order.tracking}}), shipped to {{s.pick_order.shipTo}}. It was marked delivered on {{s.pick_order.deliveredAt}}, and I've logged your report that it hasn't arrived.\n\nPackages are occasionally scanned as delivered a day or two before they actually show up, so it's worth checking with neighbors or your building's front desk. If it still hasn't turned up once it's been more than 7 days past that delivery date, just reply here and we'll arrange a free reshipment to the same address, with a new tracking number sent to {{s.pull_up_account.account.email}}.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-25",
+    "intent": "missing",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:32:58.134Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}

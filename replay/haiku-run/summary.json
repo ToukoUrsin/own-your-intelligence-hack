@@ -1,0 +1,489 @@
+{
+  "memory": true,
+  "normalizers": {
+    "haiku": 220
+  },
+  "tickets": 244,
+  "errors": 24,
+  "totalCost": 17.104,
+  "normalizerCost": 0.2788,
+  "recalled": 121,
+  "tiers": {
+    "explored": {
+      "n": 49,
+      "costPerTicket": 0.1997
+    },
+    "recalled": {
+      "n": 121,
+      "costPerTicket": 0.06
+    },
+    "compiled": {
+      "n": 50,
+      "costPerTicket": 0.0013
+    }
+  },
+  "backends": {
+    "local": 164,
+    "n/a": 50,
+    "none": 6
+  },
+  "normalizedShare": 0,
+  "recallPrecision": 0.579,
+  "recalledCost": 0.06,
+  "exploredCost": 0.0995,
+  "library": {
+    "size": 46,
+    "created": 38,
+    "reinforced": 117,
+    "revised": 9,
+    "distinctGoldIntents": 50
+  },
+  "goldAgreement": {
+    "method": "tool names mapped to ABCD actions (replay/abcd_map.ts); exactMatch = path action set equals the human agent's actions restricted to those our tools can express",
+    "expressibleActions": [
+      "ask-the-oracle",
+      "enter-details",
+      "log-out-in",
+      "make-password",
+      "make-purchase",
+      "membership",
+      "notify-team",
+      "offer-refund",
+      "promo-code",
+      "pull-up-account",
+      "record-reason",
+      "send-link",
+      "shipping-status",
+      "subscription-status",
+      "try-again",
+      "update-account",
+      "update-order",
+      "validate-purchase",
+      "verify-identity"
+    ],
+    "recalledPaths": {
+      "n": 121,
+      "exactMatch": 0.165,
+      "meanJaccard": 0.562,
+      "topMissing": {
+        "update-order": 32,
+        "validate-purchase": 19,
+        "enter-details": 16,
+        "record-reason": 15,
+        "membership": 12,
+        "verify-identity": 11,
+        "shipping-status": 10,
+        "update-account": 8
+      },
+      "topExtra": {
+        "ask-the-oracle": 20,
+        "shipping-status": 18,
+        "validate-purchase": 14,
+        "pull-up-account": 12,
+        "verify-identity": 11,
+        "update-order": 7,
+        "membership": 6,
+        "send-link": 5
+      }
+    },
+    "recalledTraces": {
+      "n": 121,
+      "exactMatch": 0.149,
+      "meanJaccard": 0.549,
+      "topMissing": {
+        "update-order": 35,
+        "validate-purchase": 20,
+        "enter-details": 16,
+        "verify-identity": 15,
+        "record-reason": 15,
+        "membership": 12,
+        "shipping-status": 10,
+        "update-account": 8
+      },
+      "topExtra": {
+        "ask-the-oracle": 19,
+        "shipping-status": 18,
+        "validate-purchase": 14,
+        "pull-up-account": 12,
+        "verify-identity": 10,
+        "membership": 6,
+        "update-order": 5,
+        "send-link": 5
+      }
+    },
+    "exploredTraces": {
+      "n": 49,
+      "exactMatch": 0.245,
+      "meanJaccard": 0.608,
+      "topMissing": {
+        "update-order": 8,
+        "verify-identity": 6,
+        "shipping-status": 4,
+        "validate-purchase": 4,
+        "record-reason": 3,
+        "enter-details": 3,
+        "offer-refund": 3,
+        "update-account": 3
+      },
+      "topExtra": {
+        "pull-up-account": 7,
+        "membership": 4,
+        "record-reason": 4,
+        "shipping-status": 3,
+        "ask-the-oracle": 3,
+        "update-order": 3,
+        "verify-identity": 2,
+        "validate-purchase": 2
+      }
+    },
+    "compiledTraces": {
+      "n": 50,
+      "exactMatch": 0.36,
+      "meanJaccard": 0.644,
+      "topMissing": {
+        "make-password": 16,
+        "enter-details": 15,
+        "verify-identity": 7,
+        "ask-the-oracle": 7,
+        "validate-purchase": 2,
+        "record-reason": 2,
+        "offer-refund": 2,
+        "update-order": 1
+      },
+      "topExtra": {
+        "shipping-status": 7,
+        "enter-details": 2,
+        "pull-up-account": 1,
+        "validate-purchase": 1,
+        "membership": 1
+      }
+    },
+    "executedTraces": {
+      "n": 220,
+      "exactMatch": 0.218,
+      "meanJaccard": 0.584,
+      "topMissing": {
+        "update-order": 44,
+        "enter-details": 34,
+        "verify-identity": 28,
+        "validate-purchase": 26,
+        "record-reason": 20,
+        "make-password": 16,
+        "shipping-status": 14,
+        "ask-the-oracle": 14
+      },
+      "topExtra": {
+        "shipping-status": 28,
+        "ask-the-oracle": 22,
+        "pull-up-account": 20,
+        "validate-purchase": 17,
+        "verify-identity": 12,
+        "membership": 11,
+        "update-order": 8,
+        "record-reason": 8
+      }
+    },
+    "baselineTraces": {
+      "n": 100,
+      "exactMatch": 0.27,
+      "meanJaccard": 0.659,
+      "topMissing": {
+        "update-order": 16,
+        "verify-identity": 12,
+        "enter-details": 12,
+        "record-reason": 8,
+        "offer-refund": 7,
+        "validate-purchase": 6,
+        "ask-the-oracle": 6,
+        "shipping-status": 5
+      },
+      "topExtra": {
+        "shipping-status": 10,
+        "enter-details": 10,
+        "update-order": 9,
+        "membership": 6,
+        "pull-up-account": 6,
+        "ask-the-oracle": 5,
+        "record-reason": 5,
+        "verify-identity": 3
+      }
+    }
+  },
+  "hardTickets": {
+    "n": 24,
+    "note": "data/hard_tickets.jsonl interleaved ~1 in 10; excluded from buckets and headline",
+    "tiers": {
+      "explored": {
+        "n": 9,
+        "costPerTicket": 0.2255
+      },
+      "recalled": {
+        "n": 13,
+        "costPerTicket": 0.0524
+      },
+      "compiled": {
+        "n": 2,
+        "costPerTicket": 0.0013
+      }
+    },
+    "costPerTicket": 0.113,
+    "recalledWrongIntent": 7,
+    "byKind": {
+      "long_conversation": {
+        "n": 5,
+        "explored": 3,
+        "recalled": 2,
+        "compiled": 0
+      },
+      "request_change": {
+        "n": 5,
+        "explored": 4,
+        "recalled": 1,
+        "compiled": 0
+      },
+      "rare_subflow": {
+        "n": 5,
+        "explored": 2,
+        "recalled": 3,
+        "compiled": 0
+      },
+      "multi_request": {
+        "n": 3,
+        "explored": 0,
+        "recalled": 2,
+        "compiled": 1
+      },
+      "missing_identifier": {
+        "n": 3,
+        "explored": 0,
+        "recalled": 2,
+        "compiled": 1
+      },
+      "contradiction": {
+        "n": 3,
+        "explored": 0,
+        "recalled": 3,
+        "compiled": 0
+      }
+    }
+  },
+  "buckets": [
+    {
+      "tickets": "1-25",
+      "n": 25,
+      "recallRate": 0,
+      "recallPrecision": null,
+      "costPerTicket": 0.1378,
+      "secondsPerTicket": 11.8,
+      "toolCallsPerTicket": 4.3,
+      "modelCallsPerTicket": 2.8,
+      "libraryAtEnd": 18,
+      "tierShare": {
+        "explored": 0.68,
+        "recalled": 0,
+        "compiled": 0.32
+      },
+      "costByTier": {
+        "explored": 0.202,
+        "recalled": null,
+        "compiled": 0.0013
+      }
+    },
+    {
+      "tickets": "26-50",
+      "n": 25,
+      "recallRate": 0.56,
+      "recallPrecision": 0.79,
+      "costPerTicket": 0.0678,
+      "secondsPerTicket": 7.4,
+      "toolCallsPerTicket": 3.9,
+      "modelCallsPerTicket": 2.2,
+      "libraryAtEnd": 20,
+      "tierShare": {
+        "explored": 0.16,
+        "recalled": 0.56,
+        "compiled": 0.28
+      },
+      "costByTier": {
+        "explored": 0.2521,
+        "recalled": 0.0484,
+        "compiled": 0.0013
+      }
+    },
+    {
+      "tickets": "51-75",
+      "n": 25,
+      "recallRate": 0.68,
+      "recallPrecision": 0.65,
+      "costPerTicket": 0.0955,
+      "secondsPerTicket": 11.2,
+      "toolCallsPerTicket": 4.7,
+      "modelCallsPerTicket": 3,
+      "libraryAtEnd": 27,
+      "tierShare": {
+        "explored": 0.24,
+        "recalled": 0.68,
+        "compiled": 0.08
+      },
+      "costByTier": {
+        "explored": 0.2115,
+        "recalled": 0.0656,
+        "compiled": 0.0013
+      }
+    },
+    {
+      "tickets": "76-100",
+      "n": 25,
+      "recallRate": 0.6,
+      "recallPrecision": 0.47,
+      "costPerTicket": 0.084,
+      "secondsPerTicket": 9.1,
+      "toolCallsPerTicket": 4.3,
+      "modelCallsPerTicket": 2.8,
+      "libraryAtEnd": 34,
+      "tierShare": {
+        "explored": 0.24,
+        "recalled": 0.6,
+        "compiled": 0.16
+      },
+      "costByTier": {
+        "explored": 0.1797,
+        "recalled": 0.0678,
+        "compiled": 0.0013
+      }
+    },
+    {
+      "tickets": "101-125",
+      "n": 25,
+      "recallRate": 0.56,
+      "recallPrecision": 0.5,
+      "costPerTicket": 0.0904,
+      "secondsPerTicket": 9.3,
+      "toolCallsPerTicket": 4.4,
+      "modelCallsPerTicket": 2.6,
+      "libraryAtEnd": 39,
+      "tierShare": {
+        "explored": 0.2,
+        "recalled": 0.56,
+        "compiled": 0.24
+      },
+      "costByTier": {
+        "explored": 0.266,
+        "recalled": 0.0659,
+        "compiled": 0.0012
+      }
+    },
+    {
+      "tickets": "126-150",
+      "n": 25,
+      "recallRate": 0.64,
+      "recallPrecision": 0.56,
+      "costPerTicket": 0.0725,
+      "secondsPerTicket": 8.3,
+      "toolCallsPerTicket": 3.7,
+      "modelCallsPerTicket": 2.6,
+      "libraryAtEnd": 42,
+      "tierShare": {
+        "explored": 0.24,
+        "recalled": 0.64,
+        "compiled": 0.12
+      },
+      "costByTier": {
+        "explored": 0.1515,
+        "recalled": 0.0562,
+        "compiled": 0.0012
+      }
+    },
+    {
+      "tickets": "151-175",
+      "n": 25,
+      "recallRate": 0.56,
+      "recallPrecision": 0.57,
+      "costPerTicket": 0.0397,
+      "secondsPerTicket": 5.7,
+      "toolCallsPerTicket": 3.2,
+      "modelCallsPerTicket": 1.7,
+      "libraryAtEnd": 44,
+      "tierShare": {
+        "explored": 0.08,
+        "recalled": 0.56,
+        "compiled": 0.36
+      },
+      "costByTier": {
+        "explored": 0.1153,
+        "recalled": 0.0536,
+        "compiled": 0.0013
+      }
+    },
+    {
+      "tickets": "176-200",
+      "n": 25,
+      "recallRate": 0.68,
+      "recallPrecision": 0.59,
+      "costPerTicket": 0.0494,
+      "secondsPerTicket": 6.8,
+      "toolCallsPerTicket": 3.4,
+      "modelCallsPerTicket": 2,
+      "libraryAtEnd": 45,
+      "tierShare": {
+        "explored": 0.08,
+        "recalled": 0.68,
+        "compiled": 0.24
+      },
+      "costByTier": {
+        "explored": 0.1263,
+        "recalled": 0.0573,
+        "compiled": 0.0012
+      }
+    },
+    {
+      "tickets": "201-220",
+      "n": 20,
+      "recallRate": 0.7,
+      "recallPrecision": 0.5,
+      "costPerTicket": 0.0589,
+      "secondsPerTicket": 7.3,
+      "toolCallsPerTicket": 3.5,
+      "modelCallsPerTicket": 2.3,
+      "libraryAtEnd": 46,
+      "tierShare": {
+        "explored": 0.05,
+        "recalled": 0.7,
+        "compiled": 0.25
+      },
+      "costByTier": {
+        "explored": 0.2719,
+        "recalled": 0.0643,
+        "compiled": 0.0012
+      }
+    }
+  ],
+  "headline": {
+    "costPerTicketFirstBucket": 0.1378,
+    "costPerTicketLastBucket": 0.0589,
+    "costFirstVsLast": "-57%",
+    "timeFirstVsLast": "-38%",
+    "toolCallsFirstVsLast": "-19%",
+    "recalledInLastBucket": "70%",
+    "librarySize": 46,
+    "recallPrecision": 0.579,
+    "recalledPathsMatchingHumanWorkflow": "17%",
+    "baselineCostPerTicket": 0.1832,
+    "lastBucketVsBaseline": "-68%",
+    "sameTicketsVsBaseline": {
+      "tickets": 100,
+      "memoryCost": 0.0963,
+      "baselineCost": 0.1832,
+      "change": "-47%"
+    },
+    "lastBucketBaselineOverlap": 0
+  },
+  "baseline": {
+    "tickets": 100,
+    "errors": 0,
+    "costPerTicket": 0.1832,
+    "secondsPerTicket": 16.4,
+    "toolCallsPerTicket": 5,
+    "totalCost": 18.318
+  }
+}

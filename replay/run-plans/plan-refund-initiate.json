@@ -1,0 +1,74 @@
+{
+  "id": "plan-refund-initiate",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "request",
+    "subject": "refund",
+    "topic": "refund_initiate",
+    "key": "Task 1: product defect: refund initiate."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": true
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out! I've verified your order {{s.validate_purchase.order.id}} ({{s.validate_purchase.order.items.0.name}}, {{s.validate_purchase.order.total|money}}), and it's eligible for a refund.\n\nHow would you like the {{s.validate_purchase.order.total|money}} refunded? Options are: your payment method on file, account credit, a mailed gift card, or a paper check (the last two would go to {{s.pull_up_account.account.defaultAddress}} unless you'd prefer another address). Just let me know and I'll get it started \u2014 refunds land 5\u20137 business days after they're issued.\n\nAnything else I can help you with in the meantime?",
+  "source": {
+    "procedureId": "proc-5",
+    "intent": "refund_initiate",
+    "uses": 3,
+    "examples": 3,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:33:49.314Z",
+  "enabled": false,
+  "shadowPending": true,
+  "shadowRejected": true
+}
