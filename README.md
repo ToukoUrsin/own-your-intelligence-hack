@@ -33,10 +33,10 @@ Compiled plans are promoted in shadow first: a plan is checked against the agent
 ## How each host is used
 
 - **GBrain** — the company brain: 71 pages (55 procedures from ABCD agent guidelines, policies, catalog, FAQ). The agent searches it on every explored ticket, and compiled plans take their guards from its policies. `brain/`, `agent/src/brain.ts`.
-- **QM** — the harness customers chat in. Our fork ([ToukoUrsin/qm-support-agi](https://github.com/ToukoUrsin/qm-support-agi), to be published) runs the support bot with our tools over MCP (`mcp/`), adds a **Paths panel** (recalled vs explored per turn, steps, time, cost, learning curve) and fixes QM's Memorable provider, which was never consulted on chat turns.
+- **QM** — the harness customers chat in. Our fork ([ToukoUrsin/qm-support-agi](https://github.com/ToukoUrsin/qm-support-agi), branch `support-agi`) runs the support bot with our tools over MCP (`mcp/`), adds a **Paths panel** (recalled vs explored per turn, steps, time, cost, learning curve) and fixes QM's Memorable provider, which was never consulted on chat turns.
 - **Memorable** — procedure extraction (`/v1/extract`), storage and recall (`agent/src/memorable-store.ts`, `RECALL_BACKEND=memorable`). Successful agent traces become procedures; later tickets recall them.
-- **River AI** — the request normalizer: messy ticket in, `CANONICAL_REQUEST_V1` out (`CANONICAL_REQUEST_V1.md`), which is what recall and compiled plans match on. Marc is training this model on ABCD with the River API. **Until his endpoint lands, a Claude Haiku stand-in emits the same structure** (`agent/src/canonical.ts`); set `ROUTER_URL` to switch to River.
-  - River results: {{RIVER_RESULTS}}
+- **River AI** — the request normalizer: messy ticket in, `CANONICAL_REQUEST_V1` out (`CANONICAL_REQUEST_V1.md`), which is what recall and compiled plans match on. Marc trained a LoRA on Qwen3.6-35B-A3B with the River API on 8,316 ABCD openings (step 50, about $1.35 of training tokens, estimate). The final run routed 398 of 400 tickets through it (`ROUTER_URL`); a Claude Haiku stand-in (`agent/src/canonical.ts`) remains the fallback.
+  - River results: **65%** held-out path hit rate in our recall harness vs **56%** for Haiku and **8%** for raw ticket text; **77%** label accuracy in Marc's own eval (`router/REPORT.md`).
 
 ## Data
 
@@ -46,19 +46,39 @@ Compiled plans are promoted in shadow first: a plan is checked against the agent
 
 ## Results
 
-Replay of 400 ABCD tickets in order, mock shop, 25-ticket buckets.
+Final cold-start run: 400 ABCD tickets in order plus 42 hard tickets interleaved, River router, Memorable, mock shop, 25-ticket buckets.
+
+![Cost per ticket falls as paths are learned](video/graphs/cost-per-ticket.png)
+![Tier share per bucket](video/graphs/tier-share.png)
 
 | Metric | Value |
 |---|---|
-| Cost per ticket, first bucket → last bucket | {{COST_FIRST}} → {{COST_LAST}} |
-| Cost per ticket, no-memory baseline | {{COST_BASELINE}} |
-| Share per tier, last bucket (explored / recalled / compiled) | {{TIER_SHARE}} |
-| Compiled-plan accuracy (reply agreement with the agent) | {{COMPILED_ACCURACY}} |
-| Router hit rate on 100 held-out tickets (raw text vs normalizer) | {{ROUTER_HIT_RATE}} |
-| Agreement with the human agent's action sequence | {{HUMAN_AGREEMENT}} |
-| Hard tickets: tier they ended in | {{HARD_TICKET_TIERS}} |
+| Cost per ticket, first 25 → last 25 | **$0.139 → $0.047 (−66%)** |
+| Cost per ticket, no-memory baseline | $0.183 |
+| Tier share, last 25 (explored / recalled / compiled) | 0% / 88% / 12% |
+| Cost per ticket by tier | explored $0.191 · recalled $0.059 · compiled ~$0.0003 (router only, 0 model calls) |
+| Compiled-plan accuracy | 94% (33 of 35) reply agreement with the agent in the offline Haiku-judged eval (`compiled-eval.json`); in the final run plans answer only after 2 of 3 shadow agreements |
+| Router path hit rate, 100 held-out tickets | River 65% · Haiku 56% · raw text 8% |
+| Hard tickets (42), tier they ended in | 8 explored · 33 recalled · 1 compiled; 20 recalls used the wrong subflow |
+| Confidence gate (≥0.7, single request) on hard tickets | wrong-procedure reuse 48% → **24%**, cost still below baseline ($0.104 vs $0.223) |
+| Answer quality (Haiku judge, "resolved per policy") | on par with the no-memory agent: hard 40% gated vs 38% baseline, normal 29% vs 26% |
 
-Raw outputs: `replay/summary.json`, `replay/summary-baseline.json`, `replay/compiled-eval.json`, `replay/router-eval.json`.
+![Hard vs normal tickets](video/graphs/hard-vs-normal.png)
+
+**Where quality is not proven.** Exact match with the human agent's action set is low for every setup: 13% for recalled paths, 23% for explored, 27% for the no-memory baseline (52% for compiled plans on their narrow intents). The judge sees the ticket, reply, policy and human actions but not the shop database, so its absolute rates are only comparable within the table. Even gated, 24% of hard tickets reuse the wrong procedure. Details: `replay/SUMMARY.md`.
+
+Raw outputs: `replay/summary.json`, `replay/summary-baseline.json`, `replay/gate-check.json`, `replay/compiled-eval.json`, `replay/router-eval.json`, `router/REPORT.md`.
+
+## Try it
+
+- **QM fork** with the Paths panel: [ToukoUrsin/qm-support-agi](https://github.com/ToukoUrsin/qm-support-agi) (branch `support-agi`).
+- **Storefront chat** (`storefront/`): a chat bubble on the Shopify dev store [kettle-and-co-support-hack.myshopify.com](https://kettle-and-co-support-hack.myshopify.com), same pipeline. The store is password-protected; the password is given on request.
+
+## Next steps
+
+- Marc's gate suggestion: create paths only at ≥0.8 router confidence and reuse at ≥0.5 (simulated only so far).
+- The canonical-v1 normalizer on River (operation, subject, topic, not just the subflow label), so plans match on structure.
+- Opus 5.5 for the explored tier, and a per-procedure check that a recalled path's first lookups fit the ticket before replay.
 
 ## What's real vs simulated
 
@@ -66,7 +86,7 @@ Raw outputs: `replay/summary.json`, `replay/summary-baseline.json`, `replay/comp
 - **Test data:** the Shopify store is a development store with test orders; no real customers or payments.
 - **Mock shop for replay:** the 400-ticket replay uses a local mock of the same shop data (`agent/src/shop.ts`) so it can run fast and repeatably; the live demo uses Shopify.
 - **Constructed:** 27 of the 42 hard tickets were written by us and are labeled `source: "constructed"`.
-- **Stand-in normalizer:** until River's endpoint is live, the canonical request comes from Claude Haiku, labeled as a stand-in everywhere it appears.
+- **Router:** the final run used Marc's River-trained router (served from his Mac); the Haiku stand-in is used only as a fallback and in the earlier compiled-plan eval.
 - **Offline validation:** compiled-plan accuracy is judged by Claude Haiku comparing the compiled reply with the agent's reply on the same ticket.
 
 ## Built today
