@@ -7,3 +7,4 @@ dist/
 event/photos/
 event/audio/
 .brain-home/
+data/.seed_shopify.log

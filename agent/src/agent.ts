@@ -94,6 +94,11 @@ export async function handleTicket(ticket: string, hint?: string): Promise<Trace
     if (response.stop_reason === "pause_turn") continue;
     if (response.stop_reason !== "tool_use") {
       const reply = response.content.filter((b): b is Anthropic.TextBlock => b.type === "text").map((b) => b.text).join("\n");
+      // The model occasionally ends a turn without text; ask once more for the customer reply.
+      if (!reply.trim() && modelCalls < 12) {
+        messages.push({ role: "user", content: "Write the reply to the customer now." });
+        continue;
+      }
       return { ticket, steps, reply, ms: Date.now() - started, inputTokens, outputTokens, modelCalls };
     }
 
