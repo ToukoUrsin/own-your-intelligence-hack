@@ -23,6 +23,26 @@ const COPY: Record<string, string> = {
 };
 const copy = (p: any) => `${p.line ? `The ${p.line} line. ` : ""}${COPY[p.type] ?? `${p.name} from ${BRAND}.`} Free returns within 30 days.`;
 
+// Product photos (Unsplash License, free to use; credits in data/PHOTO_CREDITS.md). Used when shop.json has no image(s) for the SKU.
+const PHOTOS: Record<string, string> = {
+  "BOOTS-GALE": "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=1600&q=80&fm=jpg",
+  "BOOTS-HARBOR": "https://images.unsplash.com/photo-1706587161985-abec97ad6af8?w=1600&q=80&fm=jpg",
+  "BOOTS-KLINE": "https://images.unsplash.com/photo-1777987601677-3059be0e1388?w=1600&q=80&fm=jpg",
+  "BOOTS-MERCER": "https://images.unsplash.com/photo-1606036525923-525fa3b35465?w=1600&q=80&fm=jpg",
+  "JACKET-GALE": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=1600&q=80&fm=jpg",
+  "JACKET-HARBOR": "https://images.unsplash.com/photo-1721746033898-570230f0b1d6?w=1600&q=80&fm=jpg",
+  "JACKET-KLINE": "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=1600&q=80&fm=jpg",
+  "JACKET-MERCER": "https://images.unsplash.com/photo-1727515546577-f7d82a47b51d?w=1600&q=80&fm=jpg",
+  "JEANS-GALE": "https://images.unsplash.com/photo-1714143136372-ddaf8b606da7?w=1600&q=80&fm=jpg",
+  "JEANS-HARBOR": "https://images.unsplash.com/photo-1637069585336-827b298fe84a?w=1600&q=80&fm=jpg",
+  "JEANS-KLINE": "https://images.unsplash.com/photo-1604176354204-9268737828e4?w=1600&q=80&fm=jpg",
+  "JEANS-MERCER": "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=1600&q=80&fm=jpg",
+  "SHIRT-GALE": "https://images.unsplash.com/photo-1740711152088-88a009e877bb?w=1600&q=80&fm=jpg",
+  "SHIRT-HARBOR": "https://images.unsplash.com/photo-1782226728289-f81457b760f5?w=1600&q=80&fm=jpg",
+  "SHIRT-KLINE": "https://images.unsplash.com/photo-1602810316693-3667c854239a?w=1600&q=80&fm=jpg",
+  "SHIRT-MERCER": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=1600&q=80&fm=jpg",
+};
+
 // Catalog: needs write_products (the current app token has read_products only, so this is skipped until the scope is added).
 // Creates/updates the brand's products by handle and archives Shopify's generated sample products.
 const scopes: string[] = (await gql(`{ currentAppInstallation { accessScopes { handle } } }`)).currentAppInstallation.accessScopes.map((s: any) => s.handle);
@@ -38,7 +58,9 @@ async function seedCatalog() {
     const type = (p.category ?? p.type ?? "Apparel").replace(/^./, (x: string) => x.toUpperCase()), handle = p.handle ?? slug(p.name);
     const opt = p.variants?.length ? (p.optionName ?? "Size") : "Title";
     const vals: [string, string, number][] = p.variants?.length ? p.variants.map((v: any) => [v.name ?? v.size, v.sku, v.price ?? p.price]) : [["Default Title", p.sku, p.price]];
-    const images: string[] = p.images ?? (p.image ? [p.image] : []);
+    const images: string[] = p.images ?? (p.image ? [p.image] : PHOTOS[p.sku] ? [PHOTOS[p.sku]] : []);
+    // Attach images only to products without media, so re-runs don't re-upload them.
+    const has = (await gql(`query($h: String!) { productByIdentifier(identifier: { handle: $h }) { media(first: 1) { nodes { id } } } }`, { h: handle })).productByIdentifier?.media.nodes.length;
     const d = await gql(`mutation($input: ProductSetInput!, $identifier: ProductSetIdentifiers) { productSet(input: $input, identifier: $identifier, synchronous: true) { product { id } userErrors { field message } } }`, {
       identifier: { handle },
       input: {
@@ -46,7 +68,7 @@ async function seedCatalog() {
         descriptionHtml: `<p>${p.description ?? copy(p)}</p>`,
         productOptions: [{ name: opt, values: vals.map(([n]) => ({ name: n })) }],
         variants: vals.map(([n, sku, price]) => ({ optionValues: [{ optionName: opt, name: n }], sku, price: Number(price).toFixed(2) })),
-        ...(images.length ? { files: images.map((u) => ({ originalSource: u, contentType: "IMAGE", alt: p.name })) } : {}),
+        ...(images.length && !has ? { files: images.map((u) => ({ originalSource: u, contentType: "IMAGE", alt: p.name })) } : {}),
       },
     });
     console.log(`= product ${handle} ${check(d.productSet, `productSet ${handle}`).product.id}`);
