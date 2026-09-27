@@ -1,0 +1,2876 @@
+{
+ "target": "r2:60",
+ "replay_tickets": {
+  "accuracy": 0.905,
+  "mean_confidence": 0.85,
+  "mean_nll": 0.201,
+  "library": [
+   {
+    "min_conf": 0,
+    "workflows": 53,
+    "workflows_correct_key": 47,
+    "explored": 53,
+    "reuse_rate": 0.868,
+    "correct_reuse_rate": 0.713,
+    "wrong_reuse_rate": 0.155
+   },
+   {
+    "min_conf": 0.5,
+    "workflows": 52,
+    "workflows_correct_key": 48,
+    "explored": 83,
+    "reuse_rate": 0.792,
+    "correct_reuse_rate": 0.698,
+    "wrong_reuse_rate": 0.095
+   },
+   {
+    "min_conf": 0.8,
+    "workflows": 49,
+    "workflows_correct_key": 48,
+    "explored": 139,
+    "reuse_rate": 0.652,
+    "correct_reuse_rate": 0.64,
+    "wrong_reuse_rate": 0.013
+   }
+  ]
+ },
+ "val": {
+  "accuracy": 0.887,
+  "mean_confidence": 0.862,
+  "mean_nll": 0.218,
+  "gate": [
+   {
+    "min_conf": 0,
+    "coverage": 1.0,
+    "accuracy_when_routed": 0.887
+   },
+   {
+    "min_conf": 0.5,
+    "coverage": 0.92,
+    "accuracy_when_routed": 0.942
+   },
+   {
+    "min_conf": 0.7,
+    "coverage": 0.813,
+    "accuracy_when_routed": 0.971
+   },
+   {
+    "min_conf": 0.8,
+    "coverage": 0.783,
+    "accuracy_when_routed": 0.974
+   },
+   {
+    "min_conf": 0.9,
+    "coverage": 0.687,
+    "accuracy_when_routed": 0.981
+   },
+   {
+    "min_conf": 0.95,
+    "coverage": 0.53,
+    "accuracy_when_routed": 0.987
+   }
+  ]
+ },
+ "rows": [
+  {
+   "id": "T0001",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.5528
+  },
+  {
+   "id": "T0002",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8863
+  },
+  {
+   "id": "T0003",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8544
+  },
+  {
+   "id": "T0004",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8942
+  },
+  {
+   "id": "T0005",
+   "gold": "reset_2fa",
+   "raw": "reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.9943
+  },
+  {
+   "id": "T0006",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9107
+  },
+  {
+   "id": "T0007",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.9433
+  },
+  {
+   "id": "T0008",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9588
+  },
+  {
+   "id": "T0009",
+   "gold": "manage_payment_method",
+   "raw": "manage_payment_method",
+   "intent": "manage_payment_method",
+   "confidence": 0.9716
+  },
+  {
+   "id": "T0010",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9633
+  },
+  {
+   "id": "T0011",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9154
+  },
+  {
+   "id": "T0012",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.7792
+  },
+  {
+   "id": "T0013",
+   "gold": "status_due_date",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.421
+  },
+  {
+   "id": "T0014",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8104
+  },
+  {
+   "id": "T0015",
+   "gold": "manage",
+   "raw": "manage",
+   "intent": "manage",
+   "confidence": 0.0387
+  },
+  {
+   "id": "T0016",
+   "gold": "bad_price_yesterday",
+   "raw": "bad_price_yesterday",
+   "intent": "bad_price_yesterday",
+   "confidence": 0.9237
+  },
+  {
+   "id": "T0017",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9239
+  },
+  {
+   "id": "T0018",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.656
+  },
+  {
+   "id": "T0019",
+   "gold": "status",
+   "raw": "pricing",
+   "intent": "pricing",
+   "confidence": 0.507
+  },
+  {
+   "id": "T0020",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.9903
+  },
+  {
+   "id": "T0021",
+   "gold": "bad_price_competitor",
+   "raw": "bad_price_competitor",
+   "intent": "bad_price_competitor",
+   "confidence": 0.9858
+  },
+  {
+   "id": "T0022",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9023
+  },
+  {
+   "id": "T0023",
+   "gold": "status_active",
+   "raw": "manage_dispute_bill",
+   "intent": "manage_dispute_bill",
+   "confidence": 0.3332
+  },
+  {
+   "id": "T0024",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9594
+  },
+  {
+   "id": "T0025",
+   "gold": "manage_change_phone",
+   "raw": "manage_change_phone",
+   "intent": "manage_change_phone",
+   "confidence": 0.9961
+  },
+  {
+   "id": "T0026",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9522
+  },
+  {
+   "id": "T0027",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9517
+  },
+  {
+   "id": "T0028",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.913
+  },
+  {
+   "id": "T0029",
+   "gold": "policy",
+   "raw": "policy",
+   "intent": "policy",
+   "confidence": 0.9793
+  },
+  {
+   "id": "T0030",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.9789
+  },
+  {
+   "id": "T0031",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9011
+  },
+  {
+   "id": "T0032",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.9681
+  },
+  {
+   "id": "T0033",
+   "gold": "status_due_date",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.4144
+  },
+  {
+   "id": "T0034",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9441
+  },
+  {
+   "id": "T0035",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9063
+  },
+  {
+   "id": "T0036",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8851
+  },
+  {
+   "id": "T0037",
+   "gold": "manage_pay_bill",
+   "raw": "manage_pay_bill",
+   "intent": "manage_pay_bill",
+   "confidence": 0.9473
+  },
+  {
+   "id": "T0038",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8468
+  },
+  {
+   "id": "T0039",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8618
+  },
+  {
+   "id": "T0040",
+   "gold": "manage",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.551
+  },
+  {
+   "id": "T0041",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9053
+  },
+  {
+   "id": "T0042",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.5871
+  },
+  {
+   "id": "T0043",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9672
+  },
+  {
+   "id": "T0044",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9213
+  },
+  {
+   "id": "T0045",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.9592
+  },
+  {
+   "id": "T0046",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.9875
+  },
+  {
+   "id": "T0047",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.964
+  },
+  {
+   "id": "T0048",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9394
+  },
+  {
+   "id": "T0049",
+   "gold": "refund_update",
+   "raw": "refund_update",
+   "intent": "refund_update",
+   "confidence": 0.9799
+  },
+  {
+   "id": "T0050",
+   "gold": "status_service_removed",
+   "raw": "status_service_removed",
+   "intent": "status_service_removed",
+   "confidence": 0.2833
+  },
+  {
+   "id": "T0051",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8938
+  },
+  {
+   "id": "T0052",
+   "gold": "status_due_date",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.7273
+  },
+  {
+   "id": "T0053",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9325
+  },
+  {
+   "id": "T0054",
+   "gold": "membership",
+   "raw": "membership",
+   "intent": "membership",
+   "confidence": 0.9865
+  },
+  {
+   "id": "T0055",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9311
+  },
+  {
+   "id": "T0056",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9233
+  },
+  {
+   "id": "T0057",
+   "gold": "status_service_added",
+   "raw": "manage_dispute_bill",
+   "intent": "manage_dispute_bill",
+   "confidence": 0.4364
+  },
+  {
+   "id": "T0058",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9865
+  },
+  {
+   "id": "T0059",
+   "gold": "cost",
+   "raw": "cost",
+   "intent": "cost",
+   "confidence": 0.942
+  },
+  {
+   "id": "T0060",
+   "gold": "reset_2fa",
+   "raw": "reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.8265
+  },
+  {
+   "id": "T0061",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9629
+  },
+  {
+   "id": "T0062",
+   "gold": "manage",
+   "raw": "manage",
+   "intent": "manage",
+   "confidence": 0.8599
+  },
+  {
+   "id": "T0063",
+   "gold": "bad_price_yesterday",
+   "raw": "bad_price_yesterday",
+   "intent": "bad_price_yesterday",
+   "confidence": 0.9285
+  },
+  {
+   "id": "T0064",
+   "gold": "out_of_stock_general",
+   "raw": "out_of_stock_general",
+   "intent": "out_of_stock_general",
+   "confidence": 0.73
+  },
+  {
+   "id": "T0065",
+   "gold": "manage_dispute_bill",
+   "raw": "manage_dispute_bill",
+   "intent": "manage_dispute_bill",
+   "confidence": 0.9926
+  },
+  {
+   "id": "T0066",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.5759
+  },
+  {
+   "id": "T0067",
+   "gold": "bad_price_yesterday",
+   "raw": "bad_price_yesterday",
+   "intent": "bad_price_yesterday",
+   "confidence": 0.9861
+  },
+  {
+   "id": "T0068",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.8875
+  },
+  {
+   "id": "T0069",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9037
+  },
+  {
+   "id": "T0070",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9587
+  },
+  {
+   "id": "T0071",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.871
+  },
+  {
+   "id": "T0072",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9902
+  },
+  {
+   "id": "T0073",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9256
+  },
+  {
+   "id": "T0074",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.9816
+  },
+  {
+   "id": "T0075",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.827
+  },
+  {
+   "id": "T0076",
+   "gold": "manage",
+   "raw": "manage",
+   "intent": "manage",
+   "confidence": 0.8915
+  },
+  {
+   "id": "T0077",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9793
+  },
+  {
+   "id": "T0078",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7677
+  },
+  {
+   "id": "T0079",
+   "gold": "status",
+   "raw": "boots",
+   "intent": "boots",
+   "confidence": 0.8547
+  },
+  {
+   "id": "T0080",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.9973
+  },
+  {
+   "id": "T0081",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.9807
+  },
+  {
+   "id": "T0082",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.947
+  },
+  {
+   "id": "T0083",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9526
+  },
+  {
+   "id": "T0084",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9503
+  },
+  {
+   "id": "T0085",
+   "gold": "mistimed_billing_already_returned",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.3055
+  },
+  {
+   "id": "T0086",
+   "gold": "reset_2fa",
+   "raw": "reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.9943
+  },
+  {
+   "id": "T0087",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.8808
+  },
+  {
+   "id": "T0088",
+   "gold": "status_service_added",
+   "raw": "status_service_added",
+   "intent": "status_service_added",
+   "confidence": 0.9874
+  },
+  {
+   "id": "T0089",
+   "gold": "shopping_cart",
+   "raw": "shopping_cart",
+   "intent": "shopping_cart",
+   "confidence": 0.9815
+  },
+  {
+   "id": "T0090",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8305
+  },
+  {
+   "id": "T0091",
+   "gold": "jeans",
+   "raw": "shirt",
+   "intent": "shirt",
+   "confidence": 0.7891
+  },
+  {
+   "id": "T0092",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9824
+  },
+  {
+   "id": "T0093",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.9169
+  },
+  {
+   "id": "T0094",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.3598
+  },
+  {
+   "id": "T0095",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7577
+  },
+  {
+   "id": "T0096",
+   "gold": "jacket",
+   "raw": "jacket",
+   "intent": "jacket",
+   "confidence": 0.9991
+  },
+  {
+   "id": "T0097",
+   "gold": "status_quantity",
+   "raw": "status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.9793
+  },
+  {
+   "id": "T0098",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9026
+  },
+  {
+   "id": "T0099",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8117
+  },
+  {
+   "id": "T0100",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.7553
+  },
+  {
+   "id": "T0101",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.974
+  },
+  {
+   "id": "T0102",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.9978
+  },
+  {
+   "id": "T0103",
+   "gold": "manage_change_address",
+   "raw": "manage",
+   "intent": "manage",
+   "confidence": 0.6709
+  },
+  {
+   "id": "T0104",
+   "gold": "status_due_amount",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.6763
+  },
+  {
+   "id": "T0105",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.9169
+  },
+  {
+   "id": "T0106",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7432
+  },
+  {
+   "id": "T0107",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.7976
+  },
+  {
+   "id": "T0108",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7082
+  },
+  {
+   "id": "T0109",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8776
+  },
+  {
+   "id": "T0110",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.8428
+  },
+  {
+   "id": "T0111",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9482
+  },
+  {
+   "id": "T0112",
+   "gold": "refund_status",
+   "raw": "status_payment_method",
+   "intent": "status_payment_method",
+   "confidence": 0.2878
+  },
+  {
+   "id": "T0113",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9314
+  },
+  {
+   "id": "T0114",
+   "gold": "manage_change_name",
+   "raw": "manage_change_name",
+   "intent": "manage_change_name",
+   "confidence": 0.9892
+  },
+  {
+   "id": "T0115",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8565
+  },
+  {
+   "id": "T0116",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9573
+  },
+  {
+   "id": "T0117",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9483
+  },
+  {
+   "id": "T0118",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8207
+  },
+  {
+   "id": "T0119",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.9709
+  },
+  {
+   "id": "T0120",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9105
+  },
+  {
+   "id": "T0121",
+   "gold": "manage_create",
+   "raw": "manage_create",
+   "intent": "manage_create",
+   "confidence": 0.9803
+  },
+  {
+   "id": "T0122",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9082
+  },
+  {
+   "id": "T0123",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.8024
+  },
+  {
+   "id": "T0124",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.8953
+  },
+  {
+   "id": "T0125",
+   "gold": "reset_2fa",
+   "raw": "reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.9939
+  },
+  {
+   "id": "T0126",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.1586
+  },
+  {
+   "id": "T0127",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7404
+  },
+  {
+   "id": "T0128",
+   "gold": "pricing",
+   "raw": "pricing",
+   "intent": "pricing",
+   "confidence": 0.9506
+  },
+  {
+   "id": "T0129",
+   "gold": "status_mystery_fee",
+   "raw": "status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.9795
+  },
+  {
+   "id": "T0130",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9401
+  },
+  {
+   "id": "T0131",
+   "gold": "boots",
+   "raw": "boots",
+   "intent": "boots",
+   "confidence": 0.9869
+  },
+  {
+   "id": "T0132",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.6289
+  },
+  {
+   "id": "T0133",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9343
+  },
+  {
+   "id": "T0134",
+   "gold": "status_delivery_time",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.5248
+  },
+  {
+   "id": "T0135",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.9199
+  },
+  {
+   "id": "T0136",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.7718
+  },
+  {
+   "id": "T0137",
+   "gold": "status_credit_missing",
+   "raw": "status_credit_missing",
+   "intent": "status_credit_missing",
+   "confidence": 0.9782
+  },
+  {
+   "id": "T0138",
+   "gold": "return_color",
+   "raw": "return_color",
+   "intent": "return_color",
+   "confidence": 0.9753
+  },
+  {
+   "id": "T0139",
+   "gold": "policy",
+   "raw": "policy",
+   "intent": "policy",
+   "confidence": 0.9862
+  },
+  {
+   "id": "T0140",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8154
+  },
+  {
+   "id": "T0141",
+   "gold": "out_of_stock_general",
+   "raw": "out_of_stock_general",
+   "intent": "out_of_stock_general",
+   "confidence": 0.9471
+  },
+  {
+   "id": "T0142",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9425
+  },
+  {
+   "id": "T0143",
+   "gold": "reset_2fa",
+   "raw": "reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.9952
+  },
+  {
+   "id": "T0144",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7276
+  },
+  {
+   "id": "T0145",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.7658
+  },
+  {
+   "id": "T0146",
+   "gold": "jeans",
+   "raw": "jeans",
+   "intent": "jeans",
+   "confidence": 0.9969
+  },
+  {
+   "id": "T0147",
+   "gold": "status_credit_missing",
+   "raw": "status_credit_missing",
+   "intent": "status_credit_missing",
+   "confidence": 0.9716
+  },
+  {
+   "id": "T0148",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8946
+  },
+  {
+   "id": "T0149",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.9757
+  },
+  {
+   "id": "T0150",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9449
+  },
+  {
+   "id": "T0151",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9911
+  },
+  {
+   "id": "T0152",
+   "gold": "refund_update",
+   "raw": "refund_update",
+   "intent": "refund_update",
+   "confidence": 0.9898
+  },
+  {
+   "id": "T0153",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.8876
+  },
+  {
+   "id": "T0154",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.9944
+  },
+  {
+   "id": "T0155",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9524
+  },
+  {
+   "id": "T0156",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.8277
+  },
+  {
+   "id": "T0157",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.9023
+  },
+  {
+   "id": "T0158",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9441
+  },
+  {
+   "id": "T0159",
+   "gold": "manage_payment_method",
+   "raw": "manage_payment_method",
+   "intent": "manage_payment_method",
+   "confidence": 0.9922
+  },
+  {
+   "id": "T0160",
+   "gold": "status_mystery_fee",
+   "raw": "status_mystery_fee",
+   "intent": "status_mystery_fee",
+   "confidence": 0.7827
+  },
+  {
+   "id": "T0161",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.7005
+  },
+  {
+   "id": "T0162",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.4943
+  },
+  {
+   "id": "T0163",
+   "gold": "credit_card",
+   "raw": "credit_card",
+   "intent": "credit_card",
+   "confidence": 0.993
+  },
+  {
+   "id": "T0164",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9249
+  },
+  {
+   "id": "T0165",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.6709
+  },
+  {
+   "id": "T0166",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.8259
+  },
+  {
+   "id": "T0167",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.5543
+  },
+  {
+   "id": "T0168",
+   "gold": "status_payment_method",
+   "raw": "status_payment_method",
+   "intent": "status_payment_method",
+   "confidence": 0.9573
+  },
+  {
+   "id": "T0169",
+   "gold": "status_shipping_question",
+   "raw": "status_shipping_question",
+   "intent": "status_shipping_question",
+   "confidence": 0.9839
+  },
+  {
+   "id": "T0170",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8355
+  },
+  {
+   "id": "T0171",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9652
+  },
+  {
+   "id": "T0172",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8661
+  },
+  {
+   "id": "T0173",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9846
+  },
+  {
+   "id": "T0174",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9274
+  },
+  {
+   "id": "T0175",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9226
+  },
+  {
+   "id": "T0176",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8516
+  },
+  {
+   "id": "T0177",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9056
+  },
+  {
+   "id": "T0178",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8187
+  },
+  {
+   "id": "T0179",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8029
+  },
+  {
+   "id": "T0180",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9204
+  },
+  {
+   "id": "T0181",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.9925
+  },
+  {
+   "id": "T0182",
+   "gold": "credit_card",
+   "raw": "credit_card",
+   "intent": "credit_card",
+   "confidence": 0.985
+  },
+  {
+   "id": "T0183",
+   "gold": "status_active",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.4135
+  },
+  {
+   "id": "T0184",
+   "gold": "timing",
+   "raw": "timing",
+   "intent": "timing",
+   "confidence": 0.9992
+  },
+  {
+   "id": "T0185",
+   "gold": "manage_upgrade",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7932
+  },
+  {
+   "id": "T0186",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9658
+  },
+  {
+   "id": "T0187",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.9143
+  },
+  {
+   "id": "T0188",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.6297
+  },
+  {
+   "id": "T0189",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8209
+  },
+  {
+   "id": "T0190",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8602
+  },
+  {
+   "id": "T0191",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9342
+  },
+  {
+   "id": "T0192",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9914
+  },
+  {
+   "id": "T0193",
+   "gold": "boots",
+   "raw": "jacket",
+   "intent": "jacket",
+   "confidence": 0.5998
+  },
+  {
+   "id": "T0194",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8898
+  },
+  {
+   "id": "T0195",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.8797
+  },
+  {
+   "id": "T0196",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8805
+  },
+  {
+   "id": "T0197",
+   "gold": "timing",
+   "raw": "timing",
+   "intent": "timing",
+   "confidence": 0.9995
+  },
+  {
+   "id": "T0198",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8238
+  },
+  {
+   "id": "T0199",
+   "gold": "manage_pay_bill",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.3604
+  },
+  {
+   "id": "T0200",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.9961
+  },
+  {
+   "id": "T0201",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.7657
+  },
+  {
+   "id": "T0202",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8582
+  },
+  {
+   "id": "T0203",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9695
+  },
+  {
+   "id": "T0204",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.9818
+  },
+  {
+   "id": "T0205",
+   "gold": "refund_initiate",
+   "raw": "refund_initiate",
+   "intent": "refund_initiate",
+   "confidence": 0.9107
+  },
+  {
+   "id": "T0206",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7737
+  },
+  {
+   "id": "T0207",
+   "gold": "policy",
+   "raw": "policy",
+   "intent": "policy",
+   "confidence": 0.9165
+  },
+  {
+   "id": "T0208",
+   "gold": "status_quantity",
+   "raw": "status_quantity",
+   "intent": "status_quantity",
+   "confidence": 0.9711
+  },
+  {
+   "id": "T0209",
+   "gold": "return_size",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.3802
+  },
+  {
+   "id": "T0210",
+   "gold": "status",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.4849
+  },
+  {
+   "id": "T0211",
+   "gold": "manage_downgrade",
+   "raw": "manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.9361
+  },
+  {
+   "id": "T0212",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9726
+  },
+  {
+   "id": "T0213",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.5637
+  },
+  {
+   "id": "T0214",
+   "gold": "cost",
+   "raw": "cost",
+   "intent": "cost",
+   "confidence": 0.9706
+  },
+  {
+   "id": "T0215",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8676
+  },
+  {
+   "id": "T0216",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9312
+  },
+  {
+   "id": "T0217",
+   "gold": "status_payment_method",
+   "raw": "status_payment_method",
+   "intent": "status_payment_method",
+   "confidence": 0.8491
+  },
+  {
+   "id": "T0218",
+   "gold": "search_results",
+   "raw": "search_results",
+   "intent": "search_results",
+   "confidence": 0.9877
+  },
+  {
+   "id": "T0219",
+   "gold": "shirt",
+   "raw": "shirt",
+   "intent": "shirt",
+   "confidence": 0.8616
+  },
+  {
+   "id": "T0220",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.8486
+  },
+  {
+   "id": "T0221",
+   "gold": "manage_extension",
+   "raw": "manage_extension",
+   "intent": "manage_extension",
+   "confidence": 0.9604
+  },
+  {
+   "id": "T0222",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.933
+  },
+  {
+   "id": "T0223",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9408
+  },
+  {
+   "id": "T0224",
+   "gold": "status_due_amount",
+   "raw": "status_due_amount",
+   "intent": "status_due_amount",
+   "confidence": 0.6403
+  },
+  {
+   "id": "T0225",
+   "gold": "mistimed_billing_never_bought",
+   "raw": "mistimed_billing_never_bought",
+   "intent": "mistimed_billing_never_bought",
+   "confidence": 0.9895
+  },
+  {
+   "id": "T0226",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.9957
+  },
+  {
+   "id": "T0227",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.9976
+  },
+  {
+   "id": "T0228",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.1593
+  },
+  {
+   "id": "T0229",
+   "gold": "search_results",
+   "raw": "search_results",
+   "intent": "search_results",
+   "confidence": 0.4814
+  },
+  {
+   "id": "T0230",
+   "gold": "status",
+   "raw": "membership",
+   "intent": "membership",
+   "confidence": 0.3321
+  },
+  {
+   "id": "T0231",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.8462
+  },
+  {
+   "id": "T0232",
+   "gold": "timing",
+   "raw": "timing",
+   "intent": "timing",
+   "confidence": 0.993
+  },
+  {
+   "id": "T0233",
+   "gold": "status_shipping_question",
+   "raw": "status_shipping_question",
+   "intent": "status_shipping_question",
+   "confidence": 0.9847
+  },
+  {
+   "id": "T0234",
+   "gold": "reset_2fa",
+   "raw": "reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.9955
+  },
+  {
+   "id": "T0235",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8338
+  },
+  {
+   "id": "T0236",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8395
+  },
+  {
+   "id": "T0237",
+   "gold": "missing",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.3442
+  },
+  {
+   "id": "T0238",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.8518
+  },
+  {
+   "id": "T0239",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9032
+  },
+  {
+   "id": "T0240",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.6744
+  },
+  {
+   "id": "T0241",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9017
+  },
+  {
+   "id": "T0242",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9554
+  },
+  {
+   "id": "T0243",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.888
+  },
+  {
+   "id": "T0244",
+   "gold": "cost",
+   "raw": "cost",
+   "intent": "cost",
+   "confidence": 0.9436
+  },
+  {
+   "id": "T0245",
+   "gold": "credit_card",
+   "raw": "credit_card",
+   "intent": "credit_card",
+   "confidence": 0.9501
+  },
+  {
+   "id": "T0246",
+   "gold": "out_of_stock_one_item",
+   "raw": "out_of_stock_one_item",
+   "intent": "out_of_stock_one_item",
+   "confidence": 0.7854
+  },
+  {
+   "id": "T0247",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9504
+  },
+  {
+   "id": "T0248",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.6236
+  },
+  {
+   "id": "T0249",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.771
+  },
+  {
+   "id": "T0250",
+   "gold": "bad_price_yesterday",
+   "raw": "bad_price_yesterday",
+   "intent": "bad_price_yesterday",
+   "confidence": 0.9784
+  },
+  {
+   "id": "T0251",
+   "gold": "manage_change_name",
+   "raw": "manage_change_name",
+   "intent": "manage_change_name",
+   "confidence": 0.9943
+  },
+  {
+   "id": "T0252",
+   "gold": "refund_update",
+   "raw": "refund_update",
+   "intent": "refund_update",
+   "confidence": 0.9784
+  },
+  {
+   "id": "T0253",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8702
+  },
+  {
+   "id": "T0254",
+   "gold": "shirt",
+   "raw": "shirt",
+   "intent": "shirt",
+   "confidence": 0.958
+  },
+  {
+   "id": "T0255",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8931
+  },
+  {
+   "id": "T0256",
+   "gold": "return_size",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.5177
+  },
+  {
+   "id": "T0257",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.5351
+  },
+  {
+   "id": "T0258",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.5655
+  },
+  {
+   "id": "T0259",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.995
+  },
+  {
+   "id": "T0260",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9333
+  },
+  {
+   "id": "T0261",
+   "gold": "refund_initiate",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.7097
+  },
+  {
+   "id": "T0262",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9042
+  },
+  {
+   "id": "T0263",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9283
+  },
+  {
+   "id": "T0264",
+   "gold": "jacket",
+   "raw": "jacket",
+   "intent": "jacket",
+   "confidence": 0.9864
+  },
+  {
+   "id": "T0265",
+   "gold": "out_of_stock_one_item",
+   "raw": "out_of_stock_general",
+   "intent": "out_of_stock_general",
+   "confidence": 0.857
+  },
+  {
+   "id": "T0266",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8596
+  },
+  {
+   "id": "T0267",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8276
+  },
+  {
+   "id": "T0268",
+   "gold": "refund_update",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.3386
+  },
+  {
+   "id": "T0269",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9289
+  },
+  {
+   "id": "T0270",
+   "gold": "status",
+   "raw": "mistimed_billing_never_bought",
+   "intent": "mistimed_billing_never_bought",
+   "confidence": 0.5033
+  },
+  {
+   "id": "T0271",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.7699
+  },
+  {
+   "id": "T0272",
+   "gold": "manage",
+   "raw": "manage",
+   "intent": "manage",
+   "confidence": 0.8742
+  },
+  {
+   "id": "T0273",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.8244
+  },
+  {
+   "id": "T0274",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9062
+  },
+  {
+   "id": "T0275",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8739
+  },
+  {
+   "id": "T0276",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.9949
+  },
+  {
+   "id": "T0277",
+   "gold": "shopping_cart",
+   "raw": "shopping_cart",
+   "intent": "shopping_cart",
+   "confidence": 0.9783
+  },
+  {
+   "id": "T0278",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9217
+  },
+  {
+   "id": "T0279",
+   "gold": "manage_change_phone",
+   "raw": "manage_change_phone",
+   "intent": "manage_change_phone",
+   "confidence": 0.9858
+  },
+  {
+   "id": "T0280",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.9828
+  },
+  {
+   "id": "T0281",
+   "gold": "recover_username",
+   "raw": "reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.3129
+  },
+  {
+   "id": "T0282",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9634
+  },
+  {
+   "id": "T0283",
+   "gold": "timing",
+   "raw": "timing",
+   "intent": "timing",
+   "confidence": 0.999
+  },
+  {
+   "id": "T0284",
+   "gold": "manage_create",
+   "raw": "manage_create",
+   "intent": "manage_create",
+   "confidence": 0.9538
+  },
+  {
+   "id": "T0285",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9671
+  },
+  {
+   "id": "T0286",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9487
+  },
+  {
+   "id": "T0287",
+   "gold": "status_due_date",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.8813
+  },
+  {
+   "id": "T0288",
+   "gold": "cost",
+   "raw": "cost",
+   "intent": "cost",
+   "confidence": 0.7446
+  },
+  {
+   "id": "T0289",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.8692
+  },
+  {
+   "id": "T0290",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9607
+  },
+  {
+   "id": "T0291",
+   "gold": "status",
+   "raw": "manage_dispute_bill",
+   "intent": "manage_dispute_bill",
+   "confidence": 0.4818
+  },
+  {
+   "id": "T0292",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9564
+  },
+  {
+   "id": "T0293",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.9236
+  },
+  {
+   "id": "T0294",
+   "gold": "jacket",
+   "raw": "jacket",
+   "intent": "jacket",
+   "confidence": 0.9984
+  },
+  {
+   "id": "T0295",
+   "gold": "promo_code_out_of_date",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.5618
+  },
+  {
+   "id": "T0296",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.8247
+  },
+  {
+   "id": "T0297",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9398
+  },
+  {
+   "id": "T0298",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.8764
+  },
+  {
+   "id": "T0299",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9649
+  },
+  {
+   "id": "T0300",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.8072
+  },
+  {
+   "id": "T0301",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9564
+  },
+  {
+   "id": "T0302",
+   "gold": "promo_code_invalid",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.632
+  },
+  {
+   "id": "T0303",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9403
+  },
+  {
+   "id": "T0304",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8565
+  },
+  {
+   "id": "T0305",
+   "gold": "shopping_cart",
+   "raw": "shopping_cart",
+   "intent": "shopping_cart",
+   "confidence": 0.9673
+  },
+  {
+   "id": "T0306",
+   "gold": "jeans",
+   "raw": "jeans",
+   "intent": "jeans",
+   "confidence": 0.9989
+  },
+  {
+   "id": "T0307",
+   "gold": "bad_price_competitor",
+   "raw": "bad_price_competitor",
+   "intent": "bad_price_competitor",
+   "confidence": 0.9851
+  },
+  {
+   "id": "T0308",
+   "gold": "promo_code_out_of_date",
+   "raw": "promo_code_invalid",
+   "intent": "promo_code_invalid",
+   "confidence": 0.661
+  },
+  {
+   "id": "T0309",
+   "gold": "manage_upgrade",
+   "raw": "manage_upgrade",
+   "intent": "manage_upgrade",
+   "confidence": 0.9761
+  },
+  {
+   "id": "T0310",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9035
+  },
+  {
+   "id": "T0311",
+   "gold": "cost",
+   "raw": "cost",
+   "intent": "cost",
+   "confidence": 0.9455
+  },
+  {
+   "id": "T0312",
+   "gold": "manage",
+   "raw": "manage",
+   "intent": "manage",
+   "confidence": 0.8692
+  },
+  {
+   "id": "T0313",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9318
+  },
+  {
+   "id": "T0314",
+   "gold": "shopping_cart",
+   "raw": "shopping_cart",
+   "intent": "shopping_cart",
+   "confidence": 0.9781
+  },
+  {
+   "id": "T0315",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8905
+  },
+  {
+   "id": "T0316",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8971
+  },
+  {
+   "id": "T0317",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9109
+  },
+  {
+   "id": "T0318",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.9928
+  },
+  {
+   "id": "T0319",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9417
+  },
+  {
+   "id": "T0320",
+   "gold": "manage_pay_bill",
+   "raw": "manage_pay_bill",
+   "intent": "manage_pay_bill",
+   "confidence": 0.9469
+  },
+  {
+   "id": "T0321",
+   "gold": "manage",
+   "raw": "manage",
+   "intent": "manage",
+   "confidence": 0.8663
+  },
+  {
+   "id": "T0322",
+   "gold": "policy",
+   "raw": "policy",
+   "intent": "policy",
+   "confidence": 0.9725
+  },
+  {
+   "id": "T0323",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.9683
+  },
+  {
+   "id": "T0324",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9326
+  },
+  {
+   "id": "T0325",
+   "gold": "missing",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.5006
+  },
+  {
+   "id": "T0326",
+   "gold": "status_delivery_time",
+   "raw": "manage_upgrade",
+   "intent": "manage_upgrade",
+   "confidence": 0.4551
+  },
+  {
+   "id": "T0327",
+   "gold": "timing",
+   "raw": "timing",
+   "intent": "timing",
+   "confidence": 0.9995
+  },
+  {
+   "id": "T0328",
+   "gold": "manage_extension",
+   "raw": "manage_extension",
+   "intent": "manage_extension",
+   "confidence": 0.9155
+  },
+  {
+   "id": "T0329",
+   "gold": "manage_dispute_bill",
+   "raw": "manage_dispute_bill",
+   "intent": "manage_dispute_bill",
+   "confidence": 0.989
+  },
+  {
+   "id": "T0330",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8592
+  },
+  {
+   "id": "T0331",
+   "gold": "return_stain",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.9913
+  },
+  {
+   "id": "T0332",
+   "gold": "mistimed_billing_never_bought",
+   "raw": "mistimed_billing_never_bought",
+   "intent": "mistimed_billing_never_bought",
+   "confidence": 0.9875
+  },
+  {
+   "id": "T0333",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8865
+  },
+  {
+   "id": "T0334",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.715
+  },
+  {
+   "id": "T0335",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9232
+  },
+  {
+   "id": "T0336",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9845
+  },
+  {
+   "id": "T0337",
+   "gold": "reset_2fa",
+   "raw": "reset_2fa",
+   "intent": "reset_2fa",
+   "confidence": 0.9926
+  },
+  {
+   "id": "T0338",
+   "gold": "membership",
+   "raw": "membership",
+   "intent": "membership",
+   "confidence": 0.9929
+  },
+  {
+   "id": "T0339",
+   "gold": "manage",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.2672
+  },
+  {
+   "id": "T0340",
+   "gold": "status_due_amount",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.3561
+  },
+  {
+   "id": "T0341",
+   "gold": "slow_speed",
+   "raw": "slow_speed",
+   "intent": "slow_speed",
+   "confidence": 0.98
+  },
+  {
+   "id": "T0342",
+   "gold": "membership",
+   "raw": "membership",
+   "intent": "membership",
+   "confidence": 0.9824
+  },
+  {
+   "id": "T0343",
+   "gold": "status",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.8579
+  },
+  {
+   "id": "T0344",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.965
+  },
+  {
+   "id": "T0345",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9859
+  },
+  {
+   "id": "T0346",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9427
+  },
+  {
+   "id": "T0347",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9086
+  },
+  {
+   "id": "T0348",
+   "gold": "boots",
+   "raw": "boots",
+   "intent": "boots",
+   "confidence": 0.8474
+  },
+  {
+   "id": "T0349",
+   "gold": "mistimed_billing_already_returned",
+   "raw": "mistimed_billing_already_returned",
+   "intent": "mistimed_billing_already_returned",
+   "confidence": 0.992
+  },
+  {
+   "id": "T0350",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8756
+  },
+  {
+   "id": "T0351",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.7047
+  },
+  {
+   "id": "T0352",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9577
+  },
+  {
+   "id": "T0353",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.3189
+  },
+  {
+   "id": "T0354",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.994
+  },
+  {
+   "id": "T0355",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8872
+  },
+  {
+   "id": "T0356",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8886
+  },
+  {
+   "id": "T0357",
+   "gold": "recover_username",
+   "raw": "recover_username",
+   "intent": "recover_username",
+   "confidence": 0.993
+  },
+  {
+   "id": "T0358",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8294
+  },
+  {
+   "id": "T0359",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9178
+  },
+  {
+   "id": "T0360",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8248
+  },
+  {
+   "id": "T0361",
+   "gold": "status_service_removed",
+   "raw": "status_due_date",
+   "intent": "status_due_date",
+   "confidence": 0.3697
+  },
+  {
+   "id": "T0362",
+   "gold": "status",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.4123
+  },
+  {
+   "id": "T0363",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9028
+  },
+  {
+   "id": "T0364",
+   "gold": "manage_downgrade",
+   "raw": "manage_downgrade",
+   "intent": "manage_downgrade",
+   "confidence": 0.981
+  },
+  {
+   "id": "T0365",
+   "gold": "pricing",
+   "raw": "pricing",
+   "intent": "pricing",
+   "confidence": 0.8571
+  },
+  {
+   "id": "T0366",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.7183
+  },
+  {
+   "id": "T0367",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.992
+  },
+  {
+   "id": "T0368",
+   "gold": "refund_status",
+   "raw": "return_stain",
+   "intent": "return_stain",
+   "confidence": 0.3253
+  },
+  {
+   "id": "T0369",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7263
+  },
+  {
+   "id": "T0370",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.797
+  },
+  {
+   "id": "T0371",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9509
+  },
+  {
+   "id": "T0372",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8509
+  },
+  {
+   "id": "T0373",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.8215
+  },
+  {
+   "id": "T0374",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9475
+  },
+  {
+   "id": "T0375",
+   "gold": "credit_card",
+   "raw": "credit_card",
+   "intent": "credit_card",
+   "confidence": 0.9947
+  },
+  {
+   "id": "T0376",
+   "gold": "manage_cancel",
+   "raw": "manage_cancel",
+   "intent": "manage_cancel",
+   "confidence": 0.9307
+  },
+  {
+   "id": "T0377",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.6625
+  },
+  {
+   "id": "T0378",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9904
+  },
+  {
+   "id": "T0379",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9387
+  },
+  {
+   "id": "T0380",
+   "gold": "pricing",
+   "raw": "pricing",
+   "intent": "pricing",
+   "confidence": 0.3854
+  },
+  {
+   "id": "T0381",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9468
+  },
+  {
+   "id": "T0382",
+   "gold": "search_results",
+   "raw": "search_results",
+   "intent": "search_results",
+   "confidence": 0.9952
+  },
+  {
+   "id": "T0383",
+   "gold": "refund_status",
+   "raw": "refund_status",
+   "intent": "refund_status",
+   "confidence": 0.9328
+  },
+  {
+   "id": "T0384",
+   "gold": "missing",
+   "raw": "status_shipping_question",
+   "intent": "status_shipping_question",
+   "confidence": 0.4991
+  },
+  {
+   "id": "T0385",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.8626
+  },
+  {
+   "id": "T0386",
+   "gold": "missing",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.988
+  },
+  {
+   "id": "T0387",
+   "gold": "recover_password",
+   "raw": "recover_password",
+   "intent": "recover_password",
+   "confidence": 0.9466
+  },
+  {
+   "id": "T0388",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9359
+  },
+  {
+   "id": "T0389",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7531
+  },
+  {
+   "id": "T0390",
+   "gold": "status_delivery_time",
+   "raw": "status_delivery_time",
+   "intent": "status_delivery_time",
+   "confidence": 0.9766
+  },
+  {
+   "id": "T0391",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.6796
+  },
+  {
+   "id": "T0392",
+   "gold": "manage_change_address",
+   "raw": "manage_change_address",
+   "intent": "manage_change_address",
+   "confidence": 0.8976
+  },
+  {
+   "id": "T0393",
+   "gold": "refund_update",
+   "raw": "refund_update",
+   "intent": "refund_update",
+   "confidence": 0.9856
+  },
+  {
+   "id": "T0394",
+   "gold": "return_size",
+   "raw": "return_size",
+   "intent": "return_size",
+   "confidence": 0.9461
+  },
+  {
+   "id": "T0395",
+   "gold": "status",
+   "raw": "missing",
+   "intent": "missing",
+   "confidence": 0.9827
+  },
+  {
+   "id": "T0396",
+   "gold": "cost",
+   "raw": "cost",
+   "intent": "cost",
+   "confidence": 0.9365
+  },
+  {
+   "id": "T0397",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.7601
+  },
+  {
+   "id": "T0398",
+   "gold": "slow_speed",
+   "raw": "slow_speed",
+   "intent": "slow_speed",
+   "confidence": 0.9903
+  },
+  {
+   "id": "T0399",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.843
+  },
+  {
+   "id": "T0400",
+   "gold": "status",
+   "raw": "status",
+   "intent": "status",
+   "confidence": 0.9616
+  }
+ ]
+}

@@ -1,4 +1,4 @@
-# River router: state of training (27 Sep, 15:36 PDT; `r1` finished, `r2` training)
+# River router: state of training (27 Sep, 15:55 PDT; `r1` and `r2` finished)
 
 Task (data/ROUTER.md): customer's opening message → one of 55 ABCD subflows (the saved-path key).
 Metric: label accuracy on `data/heldout.jsonl` (100 tickets, ABCD test, 1–2 per label) = path hit rate for an exact-key library.
@@ -15,6 +15,9 @@ Same system prompt (label list) for every row; greedy decoding. Rows in `runs/r1
 | **River LoRA, step 20** | **0.72** | **0.82** |
 | **River LoRA, step 50 (served)** | **0.77** | **0.887** |
 | River LoRA, step 87 (final, time limit) | 0.76 | 0.867 |
+| River r2 (balanced sampling + LR decay), step 30 | 0.76 | 0.87 |
+| River r2, step 60 | 0.79 | 0.89 |
+| River r2, step 74 (final, time limit) | 0.81 | 0.88 |
 
 Base-model misses are mostly flow-only answers (`troubleshoot_site`, `single_item_query`) that cannot select a path.
 Step 50 is served: best on validation (chosen on val, not heldout); step 50→87 is flat within noise. Step-50 heldout errors are near-neighbours: `promo_code_invalid`↔`promo_code_out_of_date` (2), `refund_update`→`refund_status` (2), shipping `cost`→`status` (2).
@@ -30,6 +33,7 @@ Library = first replay ticket per intent, filed under the router's key; 100 held
 | River step 50, no gate | 47 | 0.65 | 0.25 | 0.10 |
 | **River step 50, gate 0.5 (serve.py default)** | 47 | **0.67** | **0.15** | 0.18 |
 | River step 50, gate 0.8 | 44 | 0.58 | 0.09 | 0.33 |
+| River r2 step 74, gate 0.5 | 49 | 0.66 | 0.16 | 0.18 |
 
 Gate: below `--min-confidence` the router answers `none` and the agent explores (confidence = probability of the label tokens).
 0.5 beats no gate on both hit and wrong recall. 0.8 is the cautious setting (fewest wrong replays).
@@ -43,8 +47,20 @@ Wrong recall mostly comes from a mislabelled *first* ticket filing its workflow 
 | River step 50 | 0.865 | 0.89 | 52 (42) | 0.733 | 0.133 |
 | River step 50, gate 0.5 | – | – | 52 (45) | 0.72 | 0.09 |
 | River step 50, gate 0.8 | – | – | 51 (47) | 0.657 | 0.04 |
+| River r2 step 60 | 0.905 | 0.85 | 53 (47) | 0.713 | 0.155 |
+| River r2 step 74 | 0.902 | 0.90 | 53 (44) | 0.695 | 0.172 |
+| River r2 step 74, gate 0.5 | – | – | 53 (46) | 0.69 | 0.145 |
+| **River step 50, create ≥0.8, reuse ≥0.5** | – | – | 51 (47) | **0.718** | **0.062** |
 
 Validation gate curve (step 50): gate 0.5 routes 96% at 0.92 accuracy; 0.8 routes 86% at 0.953; 0.9 routes 77% at 0.97.
+
+## Verdict (15:55)
+
+- r2 is more accurate per ticket (heldout 0.81 vs 0.77, replay 0.90 vs 0.865) but not better for workflows: tie on the
+  Memorable harness (0.66/0.16 vs 0.67/0.15) and more wrong reuse in simulation. **Served: r1 step 50, gate 0.5.**
+- What moves workflow quality now is the library, not the router: a mislabelled first ticket files a workflow under the
+  wrong key. Saving a *new* workflow only when router confidence ≥ 0.8 (reuse still at ≥ 0.5) cuts simulated wrong reuse
+  0.09 → 0.062 at the same correct reuse (0.72). That is an app-side rule on the `confidence` field the router returns.
 
 ## Run
 
@@ -63,4 +79,4 @@ Use `ROUTER_URL=http://127.0.0.1:8789/route`.
 
 ## Open
 
-- `r2`: same recipe plus label-balanced sampling (p ~ count^0.5) and linear LR decay to 10%, 90 steps, evals at 30/60/90.
+- r2 cost 1.56M training tokens ≈ $1.56 (estimate); stopped by its 22-minute limit at step 74.
