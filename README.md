@@ -108,4 +108,6 @@ Keys: `ANTHROPIC_API_KEY`, `MEMORABLE_API_KEY`, `SHOPIFY_ADMIN_TOKEN`.
 
 ## Repository
 
+Our thinking along the way: [Codex and Claude Code conversations](jorney/README.md).
+
 `agent/` support agent, normalizer, memory, compiled plans · `mcp/` tools for QM · `replay/` replay, evals, plans · `brain/` GBrain pages · `data/` ABCD splits, hard tickets, Shopify seeder · `event/` rules and submission · `IDEA.md`, `CANONICAL_REQUEST_V1.md` design.
