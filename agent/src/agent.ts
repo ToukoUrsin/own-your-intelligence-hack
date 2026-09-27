@@ -45,6 +45,7 @@ const tools: Anthropic.Tool[] = [
 ];
 
 async function runTool(name: string, input: any): Promise<unknown> {
+  (globalThis as any).__toolGuard?.(name, input); // optional per-request guard (storefront chat)
   switch (name) {
     case "search_kb": return searchKb(input.query);
     case "read_page": return readPage(input.slug);

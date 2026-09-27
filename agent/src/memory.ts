@@ -503,7 +503,7 @@ async function compiled() {
 // ---- shadow promotion of compiled plans ----
 type Shadow = { trials: number; agree: number; promoted: boolean; rejected: boolean };
 const shadows = new Map<string, Shadow>();
-const SHADOW_LOG = join(import.meta.dir, "../../replay/shadow.jsonl");
+const SHADOW_LOG = process.env.SHADOW_LOG ?? join(import.meta.dir, "../../replay/shadow.jsonl");
 // Plans enabled when the run starts (validated offline) serve right away; plans compiled during the run start in shadow.
 function shadowState(id: string, plan?: any): Shadow {
   if (!shadows.has(id)) { const pre = !!plan && plan.enabled !== false && !plan.shadowPending; shadows.set(id, { trials: 0, agree: 0, promoted: pre, rejected: !!plan?.shadowRejected }); }

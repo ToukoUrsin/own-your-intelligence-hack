@@ -87,6 +87,7 @@ const RETURN_DAYS: Record<string, number> = { gold: 1e9, silver: 180, bronze: 90
 const TODAY = "2026-09-27";
 
 async function runTool(tool: string, a: any, ctx: Ctx): Promise<unknown> {
+  (globalThis as any).__toolGuard?.(tool, a); // optional per-request guard (storefront chat)
   switch (tool) {
     case "pull_up_account": return shop.pullUpAccount(a);
     case "verify_identity": return shop.verifyIdentity(a);
