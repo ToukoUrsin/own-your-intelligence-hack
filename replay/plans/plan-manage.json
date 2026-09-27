@@ -1,0 +1,125 @@
+{
+  "id": "plan-manage",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "request",
+    "subject": "delivery",
+    "topic": "manage",
+    "key": "Task 1: shipping issue: manage."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's manage claim a company error?"
+      },
+      "guards": [
+        {
+          "ref": "$.s.check_system.answer",
+          "op": "eq",
+          "value": "no",
+          "why": "system reports no company error (else an order fix is needed → agent)"
+        }
+      ]
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    }
+  ],
+  "reply": "Good news, {{s.pull_up_account.account.name|first}} — I checked your account and order **{{s.pick_order.id}}** ({{s.pick_order.items.0.name}} + {{s.pick_order.items.1.name}}, {{s.pick_order.total|money}}, placed {{s.pick_order.placedAt}}), and everything looks correct on our end.\n\n- Shipping address on the order: **{{s.pick_order.shipTo}}**\n- Default address on your account: **{{s.pull_up_account.account.defaultAddress}}**\n- Order status: **{{s.pick_order.status}}** — {{s.pick_order.shippingStatus}}, tracking **{{s.pick_order.tracking}}** (last scan: {{s.shipping_status.scan.lastScan}} on {{s.shipping_status.scan.date}}, estimated delivery {{s.shipping_status.scan.eta}})\n\nOur system confirms the address on the order is the right one, so the notice you received was sent in error on our side — nothing is wrong with your shipment. Sorry for the confusion that caused!\n\nIs there anything else I can help you with today?",
+  "source": {
+    "procedureId": "proc-5",
+    "intent": "manage",
+    "uses": 23,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.369Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 0,
+    "correct": 0,
+    "precision": null
+  },
+  "enabled": false
+}

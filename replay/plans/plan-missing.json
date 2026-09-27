@@ -1,0 +1,102 @@
+{
+  "id": "plan-missing",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "troubleshoot",
+    "subject": "delivery",
+    "topic": "missing",
+    "key": "Task 1: shipping issue: missing."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "record_reason",
+      "tool": "record_reason",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "reason": "missing"
+      }
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out, and sorry for the trouble!\n\nI pulled up order {{s.pick_order.id}} ({{s.pick_order.total|money}}), placed {{s.pick_order.placedAt}} and shipped {{s.pick_order.shippedAt}} to {{s.pick_order.shipTo}}. Tracking number {{s.shipping_status.tracking}} currently shows a status of \"{{s.shipping_status.shippingStatus}}\", and the latest carrier scan reads \"{{s.shipping_status.scan.lastScan}}\" on {{s.shipping_status.scan.date}}.\n\nIf the package isn't where you'd expect, it's worth checking around side and back doors, with neighbors, and with anyone else at the address — parcels left at the door sometimes get tucked out of sight, and they occasionally turn up a day or two after being scanned. If it still hasn't shown up after that, just reply here and I'll take the next step and get a free replacement order on its way to you.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-48",
+    "intent": "missing",
+    "uses": 5,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.372Z",
+  "validation": {
+    "tested": 6,
+    "compiled": 6,
+    "correct": 3,
+    "precision": 0.5
+  },
+  "enabled": false
+}

@@ -1,0 +1,97 @@
+{
+  "id": "plan-status-active",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "subscription",
+    "topic": "status_active",
+    "key": "Task 1: subscription inquiry: status active."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "subscription_status",
+      "tool": "subscription_status",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.subscription_status.ok",
+          "op": "true",
+          "why": "subscription found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out! I pulled up your account (ID {{s.pull_up_account.account.accountId}}) and here's where your subscription stands:\n\n- **Status:** {{s.subscription_status.status}}\n- **Plan:** {{s.subscription_status.plan}}\n- **Annual fee:** {{s.subscription_status.annualFee|money}}\n- **Amount due:** {{s.subscription_status.dueAmount|money}}\n- **Due date:** {{s.subscription_status.dueDate}}\n\nI've also emailed a link to your subscription/billing page at {{s.pull_up_account.account.email}}, so you can check these details anytime — your username is **{{s.pull_up_account.account.username}}**.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-11",
+    "intent": "status_active",
+    "uses": 7,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.369Z",
+  "validation": {
+    "tested": 9,
+    "compiled": 3,
+    "correct": 2,
+    "precision": 0.667
+  },
+  "enabled": false
+}

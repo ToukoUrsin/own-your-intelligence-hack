@@ -1,0 +1,59 @@
+{
+  "id": "plan-jacket",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "product_information",
+    "topic": "jacket",
+    "key": "Task 1: single item query: jacket."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "search_kb",
+      "tool": "search_kb",
+      "args": {
+        "query": "jacket faq"
+      }
+    },
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/jacket"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there,\n\nThanks for reaching out about the jacket — happy to help you decide!\n\nI wasn't able to pull up a stored answer covering your exact question, so I don't want to guess at the details. The product page on our site has the full description, materials, sizing and care information, and it's the most up-to-date source for current price and stock.\n\nIf you let me know exactly what you'd like to confirm — sizing, materials, warmth rating, care instructions or availability — I'll check with our product team and come back to you with a clear answer.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-36",
+    "intent": "jacket",
+    "uses": 11,
+    "examples": 4,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (search_kb → read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T21:53:22.372Z",
+  "validation": {
+    "tested": 4,
+    "compiled": 0,
+    "correct": 0,
+    "precision": null
+  },
+  "enabled": false
+}

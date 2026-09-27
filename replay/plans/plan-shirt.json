@@ -1,0 +1,59 @@
+{
+  "id": "plan-shirt",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "product_information",
+    "topic": "shirt",
+    "key": "Task 1: single item query: shirt."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "search_kb",
+      "tool": "search_kb",
+      "args": {
+        "query": "shirt faq"
+      }
+    },
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/shirt"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there — thanks for reaching out about our shirts!\n\nAll of our shirts are Northwind Outfitters house lines: Mercer, Kline, Gale and Harbor. Here are the key details:\n\n- **Material:** 100% cotton\n- **Care:** machine wash cold, tumble dry low; pre-treat stains with stain remover and wash cold\n- **Shrinkage:** pre-shrunk, less than 2% after washing\n- **Fit (size M):** 34\" arm length, 15.5\" collar\n- **Buttons:** available in brown or black\n- **Sizes:** S/M/L availability varies by style — check the product page; we restock every 2 weeks\n- **Warranty:** 1 year against manufacturing defects\n\nIf you let me know which shirt you're looking at, I can share more specifics. Is there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-35",
+    "intent": "shirt",
+    "uses": 11,
+    "examples": 2,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (search_kb → read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 3,
+    "compiled": 3,
+    "correct": 2,
+    "precision": 0.667
+  },
+  "enabled": false
+}

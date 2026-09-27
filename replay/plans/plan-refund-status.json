@@ -1,0 +1,93 @@
+{
+  "id": "plan-refund-status",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "refund",
+    "topic": "refund_status",
+    "key": "Task 1: product defect: refund status."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": true
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "get_refunds",
+      "tool": "get_refunds",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.get_refunds",
+          "op": "len_eq",
+          "value": 1,
+          "why": "exactly one refund on the order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for checking in!\n\nI found your refund for order {{s.pick_order.id}} ({{s.pick_order.items.0.name}}, {{s.get_refunds.0.amount|money}}). Its current status is **{{s.get_refunds.0.status}}** — it was started on {{s.get_refunds.0.createdAt}} ({{s.get_refunds.0.reason}}) and is being returned to your original payment method, {{s.get_refunds.0.method}}.\n\nYou should see the funds within the next few business days. If you'd prefer the refund a different way — like account credit or a gift card — just let me know and I can change it for you.\n\nIs there anything else I can help you with today?",
+  "source": {
+    "procedureId": "proc-1",
+    "intent": "refund_status",
+    "uses": 46,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.368Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 9,
+    "correct": 9,
+    "precision": 1
+  },
+  "enabled": true
+}

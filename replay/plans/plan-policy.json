@@ -1,0 +1,59 @@
+{
+  "id": "plan-policy",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "policy",
+    "topic": "policy",
+    "key": "Task 1: storewide query: policy."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "search_kb",
+      "tool": "search_kb",
+      "args": {
+        "query": "policy faq"
+      }
+    },
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/policy"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there! Thanks for reaching out, and happy to help before you buy.\n\nI've looked into your question about our policy. The details can vary depending on your account and membership level, so if you let me know your account email (or confirm the one you're writing from), I can give you the exact terms that apply to you — including any time limits, what you'll need to have on hand, and the options available to you.\n\nIn the meantime, if you'd like, I can also walk you through the steps involved or help you place an order.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-17",
+    "intent": "policy",
+    "uses": 11,
+    "examples": 3,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (search_kb → read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T21:53:22.370Z",
+  "validation": {
+    "tested": 3,
+    "compiled": 3,
+    "correct": 0,
+    "precision": 0
+  },
+  "enabled": false
+}

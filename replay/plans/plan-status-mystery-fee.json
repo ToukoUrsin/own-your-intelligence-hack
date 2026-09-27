@@ -1,0 +1,94 @@
+{
+  "id": "plan-status-mystery-fee",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "assess",
+    "subject": "order",
+    "topic": "status_mystery_fee",
+    "key": "Task 1: order issue: status mystery fee."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's status mystery fee claim a company error?"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for flagging this — I've verified your details and pulled up order {{s.pick_order.id}}.\n\nHere's what I see: the order was placed {{s.pick_order.placedAt}}, totals {{s.pick_order.total|money}}, was paid by {{s.pick_order.payment.method}} (invoice {{s.pick_order.invoiceId}}), and is currently {{s.pick_order.status}} — {{s.pick_order.shippingStatus}}.\n\nI also ran a billing review on it. The result came back \"{{s.check_system.answer}}\" — meaning the {{s.check_system.meaning}}. Your account is on our {{s.pull_up_account.account.membership}} membership level, which I've taken into account here.\n\nSo I can match this to the right line, could you send me the exact amount of the fee you were charged? With that figure I can take the next step right away.\n\nIs there anything else I can help you with in the meantime?",
+  "source": {
+    "procedureId": "proc-40",
+    "intent": "status_mystery_fee",
+    "uses": 4,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.372Z",
+  "validation": {
+    "tested": 5,
+    "compiled": 5,
+    "correct": 1,
+    "precision": 0.2
+  },
+  "enabled": false
+}

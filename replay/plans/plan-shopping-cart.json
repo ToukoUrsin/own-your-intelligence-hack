@@ -1,0 +1,65 @@
+{
+  "id": "plan-shopping-cart",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "troubleshoot",
+    "subject": "site",
+    "topic": "shopping_cart",
+    "key": "Task 1: troubleshoot site: shopping cart."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "troubleshoot_step",
+      "tool": "troubleshoot_step",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "step": "log out and back in, clear cache, try again"
+      }
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "-",
+        "details": "shopping cart"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, sorry about the cart trouble — let's get it sorted. A few quick things to try, in order:\n\n1. Refresh the product page and add the item to your cart again.\n2. If it still won't update, log out of your account and log back in, then try once more.\n3. Check the bottom left-hand side of the product page to see if the item is listed as Out-of-Stock — if it is, that would prevent it from being added.\n\nIf none of that works, I'm happy to place the order for you from my side. Just let me know the item you'd like (brand and type, e.g. \"Gale boots\" or \"Kline shirt\") along with your credit card number and its expiration date, and I'll take care of it.\n\nAnything else I can help you with?",
+  "source": {
+    "procedureId": "proc-34",
+    "intent": "shopping_cart",
+    "uses": 3,
+    "examples": 4,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 4,
+    "compiled": 4,
+    "correct": 0,
+    "precision": 0
+  },
+  "enabled": false
+}

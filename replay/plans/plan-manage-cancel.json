@@ -1,0 +1,131 @@
+{
+  "id": "plan-manage-cancel",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "cancellation",
+    "topic": "manage_cancel",
+    "key": "Task 1: order issue: manage cancel."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "refund_rule",
+      "tool": "policy_check",
+      "args": {
+        "rule": "not_shipped",
+        "status": "$.s.pick_order.status"
+      }
+    },
+    {
+      "id": "cancel",
+      "tool": "update_order",
+      "write": true,
+      "args": {
+        "orderId": "$.s.pick_order.id",
+        "change": "cancel order",
+        "value": "customer request"
+      },
+      "guards": [
+        {
+          "ref": "$.s.refund_rule.ok",
+          "op": "true",
+          "why": "order not shipped yet (cancellation policy)"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out!\n\nI found your order {{s.pick_order.id}} (placed {{s.pick_order.placedAt}}, {{s.pick_order.total|money}}) and confirmed the shipping status is \"{{s.shipping_status.shippingStatus}}\" — so I was able to cancel it for you right away.\n\nThe full {{s.pick_order.total|money}} will be refunded to your original {{s.pick_order.payment.method}} payment method, and it typically posts within a few business days. You won't need to do anything else on your end.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-31",
+    "intent": "manage_cancel",
+    "uses": 15,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 2,
+    "correct": 0,
+    "precision": 0
+  },
+  "enabled": false
+}

@@ -1,0 +1,71 @@
+{
+  "id": "plan-status-shipping-question",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "assess",
+    "subject": "delivery",
+    "topic": "status_shipping_question",
+    "key": "Task 1: manage account: status shipping question."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's status shipping question claim a company error?"
+      }
+    },
+    {
+      "id": "send_link",
+      "tool": "send_link",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "kind": "status shipping question"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out!\n\nI pulled up your account ({{s.pull_up_account.account.membership}} membership with a {{s.pull_up_account.account.subscription.status}} {{s.pull_up_account.account.subscription.plan}} subscription) and checked it against our system. Here's what we have on file for shipping:\n\n**{{s.pull_up_account.account.defaultAddress}}**\n\nYour most recent order (#{{s.pull_up_account.account.orders.0.id}}) shows a shipping status of **{{s.pull_up_account.account.orders.0.shippingStatus}}**, and your subscription benefits cover the shipping question you asked about.\n\nI've also emailed a link with your subscription and shipping details to {{s.send_link.sentTo}} so you can review everything anytime.\n\nIs there anything else I can help you with today?",
+  "source": {
+    "procedureId": "proc-47",
+    "intent": "status_shipping_question",
+    "uses": 5,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.372Z",
+  "validation": {
+    "tested": 6,
+    "compiled": 6,
+    "correct": 1,
+    "precision": 0.167
+  },
+  "enabled": false
+}

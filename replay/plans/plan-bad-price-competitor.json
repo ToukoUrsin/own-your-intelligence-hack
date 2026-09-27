@@ -1,0 +1,129 @@
+{
+  "id": "plan-bad-price-competitor",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "pricing",
+    "topic": "bad_price_competitor",
+    "key": "Task 1: purchase dispute: bad price competitor."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "record_reason",
+      "tool": "record_reason",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "-",
+        "reason": "bad price competitor"
+      }
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "question": "Is the customer's bad price competitor claim a company error?"
+      }
+    },
+    {
+      "id": "promo_rule",
+      "tool": "policy_check",
+      "args": {
+        "rule": "promo_allowed",
+        "level": "$.s.membership.level",
+        "answer": "$.s.check_system.answer"
+      }
+    },
+    {
+      "id": "promo_code",
+      "tool": "promo_code",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "reason": "bad price competitor",
+        "percent": 10
+      },
+      "guards": [
+        {
+          "ref": "$.s.promo_rule.ok",
+          "op": "true",
+          "why": "policies/membership: level may get a new code and system confirms company error"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out — I've verified your account and pulled up order {{s.pick_order.id}}.\n\nOur prices are set by a pricing system that adjusts automatically with demand, supply and season, so they can differ from other retailers and even shift from day to day. That part is unfortunately outside of my control.\n\nWhat I can do is help with the difference: as a {{s.membership.level}} member, here's a promo code for **{{s.promo_code.percent}}% off — {{s.promo_code.code}}**, valid through {{s.promo_code.expires}}. Just apply it at checkout.\n\nIs there anything else I can help you with today?",
+  "source": {
+    "procedureId": "proc-13",
+    "intent": "bad_price_competitor",
+    "uses": 3,
+    "examples": 4,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.369Z",
+  "validation": {
+    "tested": 4,
+    "compiled": 4,
+    "correct": 1,
+    "precision": 0.25
+  },
+  "enabled": false
+}

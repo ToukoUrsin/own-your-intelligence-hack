@@ -1,0 +1,1104 @@
+{
+  "enabled": {
+    "plans": 6,
+    "read": 5,
+    "write": 1,
+    "tested": 46,
+    "compiled": 35,
+    "correct": 33,
+    "precision": 0.943,
+    "coverageOfTheirTickets": 0.761
+  },
+  "generatedAt": "2026-09-27T21:56:45.420Z",
+  "minUses": 3,
+  "plans": 31,
+  "readPlans": 19,
+  "writePlans": 12,
+  "overall": {
+    "tested": 203,
+    "compiled": 119,
+    "coverage": 0.586,
+    "success": 0.291,
+    "modelCallsPerCompiledTicket": 0
+  },
+  "canonicalInput": "Haiku stand-in intent label → v1 {operation, subject, topic} via INTENT_V1 in compiled.ts (River endpoint not available); plans also match by the standardized key. No normalizer → regex fallback for refund status only.",
+  "judge": "claude-haiku-4-5 compares compiled reply with the agent's reply for the same ticket (offline check only).",
+  "curve": [
+    {
+      "tickets": "1-25",
+      "explored": 0.76,
+      "recalled": 0.2,
+      "compiled": 0.04
+    },
+    {
+      "tickets": "26-50",
+      "explored": 0.48,
+      "recalled": 0.4,
+      "compiled": 0.12
+    },
+    {
+      "tickets": "51-75",
+      "explored": 0.24,
+      "recalled": 0.72,
+      "compiled": 0.04
+    },
+    {
+      "tickets": "76-100",
+      "explored": 0.2,
+      "recalled": 0.76,
+      "compiled": 0.04
+    },
+    {
+      "tickets": "101-125",
+      "explored": 0.16,
+      "recalled": 0.64,
+      "compiled": 0.2
+    },
+    {
+      "tickets": "126-150",
+      "explored": 0.24,
+      "recalled": 0.6,
+      "compiled": 0.16
+    },
+    {
+      "tickets": "151-175",
+      "explored": 0.16,
+      "recalled": 0.52,
+      "compiled": 0.32
+    },
+    {
+      "tickets": "176-200",
+      "explored": 0.08,
+      "recalled": 0.72,
+      "compiled": 0.2
+    },
+    {
+      "tickets": "201-225",
+      "explored": 0.12,
+      "recalled": 0.64,
+      "compiled": 0.24
+    },
+    {
+      "tickets": "226-250",
+      "explored": 0.08,
+      "recalled": 0.76,
+      "compiled": 0.16
+    },
+    {
+      "tickets": "251-275",
+      "explored": 0,
+      "recalled": 0.72,
+      "compiled": 0.28
+    },
+    {
+      "tickets": "276-300",
+      "explored": 0,
+      "recalled": 0.72,
+      "compiled": 0.28
+    },
+    {
+      "tickets": "301-325",
+      "explored": 0.04,
+      "recalled": 0.72,
+      "compiled": 0.24
+    },
+    {
+      "tickets": "326-350",
+      "explored": 0.04,
+      "recalled": 0.72,
+      "compiled": 0.24
+    },
+    {
+      "tickets": "351-375",
+      "explored": 0,
+      "recalled": 0.72,
+      "compiled": 0.28
+    },
+    {
+      "tickets": "376-400",
+      "explored": 0,
+      "recalled": 0.84,
+      "compiled": 0.16
+    }
+  ],
+  "perPlan": [
+    {
+      "plan": "plan-boots",
+      "risk": "read",
+      "procedure": "proc-32",
+      "uses": 11,
+      "replyTemplate": "model",
+      "tested": 3,
+      "coverage": 0.667,
+      "success": 0,
+      "replyAgreement": 0,
+      "replyCorrect": 0,
+      "goldToolJaccard": 1,
+      "agentGoldToolJaccard": 1,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.061
+      },
+      "ms": {
+        "compiled": 1624.627,
+        "agent": 8429
+      },
+      "fallbacks": [
+        "T0079: select_faq: exactly one FAQ answer matches the question"
+      ],
+      "example": {
+        "ticket": "T0131",
+        "reply": "Hi there — thanks for reaching out about our boots!\n\nI'd be glad to help with that. So I can get you the exact details, could you let me know which style you're asking about and what you'd like to know — price, sizing, materials, or care instructions? Once I have that, I'll send the specifics right over.\n\nIs there anything else I can help you with in the meantime?"
+      },
+      "precision": 0,
+      "enabled": false
+    },
+    {
+      "plan": "plan-cost",
+      "risk": "read",
+      "procedure": "proc-19",
+      "uses": 10,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 0.6,
+      "success": 0,
+      "replyAgreement": 0,
+      "replyCorrect": 0,
+      "goldToolJaccard": 0.65,
+      "agentGoldToolJaccard": 0.665,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.166
+      },
+      "ms": {
+        "compiled": 1.751,
+        "agent": 17647
+      },
+      "fallbacks": [
+        "T0196: pick_order: one unambiguous order",
+        "T0244: reply template has unresolved refs",
+        "T0260: reply template has unresolved refs",
+        "T0311: reply template has unresolved refs"
+      ],
+      "example": {
+        "ticket": "T0036",
+        "reply": "Hi Alessandro, thanks for reaching out about the shipping cost!\n\nHere's what I found on order **3847653645** (Harbor jacket), placed 2026-09-24:\n\n- Amount charged: **$89** — invoice INV-653645, paid by credit card (paid), with no other charge on file for this order.\n- Billing check on your shipping-cost question: system does not confirm it (customer error).\n- Shipping to 3436 Lexington Ave, San Mateo, NY 18429, US: in transit, shipped 2026-09-25 under tracking **NW3847653645** (last scan: In transit, regional hub on 2026-09-26, estimated delivery 2026-09-29).\n\nI've verified your identity and confirmed the purchase is valid, so nothing further is needed on your side.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0,
+      "enabled": false
+    },
+    {
+      "plan": "plan-status",
+      "risk": "read",
+      "procedure": "proc-20",
+      "uses": 31,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 0.3,
+      "success": 0.3,
+      "replyAgreement": 1,
+      "replyCorrect": 1,
+      "goldToolJaccard": 0.333,
+      "agentGoldToolJaccard": 0.333,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.084
+      },
+      "ms": {
+        "compiled": 0.665,
+        "agent": 10160
+      },
+      "fallbacks": [
+        "T0048: ",
+        "T0058: ",
+        "T0069: ",
+        "T0070: ",
+        "T0072: ",
+        "T0077: ",
+        "T0092: "
+      ],
+      "example": {
+        "ticket": "T0040",
+        "reply": "Hi David, thanks for reaching out — I've looked up your order and here's where things stand.\n\n**Order #1354226379** (placed 2026-09-23, total $252)\n- Order status: **shipped** — shipping status: **out for delivery**\n- Tracking number: **NW1354226379**\n- Shipped on: 2026-09-24\n- Latest scan: \"Out for delivery, Monterey\" on 2026-09-27\n- Estimated delivery: 2026-09-27\n- Shipping to: 4901 Lincoln Ave, Monterey, TX 96619, US\n- Payment: paypal — paid (invoice INV-226379)\n\nI've verified this purchase on your account (davidw54@example.com), so everything checks out on our side. You can follow the latest carrier updates any time using the tracking number above.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 1,
+      "enabled": true
+    },
+    {
+      "plan": "plan-manage-cancel",
+      "risk": "write",
+      "procedure": "proc-31",
+      "uses": 15,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 0.2,
+      "success": 0,
+      "replyAgreement": 0,
+      "replyCorrect": 0,
+      "goldToolJaccard": 0.278,
+      "agentGoldToolJaccard": 0.388,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.161
+      },
+      "ms": {
+        "compiled": 0.77,
+        "agent": 23952
+      },
+      "fallbacks": [
+        "T0093: cancel: order not shipped yet (cancellation policy)",
+        "T0094: cancel: order not shipped yet (cancellation policy)",
+        "T0123: cancel: order not shipped yet (cancellation policy)",
+        "T0124: cancel: order not shipped yet (cancellation policy)",
+        "T0136: cancel: order not shipped yet (cancellation policy)",
+        "T0187: cancel: order not shipped yet (cancellation policy)",
+        "T0231: cancel: order not shipped yet (cancellation policy)",
+        "T0289: cancel: order not shipped yet (cancellation policy)"
+      ],
+      "example": {
+        "ticket": "T0075",
+        "reply": "Hi Joseph, thanks for reaching out!\n\nI found your order 1086743837 (placed 2026-09-25, $163) and confirmed the shipping status is \"order received\" — so I was able to cancel it for you right away.\n\nThe full $163 will be refunded to your original paypal payment method, and it typically posts within a few business days. You won't need to do anything else on your end.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0,
+      "enabled": false
+    },
+    {
+      "plan": "plan-status-shipping-question",
+      "risk": "write",
+      "procedure": "proc-47",
+      "uses": 5,
+      "replyTemplate": "model",
+      "tested": 6,
+      "coverage": 1,
+      "success": 0.167,
+      "replyAgreement": 0.167,
+      "replyCorrect": 0.167,
+      "goldToolJaccard": 0.456,
+      "agentGoldToolJaccard": 0.456,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.079
+      },
+      "ms": {
+        "compiled": 0.843,
+        "agent": 10933
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0169",
+        "reply": "Hi Crystal, thanks for reaching out!\n\nI pulled up your account (silver membership with a active Premium subscription) and checked it against our system. Here's what we have on file for shipping:\n\n**7479 Lexington Ave, Monterey, CA 12941, US**\n\nYour most recent order (#3082664327) shows a shipping status of **delivered**, and your subscription benefits cover the shipping question you asked about.\n\nI've also emailed a link with your subscription and shipping details to crystalmin451@example.com so you can review everything anytime.\n\nIs there anything else I can help you with today?"
+      },
+      "precision": 0.167,
+      "enabled": false
+    },
+    {
+      "plan": "plan-status-mystery-fee",
+      "risk": "read",
+      "procedure": "proc-40",
+      "uses": 4,
+      "replyTemplate": "model",
+      "tested": 5,
+      "coverage": 1,
+      "success": 0.2,
+      "replyAgreement": 0.2,
+      "replyCorrect": 0.2,
+      "goldToolJaccard": 0.656,
+      "agentGoldToolJaccard": 0.728,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.424
+      },
+      "ms": {
+        "compiled": 0.729,
+        "agent": 25929
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0122",
+        "reply": "Hi Rodriguez, thanks for flagging this — I've verified your details and pulled up order 1450559895.\n\nHere's what I see: the order was placed 2026-09-23, totals $227, was paid by credit card (invoice INV-559895), and is currently shipped — out for delivery.\n\nI also ran a billing review on it. The result came back \"yes\" — meaning the system confirms the customer's claim (company error). Your account is on our silver membership level, which I've taken into account here.\n\nSo I can match this to the right line, could you send me the exact amount of the fee you were charged? With that figure I can take the next step right away.\n\nIs there anything else I can help you with in the meantime?"
+      },
+      "precision": 0.2,
+      "enabled": false
+    },
+    {
+      "plan": "plan-promo-code-invalid",
+      "risk": "write",
+      "procedure": "proc-10",
+      "uses": 7,
+      "replyTemplate": "model",
+      "tested": 8,
+      "coverage": 0.375,
+      "success": 0.25,
+      "replyAgreement": 0.333,
+      "replyCorrect": 0.667,
+      "goldToolJaccard": 0.917,
+      "agentGoldToolJaccard": 0.917,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.145
+      },
+      "ms": {
+        "compiled": 0.607,
+        "agent": 11753
+      },
+      "fallbacks": [
+        "T0042: ",
+        "T0167: ",
+        "T0201: ",
+        "T0295: ",
+        "T0302: "
+      ],
+      "example": {
+        "ticket": "T0018",
+        "reply": "Hi Chloe, thanks for your patience!\n\nI looked into the promo code issue on your account, and I'm sorry for the trouble. As a valued silver member, I've gone ahead and issued you a brand-new code: **NW10-1JV9**, good for 10% off your next purchase. It's valid through 2026-10-04 — just enter it at checkout. (Promo codes are only good for 7 days after they're issued, so an older code will show as invalid.)\n\nIs there anything else I can help you with today?"
+      },
+      "precision": 0.667,
+      "enabled": false
+    },
+    {
+      "plan": "plan-jacket",
+      "risk": "read",
+      "procedure": "proc-36",
+      "uses": 11,
+      "replyTemplate": "model",
+      "tested": 4,
+      "coverage": 0,
+      "success": 0,
+      "replyAgreement": null,
+      "replyCorrect": null,
+      "goldToolJaccard": null,
+      "agentGoldToolJaccard": null,
+      "costPerTicket": {
+        "compiled": null,
+        "agent": null
+      },
+      "ms": {
+        "compiled": null,
+        "agent": 0
+      },
+      "fallbacks": [
+        "T0096: select_faq: exactly one FAQ answer matches the question",
+        "T0250: select_faq: exactly one FAQ answer matches the question",
+        "T0264: select_faq: exactly one FAQ answer matches the question",
+        "T0294: select_faq: exactly one FAQ answer matches the question"
+      ],
+      "precision": null,
+      "enabled": false
+    },
+    {
+      "plan": "plan-bad-price-competitor",
+      "risk": "write",
+      "procedure": "proc-13",
+      "uses": 3,
+      "replyTemplate": "model",
+      "tested": 4,
+      "coverage": 1,
+      "success": 0.25,
+      "replyAgreement": 0.25,
+      "replyCorrect": 0.25,
+      "goldToolJaccard": 0.518,
+      "agentGoldToolJaccard": 0.671,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.185
+      },
+      "ms": {
+        "compiled": 0.761,
+        "agent": 20775
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0021",
+        "reply": "Hi Crystal, thanks for reaching out — I've verified your account and pulled up order 2793083116.\n\nOur prices are set by a pricing system that adjusts automatically with demand, supply and season, so they can differ from other retailers and even shift from day to day. That part is unfortunately outside of my control.\n\nWhat I can do is help with the difference: as a bronze member, here's a promo code for **10% off — NW10-6E3**, valid through 2026-10-04. Just apply it at checkout.\n\nIs there anything else I can help you with today?"
+      },
+      "precision": 0.25,
+      "enabled": false
+    },
+    {
+      "plan": "plan-recover-password",
+      "risk": "read",
+      "procedure": "proc-7",
+      "uses": 30,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 1,
+      "success": 1,
+      "replyAgreement": 1,
+      "replyCorrect": 1,
+      "goldToolJaccard": 0.333,
+      "agentGoldToolJaccard": 0.592,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.059
+      },
+      "ms": {
+        "compiled": 1.079,
+        "agent": 6593
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0010",
+        "reply": "Hi Sanya, thanks for reaching out — I've pulled up your account.\n\nThe username on file is **sanyaafzal744**, so please use that one when signing in.\n\nI'm not able to look up your existing password, but I can generate a new temporary one for you right away. To do that, I just need one thing to confirm it's you — please reply with either:\n\n- Your PIN number, **or**\n- The answer to your security question: *What is your mother's maiden name?*\n\nAs soon as I have that, I'll send over your new password so you can get back into your account.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 1,
+      "enabled": true
+    },
+    {
+      "plan": "plan-refund-update",
+      "risk": "read",
+      "procedure": "proc-25",
+      "uses": 3,
+      "replyTemplate": "model",
+      "tested": 4,
+      "coverage": 1,
+      "success": 1,
+      "replyAgreement": 1,
+      "replyCorrect": 1,
+      "goldToolJaccard": 0.5,
+      "agentGoldToolJaccard": 0.563,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.095
+      },
+      "ms": {
+        "compiled": 1.401,
+        "agent": 13916
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0049",
+        "reply": "Hi Joseph, thanks for reaching out — I've verified your account and your refund.\n\nHere's where things stand: refund **RF-59623** for order **9645759623** (Mercer jeans, $69) is currently **processing**, for $69 back to your debit card. Refunds typically land 5–7 business days after they're issued.\n\nIf you'd like to add another item to this same refund, just send me:\n1. The brand and type of the item (for example, \"Mercer jeans\")\n2. The price you paid for it\n3. The reason you're returning it\n\nOnce I have those, I'll add it to your existing refund right away. Is there anything else I can help you with?"
+      },
+      "precision": 1,
+      "enabled": true
+    },
+    {
+      "plan": "plan-manage",
+      "risk": "read",
+      "procedure": "proc-5",
+      "uses": 23,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 0,
+      "success": 0,
+      "replyAgreement": null,
+      "replyCorrect": null,
+      "goldToolJaccard": null,
+      "agentGoldToolJaccard": null,
+      "costPerTicket": {
+        "compiled": null,
+        "agent": null
+      },
+      "ms": {
+        "compiled": null,
+        "agent": 0
+      },
+      "fallbacks": [
+        "T0004: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0008: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0011: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0027: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0043: reply template has unresolved refs",
+        "T0071: reply template has unresolved refs",
+        "T0076: reply template has unresolved refs",
+        "T0078: reply template has unresolved refs",
+        "T0090: reply template has unresolved refs",
+        "T0100: reply template has unresolved refs"
+      ],
+      "precision": null,
+      "enabled": false
+    },
+    {
+      "plan": "plan-refund-status",
+      "risk": "read",
+      "procedure": "proc-1",
+      "uses": 46,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 0.9,
+      "success": 0.9,
+      "replyAgreement": 1,
+      "replyCorrect": 1,
+      "goldToolJaccard": 0.917,
+      "agentGoldToolJaccard": 0.917,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.064
+      },
+      "ms": {
+        "compiled": 0.459,
+        "agent": 5831
+      },
+      "fallbacks": [
+        "T0085: "
+      ],
+      "example": {
+        "ticket": "T0003",
+        "reply": "Hi Crystal, thanks for checking in!\n\nI found your refund for order 7168705674 (Mercer boots, $74). Its current status is **processing** — it was started on 2026-09-22 (Return received) and is being returned to your original payment method, credit card.\n\nYou should see the funds within the next few business days. If you'd prefer the refund a different way — like account credit or a gift card — just let me know and I can change it for you.\n\nIs there anything else I can help you with today?"
+      },
+      "precision": 1,
+      "enabled": true
+    },
+    {
+      "plan": "plan-shirt",
+      "risk": "read",
+      "procedure": "proc-35",
+      "uses": 11,
+      "replyTemplate": "model",
+      "tested": 3,
+      "coverage": 1,
+      "success": 0.667,
+      "replyAgreement": 0.667,
+      "replyCorrect": 0.667,
+      "goldToolJaccard": 1,
+      "agentGoldToolJaccard": 0,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.215
+      },
+      "ms": {
+        "compiled": 1508.945,
+        "agent": 19555
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0091",
+        "reply": "Hi there — thanks for reaching out about our shirts!\n\nAll of our shirts are Northwind Outfitters house lines: Mercer, Kline, Gale and Harbor. Here are the key details:\n\n- **Material:** 100% cotton\n- **Care:** machine wash cold, tumble dry low; pre-treat stains with stain remover and wash cold\n- **Shrinkage:** pre-shrunk, less than 2% after washing\n- **Fit (size M):** 34\" arm length, 15.5\" collar\n- **Buttons:** available in brown or black\n- **Sizes:** S/M/L availability varies by style — check the product page; we restock every 2 weeks\n- **Warranty:** 1 year against manufacturing defects\n\nIf you let me know which shirt you're looking at, I can share more specifics. Is there anything else I can help you with?"
+      },
+      "precision": 0.667,
+      "enabled": false
+    },
+    {
+      "plan": "plan-credit-card",
+      "risk": "write",
+      "procedure": "proc-46",
+      "uses": 3,
+      "replyTemplate": "model",
+      "tested": 4,
+      "coverage": 1,
+      "success": 0,
+      "replyAgreement": 0.25,
+      "replyCorrect": 0,
+      "goldToolJaccard": 0.525,
+      "agentGoldToolJaccard": 0.525,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.09
+      },
+      "ms": {
+        "compiled": 1.882,
+        "agent": 11130
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0163",
+        "reply": "Hi Joseph, sorry about the trouble at checkout! Let's try a few quick things:\n\n1. Re-enter your card details carefully (number, expiration date, security code and billing ZIP) and submit again — a small typo is the most common cause.\n2. If it still fails, log out of your account, log back in, and try the purchase once more.\n3. Check the card's expiration date — if the card has expired or is close to it, the payment will be rejected.\n\nIf none of that works, just reply here and I can place the order for you directly — I'd only need your card number, expiration date and the item you'd like.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0,
+      "enabled": false
+    },
+    {
+      "plan": "plan-jeans",
+      "risk": "read",
+      "procedure": "proc-45",
+      "uses": 11,
+      "replyTemplate": "model",
+      "tested": 2,
+      "coverage": 0,
+      "success": 0,
+      "replyAgreement": null,
+      "replyCorrect": null,
+      "goldToolJaccard": null,
+      "agentGoldToolJaccard": null,
+      "costPerTicket": {
+        "compiled": null,
+        "agent": null
+      },
+      "ms": {
+        "compiled": null,
+        "agent": 0
+      },
+      "fallbacks": [
+        "T0146: select_faq: exactly one FAQ answer matches the question",
+        "T0306: select_faq: exactly one FAQ answer matches the question"
+      ],
+      "precision": null,
+      "enabled": false
+    },
+    {
+      "plan": "plan-status-active",
+      "risk": "read",
+      "procedure": "proc-11",
+      "uses": 7,
+      "replyTemplate": "model",
+      "tested": 9,
+      "coverage": 0.333,
+      "success": 0.222,
+      "replyAgreement": 0.667,
+      "replyCorrect": 0.667,
+      "goldToolJaccard": 0.314,
+      "agentGoldToolJaccard": 0.31,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.099
+      },
+      "ms": {
+        "compiled": 0.52,
+        "agent": 18328
+      },
+      "fallbacks": [
+        "T0013: pick_order: one unambiguous order",
+        "T0023: pick_order: one unambiguous order",
+        "T0033: pick_order: one unambiguous order",
+        "T0183: ",
+        "T0199: ",
+        "T0340: "
+      ],
+      "example": {
+        "ticket": "T0050",
+        "reply": "Hi David, thanks for reaching out! I pulled up your account (ID GDOHQVKFCO) and here's where your subscription stands:\n\n- **Status:** active\n- **Plan:** Premium\n- **Annual fee:** $99\n- **Amount due:** $99\n- **Due date:** 2026-10-21\n\nI've also emailed a link to your subscription/billing page at davidwilli322@example.com, so you can check these details anytime — your username is **davidwilli322**.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0.667,
+      "enabled": false
+    },
+    {
+      "plan": "plan-status-delivery-time",
+      "risk": "read",
+      "procedure": "proc-3",
+      "uses": 31,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 0,
+      "success": 0,
+      "replyAgreement": null,
+      "replyCorrect": null,
+      "goldToolJaccard": null,
+      "agentGoldToolJaccard": null,
+      "costPerTicket": {
+        "compiled": null,
+        "agent": null
+      },
+      "ms": {
+        "compiled": null,
+        "agent": 0
+      },
+      "fallbacks": [
+        "T0001: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0002: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0026: pick_order: one unambiguous order",
+        "T0030: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0051: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0099: pick_order: one unambiguous order",
+        "T0109: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0115: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0119: check_system: system reports no company error (else an order fix is needed → agent)",
+        "T0135: check_system: system reports no company error (else an order fix is needed → agent)"
+      ],
+      "precision": null,
+      "enabled": false
+    },
+    {
+      "plan": "plan-membership",
+      "risk": "read",
+      "procedure": "proc-27",
+      "uses": 11,
+      "replyTemplate": "model",
+      "tested": 3,
+      "coverage": 0,
+      "success": 0,
+      "replyAgreement": null,
+      "replyCorrect": null,
+      "goldToolJaccard": null,
+      "agentGoldToolJaccard": null,
+      "costPerTicket": {
+        "compiled": null,
+        "agent": null
+      },
+      "ms": {
+        "compiled": null,
+        "agent": 0
+      },
+      "fallbacks": [
+        "T0054: select_faq: exactly one FAQ answer matches the question",
+        "T0338: select_faq: exactly one FAQ answer matches the question",
+        "T0342: select_faq: exactly one FAQ answer matches the question"
+      ],
+      "precision": null,
+      "enabled": false
+    },
+    {
+      "plan": "plan-missing",
+      "risk": "write",
+      "procedure": "proc-48",
+      "uses": 5,
+      "replyTemplate": "model",
+      "tested": 6,
+      "coverage": 1,
+      "success": 0.5,
+      "replyAgreement": 0.333,
+      "replyCorrect": 0.5,
+      "goldToolJaccard": 0.486,
+      "agentGoldToolJaccard": 0.629,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.271
+      },
+      "ms": {
+        "compiled": 0.686,
+        "agent": 25873
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0171",
+        "reply": "Hi Crystal, thanks for reaching out, and sorry for the trouble!\n\nI pulled up order 3804539377 ($202), placed 2026-09-12 and shipped 2026-09-13 to 0325 Lexington Ave, Brighton, TX 11570, US. Tracking number NW3804539377 currently shows a status of \"delivered\", and the latest carrier scan reads \"Delivered, front door\" on 2026-09-16.\n\nIf the package isn't where you'd expect, it's worth checking around side and back doors, with neighbors, and with anyone else at the address — parcels left at the door sometimes get tucked out of sight, and they occasionally turn up a day or two after being scanned. If it still hasn't shown up after that, just reply here and I'll take the next step and get a free replacement order on its way to you.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0.5,
+      "enabled": false
+    },
+    {
+      "plan": "plan-return-size",
+      "risk": "write",
+      "procedure": "proc-6",
+      "uses": 20,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 0.8,
+      "success": 0.5,
+      "replyAgreement": 0.625,
+      "replyCorrect": 0.625,
+      "goldToolJaccard": 0.617,
+      "agentGoldToolJaccard": 0.574,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.15
+      },
+      "ms": {
+        "compiled": 2.51,
+        "agent": 19894
+      },
+      "fallbacks": [
+        "T0116: pick_order: one unambiguous order",
+        "T0205: pick_order: one unambiguous order"
+      ],
+      "example": {
+        "ticket": "T0006",
+        "reply": "Hi Sanya,\n\nSorry about the size mix-up! I've pulled up order 5845263466 (Gale jeans, $49, placed 2026-09-02) and confirmed it's eligible for a return under your silver membership — returns within 6 months or with receipt/original packaging.\n\nYour return request is logged and the details are saved. I have this address on file for the return label: 6970 Lexington Ave, San Mateo, MI 31018, US.\n\nJust let me know how you'd like to send it back — **by mail** (we'll email a prepaid label to sa114960@example.com), **in store**, or at a **drop-off center** — and I'll finish setting it up. Once we receive the item, your $49 refund goes back to your original credit card payment.\n\nAnything else I can help you with?"
+      },
+      "precision": 0.625,
+      "enabled": false
+    },
+    {
+      "plan": "plan-manage-change-address",
+      "risk": "write",
+      "procedure": "proc-18",
+      "uses": 12,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 1,
+      "success": 0.4,
+      "replyAgreement": 0.3,
+      "replyCorrect": 0.4,
+      "goldToolJaccard": 0.317,
+      "agentGoldToolJaccard": 0.426,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.118
+      },
+      "ms": {
+        "compiled": 1.127,
+        "agent": 14203
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0034",
+        "reply": "Hi Chloe, thanks for reaching out!\n\nI verified your identity and pulled up your account. The address we have on file for you is:\n\n**7494 2nd Ave, Newark, TX 79801, US**\n\nThat's the address your orders are set to ship to, and I've noted your request about the shipping address on your account so it's on record.\n\nIf that address isn't the one you want used going forward, just reply with the full new address (street, city, state, ZIP and country) and I'll get it updated for you.\n\nIs there anything else I can help you with today?"
+      },
+      "precision": 0.4,
+      "enabled": false
+    },
+    {
+      "plan": "plan-shopping-cart",
+      "risk": "write",
+      "procedure": "proc-34",
+      "uses": 3,
+      "replyTemplate": "model",
+      "tested": 4,
+      "coverage": 1,
+      "success": 0,
+      "replyAgreement": 0,
+      "replyCorrect": 0,
+      "goldToolJaccard": 0.5,
+      "agentGoldToolJaccard": 0.5,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.083
+      },
+      "ms": {
+        "compiled": 0.884,
+        "agent": 9962
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0089",
+        "reply": "Hi Norman, sorry about the cart trouble — let's get it sorted. A few quick things to try, in order:\n\n1. Refresh the product page and add the item to your cart again.\n2. If it still won't update, log out of your account and log back in, then try once more.\n3. Check the bottom left-hand side of the product page to see if the item is listed as Out-of-Stock — if it is, that would prevent it from being added.\n\nIf none of that works, I'm happy to place the order for you from my side. Just let me know the item you'd like (brand and type, e.g. \"Gale boots\" or \"Kline shirt\") along with your credit card number and its expiration date, and I'll take care of it.\n\nAnything else I can help you with?"
+      },
+      "precision": 0,
+      "enabled": false
+    },
+    {
+      "plan": "plan-pricing",
+      "risk": "read",
+      "procedure": "proc-16",
+      "uses": 11,
+      "replyTemplate": "model",
+      "tested": 4,
+      "coverage": 0.25,
+      "success": 0,
+      "replyAgreement": 0,
+      "replyCorrect": 0,
+      "goldToolJaccard": 1,
+      "agentGoldToolJaccard": 0,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.215
+      },
+      "ms": {
+        "compiled": 1748.882,
+        "agent": 10638
+      },
+      "fallbacks": [
+        "T0019: select_faq: exactly one FAQ answer matches the question",
+        "T0184: select_faq: exactly one FAQ answer matches the question",
+        "T0202: select_faq: exactly one FAQ answer matches the question"
+      ],
+      "example": {
+        "ticket": "T0128",
+        "reply": "Hi there, thanks for reaching out about pricing!\n\nI've checked our pricing policy and help center for you. The prices shown on the product page at the time you place your order are the ones that apply to that order, and they're listed in your order confirmation so you can compare them line by line. If something you're seeing doesn't match what you expected, just send me the order number and the items in question, and I'll review the details and explain exactly how the total was calculated.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0,
+      "enabled": false
+    },
+    {
+      "plan": "plan-return-color",
+      "risk": "write",
+      "procedure": "proc-23",
+      "uses": 7,
+      "replyTemplate": "model",
+      "tested": 8,
+      "coverage": 1,
+      "success": 0.5,
+      "replyAgreement": 0.5,
+      "replyCorrect": 0.5,
+      "goldToolJaccard": 0.608,
+      "agentGoldToolJaccard": 0.614,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.165
+      },
+      "ms": {
+        "compiled": 1.029,
+        "agent": 17271
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0045",
+        "reply": "Hi Norman, thanks for the details! I found your order #7629822906 for the Kline shirt ($94), placed 2026-08-26.\n\nGood news — as a gold member, your purchase qualifies, so I've gone ahead and recorded the return for the wrong color. I have your address on file for the return label: 1707 Lincoln Ave, Newark, CA 19691, US, and confirmations will go to nb568015@example.com.\n\nHow would you like to send it back — **by mail** (we'll email you a prepaid label to print), **in store**, or at a **drop-off center**? Just let me know and I'll set it up right away.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0.5,
+      "enabled": false
+    },
+    {
+      "plan": "plan-bad-price-yesterday",
+      "risk": "write",
+      "procedure": "proc-12",
+      "uses": 5,
+      "replyTemplate": "model",
+      "tested": 8,
+      "coverage": 0.5,
+      "success": 0,
+      "replyAgreement": 0,
+      "replyCorrect": 0,
+      "goldToolJaccard": 0.619,
+      "agentGoldToolJaccard": 0.632,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.233
+      },
+      "ms": {
+        "compiled": 0.897,
+        "agent": 23561
+      },
+      "fallbacks": [
+        "T0067: ",
+        "T0140: pick_order: one unambiguous order",
+        "T0263: ",
+        "T0379: pick_order: one unambiguous order"
+      ],
+      "example": {
+        "ticket": "T0016",
+        "reply": "Hi Joseph — thanks for reaching out, and I'm sorry for the surprise on the price!\n\nI pulled up your account and verified everything on my end. Our prices aren't fixed day to day: the pricing system adjusts item prices dynamically based on things like demand, stock and promotions, so an item can genuinely cost more or less from one day to the next. It isn't something we set manually at your account level, and I'm not able to roll a price back once it changes.\n\nThat said, I don't want to leave you empty-handed — as a silver member, here's a 10% off promo code you can use at checkout: **NW10-FN**, valid through 2026-10-04.\n\nIs there anything else I can help you with today?"
+      },
+      "precision": 0,
+      "enabled": false
+    },
+    {
+      "plan": "plan-timing",
+      "risk": "read",
+      "procedure": "proc-51",
+      "uses": 11,
+      "replyTemplate": "model",
+      "tested": 3,
+      "coverage": 0.667,
+      "success": 0.333,
+      "replyAgreement": 0.5,
+      "replyCorrect": 0.5,
+      "goldToolJaccard": 1,
+      "agentGoldToolJaccard": 0,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.138
+      },
+      "ms": {
+        "compiled": 1637.532,
+        "agent": 11862
+      },
+      "fallbacks": [
+        "T0283: select_faq: exactly one FAQ answer matches the question"
+      ],
+      "example": {
+        "ticket": "T0197",
+        "reply": "Hi there! Happy to help with the timing on this. 😊\n\nHere's what we have on file for **Spring collection**: Drops on March 1.\n\nThat's the schedule we follow, so you can plan around it — and we'll always announce any updates by email and on the site first.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0.5,
+      "enabled": false
+    },
+    {
+      "plan": "plan-return-stain",
+      "risk": "write",
+      "procedure": "proc-14",
+      "uses": 4,
+      "replyTemplate": "model",
+      "tested": 5,
+      "coverage": 1,
+      "success": 0.8,
+      "replyAgreement": 0.8,
+      "replyCorrect": 0.8,
+      "goldToolJaccard": 0.7,
+      "agentGoldToolJaccard": 0.65,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.152
+      },
+      "ms": {
+        "compiled": 0.416,
+        "agent": 17774
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0020",
+        "reply": "Hi Rodriguez, I'm so sorry your Gale shirt arrived with a stain — that's definitely not what you should have received.\n\nGood news: I checked your order #3209576909 (placed 2026-09-18, $59), and as a bronze member it falls within your return window, so your return is approved and the stain is noted on your case. I've listed your return address as 7336 1st Ave, La Fayette, WA 93350, US for the shipping label — just let me know if you'd like it sent from somewhere else.\n\nHow would you like to process the return?\n• By mail (we email you a prepaid label to print)\n• In store\n• Drop-off center\n\nTell me which you prefer, and whether you'd like a refund or a replacement, and I'll set it up right away. Is there anything else I can help you with?"
+      },
+      "precision": 0.8,
+      "enabled": true
+    },
+    {
+      "plan": "plan-recover-username",
+      "risk": "read",
+      "procedure": "proc-33",
+      "uses": 9,
+      "replyTemplate": "model",
+      "tested": 10,
+      "coverage": 0,
+      "success": 0,
+      "replyAgreement": null,
+      "replyCorrect": null,
+      "goldToolJaccard": null,
+      "agentGoldToolJaccard": null,
+      "costPerTicket": {
+        "compiled": null,
+        "agent": null
+      },
+      "ms": {
+        "compiled": null,
+        "agent": 0
+      },
+      "fallbacks": [
+        "T0080: pull_up_account: account found",
+        "T0102: pick_order: one unambiguous order",
+        "T0154: pick_order: one unambiguous order",
+        "T0200: pick_order: one unambiguous order",
+        "T0226: pick_order: one unambiguous order",
+        "T0227: pick_order: one unambiguous order",
+        "T0259: pick_order: one unambiguous order",
+        "T0276: pick_order: one unambiguous order",
+        "T0354: pick_order: one unambiguous order",
+        "T0357: pick_order: one unambiguous order"
+      ],
+      "precision": null,
+      "enabled": false
+    },
+    {
+      "plan": "plan-status-quantity",
+      "risk": "read",
+      "procedure": "proc-21",
+      "uses": 6,
+      "replyTemplate": "model",
+      "tested": 7,
+      "coverage": 0.571,
+      "success": 0.429,
+      "replyAgreement": 0.75,
+      "replyCorrect": 0.75,
+      "goldToolJaccard": 0.725,
+      "agentGoldToolJaccard": 0.675,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.23
+      },
+      "ms": {
+        "compiled": 0.233,
+        "agent": 26326
+      },
+      "fallbacks": [
+        "T0097: ",
+        "T0101: ",
+        "T0106: pick_order: one unambiguous order"
+      ],
+      "example": {
+        "ticket": "T0041",
+        "reply": "Hi Norman, thanks for reaching out — I've verified your account and pulled up order 6487558176.\n\n**Status:** placed 2026-09-22, shipped 2026-09-23, and currently **out for delivery** (tracking NW6487558176; last scan \"Out for delivery, San Mateo\" on 2026-09-27, ETA 2026-09-27). It's headed to 1497 Lincoln Ave, San Mateo, TX 53798, US, and the order total is $187, paid by paypal (paid, invoice INV-558176).\n\nOn your question about the items and quantities: I reviewed it in our system, and the result is \"system confirms the customer's claim (company error)\".\n\nSince the package is already on its way, we can't change what's in this shipment. Please accept the delivery, and if anything inside doesn't match what you ordered, just reply here and we'll start a return and refund for you right away.\n\nAnything else I can help you with?"
+      },
+      "precision": 0.75,
+      "enabled": true
+    },
+    {
+      "plan": "plan-policy",
+      "risk": "read",
+      "procedure": "proc-17",
+      "uses": 11,
+      "replyTemplate": "model",
+      "tested": 3,
+      "coverage": 1,
+      "success": 0,
+      "replyAgreement": 0,
+      "replyCorrect": 0,
+      "goldToolJaccard": 1,
+      "agentGoldToolJaccard": 0,
+      "costPerTicket": {
+        "compiled": 0.001,
+        "agent": 0.089
+      },
+      "ms": {
+        "compiled": 1538.709,
+        "agent": 8966
+      },
+      "fallbacks": [],
+      "example": {
+        "ticket": "T0029",
+        "reply": "Hi there! Thanks for reaching out, and happy to help before you buy.\n\nI've looked into your question about our policy. The details can vary depending on your account and membership level, so if you let me know your account email (or confirm the one you're writing from), I can give you the exact terms that apply to you — including any time limits, what you'll need to have on hand, and the options available to you.\n\nIn the meantime, if you'd like, I can also walk you through the steps involved or help you place an order.\n\nIs there anything else I can help you with?"
+      },
+      "precision": 0,
+      "enabled": false
+    }
+  ],
+  "notCompiled": []
+}

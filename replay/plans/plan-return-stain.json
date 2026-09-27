@@ -1,0 +1,95 @@
+{
+  "id": "plan-return-stain",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "return",
+    "topic": "return_stain",
+    "key": "Task 1: product defect: return stain."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "details": "return stain"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, I'm so sorry your {{s.pick_order.items.0.name}} arrived with a stain — that's definitely not what you should have received.\n\nGood news: I checked your order #{{s.pick_order.id}} (placed {{s.pick_order.placedAt}}, {{s.pick_order.total|money}}), and as a {{s.membership.level}} member it falls within your return window, so your return is approved and the stain is noted on your case. I've listed your return address as {{s.pick_order.shipTo}} for the shipping label — just let me know if you'd like it sent from somewhere else.\n\nHow would you like to process the return?\n• By mail (we email you a prepaid label to print)\n• In store\n• Drop-off center\n\nTell me which you prefer, and whether you'd like a refund or a replacement, and I'll set it up right away. Is there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-14",
+    "intent": "return_stain",
+    "uses": 4,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.369Z",
+  "validation": {
+    "tested": 5,
+    "compiled": 5,
+    "correct": 4,
+    "precision": 0.8
+  },
+  "enabled": true
+}

@@ -1,0 +1,85 @@
+{
+  "id": "plan-recover-username",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "account",
+    "topic": "recover_username",
+    "key": "Task 1: account access: recover username."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} — thanks for reaching out! I've located your account (ID {{s.pull_up_account.account.accountId}}) using the details you provided.\n\n**Your username: {{s.pull_up_account.account.username}}**\n\nJust a heads-up: the email on file is {{s.pull_up_account.account.email}}, so use that address when signing in or requesting a password reset. If the password is also a mystery, let me know and I can help you reset it.\n\nIs there anything else I can help you with today?",
+  "source": {
+    "procedureId": "proc-33",
+    "intent": "recover_username",
+    "uses": 9,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 0,
+    "correct": 0,
+    "precision": null
+  },
+  "enabled": false
+}

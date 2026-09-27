@@ -1,0 +1,59 @@
+{
+  "id": "plan-membership",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "policy",
+    "topic": "membership",
+    "key": "Task 1: storewide query: membership."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "search_kb",
+      "tool": "search_kb",
+      "args": {
+        "query": "membership faq"
+      }
+    },
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/membership"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there — happy to explain how our membership works!\n\n**Levels:** There are four — Guest (not yet a member), Bronze, Silver and Gold. You don't need to sign up or apply; you reach a level automatically based on what you spend in a calendar year:\n\n- **Bronze** – $100\n- **Silver** – $250\n- **Gold** – $500\n\n**How long it lasts:** Your level stays active for one year from the date you reach it, and it renews automatically whenever you hit the spend threshold again.\n\n**What you get:** Easier and longer return windows, fees waived on orders, replacement promo codes if one expires, and better perks the higher your level.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-27",
+    "intent": "membership",
+    "uses": 11,
+    "examples": 3,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (search_kb → read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 3,
+    "compiled": 0,
+    "correct": 0,
+    "precision": null
+  },
+  "enabled": false
+}

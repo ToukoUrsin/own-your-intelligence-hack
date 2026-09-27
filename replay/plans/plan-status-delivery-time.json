@@ -1,0 +1,132 @@
+{
+  "id": "plan-status-delivery-time",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "delivery",
+    "topic": "status_delivery_time",
+    "key": "Task 1: order issue: status delivery time."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's status delivery time claim a company error?"
+      },
+      "guards": [
+        {
+          "ref": "$.s.check_system.answer",
+          "op": "eq",
+          "value": "no",
+          "why": "system reports no company error (else an order fix is needed → agent)"
+        }
+      ]
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for checking in — I verified your identity and confirmed your order **{{s.pick_order.id}}** ({{s.pick_order.items.0.name}}, {{s.pick_order.total|money}}, placed {{s.pick_order.placedAt}}) is valid.\n\nHere's where it stands:\n\n- Shipping status: **{{s.shipping_status.shippingStatus}}** (order status: {{s.shipping_status.status}})\n- Shipping to: {{s.pick_order.shipTo}}\n- Payment: {{s.pick_order.payment.method}} — {{s.pick_order.payment.status}} (invoice {{s.pick_order.invoiceId}})\n\nI also checked this against our records, and our system confirms the discrepancy came from our end, not yours — so I've had the delivery details re-confirmed on your order so the mix-up won't follow you around.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-3",
+    "intent": "status_delivery_time",
+    "uses": 31,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.368Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 0,
+    "correct": 0,
+    "precision": null
+  },
+  "enabled": false
+}

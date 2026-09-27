@@ -1,0 +1,136 @@
+{
+  "id": "plan-bad-price-yesterday",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "assess",
+    "subject": "pricing",
+    "topic": "bad_price_yesterday",
+    "key": "Task 1: purchase dispute: bad price yesterday."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "record_reason",
+      "tool": "record_reason",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "-",
+        "reason": "bad price yesterday"
+      }
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "question": "Is the customer's bad price yesterday claim a company error?"
+      }
+    },
+    {
+      "id": "promo_rule",
+      "tool": "policy_check",
+      "args": {
+        "rule": "promo_allowed",
+        "level": "$.s.membership.level",
+        "answer": "$.s.check_system.answer"
+      }
+    },
+    {
+      "id": "promo_code",
+      "tool": "promo_code",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "reason": "bad price yesterday",
+        "percent": 10
+      },
+      "guards": [
+        {
+          "ref": "$.s.promo_rule.ok",
+          "op": "true",
+          "why": "policies/membership: level may get a new code and system confirms company error"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} — thanks for reaching out, and I'm sorry for the surprise on the price!\n\nI pulled up your account and verified everything on my end. Our prices aren't fixed day to day: the pricing system adjusts item prices dynamically based on things like demand, stock and promotions, so an item can genuinely cost more or less from one day to the next. It isn't something we set manually at your account level, and I'm not able to roll a price back once it changes.\n\nThat said, I don't want to leave you empty-handed — as a {{s.membership.level}} member, here's a {{s.promo_code.percent}}% off promo code you can use at checkout: **{{s.promo_code.code}}**, valid through {{s.promo_code.expires}}.\n\nIs there anything else I can help you with today?",
+  "source": {
+    "procedureId": "proc-12",
+    "intent": "bad_price_yesterday",
+    "uses": 5,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.369Z",
+  "validation": {
+    "tested": 8,
+    "compiled": 4,
+    "correct": 0,
+    "precision": 0
+  },
+  "enabled": false
+}
