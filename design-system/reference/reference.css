@@ -1,0 +1,15 @@
+/* Reference composition only; controls live in ../components.css. */
+.ref-section-heading { justify-content: space-between; }
+.ref-component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--ui-space-8); }
+.ref-state-list { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--ui-space-3) var(--ui-space-5); }
+.ref-swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: var(--ui-space-5); }
+.ref-swatches > div { display: grid; gap: var(--ui-space-2); }
+.ref-swatches code { font-size: var(--ui-text-caption); color: var(--ui-muted); }
+.ref-swatch { display: block; height: var(--ui-space-12); border: var(--ui-border-width) solid var(--ui-border); border-radius: var(--ui-radius-control); }
+.ref-swatch--bg { background: var(--ui-bg); }
+.ref-swatch--surface { background: var(--ui-surface); }
+.ref-swatch--fg { background: var(--ui-fg); }
+.ref-swatch--muted { background: var(--ui-muted); }
+.ref-swatch--accent { background: var(--ui-accent); }
+.ref-display { font-family: var(--ui-font-display); font-size: var(--ui-text-title); letter-spacing: var(--ui-tracking-display); line-height: var(--ui-leading-tight); }
+.ref-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ui-space-3); padding-top: var(--ui-space-6); border-top: var(--ui-border-width) solid var(--ui-line); }
