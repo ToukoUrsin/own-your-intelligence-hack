@@ -45,7 +45,23 @@ export type Solved = Trace & {
   learned?: string; reinforced?: string; revised?: string; abandoned?: boolean; library: number;
   tier: "explored" | "recalled" | "compiled"; backend?: string; planId?: string;
   shadow?: { planId: string; agree: boolean; trial: number; promoted: boolean; why?: string }; shadowCost?: number;
+  gate_reason?: string; routerConfidence?: number;
 };
+
+// Reuse gate: a learned path or compiled plan is reused only when the router is confident and the ticket asks for one
+// thing. Otherwise the full agent explores (and nothing is filed under the uncertain key). GATE=0 disables it.
+// GATE_CONF was calibrated on data/heldout.jsonl + the final replay run (replay/gate-calibration.json).
+export const GATE_CONF = Number(process.env.GATE_CONF ?? 0.7);
+const MULTI = /\b(two things|couple of things|a few things|also|while i have you|another thing|one more thing|in addition|additionally|as well as)\b/i;
+export function multiRequest(text: string): boolean {
+  const qs = (text.match(/\?/g) ?? []).length;
+  return MULTI.test(text) || qs >= 3;
+}
+export function gateReason(text: string, n: Normalized): string | undefined {
+  if (process.env.GATE === "0") return;
+  if (multiRequest(text)) return "multi_request";
+  if (typeof n.confidence === "number" && n.confidence < GATE_CONF) return `low_confidence:${n.confidence.toFixed(2)}<${GATE_CONF}`;
+}
 
 // 27 Bitext intents (data/ROUTER.md). A standardized request is one of these labels.
 const BITEXT_INTENTS = [
@@ -535,6 +551,11 @@ export async function solve(ticket: string, opts: { id?: string; learn?: boolean
   }
   const n = await normalize(body(ticket));
   const normalized = n.standardized ? n : { ...n, request: body(ticket) };
+  const gate = opts.recall === false ? undefined : gateReason(body(ticket), n);
+  if (gate) {
+    const t = await handleTicket(ticket);
+    return { ...t, recalled: false, similarity: 0, normalized, library: (await load()).length, tier: "explored", backend: "gated", gate_reason: gate, routerConfidence: n.confidence };
+  }
 
   // Tier 1: compiled plan, matched on the canonical primary goal (operation + subject). A plan serves only after it
   // graduated in shadow: run next to the agent on 3 matching tickets, promoted when >= 2 agree with the agent.
@@ -543,7 +564,7 @@ export async function solve(ticket: string, opts: { id?: string; learn?: boolean
   const plan = task ? planFor(cm, task) : undefined;
   if (plan && shadowState(plan.id).promoted) {
     const c = await cm.execute(plan, task, ticket).catch(() => null);
-    if (c) return { ...c, ticket, recalled: false, similarity: 1, normalized, library: (await load()).length, tier: "compiled", planId: c.planId };
+    if (c) return { ...c, ticket, recalled: false, similarity: 1, normalized, library: (await load()).length, tier: "compiled", planId: c.planId, routerConfidence: n.confidence };
   }
 
   // Tier 2: recalled path. Tier 3: explore.
@@ -590,6 +611,6 @@ export async function solve(ticket: string, opts: { id?: string; learn?: boolean
   return {
     ...trace, recalled: !!hit, procedureId: hit?.id, procedureTitle: hit?.title, procedureIntent: hit?.goldIntent ?? hit?.intent, procedureTools: hit ? [...hit.tools] : undefined,
     similarity: r.similarity, normalized, learned, reinforced, revised, abandoned, library: (await load()).length,
-    tier: hit ? "recalled" : "explored", backend: r.backend, shadow, shadowCost,
+    tier: hit ? "recalled" : "explored", backend: r.backend, shadow, shadowCost, routerConfidence: n.confidence,
   };
 }

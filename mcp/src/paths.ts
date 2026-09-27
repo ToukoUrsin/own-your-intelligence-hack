@@ -36,6 +36,9 @@ function loggedSession(): Step[] {
 export async function recallPath(request: string) {
   memory.reload();
   const normalized = await memory.normalize(request);
+  // Reuse gate (agent/src/memory.ts): uncertain or multi-part requests go to the full agent, no path is offered.
+  const gate = memory.gateReason(request, normalized);
+  if (gate) return { found: false, gated: true, gate_reason: gate, normalized: normalized.request, normalizer: normalized.source, confidence: normalized.confidence ?? null, instruction: "Uncertain or multi-part request: do not reuse a saved path. Explore with search_kb, read_page and the shop tools for each request, then call save_path only for a single clear request." };
   const r = await memory.recall(normalized.request);
   const hit = r.procedure && r.similarity >= THRESHOLD ? r.procedure : undefined;
   const common = { similarity: round(r.similarity), normalized: normalized.request, normalizer: normalized.source, backend: r.backend };

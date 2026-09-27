@@ -9,17 +9,21 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprot
 import { recallPath, savePath } from "./paths";
 import { runShopTool, shopTools } from "./tools";
 import { lastFallback, loadPlans, tryCompiled } from "../../agent/src/compiled";
-import { activeNormalizer, normalize } from "../../agent/src/memory";
+import { activeNormalizer, gateReason, multiRequest, normalize } from "../../agent/src/memory";
 
 // Compiled tier for QM's pre-turn hook: regex task first (no model), then the memory.ts normalizer (NORMALIZER, never
 // Memorable). Returns {served:true, reply, planId, steps, ms, plan} or {served:false, why}.
 async function tryCompiledRoute(text: string) {
   const t0 = performance.now();
   let normalizer = "regex";
+  // Reuse gate: multi-part requests never get a compiled reply; low router confidence neither (agent/src/memory.ts).
+  if (process.env.GATE !== "0" && multiRequest(text)) return { served: false, why: "gate: multi_request", gate_reason: "multi_request", ms: Math.round(performance.now() - t0), normalizer };
   let r = await tryCompiled(null, text).catch(() => null);
   if (!r && process.env.TRY_COMPILED_NORMALIZE !== "0" && activeNormalizer() !== "raw") {
     normalizer = activeNormalizer();
     const n = await normalize(text).catch(() => undefined);
+    const gate = n ? gateReason(text, n) : undefined;
+    if (gate) return { served: false, why: `gate: ${gate}`, gate_reason: gate, ms: Math.round(performance.now() - t0), normalizer };
     if (n?.standardized) r = await tryCompiled(n, text).catch(() => null);
   }
   const ms = Math.round(performance.now() - t0);
