@@ -96,7 +96,10 @@ export async function handleTicket(ticket: string, hint?: string): Promise<Trace
       const reply = response.content.filter((b): b is Anthropic.TextBlock => b.type === "text").map((b) => b.text).join("\n");
       // The model occasionally ends a turn without text; ask once more for the customer reply.
       if (!reply.trim() && modelCalls < 12) {
-        messages.push({ role: "user", content: "Write the reply to the customer now." });
+        messages.pop(); // drop the empty assistant turn
+        const last = messages[messages.length - 1];
+        const nudge = { type: "text" as const, text: "Write the reply to the customer now." };
+        last.content = typeof last.content === "string" ? [{ type: "text", text: last.content }, nudge] : [...last.content, nudge];
         continue;
       }
       return { ticket, steps, reply, ms: Date.now() - started, inputTokens, outputTokens, modelCalls };
