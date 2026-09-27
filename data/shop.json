@@ -1,0 +1,680 @@
+{
+ "products": [
+  {
+   "sku": "BO-1",
+   "name": "Burr One grinder",
+   "price": 249
+  },
+  {
+   "sku": "BO-MINI",
+   "name": "Burr Mini grinder",
+   "price": 129
+  },
+  {
+   "sku": "PKP-1",
+   "name": "Pour Kettle Pro",
+   "price": 139
+  },
+  {
+   "sku": "DRIP-2",
+   "name": "Dripper Two (ceramic)",
+   "price": 34
+  },
+  {
+   "sku": "SCALE-1",
+   "name": "Brew Scale",
+   "price": 59
+  },
+  {
+   "sku": "FILT-100",
+   "name": "Paper filters, 100 pack",
+   "price": 9
+  },
+  {
+   "sku": "BEAN-L",
+   "name": "Light roast 340 g",
+   "price": 22
+  },
+  {
+   "sku": "BEAN-M",
+   "name": "Medium roast 340 g",
+   "price": 22
+  },
+  {
+   "sku": "BEAN-D",
+   "name": "Dark roast 340 g",
+   "price": 22
+  }
+ ],
+ "customers": [
+  {
+   "email": "maya.lin@example.com",
+   "name": "Maya Lin",
+   "plan": "Plus",
+   "since": "2025-03-14",
+   "defaultAddress": "88 Alder St, Portland, OR 97205, US",
+   "paymentMethods": [
+    "Visa ending 4242",
+    "PayPal"
+   ],
+   "newsletter": true,
+   "status": "active"
+  },
+  {
+   "email": "dev.patel@example.com",
+   "name": "Dev Patel",
+   "plan": "Standard",
+   "since": "2026-01-09",
+   "defaultAddress": "410 Lake Ave, Oakland, CA 94610, US",
+   "paymentMethods": [
+    "Mastercard ending 5454"
+   ],
+   "newsletter": false,
+   "status": "active"
+  },
+  {
+   "email": "sam.ortiz@example.com",
+   "name": "Sam Ortiz",
+   "plan": "Standard",
+   "since": "2026-09-01",
+   "defaultAddress": "12 Pine Rd, Portland, OR 97214, US",
+   "paymentMethods": [
+    "Apple Pay"
+   ],
+   "newsletter": false,
+   "status": "active"
+  },
+  {
+   "email": "hana.sato@example.com",
+   "name": "Hana Sato",
+   "plan": "Plus",
+   "since": "2024-11-20",
+   "defaultAddress": "3-1 Kita Ave, Seattle, WA 98103, US",
+   "paymentMethods": [
+    "Amex ending 1005"
+   ],
+   "newsletter": true,
+   "status": "active"
+  },
+  {
+   "email": "leo.moreau@example.com",
+   "name": "Léo Moreau",
+   "plan": "Standard",
+   "since": "2026-05-02",
+   "defaultAddress": "14 rue Oberkampf, 75011 Paris, FR",
+   "paymentMethods": [
+    "Visa ending 1881"
+   ],
+   "newsletter": true,
+   "status": "active"
+  },
+  {
+   "email": "orders@bluedoorcafe.example",
+   "name": "Blue Door Café (Priya Nair)",
+   "plan": "Business",
+   "since": "2025-08-11",
+   "defaultAddress": "501 Grand Ave, Oakland, CA 94610, US",
+   "paymentMethods": [
+    "Net-30 invoice",
+    "Visa ending 7730"
+   ],
+   "newsletter": false,
+   "status": "active"
+  },
+  {
+   "email": "tom.becker@example.com",
+   "name": "Tom Becker",
+   "plan": "Standard",
+   "since": "2026-02-17",
+   "defaultAddress": "Torstraße 9, 10119 Berlin, DE",
+   "paymentMethods": [
+    "PayPal"
+   ],
+   "newsletter": false,
+   "status": "active"
+  },
+  {
+   "email": "ana.silva@example.com",
+   "name": "Ana Silva",
+   "plan": "Plus",
+   "since": "2025-06-30",
+   "defaultAddress": "220 Queen St W, Toronto, ON M5V 2A1, CA",
+   "paymentMethods": [
+    "Mastercard ending 3301",
+    "Google Pay"
+   ],
+   "newsletter": true,
+   "status": "active"
+  },
+  {
+   "email": "jordan.kim@example.com",
+   "name": "Jordan Kim",
+   "plan": "Standard",
+   "since": "2026-09-20",
+   "defaultAddress": "77 Mission St, San Francisco, CA 94105, US",
+   "paymentMethods": [
+    "Visa ending 0019"
+   ],
+   "newsletter": false,
+   "status": "active"
+  },
+  {
+   "email": "olivia.brown@example.com",
+   "name": "Olivia Brown",
+   "plan": "Standard",
+   "since": "2025-12-05",
+   "defaultAddress": "9 Hill St, London W1J 5LF, GB",
+   "paymentMethods": [
+    "Visa ending 6060"
+   ],
+   "newsletter": true,
+   "status": "active"
+  }
+ ],
+ "orders": [
+  {
+   "id": "KC-10421",
+   "email": "maya.lin@example.com",
+   "items": [
+    {
+     "sku": "BO-1",
+     "name": "Burr One grinder",
+     "price": 249,
+     "serial": "BO-5512"
+    }
+   ],
+   "total": 249,
+   "status": "delivered",
+   "placedAt": "2026-07-28",
+   "shipTo": "88 Alder St, Portland, OR 97205, US",
+   "payment": {
+    "method": "Visa ending 4242",
+    "status": "paid"
+   },
+   "invoiceId": "INV-20421",
+   "tracking": "1Z999AA10123450001",
+   "shippedAt": "2026-07-29",
+   "deliveredAt": "2026-08-02"
+  },
+  {
+   "id": "KC-11390",
+   "email": "maya.lin@example.com",
+   "items": [
+    {
+     "sku": "BEAN-M",
+     "name": "Medium roast 340 g",
+     "price": 22
+    },
+    {
+     "sku": "FILT-100",
+     "name": "Paper filters, 100 pack",
+     "price": 9
+    }
+   ],
+   "total": 31,
+   "status": "processing",
+   "placedAt": "2026-09-26",
+   "shipTo": "88 Alder St, Portland, OR 97205, US",
+   "payment": {
+    "method": "PayPal",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21390"
+  },
+  {
+   "id": "KC-10988",
+   "email": "dev.patel@example.com",
+   "items": [
+    {
+     "sku": "PKP-1",
+     "name": "Pour Kettle Pro",
+     "price": 139,
+     "serial": "2608-11473"
+    }
+   ],
+   "total": 139,
+   "status": "delivered",
+   "placedAt": "2026-09-06",
+   "shipTo": "410 Lake Ave, Oakland, CA 94610, US",
+   "payment": {
+    "method": "Mastercard ending 5454",
+    "status": "paid"
+   },
+   "invoiceId": "INV-20988",
+   "tracking": "1Z999AA10123452222",
+   "shippedAt": "2026-09-07",
+   "deliveredAt": "2026-09-10"
+  },
+  {
+   "id": "KC-11102",
+   "email": "dev.patel@example.com",
+   "items": [
+    {
+     "sku": "BEAN-M",
+     "name": "Medium roast 340 g",
+     "price": 22
+    },
+    {
+     "sku": "BEAN-D",
+     "name": "Dark roast 340 g",
+     "price": 22
+    }
+   ],
+   "total": 50,
+   "status": "shipped",
+   "placedAt": "2026-09-18",
+   "shipTo": "410 Lake Ave, Oakland, CA 94610, US",
+   "payment": {
+    "method": "Mastercard ending 5454",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21102",
+   "tracking": "1Z999AA10123456784",
+   "shippedAt": "2026-09-19"
+  },
+  {
+   "id": "KC-11230",
+   "email": "sam.ortiz@example.com",
+   "items": [
+    {
+     "sku": "BO-MINI",
+     "name": "Burr Mini grinder",
+     "price": 129
+    }
+   ],
+   "total": 129,
+   "status": "shipped",
+   "placedAt": "2026-09-23",
+   "shipTo": "12 Pine Rd, Portland, OR 97214, US",
+   "payment": {
+    "method": "Apple Pay",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21230",
+   "tracking": "1Z999AA10123459999",
+   "shippedAt": "2026-09-24"
+  },
+  {
+   "id": "KC-11401",
+   "email": "sam.ortiz@example.com",
+   "items": [
+    {
+     "sku": "SCALE-1",
+     "name": "Brew Scale",
+     "price": 59
+    }
+   ],
+   "total": 65,
+   "status": "processing",
+   "placedAt": "2026-09-27",
+   "shipTo": "12 Pine Rd, Portland, OR 97214, US",
+   "payment": {
+    "method": "Apple Pay",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21401"
+  },
+  {
+   "id": "KC-10877",
+   "email": "hana.sato@example.com",
+   "items": [
+    {
+     "sku": "DRIP-2",
+     "name": "Dripper Two (ceramic)",
+     "price": 34
+    },
+    {
+     "sku": "SCALE-1",
+     "name": "Brew Scale",
+     "price": 59
+    }
+   ],
+   "total": 93,
+   "status": "delivered",
+   "placedAt": "2026-08-30",
+   "shipTo": "3-1 Kita Ave, Seattle, WA 98103, US",
+   "payment": {
+    "method": "Amex ending 1005",
+    "status": "partially_refunded"
+   },
+   "invoiceId": "INV-20877",
+   "tracking": "1Z999AA10123458877",
+   "shippedAt": "2026-08-31",
+   "deliveredAt": "2026-09-03"
+  },
+  {
+   "id": "KC-11355",
+   "email": "hana.sato@example.com",
+   "items": [
+    {
+     "sku": "PKP-1",
+     "name": "Pour Kettle Pro",
+     "price": 139
+    }
+   ],
+   "total": 139,
+   "status": "processing",
+   "placedAt": "2026-09-26",
+   "shipTo": "3-1 Kita Ave, Seattle, WA 98103, US",
+   "payment": {
+    "method": "Amex ending 1005",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21355"
+  },
+  {
+   "id": "KC-11044",
+   "email": "leo.moreau@example.com",
+   "items": [
+    {
+     "sku": "BO-1",
+     "name": "Burr One grinder",
+     "price": 249
+    }
+   ],
+   "total": 278,
+   "status": "shipped",
+   "placedAt": "2026-09-12",
+   "shipTo": "14 rue Oberkampf, 75011 Paris, FR",
+   "payment": {
+    "method": "Visa ending 1881",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21044",
+   "tracking": "DHL4471902231",
+   "shippedAt": "2026-09-14"
+  },
+  {
+   "id": "KC-11380",
+   "email": "leo.moreau@example.com",
+   "items": [
+    {
+     "sku": "BEAN-L",
+     "name": "Light roast 340 g",
+     "price": 22
+    }
+   ],
+   "total": 51,
+   "status": "processing",
+   "placedAt": "2026-09-26",
+   "shipTo": "14 rue Oberkampf, 75011 Paris, FR",
+   "payment": {
+    "method": "Visa ending 1881",
+    "status": "failed"
+   },
+   "invoiceId": "INV-21380"
+  },
+  {
+   "id": "KC-10950",
+   "email": "orders@bluedoorcafe.example",
+   "items": [
+    {
+     "sku": "BEAN-M",
+     "name": "Medium roast 340 g",
+     "price": 22
+    },
+    {
+     "sku": "BEAN-D",
+     "name": "Dark roast 340 g",
+     "price": 22
+    },
+    {
+     "sku": "FILT-100",
+     "name": "Paper filters, 100 pack",
+     "price": 9
+    }
+   ],
+   "total": 53,
+   "status": "delivered",
+   "placedAt": "2026-09-02",
+   "shipTo": "501 Grand Ave, Oakland, CA 94610, US",
+   "payment": {
+    "method": "Net-30 invoice",
+    "status": "due"
+   },
+   "invoiceId": "INV-20950",
+   "tracking": "1Z999AA10123450950",
+   "shippedAt": "2026-09-02",
+   "deliveredAt": "2026-09-04"
+  },
+  {
+   "id": "KC-11299",
+   "email": "orders@bluedoorcafe.example",
+   "items": [
+    {
+     "sku": "BO-1",
+     "name": "Burr One grinder",
+     "price": 249
+    },
+    {
+     "sku": "BEAN-M",
+     "name": "Medium roast 340 g",
+     "price": 22
+    }
+   ],
+   "total": 271,
+   "status": "shipped",
+   "placedAt": "2026-09-24",
+   "shipTo": "501 Grand Ave, Oakland, CA 94610, US",
+   "payment": {
+    "method": "Net-30 invoice",
+    "status": "due"
+   },
+   "invoiceId": "INV-21299",
+   "tracking": "1Z999AA10123451299",
+   "shippedAt": "2026-09-25"
+  },
+  {
+   "id": "KC-10715",
+   "email": "tom.becker@example.com",
+   "items": [
+    {
+     "sku": "PKP-1",
+     "name": "Pour Kettle Pro",
+     "price": 139
+    }
+   ],
+   "total": 168,
+   "status": "cancelled",
+   "placedAt": "2026-08-14",
+   "shipTo": "Torstraße 9, 10119 Berlin, DE",
+   "payment": {
+    "method": "PayPal",
+    "status": "refunded"
+   },
+   "invoiceId": "INV-20715"
+  },
+  {
+   "id": "KC-11210",
+   "email": "tom.becker@example.com",
+   "items": [
+    {
+     "sku": "BO-MINI",
+     "name": "Burr Mini grinder",
+     "price": 129
+    }
+   ],
+   "total": 158,
+   "status": "shipped",
+   "placedAt": "2026-09-15",
+   "shipTo": "Torstraße 9, 10119 Berlin, DE",
+   "payment": {
+    "method": "PayPal",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21210",
+   "tracking": "DHL4471905510",
+   "shippedAt": "2026-09-16"
+  },
+  {
+   "id": "KC-10802",
+   "email": "ana.silva@example.com",
+   "items": [
+    {
+     "sku": "BO-MINI",
+     "name": "Burr Mini grinder",
+     "price": 129
+    }
+   ],
+   "total": 158,
+   "status": "delivered",
+   "placedAt": "2026-08-20",
+   "shipTo": "220 Queen St W, Toronto, ON M5V 2A1, CA",
+   "payment": {
+    "method": "Mastercard ending 3301",
+    "status": "refund_pending"
+   },
+   "invoiceId": "INV-20802",
+   "tracking": "DHL4471900802",
+   "shippedAt": "2026-08-21",
+   "deliveredAt": "2026-08-29"
+  },
+  {
+   "id": "KC-11412",
+   "email": "jordan.kim@example.com",
+   "items": [
+    {
+     "sku": "DRIP-2",
+     "name": "Dripper Two (ceramic)",
+     "price": 34
+    },
+    {
+     "sku": "FILT-100",
+     "name": "Paper filters, 100 pack",
+     "price": 9
+    }
+   ],
+   "total": 49,
+   "status": "processing",
+   "placedAt": "2026-09-27",
+   "shipTo": "77 Mission St, San Francisco, CA 94105, US",
+   "payment": {
+    "method": "Visa ending 0019",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21412"
+  },
+  {
+   "id": "KC-11150",
+   "email": "olivia.brown@example.com",
+   "items": [
+    {
+     "sku": "SCALE-1",
+     "name": "Brew Scale",
+     "price": 59
+    },
+    {
+     "sku": "BEAN-L",
+     "name": "Light roast 340 g",
+     "price": 22
+    }
+   ],
+   "total": 110,
+   "status": "delivered",
+   "placedAt": "2026-09-08",
+   "shipTo": "9 Hill St, London W1J 5LF, GB",
+   "payment": {
+    "method": "Visa ending 6060",
+    "status": "paid"
+   },
+   "invoiceId": "INV-21150",
+   "tracking": "DHL4471901150",
+   "shippedAt": "2026-09-09",
+   "deliveredAt": "2026-09-17"
+  }
+ ],
+ "tracking": {
+  "1Z999AA10123450001": {
+   "lastScan": "Delivered, front door",
+   "date": "2026-08-02",
+   "delivered": true
+  },
+  "1Z999AA10123452222": {
+   "lastScan": "Delivered, mailroom",
+   "date": "2026-09-10",
+   "delivered": true
+  },
+  "1Z999AA10123456784": {
+   "lastScan": "Departed facility, Reno NV",
+   "date": "2026-09-19",
+   "delivered": false,
+   "eta": "unknown (no scan for 6 business days)"
+  },
+  "1Z999AA10123459999": {
+   "lastScan": "Out for delivery, Portland OR",
+   "date": "2026-09-27",
+   "delivered": false,
+   "eta": "2026-09-27"
+  },
+  "1Z999AA10123458877": {
+   "lastScan": "Delivered, porch",
+   "date": "2026-09-03",
+   "delivered": true
+  },
+  "DHL4471902231": {
+   "lastScan": "Customs cleared, Paris CDG",
+   "date": "2026-09-25",
+   "delivered": false,
+   "eta": "2026-09-29"
+  },
+  "1Z999AA10123450950": {
+   "lastScan": "Delivered, reception",
+   "date": "2026-09-04",
+   "delivered": true
+  },
+  "1Z999AA10123451299": {
+   "lastScan": "Arrived at facility, Oakland CA",
+   "date": "2026-09-26",
+   "delivered": false,
+   "eta": "2026-09-29"
+  },
+  "DHL4471905510": {
+   "lastScan": "Held at customs, Leipzig DE: import duties unpaid",
+   "date": "2026-09-22",
+   "delivered": false,
+   "eta": "after duties are paid"
+  },
+  "DHL4471900802": {
+   "lastScan": "Delivered, front desk",
+   "date": "2026-08-29",
+   "delivered": true
+  },
+  "DHL4471901150": {
+   "lastScan": "Delivered, letterbox",
+   "date": "2026-09-17",
+   "delivered": true
+  }
+ },
+ "refunds": [
+  {
+   "id": "RF-0877",
+   "orderId": "KC-10877",
+   "amount": 34,
+   "reason": "Dripper arrived cracked",
+   "status": "sent",
+   "createdAt": "2026-09-04",
+   "sentAt": "2026-09-05",
+   "method": "Amex ending 1005"
+  },
+  {
+   "id": "RF-0715",
+   "orderId": "KC-10715",
+   "amount": 168,
+   "reason": "Order cancelled before shipping",
+   "status": "sent",
+   "createdAt": "2026-08-14",
+   "sentAt": "2026-08-15",
+   "method": "PayPal"
+  },
+  {
+   "id": "RF-0802",
+   "orderId": "KC-10802",
+   "amount": 129,
+   "reason": "Return of unused Burr Mini",
+   "status": "waiting_for_return",
+   "createdAt": "2026-09-15",
+   "method": "Mastercard ending 3301",
+   "note": "Return label DHL4471990802 created 2026-09-15; not yet scanned by carrier"
+  }
+ ]
+}

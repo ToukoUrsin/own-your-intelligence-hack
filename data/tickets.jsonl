@@ -1,0 +1,400 @@
+{"id": "T0001", "text": "i have got to see when will my parcel arrive can ya help me", "intent": "delivery_period", "category": "DELIVERY", "email": "jordan.kim@example.com", "flags": "BCILQ", "source_row": 13326}
+{"id": "T0002", "text": "see order KC-10421 current status", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BKL", "source_row": 25845}
+{"id": "T0003", "text": "i need assistance getting compensations of my money", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BLMQ", "source_row": 16140}
+{"id": "T0004", "text": "need assistance getting restitutions of my money", "intent": "get_refund", "category": "REFUND", "email": "maya.lin@example.com", "flags": "BLMQ", "source_row": 16626}
+{"id": "T0005", "text": "where do I see when my package is going to arrive?", "intent": "delivery_period", "category": "DELIVERY", "email": "leo.moreau@example.com", "flags": "BIL", "source_row": 13442}
+{"id": "T0006", "text": "I need help updating my shipping address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "ana.silva@example.com", "flags": "BL", "source_row": 2105}
+{"id": "T0007", "text": "I cannot afford purchase KC-11390", "intent": "cancel_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BELN", "source_row": 453}
+{"id": "T0008", "text": "i try to request a restitution of money", "intent": "get_refund", "category": "REFUND", "email": "sam.ortiz@example.com", "flags": "BLQ", "source_row": 16324}
+{"id": "T0009", "text": "I am waiting for a compensation of  $129", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BLZ", "source_row": 26675}
+{"id": "T0010", "text": "help me solve troubles with payments", "intent": "payment_issue", "category": "PAYMENT", "email": "tom.becker@example.com", "flags": "BLM", "source_row": 18381}
+{"id": "T0011", "text": "i want help to cancel purchase KC-11380", "intent": "cancel_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BLQ", "source_row": 912}
+{"id": "T0012", "text": "I need to update order KC-10950", "intent": "change_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BL", "source_row": 1292}
+{"id": "T0013", "text": "I do not know how I could see order KC-10877 status", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BELP", "source_row": 25435}
+{"id": "T0014", "text": "is it possible to place an order from London ?", "intent": "delivery_options", "category": "DELIVERY", "email": "jordan.kim@example.com", "flags": "BISZ", "source_row": 12578}
+{"id": "T0015", "text": "I have to edit my account, how could I do it?", "intent": "edit_account", "category": "ACCOUNT", "email": "sam.ortiz@example.com", "flags": "BCIP", "source_row": 14701}
+{"id": "T0016", "text": "I need to list your allowed payment options, how do I do it?", "intent": "check_payment_methods", "category": "PAYMENT", "email": "sam.ortiz@example.com", "flags": "BCIL", "source_row": 5719}
+{"id": "T0017", "text": "i want help seeing purchase KC-11230 current status", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BLQ", "source_row": 25393}
+{"id": "T0018", "text": "where could I edit the address?", "intent": "change_shipping_address", "category": "SHIPPING", "email": "hana.sato@example.com", "flags": "BILP", "source_row": 2163}
+{"id": "T0019", "text": "check order KC-11102 status", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BK", "source_row": 25384}
+{"id": "T0020", "text": "I need assistance to check order KC-10802 current status", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BL", "source_row": 25743}
+{"id": "T0021", "text": "i dont know what i need to do to restore my profile key", "intent": "recover_password", "category": "ACCOUNT", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 19951}
+{"id": "T0022", "text": "where do i get an compensation of money", "intent": "get_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BILQZ", "source_row": 16869}
+{"id": "T0023", "text": "I need assistance checking how soon can I expect my delivery", "intent": "delivery_period", "category": "DELIVERY", "email": "hana.sato@example.com", "flags": "BL", "source_row": 13353}
+{"id": "T0024", "text": "I do not know what I need to do to locate order KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BEL", "source_row": 25781}
+{"id": "T0025", "text": "show me the eta of the order KC-11299", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BQ", "source_row": 25368}
+{"id": "T0026", "text": "can I see the current status of purchase KC-11412?", "intent": "track_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BIL", "source_row": 25522}
+{"id": "T0027", "text": "is it possible to cancel purchase KC-11102?", "intent": "cancel_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BIL", "source_row": 590}
+{"id": "T0028", "text": "I'd like to locate purchase KC-11150 i need assistance", "intent": "track_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BCLPQ", "source_row": 25394}
+{"id": "T0029", "text": "I need help seeing a what time customer service available is", "intent": "contact_customer_service", "category": "CONTACT", "email": "dev.patel@example.com", "flags": "BLZ", "source_row": 8248}
+{"id": "T0030", "text": "want help to set up a shipping address", "intent": "set_up_shipping_address", "category": "SHIPPING", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 22942}
+{"id": "T0031", "text": "I am waiting for a refund of $34, has it been porocessed?", "intent": "track_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BCILZ", "source_row": 26282}
+{"id": "T0032", "text": "can i see how long it takes for the item to arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "olivia.brown@example.com", "flags": "BILQ", "source_row": 13812}
+{"id": "T0033", "text": "I do not know how I can check when will my package arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "maya.lin@example.com", "flags": "BEL", "source_row": 12924}
+{"id": "T0034", "text": "I need support trying to update my address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 2563}
+{"id": "T0035", "text": "I am trying to see the ET of the order KC-11210", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BLZ", "source_row": 25780}
+{"id": "T0036", "text": "how can I see order KC-11299 current status?", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BIL", "source_row": 25350}
+{"id": "T0037", "text": "help locating my invoice #00108", "intent": "check_invoice", "category": "INVOICE", "email": "dev.patel@example.com", "flags": "BL", "source_row": 4134}
+{"id": "T0038", "text": "help me retrieving my account PIN code", "intent": "recover_password", "category": "ACCOUNT", "email": "leo.moreau@example.com", "flags": "BL", "source_row": 20557}
+{"id": "T0039", "text": "show me order KC-11210 current status", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BKL", "source_row": 25535}
+{"id": "T0040", "text": "help me see when will myarticle arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "sam.ortiz@example.com", "flags": "BLZ", "source_row": 13070}
+{"id": "T0041", "text": "problem with Business account cancellations", "intent": "delete_account", "category": "ACCOUNT", "email": "tom.becker@example.com", "flags": "BLM", "source_row": 11433}
+{"id": "T0042", "text": "assistance to inform of issues with payments", "intent": "payment_issue", "category": "PAYMENT", "email": "leo.moreau@example.com", "flags": "BLM", "source_row": 18302}
+{"id": "T0043", "text": "i want supports trying to correct the address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "maya.lin@example.com", "flags": "BLMQ", "source_row": 2858}
+{"id": "T0044", "text": "i need assistance canceling the newsletter subscription", "intent": "newsletter_subscription", "category": "SUBSCRIPTION", "email": "hana.sato@example.com", "flags": "BLQ", "source_row": 17229}
+{"id": "T0045", "text": "wanna check the eta of order KC-11150 how to do it", "intent": "track_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BCIQ", "source_row": 25633}
+{"id": "T0046", "text": "I have got to speak to a person", "intent": "contact_human_agent", "category": "CONTACT", "email": "ana.silva@example.com", "flags": "BL", "source_row": 9691}
+{"id": "T0047", "text": "I would like to check how soon can I expect the shipment", "intent": "delivery_period", "category": "DELIVERY", "email": "hana.sato@example.com", "flags": "BLP", "source_row": 13780}
+{"id": "T0048", "text": "I want to track purchase KC-11230, I need help", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BCL", "source_row": 25328}
+{"id": "T0049", "text": "I need help making a claim against your organization", "intent": "complaint", "category": "FEEDBACK", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 7008}
+{"id": "T0050", "text": "need assistance getting refunds of moey", "intent": "get_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BMQZ", "source_row": 15923}
+{"id": "T0051", "text": "i want help to cancel order KC-11355", "intent": "cancel_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BQ", "source_row": 271}
+{"id": "T0052", "text": "what is order KC-10421 crrent status", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BILQZ", "source_row": 25246}
+{"id": "T0053", "text": "I have to see my bill, help me", "intent": "check_invoice", "category": "INVOICE", "email": "olivia.brown@example.com", "flags": "BCL", "source_row": 4252}
+{"id": "T0054", "text": "I try to check the ETA of the purchase KC-11210", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BL", "source_row": 25218}
+{"id": "T0055", "text": "want supports trying to edit my address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "tom.becker@example.com", "flags": "BLMQ", "source_row": 2735}
+{"id": "T0056", "text": "i do not know what to do to rerquest a compensation of money", "intent": "get_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BELQZ", "source_row": 16551}
+{"id": "T0057", "text": "I am trying to change my delivery address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "maya.lin@example.com", "flags": "BL", "source_row": 2166}
+{"id": "T0058", "text": "need to trafk order KC-10877 help me", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BCQZ", "source_row": 25761}
+{"id": "T0059", "text": "I have a problem submitting the new delivery address", "intent": "set_up_shipping_address", "category": "SHIPPING", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 23730}
+{"id": "T0060", "text": "I do not understand you, can you help me to contact someone?", "intent": "contact_human_agent", "category": "CONTACT", "email": "jordan.kim@example.com", "flags": "BCEIL", "source_row": 9130}
+{"id": "T0061", "text": "I have to check purchase KC-10802 current status", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BL", "source_row": 25043}
+{"id": "T0062", "text": "close Business account", "intent": "delete_account", "category": "ACCOUNT", "email": "jordan.kim@example.com", "flags": "BKL", "source_row": 11425}
+{"id": "T0063", "text": "need help to see the ETA of the purchase KC-11412", "intent": "track_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BLQ", "source_row": 25872}
+{"id": "T0064", "text": "can ya help me to see the ETA of the purchase KC-10802", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BILQ", "source_row": 25665}
+{"id": "T0065", "text": "I want help canceling order KC-10802", "intent": "cancel_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "B", "source_row": 94}
+{"id": "T0066", "text": "I have got to locate purchase KC-11355, I need help", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BCL", "source_row": 25740}
+{"id": "T0067", "text": "I try to check in what situations can I request a refund", "intent": "check_refund_policy", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BL", "source_row": 6765}
+{"id": "T0068", "text": "i have paid $129 for this item help me to receive a refund", "intent": "get_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BCELMQV", "source_row": 16333}
+{"id": "T0069", "text": "help me obtain a reimbursement", "intent": "get_refund", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BL", "source_row": 16192}
+{"id": "T0070", "text": "need assistance to request a reimbursement of my money", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 15922}
+{"id": "T0071", "text": "help me check how long it takes for my package to arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "dev.patel@example.com", "flags": "BL", "source_row": 13785}
+{"id": "T0072", "text": "you are not helpful, can you help me to speak to someone?", "intent": "contact_human_agent", "category": "CONTACT", "email": "hana.sato@example.com", "flags": "BCEIL", "source_row": 9185}
+{"id": "T0073", "text": "what do I have to do to see the status of purchase KC-11230?", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BIL", "source_row": 25545}
+{"id": "T0074", "text": "I can't check the ETA of the orfer KC-11210", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BNZ", "source_row": 25321}
+{"id": "T0075", "text": "modifu details on pro account", "intent": "edit_account", "category": "ACCOUNT", "email": "jordan.kim@example.com", "flags": "BKLMZ", "source_row": 14233}
+{"id": "T0076", "text": "modify data on pro account", "intent": "edit_account", "category": "ACCOUNT", "email": "maya.lin@example.com", "flags": "BKL", "source_row": 14307}
+{"id": "T0077", "text": "what do I have to do to notify of a problem with payments?", "intent": "payment_issue", "category": "PAYMENT", "email": "tom.becker@example.com", "flags": "BILM", "source_row": 18671}
+{"id": "T0078", "text": "I want help checking purchase KC-11210 status", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BL", "source_row": 25829}
+{"id": "T0079", "text": "where can I request rebates of my money?", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BILM", "source_row": 16589}
+{"id": "T0080", "text": "I can't check the current status of purchase KC-11210", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BLN", "source_row": 25282}
+{"id": "T0081", "text": "I have paid $34 for this item, I want to get a refund", "intent": "get_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BCELMV", "source_row": 15997}
+{"id": "T0082", "text": "would it be possible to get a refund?", "intent": "get_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BIP", "source_row": 16764}
+{"id": "T0083", "text": "help seeing in what cases can i ask for a refund", "intent": "check_refund_policy", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 6911}
+{"id": "T0084", "text": "I don't know how to update my delivery address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "sam.ortiz@example.com", "flags": "BL", "source_row": 2513}
+{"id": "T0085", "text": "my address has changed, I need help modifying it", "intent": "change_shipping_address", "category": "SHIPPING", "email": "olivia.brown@example.com", "flags": "BCL", "source_row": 2710}
+{"id": "T0086", "text": "assistance to see order KC-11150 current status", "intent": "track_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BL", "source_row": 25591}
+{"id": "T0087", "text": "help seeing the ETA of order KC-11210", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BL", "source_row": 25475}
+{"id": "T0088", "text": "i need help with cancelling order KC-11401", "intent": "cancel_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BQ", "source_row": 681}
+{"id": "T0089", "text": "wanna locate uprchase KC-11210 can i get some help", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BCILQZ", "source_row": 25581}
+{"id": "T0090", "text": "there is an error trying to change my address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "ana.silva@example.com", "flags": "BL", "source_row": 2019}
+{"id": "T0091", "text": "i expect a compensation of $168", "intent": "track_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BLQ", "source_row": 26759}
+{"id": "T0092", "text": "help trying to modify the damn address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "leo.moreau@example.com", "flags": "BLW", "source_row": 2020}
+{"id": "T0093", "text": "I want assistance to speak with a human agent", "intent": "contact_human_agent", "category": "CONTACT", "email": "maya.lin@example.com", "flags": "BL", "source_row": 9322}
+{"id": "T0094", "text": "I want help to get compensations", "intent": "get_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BLM", "source_row": 16697}
+{"id": "T0095", "text": "help to obtain a compensation of my money", "intent": "get_refund", "category": "REFUND", "email": "maya.lin@example.com", "flags": "BL", "source_row": 16329}
+{"id": "T0096", "text": "help seeing order KC-10877 status", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BL", "source_row": 25187}
+{"id": "T0097", "text": "check purchase KC-11230 statsu", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BKLZ", "source_row": 25530}
+{"id": "T0098", "text": "what do I have to do to purchase seevral articles?", "intent": "place_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BILMZ", "source_row": 19670}
+{"id": "T0099", "text": "is it possible to file a customer complaint?", "intent": "complaint", "category": "FEEDBACK", "email": "hana.sato@example.com", "flags": "BIL", "source_row": 7716}
+{"id": "T0100", "text": "where do i request a reimbursement of money", "intent": "get_refund", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BILQ", "source_row": 15932}
+{"id": "T0101", "text": "track order KC-11150", "intent": "track_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BK", "source_row": 25646}
+{"id": "T0102", "text": "I do not know how I can receive a bloody reimbursement", "intent": "get_refund", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BELW", "source_row": 16038}
+{"id": "T0103", "text": "wannasubmit the secondary delivery address", "intent": "set_up_shipping_address", "category": "SHIPPING", "email": "maya.lin@example.com", "flags": "BLQZ", "source_row": 23748}
+{"id": "T0104", "text": "I need help reporting a trouble with online payment", "intent": "payment_issue", "category": "PAYMENT", "email": "tom.becker@example.com", "flags": "BL", "source_row": 18064}
+{"id": "T0105", "text": "i need assistance changing the delivery address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "hana.sato@example.com", "flags": "BLQ", "source_row": 2008}
+{"id": "T0106", "text": "canceling purchase KC-11355", "intent": "cancel_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BKL", "source_row": 426}
+{"id": "T0107", "text": "help me locating purchase KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BL", "source_row": 25862}
+{"id": "T0108", "text": "I try to see how soon can I expect the parcel", "intent": "delivery_period", "category": "DELIVERY", "email": "maya.lin@example.com", "flags": "BL", "source_row": 12994}
+{"id": "T0109", "text": "where do i receive compensations of my money", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BILMQ", "source_row": 16861}
+{"id": "T0110", "text": "the delivery address changed", "intent": "change_shipping_address", "category": "SHIPPING", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 2924}
+{"id": "T0111", "text": "help me reporting an issue wigh online payment", "intent": "payment_issue", "category": "PAYMENT", "email": "tom.becker@example.com", "flags": "BLZ", "source_row": 17918}
+{"id": "T0112", "text": "i dont know wwhat i need to do to check invoice #85632", "intent": "check_invoice", "category": "INVOICE", "email": "tom.becker@example.com", "flags": "BQZ", "source_row": 4326}
+{"id": "T0113", "text": "how can I find information about a shipping address update?", "intent": "change_shipping_address", "category": "SHIPPING", "email": "ana.silva@example.com", "flags": "BIL", "source_row": 2616}
+{"id": "T0114", "text": "what do i need to do to reset my profile pwd", "intent": "recover_password", "category": "ACCOUNT", "email": "sam.ortiz@example.com", "flags": "BILQ", "source_row": 19944}
+{"id": "T0115", "text": "I donot know what to do to demand a refund", "intent": "get_refund", "category": "REFUND", "email": "jordan.kim@example.com", "flags": "BELZ", "source_row": 16582}
+{"id": "T0116", "text": "wann locate order KC-11210", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BLQZ", "source_row": 25156}
+{"id": "T0117", "text": "can you help me seeing the ETA of the order KC-10877?", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BIL", "source_row": 25825}
+{"id": "T0118", "text": "i cannot see if there is anything new on the compensation", "intent": "track_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BELNQ", "source_row": 25898}
+{"id": "T0119", "text": "can ya help me to make a complaint against ur company", "intent": "complaint", "category": "FEEDBACK", "email": "olivia.brown@example.com", "flags": "BILQ", "source_row": 7322}
+{"id": "T0120", "text": "where is order KC-11390", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BIQ", "source_row": 25276}
+{"id": "T0121", "text": "getting bill from Sam Ortiz", "intent": "get_invoice", "category": "INVOICE", "email": "sam.ortiz@example.com", "flags": "BKL", "source_row": 14993}
+{"id": "T0122", "text": "help to locate purchaes KC-11299", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BLZ", "source_row": 24992}
+{"id": "T0123", "text": "Ineed assistance to see the withdrawal charges", "intent": "check_cancellation_fee", "category": "CANCEL", "email": "leo.moreau@example.com", "flags": "BLMZ", "source_row": 3413}
+{"id": "T0124", "text": "problem with the pass recovery", "intent": "recover_password", "category": "ACCOUNT", "email": "maya.lin@example.com", "flags": "BLQ", "source_row": 20837}
+{"id": "T0125", "text": "how can I check the ETA of the purchase KC-11355?", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BIL", "source_row": 25383}
+{"id": "T0126", "text": "i try to get a rebate of money", "intent": "get_refund", "category": "REFUND", "email": "jordan.kim@example.com", "flags": "BLQ", "source_row": 16577}
+{"id": "T0127", "text": "problems with canceling purchase KC-10802", "intent": "cancel_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLM", "source_row": 408}
+{"id": "T0128", "text": "I have to see order KC-10421 status, I need assistance", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BCL", "source_row": 25645}
+{"id": "T0129", "text": "need assistance to check the status of order KC-11355", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BQ", "source_row": 25025}
+{"id": "T0130", "text": "what do i have to  do to see when will my parcel arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "hana.sato@example.com", "flags": "BILQZ", "source_row": 13025}
+{"id": "T0131", "text": "i paid 110 dollars for an article how can i obtain a rebate", "intent": "get_refund", "category": "REFUND", "email": "olivia.brown@example.com", "flags": "BCILMQ", "source_row": 16573}
+{"id": "T0132", "text": "help me to see how long it takes for the article to arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 13829}
+{"id": "T0133", "text": "assistance restoring my user account access key", "intent": "recover_password", "category": "ACCOUNT", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 20521}
+{"id": "T0134", "text": "i have to demand a rebate", "intent": "get_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 16259}
+{"id": "T0135", "text": "want help to talk to someone", "intent": "contact_human_agent", "category": "CONTACT", "email": "leo.moreau@example.com", "flags": "BLQ", "source_row": 9715}
+{"id": "T0136", "text": "is it possible to notify of a problem with a signup?", "intent": "registration_problems", "category": "ACCOUNT", "email": "hana.sato@example.com", "flags": "BIL", "source_row": 21157}
+{"id": "T0137", "text": "how do I ddmand refunds of my money?", "intent": "get_refund", "category": "REFUND", "email": "jordan.kim@example.com", "flags": "BILMZ", "source_row": 16157}
+{"id": "T0138", "text": "where could I take a quick look at invokce #37777?", "intent": "check_invoice", "category": "INVOICE", "email": "hana.sato@example.com", "flags": "BIPZ", "source_row": 4189}
+{"id": "T0139", "text": "I have a problem with cancelling order KC-11150", "intent": "cancel_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "B", "source_row": 242}
+{"id": "T0140", "text": "I want to talk to customer assistance, I need help", "intent": "contact_customer_service", "category": "CONTACT", "email": "hana.sato@example.com", "flags": "BCL", "source_row": 8130}
+{"id": "T0141", "text": "where do I see what options for delivery you offer?", "intent": "delivery_options", "category": "DELIVERY", "email": "orders@bluedoorcafe.example", "flags": "BILM", "source_row": 11965}
+{"id": "T0142", "text": "I want assistance to check the ETA of purchase KC-10421", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BL", "source_row": 25111}
+{"id": "T0143", "text": "i need help with cancelling purchase KC-11390", "intent": "cancel_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BLQ", "source_row": 650}
+{"id": "T0144", "text": "wanna track purchase KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BLQ", "source_row": 24904}
+{"id": "T0145", "text": "what do i have to do to use the Business profile", "intent": "switch_account", "category": "ACCOUNT", "email": "ana.silva@example.com", "flags": "BILQ", "source_row": 24213}
+{"id": "T0146", "text": "help me seeing ur refund policy", "intent": "check_refund_policy", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BLQ", "source_row": 6030}
+{"id": "T0147", "text": "I can't see the ETA of purchase KC-10802", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLN", "source_row": 24942}
+{"id": "T0148", "text": "I would like to cancel purchase KC-11390", "intent": "cancel_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BLP", "source_row": 705}
+{"id": "T0149", "text": "i want assistance to see the eta of order KC-11102", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 24905}
+{"id": "T0150", "text": "where can i list ur accepted payment methods", "intent": "check_payment_methods", "category": "PAYMENT", "email": "ana.silva@example.com", "flags": "BILQ", "source_row": 5252}
+{"id": "T0151", "text": "how to demand a compensation of my money?", "intent": "get_refund", "category": "REFUND", "email": "maya.lin@example.com", "flags": "BIL", "source_row": 16794}
+{"id": "T0152", "text": "I have got to recover my user pwd", "intent": "recover_password", "category": "ACCOUNT", "email": "olivia.brown@example.com", "flags": "BLQ", "source_row": 20874}
+{"id": "T0153", "text": "i have to see the status of order KC-10877", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BLQ", "source_row": 25764}
+{"id": "T0154", "text": "check status of order KC-11210", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BK", "source_row": 25205}
+{"id": "T0155", "text": "I paid 158 dollars for an item, I need to receive a rebate", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BCLM", "source_row": 16578}
+{"id": "T0156", "text": "want hewlp locating order KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BLQZ", "source_row": 25574}
+{"id": "T0157", "text": "i want help canceling order KC-11150", "intent": "cancel_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BQ", "source_row": 316}
+{"id": "T0158", "text": "could ya help me receive a  rebate", "intent": "get_refund", "category": "REFUND", "email": "dev.patel@example.com", "flags": "BILPQZ", "source_row": 16540}
+{"id": "T0159", "text": "I ahve got to get rebates", "intent": "get_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BLMZ", "source_row": 16760}
+{"id": "T0160", "text": "remove article from purchase KC-10988", "intent": "change_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BKL", "source_row": 1424}
+{"id": "T0161", "text": "I have to see how soon can I expect the goddamn order", "intent": "delivery_period", "category": "DELIVERY", "email": "sam.ortiz@example.com", "flags": "BLW", "source_row": 13116}
+{"id": "T0162", "text": "help cancelling order KC-11390", "intent": "cancel_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "B", "source_row": 484}
+{"id": "T0163", "text": "I have got to file a bloody reclamation, will you help me?", "intent": "complaint", "category": "FEEDBACK", "email": "olivia.brown@example.com", "flags": "BCILPW", "source_row": 7692}
+{"id": "T0164", "text": "I have to swap some items of order KC-11390, help me", "intent": "change_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BCLM", "source_row": 1864}
+{"id": "T0165", "text": "i need help trackng order KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BQZ", "source_row": 25873}
+{"id": "T0166", "text": "i have padi $34 for an order i need to get a reimbursement", "intent": "get_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BCELMQVZ", "source_row": 15951}
+{"id": "T0167", "text": "questionn about canceling order KC-11150", "intent": "cancel_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BZ", "source_row": 777}
+{"id": "T0168", "text": "can you help me see purchase KC-11102 current status?", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BIL", "source_row": 25739}
+{"id": "T0169", "text": "need help to check  the ETA of the order KC-11230", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BQZ", "source_row": 25509}
+{"id": "T0170", "text": "I have to see at what time I can reach customer assistance", "intent": "contact_customer_service", "category": "CONTACT", "email": "dev.patel@example.com", "flags": "BL", "source_row": 8716}
+{"id": "T0171", "text": "I can no longer pay for purchase KC-11380", "intent": "cancel_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BLN", "source_row": 216}
+{"id": "T0172", "text": "I want to receive your newsletter, how can I do it?", "intent": "newsletter_subscription", "category": "SUBSCRIPTION", "email": "dev.patel@example.com", "flags": "BCIL", "source_row": 17696}
+{"id": "T0173", "text": "correct order KC-11380", "intent": "change_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BL", "source_row": 1058}
+{"id": "T0174", "text": "need help checking the status of purechase KC-11412", "intent": "track_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BLQZ", "source_row": 25657}
+{"id": "T0175", "text": "wannma change to the Business account i need help", "intent": "switch_account", "category": "ACCOUNT", "email": "dev.patel@example.com", "flags": "BCLQZ", "source_row": 24681}
+{"id": "T0176", "text": "I need help to restore my user key", "intent": "recover_password", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BL", "source_row": 20004}
+{"id": "T0177", "text": "I want assistance canceling purchase KC-10988", "intent": "cancel_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BL", "source_row": 880}
+{"id": "T0178", "text": "I'm waiting for a refund of 129 dollars", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BQ", "source_row": 26416}
+{"id": "T0179", "text": "i have paid $278 for an item help me receive a compensation", "intent": "get_refund", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BCELMQV", "source_row": 16630}
+{"id": "T0180", "text": "i expect a refund of 129 dollars has it been processed", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BCILQ", "source_row": 26361}
+{"id": "T0181", "text": "I am waiting for a refund of $168", "intent": "track_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "B", "source_row": 26803}
+{"id": "T0182", "text": "needto locate order KC-11150 how can i do it", "intent": "track_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BCILQZ", "source_row": 25149}
+{"id": "T0183", "text": "how canI change order KC-10802?", "intent": "change_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BIZ", "source_row": 1151}
+{"id": "T0184", "text": "i cannot check if there are any news on the compensation", "intent": "track_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BELMNQ", "source_row": 26044}
+{"id": "T0185", "text": "correct details onstandard account", "intent": "edit_account", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BKLMZ", "source_row": 14677}
+{"id": "T0186", "text": "track order KC-11299", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BK", "source_row": 24892}
+{"id": "T0187", "text": "see purchase KC-10802 status", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BKL", "source_row": 25792}
+{"id": "T0188", "text": "i dont know how i can obtain reimbursements of myh money", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BLMQZ", "source_row": 16023}
+{"id": "T0189", "text": "could I place an order from Germany ?", "intent": "delivery_options", "category": "DELIVERY", "email": "dev.patel@example.com", "flags": "BIPSZ", "source_row": 12428}
+{"id": "T0190", "text": "i try to check how soon can i expect my article", "intent": "delivery_period", "category": "DELIVERY", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 13387}
+{"id": "T0191", "text": "I have lost the bill #37777, will you send it to me?", "intent": "get_invoice", "category": "INVOICE", "email": "jordan.kim@example.com", "flags": "BCILP", "source_row": 15233}
+{"id": "T0192", "text": "I have paid $49 for this article, how to obtain a rebate?", "intent": "get_refund", "category": "REFUND", "email": "jordan.kim@example.com", "flags": "BCEILMV", "source_row": 16659}
+{"id": "T0193", "text": "order KC-10421 current status", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BKL", "source_row": 25121}
+{"id": "T0194", "text": "I'm trying to buy a few of ur item", "intent": "place_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BMQ", "source_row": 19164}
+{"id": "T0195", "text": "I cannot afford order KC-10802", "intent": "cancel_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BELN", "source_row": 170}
+{"id": "T0196", "text": "help me seeing in which situations can I ask for refunds", "intent": "check_refund_policy", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BL", "source_row": 5941}
+{"id": "T0197", "text": "how do i find the bills from Ana Silva", "intent": "check_invoice", "category": "INVOICE", "email": "ana.silva@example.com", "flags": "BILMQ", "source_row": 4696}
+{"id": "T0198", "text": "check ur money back guarantee", "intent": "check_refund_policy", "category": "REFUND", "email": "maya.lin@example.com", "flags": "BKLQ", "source_row": 5977}
+{"id": "T0199", "text": "can you tell me more about the methods for delivery?", "intent": "delivery_options", "category": "DELIVERY", "email": "sam.ortiz@example.com", "flags": "BIL", "source_row": 11929}
+{"id": "T0200", "text": "I'm waiting for a refund of 129 dollars", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BQ", "source_row": 26300}
+{"id": "T0201", "text": "check the ETA of purchase KC-11102", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BL", "source_row": 24977}
+{"id": "T0202", "text": "need help switching several items of order KC-10802", "intent": "change_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLMQ", "source_row": 1673}
+{"id": "T0203", "text": "i need assistance checking how soon can i expect my package", "intent": "delivery_period", "category": "DELIVERY", "email": "sam.ortiz@example.com", "flags": "BLQ", "source_row": 13142}
+{"id": "T0204", "text": "I am trying to find the shipping period, I need help", "intent": "delivery_period", "category": "DELIVERY", "email": "leo.moreau@example.com", "flags": "BCEL", "source_row": 13701}
+{"id": "T0205", "text": "I want help to see the fucking ETA of the order KC-10802", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLW", "source_row": 25275}
+{"id": "T0206", "text": "i do not know how i can see the ETA of purcyase KC-10802", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BELQZ", "source_row": 25301}
+{"id": "T0207", "text": "is there a section to submit an opinion for ur products", "intent": "review", "category": "FEEDBACK", "email": "hana.sato@example.com", "flags": "BILQ", "source_row": 21945}
+{"id": "T0208", "text": "rebating  51 dollars", "intent": "get_refund", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BKLMZ", "source_row": 16746}
+{"id": "T0209", "text": "help me obtain a compensation of money", "intent": "get_refund", "category": "REFUND", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 16181}
+{"id": "T0210", "text": "I would like to know about changing my delivery address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "leo.moreau@example.com", "flags": "BLP", "source_row": 2842}
+{"id": "T0211", "text": "need to restore the pass of my user account", "intent": "recover_password", "category": "ACCOUNT", "email": "olivia.brown@example.com", "flags": "BLQ", "source_row": 20406}
+{"id": "T0212", "text": "i need help canceling purchase KC-10802", "intent": "cancel_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 868}
+{"id": "T0213", "text": "i expect a refund of $129 has it been processed already", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BCIQ", "source_row": 26116}
+{"id": "T0214", "text": "can ya help me to lodge a reclamatiom against ur company", "intent": "complaint", "category": "FEEDBACK", "email": "tom.becker@example.com", "flags": "BILQZ", "source_row": 7185}
+{"id": "T0215", "text": "assistance to check the current status of order KC-10877", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BL", "source_row": 25788}
+{"id": "T0216", "text": "want assistance trying to update my shipping address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "tom.becker@example.com", "flags": "BLQ", "source_row": 2734}
+{"id": "T0217", "text": "want help getting goddamn reimbursements of money", "intent": "get_refund", "category": "REFUND", "email": "maya.lin@example.com", "flags": "BLMQW", "source_row": 16011}
+{"id": "T0218", "text": "I no longer want order KC-10802", "intent": "cancel_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLN", "source_row": 885}
+{"id": "T0219", "text": "see ETA ob order KC-11230", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BKLQZ", "source_row": 25763}
+{"id": "T0220", "text": "what is order KC-11230 status", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BIQ", "source_row": 25173}
+{"id": "T0221", "text": "I do not know what to do to obtain compensations of my money", "intent": "get_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BELM", "source_row": 16623}
+{"id": "T0222", "text": "help to edit the delivery aderess", "intent": "change_shipping_address", "category": "SHIPPING", "email": "ana.silva@example.com", "flags": "BLZ", "source_row": 2697}
+{"id": "T0223", "text": "what is order KC-11230 status", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BIQ", "source_row": 25004}
+{"id": "T0224", "text": "i need assistance to check the status of order KC-11230", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BQ", "source_row": 25448}
+{"id": "T0225", "text": "need to report a payment error", "intent": "payment_issue", "category": "PAYMENT", "email": "leo.moreau@example.com", "flags": "BLQ", "source_row": 18110}
+{"id": "T0226", "text": "I no longer want order KC-10715", "intent": "cancel_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BLN", "source_row": 277}
+{"id": "T0227", "text": "my bloody delivery address changed, can I update it?", "intent": "change_shipping_address", "category": "SHIPPING", "email": "jordan.kim@example.com", "flags": "BCILW", "source_row": 2356}
+{"id": "T0228", "text": "how to correct the shipping address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "ana.silva@example.com", "flags": "BILQ", "source_row": 2237}
+{"id": "T0229", "text": "need assistance to see the status of purchase KC-11102", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 24925}
+{"id": "T0230", "text": "get bills from Léo Moreau", "intent": "get_invoice", "category": "INVOICE", "email": "leo.moreau@example.com", "flags": "BKLM", "source_row": 15676}
+{"id": "T0231", "text": "I have to check the ETA of the purchase KC-11102", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BL", "source_row": 25681}
+{"id": "T0232", "text": "I don't know what I need to do to get the invoice #12588", "intent": "get_invoice", "category": "INVOICE", "email": "dev.patel@example.com", "flags": "B", "source_row": 15386}
+{"id": "T0233", "text": "help to see the eta of purchase KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BLQ", "source_row": 25537}
+{"id": "T0234", "text": "I paid $53 for this item, help me get a refund", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BCLM", "source_row": 15992}
+{"id": "T0235", "text": "wanna see purchase KC-11299 current status", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 25552}
+{"id": "T0236", "text": "i want assistance creating a standard account fr my fiance", "intent": "create_account", "category": "ACCOUNT", "email": "sam.ortiz@example.com", "flags": "BLQZ", "source_row": 10779}
+{"id": "T0237", "text": "can you help me to inform of an error with online payment?", "intent": "payment_issue", "category": "PAYMENT", "email": "tom.becker@example.com", "flags": "BIL", "source_row": 17988}
+{"id": "T0238", "text": "how can i download the bill from Sam Ortiz", "intent": "get_invoice", "category": "INVOICE", "email": "sam.ortiz@example.com", "flags": "BILQ", "source_row": 15779}
+{"id": "T0239", "text": "i want assistance cancelling order KC-10715", "intent": "cancel_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BQ", "source_row": 25}
+{"id": "T0240", "text": "I have lost bill #37777, could you send it to me?", "intent": "get_invoice", "category": "INVOICE", "email": "olivia.brown@example.com", "flags": "BCILP", "source_row": 15115}
+{"id": "T0241", "text": "wanna locate order KC-10802 how can i do it", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BCILQ", "source_row": 25019}
+{"id": "T0242", "text": "can you help me reset my profile PIN?", "intent": "recover_password", "category": "ACCOUNT", "email": "leo.moreau@example.com", "flags": "BIL", "source_row": 20564}
+{"id": "T0243", "text": "i want help seeing the goddamn ETA of purchase KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BLQW", "source_row": 25614}
+{"id": "T0244", "text": "help checking the status of purchase KC-10802", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BL", "source_row": 25236}
+{"id": "T0245", "text": "where to see the ETA of the order KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BILQ", "source_row": 25777}
+{"id": "T0246", "text": "were can I demand compensations of money?", "intent": "get_refund", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BILMZ", "source_row": 16455}
+{"id": "T0247", "text": "I do not know what I need to do to see my rebate status", "intent": "track_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BEL", "source_row": 26651}
+{"id": "T0248", "text": "I want help to receive refunds of money", "intent": "get_refund", "category": "REFUND", "email": "dev.patel@example.com", "flags": "BLM", "source_row": 16702}
+{"id": "T0249", "text": "where can I get information about changing the address?", "intent": "change_shipping_address", "category": "SHIPPING", "email": "olivia.brown@example.com", "flags": "BIL", "source_row": 2567}
+{"id": "T0250", "text": "I try to check purchase KC-11044 current status", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BL", "source_row": 25594}
+{"id": "T0251", "text": "I want assistance receiving a compensation", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BL", "source_row": 16371}
+{"id": "T0252", "text": "I'm waiting for a reimbjrsement of $129", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BLQZ", "source_row": 25968}
+{"id": "T0253", "text": "want help seeing the ETA of the purchase KC-11390", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BLQ", "source_row": 25473}
+{"id": "T0254", "text": "the damn shipping address has changed, can I correct it?", "intent": "change_shipping_address", "category": "SHIPPING", "email": "hana.sato@example.com", "flags": "BCILW", "source_row": 2934}
+{"id": "T0255", "text": "refund $34", "intent": "get_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BKM", "source_row": 16846}
+{"id": "T0256", "text": "i acnt see purchase KC-11230 status", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BLNQZ", "source_row": 24936}
+{"id": "T0257", "text": "how to see if there are any updates on the refund?", "intent": "track_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BILM", "source_row": 26145}
+{"id": "T0258", "text": "how can i notify of issues with online payment", "intent": "payment_issue", "category": "PAYMENT", "email": "maya.lin@example.com", "flags": "BILMQ", "source_row": 18165}
+{"id": "T0259", "text": "what do i have to do to see the status of purchase KC-11230", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BILQ", "source_row": 24939}
+{"id": "T0260", "text": "i cant check ur moeny back guarantee", "intent": "check_refund_policy", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BLQZ", "source_row": 6783}
+{"id": "T0261", "text": "I need assistance locating order KC-10877", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BL", "source_row": 25568}
+{"id": "T0262", "text": "I have errors correcting the address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "orders@bluedoorcafe.example", "flags": "BLM", "source_row": 2920}
+{"id": "T0263", "text": "checking the available options for shipment", "intent": "delivery_options", "category": "DELIVERY", "email": "leo.moreau@example.com", "flags": "BL", "source_row": 12420}
+{"id": "T0264", "text": "I don't know how I could see the early termination penalties", "intent": "check_cancellation_fee", "category": "CANCEL", "email": "orders@bluedoorcafe.example", "flags": "BLMP", "source_row": 3468}
+{"id": "T0265", "text": "i do not know what to do to acquire several of ur item", "intent": "place_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BELMQ", "source_row": 19109}
+{"id": "T0266", "text": "help me making a consumer claim against your company", "intent": "complaint", "category": "FEEDBACK", "email": "tom.becker@example.com", "flags": "BL", "source_row": 7130}
+{"id": "T0267", "text": "how could I check the current status of order KC-11210?", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BILP", "source_row": 25298}
+{"id": "T0268", "text": "help me to check the eta of the purchase KC-11412", "intent": "track_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BLQ", "source_row": 24903}
+{"id": "T0269", "text": "I have paid $53 for a purchase, where to obtain a rebate?", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BCEILMV", "source_row": 16142}
+{"id": "T0270", "text": "where to see how long the delivery takes?", "intent": "delivery_period", "category": "DELIVERY", "email": "tom.becker@example.com", "flags": "BIL", "source_row": 13308}
+{"id": "T0271", "text": "I can't afford order KC-11355", "intent": "cancel_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BLN", "source_row": 572}
+{"id": "T0272", "text": "cancelling purchase KC-11150", "intent": "cancel_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BKL", "source_row": 874}
+{"id": "T0273", "text": "need to see purchase KC-10877 status", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BLQ", "source_row": 25558}
+{"id": "T0274", "text": "I need assistance listing your vaailable payment modalities", "intent": "check_payment_methods", "category": "PAYMENT", "email": "ana.silva@example.com", "flags": "BLZ", "source_row": 5695}
+{"id": "T0275", "text": "I need to see what payment options you accept", "intent": "check_payment_methods", "category": "PAYMENT", "email": "tom.becker@example.com", "flags": "BL", "source_row": 5189}
+{"id": "T0276", "text": "I try to see purchase KC-10421 status", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BL", "source_row": 25732}
+{"id": "T0277", "text": "I want help olcating purchase KC-10802", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLZ", "source_row": 25634}
+{"id": "T0278", "text": "I have to see the bloody ETA of order KC-10877, I need help", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BCLW", "source_row": 25431}
+{"id": "T0279", "text": "i dont know how i can see the eta of the order KC-10802", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 25436}
+{"id": "T0280", "text": "where do I see how long it takes for the item to arrive?", "intent": "delivery_period", "category": "DELIVERY", "email": "jordan.kim@example.com", "flags": "BIL", "source_row": 13550}
+{"id": "T0281", "text": "check my reimbursement status", "intent": "track_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BL", "source_row": 26754}
+{"id": "T0282", "text": "I try to see the ETA of order KC-11102", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BL", "source_row": 25466}
+{"id": "T0283", "text": "there is a problem with my registration", "intent": "registration_problems", "category": "ACCOUNT", "email": "tom.becker@example.com", "flags": "BEL", "source_row": 21663}
+{"id": "T0284", "text": "would it be possible to chat with somebody?", "intent": "contact_human_agent", "category": "CONTACT", "email": "orders@bluedoorcafe.example", "flags": "BILP", "source_row": 9794}
+{"id": "T0285", "text": "can you help me canceling order KC-10802?", "intent": "cancel_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BI", "source_row": 13}
+{"id": "T0286", "text": "I need assistance trying to change my address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "dev.patel@example.com", "flags": "BL", "source_row": 2251}
+{"id": "T0287", "text": "assistance to demand reimbursements", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BLM", "source_row": 16273}
+{"id": "T0288", "text": "I do not know how to retrieve the key of my user", "intent": "recover_password", "category": "ACCOUNT", "email": "leo.moreau@example.com", "flags": "BEL", "source_row": 19915}
+{"id": "T0289", "text": "i do not know how i can switch to the Standard account", "intent": "switch_account", "category": "ACCOUNT", "email": "ana.silva@example.com", "flags": "BEQ", "source_row": 24657}
+{"id": "T0290", "text": "i do not know how to get a refund of my money", "intent": "get_refund", "category": "REFUND", "email": "olivia.brown@example.com", "flags": "BEQ", "source_row": 16051}
+{"id": "T0291", "text": "I cannot notify of issues with signup", "intent": "registration_problems", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BELMN", "source_row": 21220}
+{"id": "T0292", "text": "correcting details on pro account", "intent": "edit_account", "category": "ACCOUNT", "email": "olivia.brown@example.com", "flags": "BKLM", "source_row": 14115}
+{"id": "T0293", "text": "help me see the ETA of purchase KC-11412", "intent": "track_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 25596}
+{"id": "T0294", "text": "can i see how soon cqn i expect the order", "intent": "delivery_period", "category": "DELIVERY", "email": "hana.sato@example.com", "flags": "BILQZ", "source_row": 13677}
+{"id": "T0295", "text": "I need assistance canceling ordr KC-11401", "intent": "cancel_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BZ", "source_row": 888}
+{"id": "T0296", "text": "I need to check if there are any updates on my bloody rebate", "intent": "track_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BLMW", "source_row": 26208}
+{"id": "T0297", "text": "edit ordr KC-11380", "intent": "change_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BKLZ", "source_row": 1846}
+{"id": "T0298", "text": "correcting purchase KC-11390", "intent": "change_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BL", "source_row": 1992}
+{"id": "T0299", "text": "I don't know how to inform of issues with online payment", "intent": "payment_issue", "category": "PAYMENT", "email": "orders@bluedoorcafe.example", "flags": "BLM", "source_row": 18774}
+{"id": "T0300", "text": "I can't check the ETA of the purchase KC-11299", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BLN", "source_row": 25032}
+{"id": "T0301", "text": "how to check order KC-11044 current status?", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BIL", "source_row": 25223}
+{"id": "T0302", "text": "how long till I receive my refund of money ?", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BILZ", "source_row": 16044}
+{"id": "T0303", "text": "could you help me canceling purchase KC-11102?", "intent": "cancel_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BILP", "source_row": 878}
+{"id": "T0304", "text": "assistance to get a rebate", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BL", "source_row": 16470}
+{"id": "T0305", "text": "canceling pro account", "intent": "delete_account", "category": "ACCOUNT", "email": "jordan.kim@example.com", "flags": "BKL", "source_row": 11583}
+{"id": "T0306", "text": "I have got to see purchase KC-11390 current status", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BL", "source_row": 25378}
+{"id": "T0307", "text": "I want to track purchase KC-10421, how could I do it?", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BCILP", "source_row": 25839}
+{"id": "T0308", "text": "i dont know how i can asj for a rebate", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BLQZ", "source_row": 16475}
+{"id": "T0309", "text": "i want help to see what hours i can reach customer support", "intent": "contact_customer_service", "category": "CONTACT", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 8185}
+{"id": "T0310", "text": "help me informing of an issue with payments", "intent": "payment_issue", "category": "PAYMENT", "email": "ana.silva@example.com", "flags": "BLM", "source_row": 18228}
+{"id": "T0311", "text": "want assistance to demand a refund of my money", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 16195}
+{"id": "T0312", "text": "I do not know how I can see the early termination penalty", "intent": "check_cancellation_fee", "category": "CANCEL", "email": "sam.ortiz@example.com", "flags": "BEL", "source_row": 3893}
+{"id": "T0313", "text": "help me to see how soon can I expect my parcel", "intent": "delivery_period", "category": "DELIVERY", "email": "olivia.brown@example.com", "flags": "BL", "source_row": 13171}
+{"id": "T0314", "text": "help me see in wht cases can I request reimbursements", "intent": "check_refund_policy", "category": "REFUND", "email": "olivia.brown@example.com", "flags": "BLZ", "source_row": 6592}
+{"id": "T0315", "text": "i try to send feedback for a product", "intent": "review", "category": "FEEDBACK", "email": "jordan.kim@example.com", "flags": "BLQ", "source_row": 22560}
+{"id": "T0316", "text": "I am trying to recover my account access key", "intent": "recover_password", "category": "ACCOUNT", "email": "dev.patel@example.com", "flags": "BL", "source_row": 20414}
+{"id": "T0317", "text": "what is order KC-10802 current status?", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BIL", "source_row": 25601}
+{"id": "T0318", "text": "how do I download the goddamn invoice from Blue Door Café?", "intent": "get_invoice", "category": "INVOICE", "email": "orders@bluedoorcafe.example", "flags": "BILW", "source_row": 15307}
+{"id": "T0319", "text": "want assistance to check purchase KC-11210 status", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BLQ", "source_row": 24978}
+{"id": "T0320", "text": "I need assistance obtaining rebates of money", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BLM", "source_row": 16893}
+{"id": "T0321", "text": "want help to see the status of purchase KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BLQ", "source_row": 25426}
+{"id": "T0322", "text": "need help cancelling purchase KC-10802", "intent": "cancel_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 487}
+{"id": "T0323", "text": "have problems with canceling purchase KC-10988", "intent": "cancel_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BLMQ", "source_row": 125}
+{"id": "T0324", "text": "can uhelp me checking the eta of order KC-11102", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BIQ", "source_row": 25470}
+{"id": "T0325", "text": "want help cancelling purchase KC-11412", "intent": "cancel_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BLQ", "source_row": 929}
+{"id": "T0326", "text": "help correcting my address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 2292}
+{"id": "T0327", "text": "my new shipping address is invalid, can you help me?", "intent": "set_up_shipping_address", "category": "SHIPPING", "email": "dev.patel@example.com", "flags": "BCIL", "source_row": 23557}
+{"id": "T0328", "text": "I do not know how to take a qauick look at my invoice #00108", "intent": "check_invoice", "category": "INVOICE", "email": "tom.becker@example.com", "flags": "BEZ", "source_row": 4720}
+{"id": "T0329", "text": "can ushow me the ETA of purchase KC-11150", "intent": "track_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BILQ", "source_row": 25848}
+{"id": "T0330", "text": "I haven't signed up yet, help me to create a pro account", "intent": "create_account", "category": "ACCOUNT", "email": "dev.patel@example.com", "flags": "BCL", "source_row": 9973}
+{"id": "T0331", "text": "I'm calling to see the shipment methods", "intent": "delivery_options", "category": "DELIVERY", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 12707}
+{"id": "T0332", "text": "is it possible to ask for a refund of my money?", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BIL", "source_row": 15911}
+{"id": "T0333", "text": "checking ETA of order KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BK", "source_row": 25083}
+{"id": "T0334", "text": "where do I see the status of purchase KC-11412?", "intent": "track_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BIL", "source_row": 25857}
+{"id": "T0335", "text": "help me see the status of purchase KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BL", "source_row": 24973}
+{"id": "T0336", "text": "how to check the current status of order KC-11044?", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BIL", "source_row": 25274}
+{"id": "T0337", "text": "what do i need to do to report prbolems with payment", "intent": "payment_issue", "category": "PAYMENT", "email": "orders@bluedoorcafe.example", "flags": "BILMQZ", "source_row": 18136}
+{"id": "T0338", "text": "I do not know how to cancel purchase KC-11401", "intent": "cancel_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BEL", "source_row": 542}
+{"id": "T0339", "text": "what do I need to do to lodge a customer complaint?", "intent": "complaint", "category": "FEEDBACK", "email": "sam.ortiz@example.com", "flags": "BIL", "source_row": 7248}
+{"id": "T0340", "text": "I try to file a consumer claim against your business", "intent": "complaint", "category": "FEEDBACK", "email": "jordan.kim@example.com", "flags": "BL", "source_row": 7726}
+{"id": "T0341", "text": "help me asking for compensations", "intent": "get_refund", "category": "REFUND", "email": "tom.becker@example.com", "flags": "BLM", "source_row": 16678}
+{"id": "T0342", "text": "need help ot recover the pin of my user", "intent": "recover_password", "category": "ACCOUNT", "email": "sam.ortiz@example.com", "flags": "BLQZ", "source_row": 20421}
+{"id": "T0343", "text": "check ETA of order KC-11299", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BK", "source_row": 25407}
+{"id": "T0344", "text": "canceling purchase KC-11401", "intent": "cancel_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BKL", "source_row": 168}
+{"id": "T0345", "text": "how to see order KC-10421 fucking current status?", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BILW", "source_row": 25386}
+{"id": "T0346", "text": "I need assistance retsoring the fucking key of my user", "intent": "recover_password", "category": "ACCOUNT", "email": "ana.silva@example.com", "flags": "BLWZ", "source_row": 20693}
+{"id": "T0347", "text": "how do i check how long it takes for my item to arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "olivia.brown@example.com", "flags": "BILQ", "source_row": 13234}
+{"id": "T0348", "text": "wanna chec order KC-11044 status", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BQZ", "source_row": 25200}
+{"id": "T0349", "text": "I have got to reuqest rebates of money", "intent": "get_refund", "category": "REFUND", "email": "dev.patel@example.com", "flags": "BLMZ", "source_row": 16809}
+{"id": "T0350", "text": "send me bills from Dev Patel", "intent": "get_invoice", "category": "INVOICE", "email": "dev.patel@example.com", "flags": "BKLM", "source_row": 15700}
+{"id": "T0351", "text": "can you help me  cancelling purchase KC-11150?", "intent": "cancel_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BILZ", "source_row": 801}
+{"id": "T0352", "text": "help cnceling order KC-11380", "intent": "cancel_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BZ", "source_row": 24}
+{"id": "T0353", "text": "need help to check order KC-11210 current status", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BLQ", "source_row": 25164}
+{"id": "T0354", "text": "I can't pay for purchase KC-11355", "intent": "cancel_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BLN", "source_row": 775}
+{"id": "T0355", "text": "I need help to unsubscribe to your newsletter", "intent": "newsletter_subscription", "category": "SUBSCRIPTION", "email": "sam.ortiz@example.com", "flags": "BL", "source_row": 17166}
+{"id": "T0356", "text": "i need informqtion about creating platinum accounts", "intent": "create_account", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BMQZ", "source_row": 10761}
+{"id": "T0357", "text": "how to get a rebate of money?", "intent": "get_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BIL", "source_row": 15996}
+{"id": "T0358", "text": "need assistance to check the ETA of order KC-11230", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BLQ", "source_row": 25050}
+{"id": "T0359", "text": "is it possible to check order KC-11355 current status?", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BIL", "source_row": 25587}
+{"id": "T0360", "text": "allowed payment methods", "intent": "check_payment_methods", "category": "PAYMENT", "email": "tom.becker@example.com", "flags": "BK", "source_row": 5134}
+{"id": "T0361", "text": "help me canceling purchase KC-11390", "intent": "cancel_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BL", "source_row": 334}
+{"id": "T0362", "text": "i have a question about the removal of my Plus account", "intent": "delete_account", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 10970}
+{"id": "T0363", "text": "want assistance earning  something", "intent": "place_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BLQZ", "source_row": 19227}
+{"id": "T0364", "text": "check order KC-11210 status", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BK", "source_row": 24987}
+{"id": "T0365", "text": "can I see order KC-11230 status?", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BIL", "source_row": 25402}
+{"id": "T0366", "text": "I need help to demand a compensation of money", "intent": "get_refund", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BL", "source_row": 16301}
+{"id": "T0367", "text": "want assistance to remove some items from order KC-10988", "intent": "change_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BMQ", "source_row": 1022}
+{"id": "T0368", "text": "help to edit the delivery address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "olivia.brown@example.com", "flags": "BL", "source_row": 2498}
+{"id": "T0369", "text": "need help to check the ETA of the order KC-11102", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BQ", "source_row": 25520}
+{"id": "T0370", "text": "have a question about an address update", "intent": "change_shipping_address", "category": "SHIPPING", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 2966}
+{"id": "T0371", "text": "how can i create a Business account", "intent": "create_account", "category": "ACCOUNT", "email": "sam.ortiz@example.com", "flags": "BILQ", "source_row": 10588}
+{"id": "T0372", "text": "i try to acquire an article", "intent": "place_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 19694}
+{"id": "T0373", "text": "contact a fucking live agent", "intent": "contact_human_agent", "category": "CONTACT", "email": "orders@bluedoorcafe.example", "flags": "BLW", "source_row": 9248}
+{"id": "T0374", "text": "how can I speak to customer assistance?", "intent": "contact_customer_service", "category": "CONTACT", "email": "dev.patel@example.com", "flags": "BIL", "source_row": 8692}
+{"id": "T0375", "text": "I want to see the fucking ETA of the order KC-10877", "intent": "track_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BLW", "source_row": 25162}
+{"id": "T0376", "text": "where could I inform of issues with payment?", "intent": "payment_issue", "category": "PAYMENT", "email": "sam.ortiz@example.com", "flags": "BILMP", "source_row": 18695}
+{"id": "T0377", "text": "show me the eta of the order KC-10802", "intent": "track_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BQ", "source_row": 24932}
+{"id": "T0378", "text": "I do not know how to get my invoices from Olivia Brown", "intent": "get_invoice", "category": "INVOICE", "email": "olivia.brown@example.com", "flags": "BELM", "source_row": 15170}
+{"id": "T0379", "text": "want help seeing the current status of my reimbursement", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 26090}
+{"id": "T0380", "text": "i need help requesting reimbursemenmts", "intent": "get_refund", "category": "REFUND", "email": "olivia.brown@example.com", "flags": "BLMQZ", "source_row": 15958}
+{"id": "T0381", "text": "I need to see the ETA of purchase00123842", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BLZ", "source_row": 25853}
+{"id": "T0382", "text": "help me to see the ETA of the purchase KC-11102", "intent": "track_order", "category": "ORDER", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 25342}
+{"id": "T0383", "text": "need assistance to see the eta of purcase KC-11044", "intent": "track_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BLQZ", "source_row": 25123}
+{"id": "T0384", "text": "wanna see order KC-11390 status help me", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BCLQ", "source_row": 25830}
+{"id": "T0385", "text": "I can't correct the shipping address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "dev.patel@example.com", "flags": "BL", "source_row": 2350}
+{"id": "T0386", "text": "how to switch a product of order KC-10802?", "intent": "change_order", "category": "ORDER", "email": "ana.silva@example.com", "flags": "BIL", "source_row": 1111}
+{"id": "T0387", "text": "i cannot see the eta of order KC-11299", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BELNQ", "source_row": 25685}
+{"id": "T0388", "text": "give me infrmation about my access key retrieval", "intent": "recover_password", "category": "ACCOUNT", "email": "dev.patel@example.com", "flags": "BLZ", "source_row": 20380}
+{"id": "T0389", "text": "I do not know how I could submit feedback about a service", "intent": "review", "category": "FEEDBACK", "email": "olivia.brown@example.com", "flags": "BELP", "source_row": 22751}
+{"id": "T0390", "text": "editing info on freemium account", "intent": "edit_account", "category": "ACCOUNT", "email": "olivia.brown@example.com", "flags": "BKLQ", "source_row": 14170}
+{"id": "T0391", "text": "help me to check the ETA of the order KC-11150", "intent": "track_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BLQ", "source_row": 24913}
+{"id": "T0392", "text": "how do i use the Standard profile", "intent": "switch_account", "category": "ACCOUNT", "email": "sam.ortiz@example.com", "flags": "BILQ", "source_row": 24150}
+{"id": "T0393", "text": "help me seeing the ETA of order KC-11299", "intent": "track_order", "category": "ORDER", "email": "orders@bluedoorcafe.example", "flags": "BL", "source_row": 25215}
+{"id": "T0394", "text": "show me order KC-11230 current status", "intent": "track_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BL", "source_row": 25811}
+{"id": "T0395", "text": "I need help to request reimbursements of money", "intent": "get_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BLM", "source_row": 16892}
+{"id": "T0396", "text": "I want help to request rebates of money", "intent": "get_refund", "category": "REFUND", "email": "jordan.kim@example.com", "flags": "BLM", "source_row": 16222}
+{"id": "T0397", "text": "want help cancelling my company newsletter subscriptikon", "intent": "newsletter_subscription", "category": "SUBSCRIPTION", "email": "orders@bluedoorcafe.example", "flags": "BLQZ", "source_row": 17672}
+{"id": "T0398", "text": "how do I see the ETA of the order KC-11210?", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BIL", "source_row": 25409}
+{"id": "T0399", "text": "can i see tye eta of purchase KC-11150", "intent": "track_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BILQZ", "source_row": 25184}
+{"id": "T0400", "text": "can uhelp me to see how long reimbursements usually take", "intent": "check_refund_policy", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BILQ", "source_row": 6343}

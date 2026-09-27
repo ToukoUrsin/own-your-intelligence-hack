@@ -1,0 +1,100 @@
+{"id": "H0001", "text": "is there an e-mail to send my feedbakc for ur products", "intent": "review", "category": "FEEDBACK", "email": "dev.patel@example.com", "flags": "BILQZ", "source_row": 22053}
+{"id": "H0002", "text": "i call to send my feedback about ur services", "intent": "review", "category": "FEEDBACK", "email": "leo.moreau@example.com", "flags": "BLQ", "source_row": 22638}
+{"id": "H0003", "text": "need assistance to obtain a refund of my money", "intent": "get_refund", "category": "REFUND", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 16637}
+{"id": "H0004", "text": "how cani demand rebates of money", "intent": "get_refund", "category": "REFUND", "email": "leo.moreau@example.com", "flags": "BILMQZ", "source_row": 16436}
+{"id": "H0005", "text": "delete gold acvount", "intent": "delete_account", "category": "ACCOUNT", "email": "olivia.brown@example.com", "flags": "BKLZ", "source_row": 11463}
+{"id": "H0006", "text": "i cant switch to the premium account", "intent": "switch_account", "category": "ACCOUNT", "email": "jordan.kim@example.com", "flags": "BNQ", "source_row": 24616}
+{"id": "H0007", "text": "help me to file a claim against ur organization", "intent": "complaint", "category": "FEEDBACK", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 7214}
+{"id": "H0008", "text": "I'd likke to locate the bill #85632", "intent": "check_invoice", "category": "INVOICE", "email": "jordan.kim@example.com", "flags": "BLPQZ", "source_row": 4881}
+{"id": "H0009", "text": "I am waiting for a reimbursement of 129 dollras", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BLZ", "source_row": 26323}
+{"id": "H0010", "text": "need supports trying to modify my delivery address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "maya.lin@example.com", "flags": "BLMQ", "source_row": 2865}
+{"id": "H0011", "text": "want assistance seeing the withdrawal charge", "intent": "check_cancellation_fee", "category": "CANCEL", "email": "sam.ortiz@example.com", "flags": "BLQ", "source_row": 3884}
+{"id": "H0012", "text": "i dont know how to restore the pin of myuser account", "intent": "recover_password", "category": "ACCOUNT", "email": "ana.silva@example.com", "flags": "BLQZ", "source_row": 20122}
+{"id": "H0013", "text": "can  i create a Plus account", "intent": "create_account", "category": "ACCOUNT", "email": "sam.ortiz@example.com", "flags": "BIQZ", "source_row": 10373}
+{"id": "H0014", "text": "i want assistance to chat with an agent", "intent": "contact_human_agent", "category": "CONTACT", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 8998}
+{"id": "H0015", "text": "want assistance to report a sign-up error", "intent": "registration_problems", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 20966}
+{"id": "H0016", "text": "i have got to use the standard profile", "intent": "switch_account", "category": "ACCOUNT", "email": "tom.becker@example.com", "flags": "BLQ", "source_row": 24318}
+{"id": "H0017", "text": "could i file an customer claim", "intent": "complaint", "category": "FEEDBACK", "email": "sam.ortiz@example.com", "flags": "BILPQZ", "source_row": 6994}
+{"id": "H0018", "text": "how to update the address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "ana.silva@example.com", "flags": "BILQ", "source_row": 2399}
+{"id": "H0019", "text": "deliverids to Canada", "intent": "delivery_options", "category": "DELIVERY", "email": "orders@bluedoorcafe.example", "flags": "BSZ", "source_row": 12075}
+{"id": "H0020", "text": "is it possible to cxancel order KC-11150", "intent": "cancel_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BIQZ", "source_row": 827}
+{"id": "H0021", "text": "new standard acount for wife", "intent": "create_account", "category": "ACCOUNT", "email": "ana.silva@example.com", "flags": "BKLZ", "source_row": 10175}
+{"id": "H0022", "text": "whereto acquire something", "intent": "place_order", "category": "ORDER", "email": "hana.sato@example.com", "flags": "BILQZ", "source_row": 19371}
+{"id": "H0023", "text": "need help to unsubscribe to your newsletter", "intent": "newsletter_subscription", "category": "SUBSCRIPTION", "email": "hana.sato@example.com", "flags": "BLQ", "source_row": 17467}
+{"id": "H0024", "text": "I'm trying to cancel order KC-11150", "intent": "cancel_order", "category": "ORDER", "email": "olivia.brown@example.com", "flags": "BQ", "source_row": 393}
+{"id": "H0025", "text": "i have an issue setting an different shipping address up", "intent": "set_up_shipping_address", "category": "SHIPPING", "email": "leo.moreau@example.com", "flags": "BQZ", "source_row": 23358}
+{"id": "H0026", "text": "assistance to add a damn article to order KC-11412", "intent": "change_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BLW", "source_row": 1618}
+{"id": "H0027", "text": "i want help listing u payment methods", "intent": "check_payment_methods", "category": "PAYMENT", "email": "hana.sato@example.com", "flags": "BLQZ", "source_row": 5408}
+{"id": "H0028", "text": "need help to see how long it takes for my shipment to arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "maya.lin@example.com", "flags": "BLQ", "source_row": 13859}
+{"id": "H0029", "text": "I cannot sign up, assistance reporting fucking signup issues", "intent": "registration_problems", "category": "ACCOUNT", "email": "jordan.kim@example.com", "flags": "BCELMNW", "source_row": 21397}
+{"id": "H0030", "text": "need help requesting reimbursements of my money", "intent": "get_refund", "category": "REFUND", "email": "jordan.kim@example.com", "flags": "BLMQ", "source_row": 16226}
+{"id": "H0031", "text": "open a Plus acount for my dad", "intent": "create_account", "category": "ACCOUNT", "email": "dev.patel@example.com", "flags": "BLZ", "source_row": 10490}
+{"id": "H0032", "text": "how can i get information about pro account cancellations", "intent": "delete_account", "category": "ACCOUNT", "email": "jordan.kim@example.com", "flags": "BILMQ", "source_row": 11187}
+{"id": "H0033", "text": "i need help seeing what shipping methods i can choose", "intent": "delivery_options", "category": "DELIVERY", "email": "dev.patel@example.com", "flags": "BLMQ", "source_row": 12312}
+{"id": "H0034", "text": "removing gold acconut", "intent": "delete_account", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BKLZ", "source_row": 11340}
+{"id": "H0035", "text": "have a question about the deletion of my Plus account", "intent": "delete_account", "category": "ACCOUNT", "email": "maya.lin@example.com", "flags": "BLQ", "source_row": 11748}
+{"id": "H0036", "text": "can uhelp me subscribing to the copany newsletter", "intent": "newsletter_subscription", "category": "SUBSCRIPTION", "email": "hana.sato@example.com", "flags": "BILQZ", "source_row": 17308}
+{"id": "H0037", "text": "could uhelp me to change the data on my user account", "intent": "edit_account", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BILPQ", "source_row": 14108}
+{"id": "H0038", "text": "i have got to notify of issues with online payment", "intent": "payment_issue", "category": "PAYMENT", "email": "orders@bluedoorcafe.example", "flags": "BLMQ", "source_row": 18051}
+{"id": "H0039", "text": "updating info on standard account", "intent": "edit_account", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BKLQ", "source_row": 14476}
+{"id": "H0040", "text": "where to modify the address", "intent": "change_shipping_address", "category": "SHIPPING", "email": "maya.lin@example.com", "flags": "BILQ", "source_row": 2617}
+{"id": "H0041", "text": "how can i inform of a payment problem", "intent": "payment_issue", "category": "PAYMENT", "email": "sam.ortiz@example.com", "flags": "BILQ", "source_row": 18161}
+{"id": "H0042", "text": "want help to see ur reimbursement policy", "intent": "check_refund_policy", "category": "REFUND", "email": "olivia.brown@example.com", "flags": "BLQ", "source_row": 6653}
+{"id": "H0043", "text": "have a problem with cancelling purchase KC-11390", "intent": "cancel_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BLQ", "source_row": 179}
+{"id": "H0044", "text": "want assistance to order something", "intent": "place_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BLQ", "source_row": 19356}
+{"id": "H0045", "text": "updating Standard accojnt", "intent": "edit_account", "category": "ACCOUNT", "email": "leo.moreau@example.com", "flags": "BKLZ", "source_row": 14388}
+{"id": "H0046", "text": "edtiing order KC-11390", "intent": "change_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BLZ", "source_row": 1566}
+{"id": "H0047", "text": "need to check ur refund policy can i get some help", "intent": "check_refund_policy", "category": "REFUND", "email": "olivia.brown@example.com", "flags": "BCIQ", "source_row": 6390}
+{"id": "H0048", "text": "can ya hepl me see when will my item arrive", "intent": "delivery_period", "category": "DELIVERY", "email": "dev.patel@example.com", "flags": "BILQZ", "source_row": 13435}
+{"id": "H0049", "text": "i dont know what to do to recover myuser account pin", "intent": "recover_password", "category": "ACCOUNT", "email": "jordan.kim@example.com", "flags": "BLQZ", "source_row": 20864}
+{"id": "H0050", "text": "wana swap a damn product of order KC-11412 help me", "intent": "change_order", "category": "ORDER", "email": "jordan.kim@example.com", "flags": "BCLQWZ", "source_row": 1968}
+{"id": "H0051", "text": "get bill fromAnna Freeman", "intent": "get_invoice", "category": "INVOICE", "email": "sam.ortiz@example.com", "flags": "BKLZ", "source_row": 15435}
+{"id": "H0052", "text": "trouble submitting the edlivery address", "intent": "set_up_shipping_address", "category": "SHIPPING", "email": "maya.lin@example.com", "flags": "BLZ", "source_row": 23027}
+{"id": "H0053", "text": "want assistance notifying of problems with a registration", "intent": "registration_problems", "category": "ACCOUNT", "email": "olivia.brown@example.com", "flags": "BLMQ", "source_row": 21529}
+{"id": "H0054", "text": "do ya ship toJapan", "intent": "delivery_options", "category": "DELIVERY", "email": "dev.patel@example.com", "flags": "BILQSZ", "source_row": 12068}
+{"id": "H0055", "text": "i need helo checking ur allowed payment methods", "intent": "check_payment_methods", "category": "PAYMENT", "email": "jordan.kim@example.com", "flags": "BQZ", "source_row": 5886}
+{"id": "H0056", "text": "can i change to the Plus account", "intent": "switch_account", "category": "ACCOUNT", "email": "ana.silva@example.com", "flags": "BILQ", "source_row": 24220}
+{"id": "H0057", "text": "I want to see what payment options are availabl", "intent": "check_payment_methods", "category": "PAYMENT", "email": "orders@bluedoorcafe.example", "flags": "BLZ", "source_row": 5405}
+{"id": "H0058", "text": "i dont know what to do to talk to customer support", "intent": "contact_customer_service", "category": "CONTACT", "email": "maya.lin@example.com", "flags": "BLQ", "source_row": 8530}
+{"id": "H0059", "text": "need help to see in what cases can I ask for refunds", "intent": "check_refund_policy", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BLQ", "source_row": 6305}
+{"id": "H0060", "text": "how do i subscribe to the corporate newsletter", "intent": "newsletter_subscription", "category": "SUBSCRIPTION", "email": "dev.patel@example.com", "flags": "BILQ", "source_row": 17344}
+{"id": "H0061", "text": "i dont know what to do to set my newdelivery address up", "intent": "set_up_shipping_address", "category": "SHIPPING", "email": "maya.lin@example.com", "flags": "BLQZ", "source_row": 23403}
+{"id": "H0062", "text": "i have troubles entering the new shipping address", "intent": "set_up_shipping_address", "category": "SHIPPING", "email": "orders@bluedoorcafe.example", "flags": "BLMQ", "source_row": 23315}
+{"id": "H0063", "text": "i have to sede the cancellation charge", "intent": "check_cancellation_fee", "category": "CANCEL", "email": "ana.silva@example.com", "flags": "BLQZ", "source_row": 3107}
+{"id": "H0064", "text": "how casn i check at what time i can contact customer support", "intent": "contact_customer_service", "category": "CONTACT", "email": "sam.ortiz@example.com", "flags": "BILQZ", "source_row": 8865}
+{"id": "H0065", "text": "i dont know what i need to do to subscribe to the newsletter", "intent": "newsletter_subscription", "category": "SUBSCRIPTION", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 17295}
+{"id": "H0066", "text": "need assistnce to see how soon can I expect the purchase", "intent": "delivery_period", "category": "DELIVERY", "email": "hana.sato@example.com", "flags": "BLQZ", "source_row": 13602}
+{"id": "H0067", "text": "i ahve to acquire some products", "intent": "place_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BLMQZ", "source_row": 19377}
+{"id": "H0068", "text": "is there a section to submit my feedback for ur products", "intent": "review", "category": "FEEDBACK", "email": "jordan.kim@example.com", "flags": "BILQ", "source_row": 22773}
+{"id": "H0069", "text": "assistance checking what bloody shipping options you offer", "intent": "delivery_options", "category": "DELIVERY", "email": "ana.silva@example.com", "flags": "BLMW", "source_row": 12051}
+{"id": "H0070", "text": "i want assistance to report issues with payments", "intent": "payment_issue", "category": "PAYMENT", "email": "hana.sato@example.com", "flags": "BMQ", "source_row": 18412}
+{"id": "H0071", "text": "where do i report an error with sign-up", "intent": "registration_problems", "category": "ACCOUNT", "email": "maya.lin@example.com", "flags": "BILQ", "source_row": 21191}
+{"id": "H0072", "text": "want assistance to talk with a live agent", "intent": "contact_human_agent", "category": "CONTACT", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 9354}
+{"id": "H0073", "text": "I do not know what I have to do to create a pro accoun", "intent": "create_account", "category": "ACCOUNT", "email": "tom.becker@example.com", "flags": "BEZ", "source_row": 10389}
+{"id": "H0074", "text": "i have got to get my goddamn bills from Blue Door Café", "intent": "get_invoice", "category": "INVOICE", "email": "orders@bluedoorcafe.example", "flags": "BLMQW", "source_row": 15650}
+{"id": "H0075", "text": "needc to talk to an assistant", "intent": "contact_human_agent", "category": "CONTACT", "email": "ana.silva@example.com", "flags": "BLQZ", "source_row": 9353}
+{"id": "H0076", "text": "can I update order00004587345?", "intent": "change_order", "category": "ORDER", "email": "leo.moreau@example.com", "flags": "BILZ", "source_row": 1523}
+{"id": "H0077", "text": "help filing a cosnumer reclamation against ur company", "intent": "complaint", "category": "FEEDBACK", "email": "tom.becker@example.com", "flags": "BLQZ", "source_row": 7458}
+{"id": "H0078", "text": "i do not know how i can receive rebates of my money", "intent": "get_refund", "category": "REFUND", "email": "olivia.brown@example.com", "flags": "BELMQ", "source_row": 16688}
+{"id": "H0079", "text": "can i see my invoices from Léo Moreau", "intent": "check_invoice", "category": "INVOICE", "email": "leo.moreau@example.com", "flags": "BILMQ", "source_row": 4627}
+{"id": "H0080", "text": "what do i need to do to hceck the termination charge", "intent": "check_cancellation_fee", "category": "CANCEL", "email": "dev.patel@example.com", "flags": "BILQZ", "source_row": 3802}
+{"id": "H0081", "text": "i do not know what to do to inform of problems with payments", "intent": "payment_issue", "category": "PAYMENT", "email": "leo.moreau@example.com", "flags": "BELMQ", "source_row": 18375}
+{"id": "H0082", "text": "whree to check what payment methods are available?", "intent": "check_payment_methods", "category": "PAYMENT", "email": "olivia.brown@example.com", "flags": "BIZ", "source_row": 5378}
+{"id": "H0083", "text": "i want help talking with somebody", "intent": "contact_human_agent", "category": "CONTACT", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 9423}
+{"id": "H0084", "text": "how cam i track order KC-11390", "intent": "track_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BIQZ", "source_row": 25232}
+{"id": "H0085", "text": "how do i find bill #12588", "intent": "check_invoice", "category": "INVOICE", "email": "tom.becker@example.com", "flags": "BILQ", "source_row": 4485}
+{"id": "H0086", "text": "I have  to locate my bill #00108, help me", "intent": "check_invoice", "category": "INVOICE", "email": "maya.lin@example.com", "flags": "BCLZ", "source_row": 4572}
+{"id": "H0087", "text": "order 113542617735902current status", "intent": "track_order", "category": "ORDER", "email": "tom.becker@example.com", "flags": "BKLZ", "source_row": 25711}
+{"id": "H0088", "text": "i need assistance acquiring several items", "intent": "place_order", "category": "ORDER", "email": "sam.ortiz@example.com", "flags": "BLMQ", "source_row": 19868}
+{"id": "H0089", "text": "I'm waiting for a reimbursement of 129 dollars", "intent": "track_refund", "category": "REFUND", "email": "ana.silva@example.com", "flags": "BLQ", "source_row": 26246}
+{"id": "H0090", "text": "need help canging to the Standard account", "intent": "switch_account", "category": "ACCOUNT", "email": "maya.lin@example.com", "flags": "BLQZ", "source_row": 24570}
+{"id": "H0091", "text": "I'm trying to rset the pwd of my user profile", "intent": "recover_password", "category": "ACCOUNT", "email": "orders@bluedoorcafe.example", "flags": "BLQZ", "source_row": 20372}
+{"id": "H0092", "text": "where can I get information about an address correction ?", "intent": "change_shipping_address", "category": "SHIPPING", "email": "olivia.brown@example.com", "flags": "BILZ", "source_row": 2409}
+{"id": "H0093", "text": "is it possible to get my invoice from Sam Ortiz", "intent": "get_invoice", "category": "INVOICE", "email": "sam.ortiz@example.com", "flags": "BILQ", "source_row": 15378}
+{"id": "H0094", "text": "I have to see in which cases can I sak for reimbursements", "intent": "check_refund_policy", "category": "REFUND", "email": "orders@bluedoorcafe.example", "flags": "BLZ", "source_row": 6443}
+{"id": "H0095", "text": "I am waiting for a compensation of 34 doolars", "intent": "track_refund", "category": "REFUND", "email": "hana.sato@example.com", "flags": "BLZ", "source_row": 26449}
+{"id": "H0096", "text": "i do not know what i need to do to download my bill #12588", "intent": "get_invoice", "category": "INVOICE", "email": "orders@bluedoorcafe.example", "flags": "BELQ", "source_row": 15285}
+{"id": "H0097", "text": "how can i send my feedback about ur services", "intent": "review", "category": "FEEDBACK", "email": "leo.moreau@example.com", "flags": "BILQ", "source_row": 22475}
+{"id": "H0098", "text": "i can no longer afford purchase KC-11390", "intent": "cancel_order", "category": "ORDER", "email": "maya.lin@example.com", "flags": "BLNQ", "source_row": 928}
+{"id": "H0099", "text": "i dont know how to make a reclamation against ur company", "intent": "complaint", "category": "FEEDBACK", "email": "jordan.kim@example.com", "flags": "BLQ", "source_row": 7564}
+{"id": "H0100", "text": "i have to see at what time i can contact customer service", "intent": "contact_customer_service", "category": "CONTACT", "email": "dev.patel@example.com", "flags": "BLQ", "source_row": 8607}
