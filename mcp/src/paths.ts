@@ -38,7 +38,7 @@ export async function recallPath(request: string) {
   const normalized = await memory.normalize(request);
   const r = await memory.recall(normalized.request);
   const hit = r.procedure && r.similarity >= THRESHOLD ? r.procedure : undefined;
-  const common = { similarity: round(r.similarity), normalized: normalized.request, normalizer: normalized.source };
+  const common = { similarity: round(r.similarity), normalized: normalized.request, normalizer: normalized.source, backend: r.backend };
   if (!hit) return { found: false, ...common, closest: r.procedure?.title ?? null, instruction: "No saved procedure. Explore with search_kb, read_page and the shop tools, then call save_path." };
   return {
     found: true,
@@ -46,6 +46,10 @@ export async function recallPath(request: string) {
     title: hit.title,
     ...common,
     steps: hit.path,
+    tools: hit.tools ?? hit.memorableSteps?.map((m: any) => m.action) ?? [],
+    uses: hit.uses ?? 0,
+    learnedFrom: (hit as any).learnedFrom ?? null,
+    earlierTickets: earlierTickets(hit.id, (hit as any).learnedFrom),
     knowledge: hit.knowledge,
     instruction: "Replay these steps for this customer. The policy text is included, so skip search_kb; make independent calls together. Deviate only if a result shows this is a different case.",
   };
@@ -68,6 +72,24 @@ export async function savePath(task: string, toolCalls: ToolCall[]) {
   }
   const { procedure, created } = await memory.saveProcedure({ sessionId: "qm-chat", normalized, steps, embedding: r.embedding, harness: "northwind-support-agent-qm" });
   return { saved: created, id: procedure?.id, title: procedure?.title, steps: procedure?.path, calls: steps.length, callsFrom: source, normalizer: normalized.source };
+}
+
+// Earlier replay tickets that learned or reused this path (replay/results.jsonl + data/tickets.jsonl), for the Paths panel.
+function readJsonl(file: string): any[] {
+  if (!existsSync(file)) return [];
+  return readFileSync(file, "utf8").split("\n").filter(Boolean).flatMap((l) => { try { return [JSON.parse(l)]; } catch { return []; } });
+}
+function earlierTickets(id: string, learnedFrom?: string) {
+  try {
+    const root = join(import.meta.dir, "../..");
+    const text = new Map(readJsonl(join(root, "data/tickets.jsonl")).map((t) => [t.id, String(t.text ?? "")]));
+    const rows = readJsonl(join(root, "replay/results.jsonl")).filter((r) => r.tier !== "error" && (r.learned === id || r.reinforced === id || r.procedureId === id));
+    const ids = [...new Set([...(learnedFrom ? [learnedFrom] : []), ...rows.map((r) => r.id)])];
+    return ids.slice(0, 8).map((t) => {
+      const row = rows.find((r) => r.id === t);
+      return { id: t, text: (text.get(t) ?? "").replace(/\s+/g, " ").slice(0, 90), tier: row?.tier ?? (t === learnedFrom ? "explored" : undefined) };
+    });
+  } catch { return []; }
 }
 
 const round = (n: number) => Math.round(n * 1000) / 1000;
