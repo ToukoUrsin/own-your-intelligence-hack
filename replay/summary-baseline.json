@@ -1,0 +1,54 @@
+{
+  "tickets": 100,
+  "errors": 0,
+  "costPerTicket": 0.0837,
+  "secondsPerTicket": 10.3,
+  "toolCallsPerTicket": 4,
+  "totalCost": 8.367,
+  "buckets": [
+    {
+      "tickets": "1-25",
+      "n": 25,
+      "recallRate": 0,
+      "recallPrecision": null,
+      "costPerTicket": 0.0833,
+      "secondsPerTicket": 10.4,
+      "toolCallsPerTicket": 4.1,
+      "modelCallsPerTicket": 3.2,
+      "libraryAtEnd": 0
+    },
+    {
+      "tickets": "26-50",
+      "n": 25,
+      "recallRate": 0,
+      "recallPrecision": null,
+      "costPerTicket": 0.0859,
+      "secondsPerTicket": 10.4,
+      "toolCallsPerTicket": 4,
+      "modelCallsPerTicket": 3.2,
+      "libraryAtEnd": 0
+    },
+    {
+      "tickets": "51-75",
+      "n": 25,
+      "recallRate": 0,
+      "recallPrecision": null,
+      "costPerTicket": 0.081,
+      "secondsPerTicket": 10.3,
+      "toolCallsPerTicket": 3.9,
+      "modelCallsPerTicket": 3.1,
+      "libraryAtEnd": 0
+    },
+    {
+      "tickets": "76-100",
+      "n": 25,
+      "recallRate": 0,
+      "recallPrecision": null,
+      "costPerTicket": 0.0845,
+      "secondsPerTicket": 10.3,
+      "toolCallsPerTicket": 4.1,
+      "modelCallsPerTicket": 3.2,
+      "libraryAtEnd": 0
+    }
+  ]
+}

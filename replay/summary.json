@@ -1,43 +1,138 @@
 {
   "memory": true,
-  "tickets": 60,
+  "normalizers": {
+    "haiku": 194
+  },
+  "tickets": 194,
   "errors": 0,
-  "totalCost": 4.219,
-  "recalled": 18,
-  "recalledCost": 0.0489,
-  "exploredCost": 0.0795,
+  "totalCost": 10.265,
+  "normalizerCost": 0.0845,
+  "recalled": 163,
+  "recallPrecision": 0.908,
+  "recalledCost": 0.0478,
+  "exploredCost": 0.0797,
+  "library": {
+    "size": 25,
+    "created": 25,
+    "reinforced": 149,
+    "revised": 20,
+    "distinctGoldIntents": 25
+  },
   "buckets": [
     {
       "tickets": "1-25",
       "n": 25,
-      "recallRate": 0.16,
-      "costPerTicket": 0.076,
-      "secondsPerTicket": 10.4,
-      "toolCallsPerTicket": 4,
-      "modelCallsPerTicket": 2.8
+      "recallRate": 0.32,
+      "recallPrecision": 1,
+      "costPerTicket": 0.0717,
+      "secondsPerTicket": 9.1,
+      "toolCallsPerTicket": 3.9,
+      "modelCallsPerTicket": 2.6,
+      "libraryAtEnd": 13
     },
     {
       "tickets": "26-50",
       "n": 25,
-      "recallRate": 0.24,
-      "costPerTicket": 0.0743,
-      "secondsPerTicket": 9.9,
-      "toolCallsPerTicket": 3.7,
-      "modelCallsPerTicket": 2.7
+      "recallRate": 0.68,
+      "recallPrecision": 0.88,
+      "costPerTicket": 0.0562,
+      "secondsPerTicket": 8.1,
+      "toolCallsPerTicket": 3.6,
+      "modelCallsPerTicket": 1.9,
+      "libraryAtEnd": 19
     },
     {
-      "tickets": "51-60",
-      "n": 10,
-      "recallRate": 0.8,
-      "costPerTicket": 0.0462,
-      "secondsPerTicket": 7,
-      "toolCallsPerTicket": 3,
-      "modelCallsPerTicket": 1.6
+      "tickets": "51-75",
+      "n": 25,
+      "recallRate": 0.92,
+      "recallPrecision": 1,
+      "costPerTicket": 0.0496,
+      "secondsPerTicket": 7.2,
+      "toolCallsPerTicket": 3.3,
+      "modelCallsPerTicket": 1.6,
+      "libraryAtEnd": 21
+    },
+    {
+      "tickets": "76-100",
+      "n": 25,
+      "recallRate": 1,
+      "recallPrecision": 0.84,
+      "costPerTicket": 0.0487,
+      "secondsPerTicket": 7.6,
+      "toolCallsPerTicket": 3.8,
+      "modelCallsPerTicket": 1.5,
+      "libraryAtEnd": 21
+    },
+    {
+      "tickets": "101-125",
+      "n": 25,
+      "recallRate": 1,
+      "recallPrecision": 0.8,
+      "costPerTicket": 0.0466,
+      "secondsPerTicket": 7.8,
+      "toolCallsPerTicket": 3.7,
+      "modelCallsPerTicket": 1.4,
+      "libraryAtEnd": 21
+    },
+    {
+      "tickets": "126-150",
+      "n": 25,
+      "recallRate": 0.88,
+      "recallPrecision": 1,
+      "costPerTicket": 0.0476,
+      "secondsPerTicket": 7.5,
+      "toolCallsPerTicket": 3.6,
+      "modelCallsPerTicket": 1.5,
+      "libraryAtEnd": 24
+    },
+    {
+      "tickets": "151-175",
+      "n": 25,
+      "recallRate": 1,
+      "recallPrecision": 0.92,
+      "costPerTicket": 0.0409,
+      "secondsPerTicket": 6.5,
+      "toolCallsPerTicket": 3.8,
+      "modelCallsPerTicket": 1.3,
+      "libraryAtEnd": 24
+    },
+    {
+      "tickets": "176-194",
+      "n": 19,
+      "recallRate": 0.95,
+      "recallPrecision": 0.89,
+      "costPerTicket": 0.0649,
+      "secondsPerTicket": 9.4,
+      "toolCallsPerTicket": 4.4,
+      "modelCallsPerTicket": 1.9,
+      "libraryAtEnd": 25
     }
   ],
-  "firstVsLast": {
-    "cost": "-39%",
-    "time": "-33%",
-    "toolCalls": "-25%"
+  "headline": {
+    "costPerTicketFirstBucket": 0.0717,
+    "costPerTicketLastBucket": 0.0649,
+    "costFirstVsLast": "-9%",
+    "timeFirstVsLast": "3%",
+    "toolCallsFirstVsLast": "13%",
+    "recalledInLastBucket": "95%",
+    "librarySize": 25,
+    "recallPrecision": 0.908,
+    "baselineCostPerTicket": 0.0837,
+    "lastBucketVsBaseline": "-22%",
+    "sameTicketsVsBaseline": {
+      "tickets": 100,
+      "memoryCost": 0.0565,
+      "baselineCost": 0.0837,
+      "change": "-32%"
+    },
+    "lastBucketBaselineOverlap": 0
+  },
+  "baseline": {
+    "tickets": 100,
+    "errors": 0,
+    "costPerTicket": 0.0837,
+    "secondsPerTicket": 10.3,
+    "toolCallsPerTicket": 4,
+    "totalCost": 8.367
   }
 }

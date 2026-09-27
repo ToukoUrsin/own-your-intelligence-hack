@@ -1,15 +1,15 @@
-// Path memory for the MCP server: recall and save through agent/src/memory.ts (Memorable embeddings + shared
-// procedure store). memory.ts keeps its own learn() private, so save mirrors it here and pushes into the same
-// in-process cache so later recalls see the new path immediately.
-import { appendFileSync, mkdirSync } from "node:fs";
-import { dirname, join } from "node:path";
+// Path memory for the MCP server: recall and save through agent/src/memory.ts (same normalizer, Memorable
+// embeddings/extraction and shared procedure store as the replay). Recall re-reads the store every time, so paths
+// learned by the replay or another process are visible immediately. Save uses the calls this server actually logged
+// for the session (mcp/logs/calls.jsonl since the last recall_path), not the agent's self-reported list.
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import * as memory from "../../agent/src/memory";
-import type { Procedure } from "../../agent/src/memory";
+import type { Step } from "../../agent/src/agent";
 import { shopTools } from "./tools";
 
-const API = process.env.MEMORABLE_API_URL ?? "https://memorable-extraction-api.memorable.workers.dev";
 const THRESHOLD = Number(process.env.RECALL_THRESHOLD ?? 0.78);
-const STORE = process.env.MEMORY_STORE ?? join(import.meta.dir, "../../replay/procedures.jsonl");
+const LOG = join(import.meta.dir, "../logs/calls.jsonl");
 
 export type ToolCall = { name: string; input?: unknown; result?: unknown };
 
@@ -19,79 +19,55 @@ function bare(name: string) {
   return TOOLS.find((t) => name === t || name.endsWith(`_${t}`)) ?? name;
 }
 
-async function memorable(path: string, body: unknown): Promise<any> {
-  const key = process.env.MEMORABLE_API_KEY;
-  if (!key) throw new Error("MEMORABLE_API_KEY missing");
-  const r = await fetch(new URL(path, API), {
-    method: "POST",
-    headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(30000),
-  });
-  if (!r.ok) throw new Error(`memorable ${path}: ${r.status}`);
-  return r.json();
-}
+const parse = (s: unknown) => { if (typeof s !== "string") return s; try { return JSON.parse(s); } catch { return s; } };
 
-function toPath(steps: { tool: string; input: Record<string, unknown> }[]): string[] {
-  const readsPages = steps.some((s) => s.tool === "read_page");
-  const path: string[] = [];
-  for (const s of steps) {
-    let line: string;
-    if (s.tool === "read_page") line = `read_page ${JSON.stringify({ slug: s.input.slug })}`;
-    else if (s.tool === "search_kb") { if (readsPages) continue; line = `search_kb ${JSON.stringify({ query: s.input.query })}`; }
-    else line = `${s.tool} (${Object.keys(s.input).join(", ")} from this ticket and its order)`;
-    if (!path.includes(line)) path.push(line);
-  }
-  return path;
+// The current session's calls: everything logged after the most recent recall_path (the MCP is stateless, and the
+// agent is told to call recall_path first for each request).
+function loggedSession(): Step[] {
+  if (!existsSync(LOG)) return [];
+  const rows = readFileSync(LOG, "utf8").split("\n").filter(Boolean).map((l) => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+  let start = 0;
+  for (let i = rows.length - 1; i >= 0; i--) if (rows[i].tool === "recall_path") { start = i + 1; break; }
+  return rows.slice(start)
+    .filter((r: any) => r.ok && r.tool !== "recall_path" && r.tool !== "save_path")
+    .map((r: any) => ({ tool: bare(r.tool), input: r.args ?? {}, output: parse(r.output) }));
 }
 
 export async function recallPath(request: string) {
+  memory.reload();
   const normalized = await memory.normalize(request);
   const r = await memory.recall(normalized.request);
   const hit = r.procedure && r.similarity >= THRESHOLD ? r.procedure : undefined;
-  if (!hit) return { found: false, similarity: round(r.similarity), closest: r.procedure?.title ?? null, normalized: normalized.request, instruction: "No saved procedure. Explore with search_kb, read_page and the shop tools, then call save_path." };
+  const common = { similarity: round(r.similarity), normalized: normalized.request, normalizer: normalized.source };
+  if (!hit) return { found: false, ...common, closest: r.procedure?.title ?? null, instruction: "No saved procedure. Explore with search_kb, read_page and the shop tools, then call save_path." };
   return {
     found: true,
     id: hit.id,
     title: hit.title,
-    similarity: round(r.similarity),
-    normalized: normalized.request,
+    ...common,
     steps: hit.path,
-    instruction: "Replay these steps for this customer. The brain pages are listed, so skip search_kb; make independent calls together. Deviate only if a result shows this is a different case.",
+    knowledge: hit.knowledge,
+    instruction: "Replay these steps for this customer. The policy text is included, so skip search_kb; make independent calls together. Deviate only if a result shows this is a different case.",
   };
 }
 
 export async function savePath(task: string, toolCalls: ToolCall[]) {
-  const steps = toolCalls
-    .map((c) => ({ tool: bare(c.name), input: (c.input ?? {}) as Record<string, unknown>, result: c.result }))
-    .filter((s) => s.tool !== "recall_path" && s.tool !== "save_path");
+  memory.reload();
+  let steps = loggedSession();
+  const source = steps.length ? "server log" : "agent report";
+  if (!steps.length)
+    steps = toolCalls
+      .map((c) => ({ tool: bare(c.name), input: (c.input ?? {}) as Record<string, unknown>, output: c.result }))
+      .filter((s) => s.tool !== "recall_path" && s.tool !== "save_path");
   if (!steps.length) return { saved: false, reason: "no tool calls to save" };
-  const r = await memory.recall(task);
-  if (r.procedure && r.similarity >= 0.95) return { saved: false, reason: "already known", id: r.procedure.id, title: r.procedure.title };
-  const res = await memorable("/v1/extract", {
-    session_id: `qm-${Date.now()}`,
-    task_description: task.slice(0, 200),
-    harness: "kettle-support-agent-qm",
-    tool_calls: steps.map((s) => ({ name: s.tool, input: s.input, result: JSON.stringify(s.result ?? "").slice(0, 2000) })),
-  }).catch(() => null);
-  const d = res?.draft;
-  const all = await memory.listProcedures();
-  const p: Procedure = {
-    id: `proc-${all.length + 1}`,
-    title: d?.title ?? task,
-    task,
-    memorableSteps: (d?.steps ?? []).map((s: any) => ({ seq: s.seq, action: s.action, repeat_count: s.repeat_count })),
-    admitted: res?.judge?.admitted,
-    path: toPath(steps),
-    tools: [...new Set(steps.map((s) => s.tool))],
-    embedding: d?.embedding?.length ? d.embedding : r.embedding,
-    learnedFrom: "qm-chat",
-    createdAt: new Date().toISOString(),
-  };
-  all.push(p);
-  mkdirSync(dirname(STORE), { recursive: true });
-  appendFileSync(STORE, JSON.stringify(p) + "\n");
-  return { saved: true, id: p.id, title: p.title, steps: p.path, memorableDraft: !!d };
+  const normalized = await memory.normalize(task);
+  const r = await memory.recall(normalized.request);
+  if (r.procedure && (r.similarity >= 0.95)) {
+    const { procedure } = await memory.saveProcedure({ sessionId: "qm-chat", normalized, steps, harness: "kettle-support-agent-qm" });
+    return { saved: false, reason: "already known (reinforced)", id: procedure?.id ?? r.procedure.id, title: procedure?.title ?? r.procedure.title };
+  }
+  const { procedure, created } = await memory.saveProcedure({ sessionId: "qm-chat", normalized, steps, embedding: r.embedding, harness: "kettle-support-agent-qm" });
+  return { saved: created, id: procedure?.id, title: procedure?.title, steps: procedure?.path, calls: steps.length, callsFrom: source, normalizer: normalized.source };
 }
 
 const round = (n: number) => Math.round(n * 1000) / 1000;
