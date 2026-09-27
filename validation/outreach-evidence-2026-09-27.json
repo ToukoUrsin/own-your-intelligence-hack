@@ -1,0 +1,433 @@
+{
+  "sender": "marc@heliosone.fi",
+  "subject": "YC hackathon — quick question about your agent costs",
+  "baseBody": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nHave you spent engineering time reducing the cost of recurring tasks in your product? What have you tried?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+  "knownBounces": [
+    {
+      "recipient": "founders@airial.travel",
+      "reason": "Recipient group permits organization and allowed senders only; 550 5.7.133"
+    }
+  ],
+  "incoming": [
+    {
+      "company": "Duckbill",
+      "sender": "support@getduckbill.com",
+      "receivedLocal": "2026-09-27 15:27 PDT",
+      "kind": "support-assistant acknowledgment",
+      "summary": "Says request was shared with the support team. No answer on inference costs, no pilot or LOI.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Agabrielle%40teamohai.ai+to%3Asupport%40getduckbill.com+to%3Afounders%40fabraix.com+to%3Acontactus%40onegrep.dev%7D/FFNDWMQQPFPkxtnkfBgdsDRFmFxWsxfj"
+    },
+    {
+      "company": "Poke",
+      "sender": "poke@interaction.co",
+      "receivedLocal": "2026-09-27 15:16 PDT",
+      "kind": "support acknowledgment",
+      "summary": "Confirms receipt and says team will get back to Marc. No answer to cost questions or commitment.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Aanywhere+newer_than%3A1d+-from%3Ame+%7Bsubject%3A%22YC+hackathon%22+from%3Aapten.ai+from%3Atryrisotto.com+from%3Ayuma.ai+from%3Aletterbook.ai+from%3Atwin.so+from%3Aollie.ai+from%3Aheyclicky.com+from%3Alindy.ai+from%3Aairial.travel+from%3Atouchyapp.com+from%3Arisely.ai+from%3Atryvela.ai+from%3Atsenta.com+from%3Aaemon.ai+from%3Alayla.ai+from%3Amypingoai.com+from%3Abik.ai+from%3Atrykinect.ai+from%3Arunpalisade.com+from%3Agoekpa.com+from%3Ahessian.sh+from%3Aruncanary.ai+from%3Agetdecipher.com+from%3Aanglera.com+from%3Ausefini.com+from%3Aveeza.ai+from%3Asolosystems.dev+from%3Aelicit.com+from%3Aaskjo.ai+from%3Ajulius.ai+from%3Ainteraction.co+from%3Alastaccountingcompany.com+from%3Aqomplement.com+from%3Athebillow.ai+from%3Are-tell.ai+from%3Aillumelabs.ai+from%3Agumloop.com+from%3Aonegrep.dev+from%3Afabraix.com+from%3Ateamohai.ai+from%3Agetduckbill.com%7D/FMfcgzQhWfSGVXPZsHKHCDXhgVHdgtsr"
+    }
+  ],
+  "sent": [
+    {
+      "recipient": "daniel@apten.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/KtbxLxGvbBLWdvTVPWhLsqwCsBwGXqbwhL"
+    },
+    {
+      "recipient": "founders@tryrisotto.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/KtbxLxGStTVbDqfvnGQJdqQqszdPwJLbzL"
+    },
+    {
+      "recipient": "g@yuma.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/QgrcJHrhxnLcpCvsHgrjkztCmzDFxGkqxcl"
+    },
+    {
+      "recipient": "dawson@letterbook.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/KtbxLxGPnHTrnGqQsltPSpgTsJrcMznPTL"
+    },
+    {
+      "recipient": "hugo@twin.so",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/KtbxLthdpVMBQvppMmkkWgtWPcVkvGBvSV"
+    },
+    {
+      "recipient": "hello@ollie.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/QgrcJHrnxTtvXPZqBggbRGDQLtgTPjCMCFq"
+    },
+    {
+      "recipient": "hi@heyclicky.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/QgrcJHsBmHBQgpMDqMDrVbTwxhPHTkWxHtL"
+    },
+    {
+      "recipient": "flo@lindy.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/QgrcJHsbkdpBSJjJZkVbhLrDMPBrgDfjBnq"
+    },
+    {
+      "recipient": "founders@airial.travel",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/KtbxLvhNWMkmsTFHXrLJHhtHpxVDNxHnwg"
+    },
+    {
+      "recipient": "founders@touchyapp.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 2,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+subject%3A%22agent+costs%22/QgrcJHsbhPBlVGMXfnmwjxxHMgRWDBjCMVB"
+    },
+    {
+      "recipient": "founders@risely.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Asaad%40layla.ai+to%3Afounder%40aemon.ai+to%3Afounders%40tsenta.com+to%3Afounders%40tryvela.ai+to%3Afounders%40risely.ai%7D/KtbxLwGnMXjVgtQnptcNsRHpbWcbMWmfML"
+    },
+    {
+      "recipient": "founders@tryvela.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Asaad%40layla.ai+to%3Afounder%40aemon.ai+to%3Afounders%40tsenta.com+to%3Afounders%40tryvela.ai+to%3Afounders%40risely.ai%7D/QgrcJHrntPNNcfrPdsXJcZKrVnSJxqltsSq"
+    },
+    {
+      "recipient": "founders@tsenta.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Asaad%40layla.ai+to%3Afounder%40aemon.ai+to%3Afounders%40tsenta.com+to%3Afounders%40tryvela.ai+to%3Afounders%40risely.ai%7D/QgrcJHsHkxVXKnPbsXHdTxlJmDbBmDFfGPl"
+    },
+    {
+      "recipient": "founder@aemon.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Asaad%40layla.ai+to%3Afounder%40aemon.ai+to%3Afounders%40tsenta.com+to%3Afounders%40tryvela.ai+to%3Afounders%40risely.ai%7D/KtbxLvHHnpnBWgkfvHJdWpWPjSCCvBcvDV"
+    },
+    {
+      "recipient": "saad@layla.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Asaad%40layla.ai+to%3Afounder%40aemon.ai+to%3Afounders%40tsenta.com+to%3Afounders%40tryvela.ai+to%3Afounders%40risely.ai%7D/KtbxLzGcGXlNwkZqQZpXBscSBnPHsZGGSV"
+    },
+    {
+      "recipient": "founders@mypingoai.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajonathan%40runpalisade.com+to%3Avarun%40trykinect.ai+to%3Asonakshi%40bik.ai+to%3Afounders%40mypingoai.com%7D/KtbxLxGnRTDzWkgZqvGFFBMCnTMRQVqvSV"
+    },
+    {
+      "recipient": "sonakshi@bik.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajonathan%40runpalisade.com+to%3Avarun%40trykinect.ai+to%3Asonakshi%40bik.ai+to%3Afounders%40mypingoai.com%7D/QgrcJHsHlmZMMQDHCqndzJxFlsqVpXFZDSV"
+    },
+    {
+      "recipient": "varun@trykinect.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajonathan%40runpalisade.com+to%3Avarun%40trykinect.ai+to%3Asonakshi%40bik.ai+to%3Afounders%40mypingoai.com%7D/QgrcJHrtqfMpghqZgGZmCGQKxCqpFkLRKZq"
+    },
+    {
+      "recipient": "jonathan@runpalisade.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajonathan%40runpalisade.com+to%3Avarun%40trykinect.ai+to%3Asonakshi%40bik.ai+to%3Afounders%40mypingoai.com%7D/QgrcJHsHsHnPVgcPDmFlwbgjLpTRjGnPKZQ"
+    },
+    {
+      "recipient": "founders@goekpa.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40runcanary.ai+to%3Afounders%40hessian.sh+to%3Afounders%40goekpa.com%7D/KtbxLxgGCsxcXNLsZfQhDLXwtPpkjdkRgV"
+    },
+    {
+      "recipient": "founders@hessian.sh",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40runcanary.ai+to%3Afounders%40hessian.sh+to%3Afounders%40goekpa.com%7D/KtbxLvhCHsRXQwpWbFqVbkfvwXLccqrmgV"
+    },
+    {
+      "recipient": "founders@runcanary.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40runcanary.ai+to%3Afounders%40hessian.sh+to%3Afounders%40goekpa.com%7D/KtbxLvHkRZRGPvvGPQSkkffZbDMQxsbWJB"
+    },
+    {
+      "recipient": "founders@getdecipher.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40anglera.com+to%3Afounders%40getdecipher.com%7D/KtbxLvHkVsqLBHGPfVSNbcqzvnKlGNZVKg"
+    },
+    {
+      "recipient": "founders@anglera.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "approvedBodyCopies": 1,
+      "renderedImages": 0,
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40anglera.com+to%3Afounders%40getdecipher.com%7D/KtbxLzfhZJgFGVGNxSgWMTwKQFqCJdwxgB"
+    },
+    {
+      "recipient": "deepak@usefini.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nI saw Fini turns past support conversations into reusable knowledge. Have you also tried reusing the execution steps of recurring support tasks to reduce inference costs? What have you tried, and where does it stop helping?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajeremy%40solosystems.dev+to%3Ainfo%40veeza.ai+to%3Adeepak%40usefini.com%7D/KtbxLvgwxKzVpkQphzSKZRsKzkZHRMfhHg"
+    },
+    {
+      "recipient": "info@veeza.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nI saw Veeza handles repeated application-portal steps and document checks. Have you spent engineering time reducing the cost of those recurring tasks? What have you tried, and is inference a meaningful cost compared with human review?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajeremy%40solosystems.dev+to%3Ainfo%40veeza.ai+to%3Adeepak%40usefini.com%7D/QgrcJHrhvXXQrzvWnVNshPMnvvwxFKZHNkV"
+    },
+    {
+      "recipient": "jeremy@solosystems.dev",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nYour YC page mentions substantial inference throughput. Have you tried reusing recurring setup, testing or tool-call sequences to reduce costs? Or is novel reasoning the bulk of the spend, with users paying it directly?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajeremy%40solosystems.dev+to%3Ainfo%40veeza.ai+to%3Adeepak%40usefini.com%7D/KtbxLwgVVCdvGqCWrxpcJhSrMWSDgFNdxq"
+    },
+    {
+      "recipient": "help@elicit.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nYour infrastructure hiring page highlights multi-provider inference cost. Could you route this to an engineer who owns that? Have recurring research or extraction steps been worth reusing, or does each new paper still require most of the same model work?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Apoke%40interaction.co+to%3Arahul%40julius.ai+to%3Afounders%40askjo.ai+to%3Ahelp%40elicit.com%7D/QgrcJHsTkxvMTQDZvvtKMdBcRvBHRtshsSl"
+    },
+    {
+      "recipient": "founders@askjo.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nJo’s scheduled briefings and cross-app routines look relevant. Have you spent engineering time cutting their inference costs? If so, which recurring task has been hardest to make economical while preserving the result?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Apoke%40interaction.co+to%3Arahul%40julius.ai+to%3Afounders%40askjo.ai+to%3Ahelp%40elicit.com%7D/KtbxLwglmnjTGXZRVXSMCzHsNcjXvwQMXB"
+    },
+    {
+      "recipient": "rahul@julius.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nI read your post about retiring Notebooks because single prompts completed the same workflows faster with fewer credits. Have you found recurring parts still worth compiling or reusing, or do stronger models make that extra machinery unnecessary?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Apoke%40interaction.co+to%3Arahul%40julius.ai+to%3Afounders%40askjo.ai+to%3Ahelp%40elicit.com%7D/KtbxLzfhcFmtTQDvsRGlJGSWfQDXhKFLbV"
+    },
+    {
+      "recipient": "poke@interaction.co",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nI saw Poke supports recurring recipes and many integrations. Which repeated jobs drive inference costs, and have you had to optimize their execution? Does cost constrain what you can include for users?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Apoke%40interaction.co+to%3Arahul%40julius.ai+to%3Afounders%40askjo.ai+to%3Ahelp%40elicit.com%7D/KtbxLvHcNNCndTTltGgGdPKRGXzSbNZBqV"
+    },
+    {
+      "recipient": "hello@lastaccountingcompany.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nI saw your agents do bookkeeping while accountants validate the outputs. Is repeated agent inference an expense you actively optimize, or is review and integration work the bigger cost? Have you tried reusing execution steps across periods?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajoan%40thebillow.ai+to%3Akerim%40qomplement.com+to%3Ahello%40lastaccountingcompany.com%7D/QgrcJHrhtkTXpkPpsxmcKPNXGltDMsPXfqq"
+    },
+    {
+      "recipient": "kerim@qomplement.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nYour purchasing and inventory workflows repeat across many transactions. Have you spent engineering time making the repeated agent steps cheaper? What have you tried, and which parts already run as deterministic code?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajoan%40thebillow.ai+to%3Akerim%40qomplement.com+to%3Ahello%40lastaccountingcompany.com%7D/QgrcJHrtvXrTsdSSlRlpNSNNQJpxvmQlLXb"
+    },
+    {
+      "recipient": "joan@thebillow.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nYour site describes agents doing recurring reconciliations and month-end work. Have you had to reduce inference costs for those tasks, or is expert review the bigger cost? Which parts already run as conventional code?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Ajoan%40thebillow.ai+to%3Akerim%40qomplement.com+to%3Ahello%40lastaccountingcompany.com%7D/KtbxLvgwxKrScJgxwmDdrMjJrpwBGgVRQV"
+    },
+    {
+      "recipient": "founders@re-tell.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nI saw your pricing separates LLM, voice infrastructure and speech costs, and a public support thread described context-token surcharges. Have repeated tool or workflow steps been worth reusing to reduce costs, or do speech and live conversation dominate the economics?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40gumloop.com+to%3Afounders%40illumelabs.ai+to%3Afounders%40re-tell.ai%7D/KtbxLwhCGXSRbDbtHDwqjWWlxhvXkDsWqV"
+    },
+    {
+      "recipient": "founders@illumelabs.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nIllume’s recurring daily insights look relevant to consumer AI economics. Have you spent engineering time reducing the cost of recurring data gathering or analysis? What have you tried, and is inference currently a meaningful constraint on usage?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40gumloop.com+to%3Afounders%40illumelabs.ai+to%3Afounders%40re-tell.ai%7D/KtbxLxGPqDclrvcCcmlGtPHWGkBbtBvZlB"
+    },
+    {
+      "recipient": "founders@gumloop.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nI saw your current agent product learns from runs and shared team skills, and your original launch discussed keeping AI limited to the reasoning that needs it. Is discovering and reusing recurring execution already solved in your stack, or does it still take meaningful engineering work?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40gumloop.com+to%3Afounders%40illumelabs.ai+to%3Afounders%40re-tell.ai%7D/KtbxLxGnRTMCkcmQPMXHjBmMcMsWhlFRkL"
+    },
+    {
+      "recipient": "contactus@onegrep.dev",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nOneGrep’s cross-tool investigations and runbooks look relevant. Have you spent engineering time reducing the agent’s own inference costs for recurring investigations? What have you tried, and does the same execution pattern recur often enough to reuse?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Agabrielle%40teamohai.ai+to%3Asupport%40getduckbill.com+to%3Afounders%40fabraix.com+to%3Acontactus%40onegrep.dev%7D/QgrcJHsHkxJrgcKnsbjrJhhKQzTbNCQHmtV"
+    },
+    {
+      "recipient": "founders@fabraix.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nFor repeated security regression tests, have you spent engineering time reducing inference costs or reusing parts of past agent runs? Or does each investigation need enough fresh reasoning that reuse adds little value?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Agabrielle%40teamohai.ai+to%3Asupport%40getduckbill.com+to%3Afounders%40fabraix.com+to%3Acontactus%40onegrep.dev%7D/FFNDWNPHnDRSKFMWWNqtXNnpCMCkZXPC"
+    },
+    {
+      "recipient": "gabrielle@teamohai.ai",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nI saw your note inviting conversations about Ohai’s new household routines. Could you route this to whoever owns the AI economics? Have recurring calendar or inbox tasks required engineering work to reduce inference costs, and what have you tried?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Agabrielle%40teamohai.ai+to%3Asupport%40getduckbill.com+to%3Afounders%40fabraix.com+to%3Acontactus%40onegrep.dev%7D/KtbxLthhsMFBKslWgJBrsrtjMNRbqSBLLq"
+    },
+    {
+      "recipient": "support@getduckbill.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nCould you route this to the founder or engineer who owns AI costs? With Duckbill’s recurring household tasks, is inference a meaningful expense you actively optimize, or is human execution the main cost? Have you tried reusing the repeated agent steps?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Agabrielle%40teamohai.ai+to%3Asupport%40getduckbill.com+to%3Afounders%40fabraix.com+to%3Acontactus%40onegrep.dev%7D/FFNDWMQQPFPkxtnkfBgdsDRFmFxWsxfj"
+    },
+    {
+      "recipient": "support@composio.dev",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nCould you route this to the relevant engineer? Your pricing separates managed-model tokens from tool calls. Do users mainly need fewer reasoning steps, fewer API calls, or reuse of whole recurring jobs? What have you tried that actually helps?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40skyvern.com+to%3Asales%40browser-use.com+to%3Asupport%40composio.dev%7D/KtbxLwGgCsgZnvrTwthVZJxHzNTzdpxcgB"
+    },
+    {
+      "recipient": "sales@browser-use.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nCould you route this to someone who owns agent economics? Your model-cost-plus-service-fee pricing makes per-task costs visible. Have repeated execution patterns been worth reusing, and what still drives costs on recurring jobs?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40skyvern.com+to%3Asales%40browser-use.com+to%3Asupport%40composio.dev%7D/KtbxLrjCNkDflmzGRHzXvqFnGhMFCrvSgq"
+    },
+    {
+      "recipient": "founders@skyvern.com",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nYour product already offers generated-code caching. What is still hard about deciding which past execution paths can be reused safely? Is automatic discovery across many traces valuable, or is keeping cached scripts reliable the bigger problem?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+%7Bto%3Afounders%40skyvern.com+to%3Asales%40browser-use.com+to%3Asupport%40composio.dev%7D/KtbxLwghlsfFbNvWhXTlNnLKLjJMBVSsVV"
+    },
+    {
+      "recipient": "contact@conifer.build",
+      "senderCorrect": true,
+      "subjectCorrect": true,
+      "expectedBodyCopies": 1,
+      "renderedImages": 0,
+      "bodyKind": "personalized discovery",
+      "body": "Hi, I’m Marc, building at today’s YC hackathon. We’re testing whether discovering and reusing repeated agent workflows can reduce inference costs while preserving successful outcomes.\n\nYour product already addresses model routing and cache management inside existing harnesses. When teams want lower bills, do repeated workflow executions remain a distinct problem, or do routing and prompt caching solve enough? Which limitation matters most to them?\n\nA quick reply or five-minute call today would really help us understand whether we’re solving a meaningful problem.",
+      "url": "https://mail.google.com/mail/u/0/#search/in%3Asent+subject%3A%22YC+hackathon%22+to%3Acontact%40conifer.build/KtbxLrjdrrzXvjGWmXCCHmvJndNLgKxptg"
+    }
+  ]
+}
