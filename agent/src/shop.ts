@@ -1,5 +1,14 @@
 // Mock shop backend for Kettle & Co. Synthetic fixtures in data/shop.json; every tool is deterministic.
+// SHOP_BACKEND=shopify delegates customers, orders, cancellations, refunds, address changes, account updates,
+// plans and invoices to the Shopify dev store (./shopify.ts, needs SHOPIFY_ADMIN_TOKEN). Reads stay synchronous
+// (served from a cache loaded at import); Shopify writes return Promises (agent.ts and mcp/ await tool results).
+// Stay mock even on Shopify, because Shopify cannot represent them (or lacks scopes): carrier scans (get_tracking),
+// newsletter, password reset, edit_order (needs write_order_edits), email_invoice (would send real mail),
+// create_case, reship, send_part. On the Shopify backend these run against the Shopify-loaded cache.
 import fixtures from "../../data/shop.json";
+import * as sf from "./shopify";
+
+export const SHOPIFY = process.env.SHOP_BACKEND === "shopify";
 
 export type Customer = {
   email: string; name: string; plan: "Standard" | "Plus" | "Business"; since: string; defaultAddress: string;
@@ -17,8 +26,8 @@ const TODAY = "2026-09-27";
 const clone = <T>(x: T): T => JSON.parse(JSON.stringify(x));
 
 export const products: { sku: string; name: string; price: number }[] = fixtures.products;
-export const customers: Record<string, Customer> = Object.fromEntries((clone(fixtures.customers) as Customer[]).map((c) => [c.email, c]));
-export const orders: Record<string, Order> = Object.fromEntries((clone(fixtures.orders) as Order[]).map((o) => [o.id, o]));
+export const customers: Record<string, Customer> = SHOPIFY ? sf.customers : Object.fromEntries((clone(fixtures.customers) as Customer[]).map((c) => [c.email, c]));
+export const orders: Record<string, Order> = SHOPIFY ? sf.orders : Object.fromEntries((clone(fixtures.orders) as Order[]).map((o) => [o.id, o]));
 export const refunds: Refund[] = clone(fixtures.refunds);
 // Last carrier scan per tracking number.
 const tracking: Record<string, { lastScan: string; date: string; delivered: boolean; eta?: string }> = fixtures.tracking;
@@ -28,14 +37,17 @@ export const actions: { type: string; orderId: string; detail: string }[] = [];
 const norm = (s?: string) => s?.trim().toLowerCase();
 const normId = (s?: string) => s?.trim().toUpperCase().replace(/^#/, "");
 const log = (type: string, orderId: string, detail: string) => { actions.push({ type, orderId, detail }); return actions.length; };
+if (SHOPIFY) await sf.init(log);
 
 export function findCustomer(query: { email?: string; name?: string }) {
+  if (SHOPIFY) return sf.findCustomer(query);
   if (query.email) return customers[norm(query.email)!] ?? null;
   if (query.name) return Object.values(customers).filter((c) => c.name.toLowerCase().includes(norm(query.name)!));
   return null;
 }
 
 export function findOrders(query: { orderId?: string; email?: string }) {
+  if (SHOPIFY) return sf.findOrders(query);
   if (query.orderId) { const o = orders[normId(query.orderId)!]; return o ? [o] : []; }
   if (query.email) return Object.values(orders).filter((o) => o.email === norm(query.email));
   return [];
@@ -50,6 +62,7 @@ export function listProducts() {
 }
 
 export function placeOrder(email: string, items: { sku: string; qty?: number }[]) {
+  if (SHOPIFY) return sf.placeOrder(email, items);
   const c = customers[norm(email)!];
   if (!c) return { ok: false, error: "no account for this email" };
   const lines = items.flatMap(({ sku, qty = 1 }) => { const p = products.find((x) => x.sku === sku); return p ? Array(qty).fill({ ...p }) : []; });
@@ -63,6 +76,7 @@ export function placeOrder(email: string, items: { sku: string; qty?: number }[]
 }
 
 export function cancelOrder(orderId: string, reason: string) {
+  if (SHOPIFY) return sf.cancelOrder(orderId, reason);
   const o = orders[normId(orderId)!];
   if (!o) return { ok: false, error: "order not found" };
   if (o.status !== "processing") return { ok: false, error: `order is ${o.status}; only processing orders can be cancelled` };
@@ -85,6 +99,7 @@ export function editOrder(orderId: string, addSkus: string[] = [], removeSkus: s
 }
 
 export function changeShippingAddress(orderId: string, address: string) {
+  if (SHOPIFY) return sf.changeShippingAddress(orderId, address);
   const o = orders[normId(orderId)!];
   if (!o) return { ok: false, error: "order not found" };
   if (o.status !== "processing") return { ok: false, error: `order is ${o.status}; label already created, address cannot be changed`, tracking: o.tracking };
@@ -94,6 +109,7 @@ export function changeShippingAddress(orderId: string, address: string) {
 }
 
 export function updateAccount(email: string, changes: { name?: string; phone?: string; defaultAddress?: string; newEmail?: string }) {
+  if (SHOPIFY) return sf.updateAccount(email, changes);
   const c = customers[norm(email)!];
   if (!c) return { ok: false, error: "no account for this email" };
   const { newEmail, ...rest } = changes;
@@ -103,6 +119,7 @@ export function updateAccount(email: string, changes: { name?: string; phone?: s
 }
 
 export function changePlan(email: string, plan: "Standard" | "Plus") {
+  if (SHOPIFY) return sf.changePlan(email, plan);
   const c = customers[norm(email)!];
   if (!c) return { ok: false, error: "no account for this email" };
   if (c.plan === plan) return { ok: false, error: `already on ${plan}` };
@@ -128,6 +145,7 @@ export function sendPasswordReset(email: string) {
 }
 
 export function createAccount(email: string, name: string) {
+  if (SHOPIFY) return sf.createAccount(email, name);
   if (customers[norm(email)!]) return { ok: false, error: "an account already exists for this email" };
   customers[norm(email)!] = { email: norm(email)!, name, plan: "Standard", since: TODAY, defaultAddress: "", paymentMethods: [], newsletter: false, status: "unverified" };
   log("create_account", "-", norm(email)!);
@@ -135,6 +153,7 @@ export function createAccount(email: string, name: string) {
 }
 
 export function requestAccountDeletion(email: string) {
+  if (SHOPIFY) return sf.requestAccountDeletion(email);
   const c = customers[norm(email)!];
   if (!c) return { ok: false, error: "no account for this email" };
   const open = Object.values(orders).filter((o) => o.email === c.email && (o.status === "processing" || o.status === "shipped")).map((o) => o.id);
@@ -144,11 +163,13 @@ export function requestAccountDeletion(email: string) {
 }
 
 export function getRefunds(query: { orderId?: string; email?: string }) {
+  if (SHOPIFY) return sf.getRefunds(query);
   const ids = query.orderId ? [normId(query.orderId)] : findOrders({ email: query.email }).map((o) => o.id);
   return refunds.filter((r) => ids.includes(r.orderId));
 }
 
 export function issueRefund(orderId: string, amount: number, reason: string) {
+  if (SHOPIFY) return sf.issueRefund(orderId, amount, reason);
   const o = orders[normId(orderId)!];
   if (!o) return { ok: false, error: "order not found" };
   const refunded = refunds.filter((r) => r.orderId === o.id).reduce((s, r) => s + r.amount, 0);
@@ -159,6 +180,7 @@ export function issueRefund(orderId: string, amount: number, reason: string) {
 }
 
 export function getInvoices(query: { invoiceId?: string; orderId?: string; email?: string }) {
+  if (SHOPIFY) return sf.getInvoices(query);
   const list = query.invoiceId ? Object.values(orders).filter((o) => o.invoiceId === normId(query.invoiceId)) : findOrders(query);
   return list.map((o) => ({ invoiceId: o.invoiceId, orderId: o.id, date: o.placedAt, amount: o.total, status: o.payment.status, pdf: `https://kettleandco.example/account/invoices/${o.invoiceId}.pdf` }));
 }
