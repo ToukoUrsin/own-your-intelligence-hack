@@ -4,7 +4,7 @@ Fields: Email (touko.ursin@gmail.com, recorded) · Team Name* · Member Names + 
 Form URL: TODO (not yet received). Links must be public before submitting.
 
 ## Draft answers
-- **Team Name:** TODO (Touko)
+- **Team Name:** Support AGI
 - **Members:** Touko Ursin (touko.ursin@gmail.com), Marc Smeds (alexsmeds123@gmail.com) — confirm
 - **Project Description:** TODO after build freeze (draft below)
 - **Github URL:** https://github.com/ToukoUrsin/own-your-intelligence-hack (+ QM fork link in description)
