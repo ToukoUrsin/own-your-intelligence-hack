@@ -1,0 +1,6 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+router on http://127.0.0.1:8789/route  (r1 step 50)
+"GET /health HTTP/1.1" 200 -
+"GET /health HTTP/1.1" 200 -
+"POST /route HTTP/1.1" 200 -
