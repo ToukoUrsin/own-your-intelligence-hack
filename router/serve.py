@@ -1,9 +1,9 @@
 # Router endpoint for agent/src/memory.ts: POST /route {"text"} -> {"intent", "confidence"} (data/ROUTER.md).
 # Port 8789 (8788 is the canonical-v1 normalizer). Run: .venv/bin/python serve.py --run r1 [--step 100]
 #   ROUTER_URL=http://127.0.0.1:8789/route
-import argparse, json
+import argparse, json, re, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from common import BASE, HERE, TAGS, classify, client, renderer
+from common import BASE, HERE, LABELS, TAGS, classify, client, renderer
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--run", required=True)
@@ -19,6 +19,20 @@ ckpt = river.Checkpoint(**ckpts[step])
 rend, c = renderer(), client()
 ctx = c.session(**TAGS, role=f"serve-{args.run}")
 session = ctx.__enter__()
+# Customers don't type snake_case labels or talk to the system prompt; such text is answered none (agent explores).
+INJECTION = re.compile(r"ignore (all |any |the )?(previous|prior|above|earlier) (instructions|prompts?)|system prompt|you are now|"
+                       r"(output|respond with|reply with|return) (the )?(label|intent)?\s*\S*_|" + "|".join(l for l in LABELS if "_" in l), re.I)
+
+
+def route(text: str) -> dict:
+    """River call with one retry inside the caller's 15 s budget (River occasionally exceeds 8 s)."""
+    t0 = time.monotonic()
+    try:
+        return classify(session, rend, [text], checkpoint=ckpt, timeout=8)[0]
+    except Exception:
+        left = 14 - (time.monotonic() - t0)
+        if left < 3: raise
+        return classify(session, rend, [text], checkpoint=ckpt, timeout=left)[0]
 
 
 class H(BaseHTTPRequestHandler):
@@ -32,14 +46,20 @@ class H(BaseHTTPRequestHandler):
 
     def do_POST(self):
         try:
-            text = json.loads(self.rfile.read(int(self.headers.get("content-length") or 0)) or b"{}").get("text", "")
-            if not isinstance(text, str) or not text.strip():
-                return self.reply(400, {"error": "text required"})
-            p = classify(session, rend, [text], checkpoint=ckpt, timeout=12)[0]
-            intent = p["intent"] if (p["confidence"] or 0) >= args.min_confidence else "none"
-            self.reply(200, {"intent": intent, "confidence": p["confidence"], "predicted": p["intent"], "model": f"river:{args.run}@{step}"})
+            body = json.loads(self.rfile.read(int(self.headers.get("content-length") or 0)) or b"{}")
+        except (ValueError, UnicodeDecodeError):
+            return self.reply(400, {"error": "body must be JSON {\"text\": ...}"})
+        text = body.get("text", "") if isinstance(body, dict) else ""
+        if not isinstance(text, str) or not text.strip():
+            return self.reply(400, {"error": "text required"})
+        if INJECTION.search(text):
+            return self.reply(200, {"intent": "none", "confidence": 0.0, "predicted": None, "guard": "instruction-like text", "model": f"river:{args.run}@{step}"})
+        try:
+            p = route(text)
         except Exception as e:  # the caller falls back to raw text on any non-200
-            self.reply(502, {"error": type(e).__name__})
+            return self.reply(502, {"error": type(e).__name__})
+        intent = p["intent"] if (p["confidence"] or 0) >= args.min_confidence else "none"
+        self.reply(200, {"intent": intent, "confidence": p["confidence"], "predicted": p["intent"], "model": f"river:{args.run}@{step}"})
 
     def log_message(self, fmt, *a):
         print(fmt % a, flush=True)

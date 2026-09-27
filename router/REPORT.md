@@ -62,6 +62,16 @@ Validation gate curve (step 50): gate 0.5 routes 96% at 0.92 accuracy; 0.8 route
   wrong key. Saving a *new* workflow only when router confidence ≥ 0.8 (reuse still at ≥ 0.5) cuts simulated wrong reuse
   0.09 → 0.062 at the same correct reuse (0.72). That is an app-side rule on the `confidence` field the router returns.
 
+## Independent test + fixes (16:13)
+
+A separate agent wrote 78 new tickets (all 55 labels): 0.885 accuracy (0.94 without its 10 debatable golds); all REPORT numbers
+recomputed from the JSON and matched; isolation confirmed. Fixed in `serve.py`: bad/non-JSON body → 400 (was 502);
+instruction-like text ("ignore previous instructions", snake_case labels) → `none` (injection was routed at 0.97);
+River call retried once inside the 15 s caller budget (2 of 78 calls had hit River's 12 s timeout).
+Not fixable by training: ABCD `promo_code_invalid` and `promo_code_out_of_date` openings are indistinguishable
+(both say "invalid", 77 vs 72 of train; neither says "expired") — the agent learns which it is later in the chat.
+River-side: per-call checkpoint load (~4 s, occasional >8 s) and ±0.08 confidence jitter at temperature 0.
+
 ## Run
 
 - Base `Qwen/Qwen3.6-35B-A3B-FP8`, LoRA rank 16, lr 2e-4, batch 64, cross-entropy on the label tokens only (~329 tokens/example).
