@@ -2,6 +2,9 @@
 
 Team **Support AGI** (Touko, Marc) · company **Northwind Outfitters** (online clothing retailer) · submission due 17:00.
 
+## Headline: routes that compile themselves
+Every ticket takes the cheapest route that works: **explored** (agent solves from scratch; Memorable saves the path) → **recalled** (agent replays a learned path) → **compiled** (a path reused successfully ≥3 times becomes a deterministic JSON program: bindings from River's canonical request, tool calls, guards from GBrain policy, reply template; zero model calls). Guard failure or missing data falls back to the agent. Not everything compiles; the system learns to compile as much as it safely can. Plans live in `replay/plans/`.
+
 ## Working now
 | Piece | State |
 |---|---|
