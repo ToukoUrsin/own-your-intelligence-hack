@@ -6,6 +6,8 @@ A customer-support agent that gets cheaper the more tickets it handles. The firs
 
 ## Three tiers
 
+![Architecture: River routes each ticket to compiled, recalled or explored](video/graphs/architecture.png)
+
 ```mermaid
 flowchart LR
     T[Customer ticket] --> N[Request normalizer<br/>CANONICAL_REQUEST_V1]
