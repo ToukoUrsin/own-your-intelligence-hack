@@ -1,5 +1,7 @@
 # Support AGI — support that compiles itself
 
+**Result: 3rd place overall** at the YC Own Your Intelligence Hackathon (27 Sep 2026).
+
 **A customer-support agent that gets cheaper the more tickets it handles.** It remembers how it solved each kind of request, replays that path next time, and compiles well-proven paths into plans that answer without calling the agent model. Replaying 400 ABCD support conversations, cost per ticket fell 66% from the first 25 tickets to the last 25.
 
 Team **Support AGI**: Touko Ursin and Marc Smeds · Own Your Intelligence Hackathon, YC San Francisco, 27 September 2026 · built in about three hours (first line of code 13:58, final 442-ticket run 15:43 PDT).
