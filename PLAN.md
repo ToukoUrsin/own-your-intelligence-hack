@@ -1,5 +1,7 @@
 # Build plan (14:05 → 17:00)
 
+> Historical plan from 14:05. What changed: the data moved from Bitext to ABCD at 14:27, and River became the request router rather than a distilled executor; compiled JSON plans took that role. Final state: `README.md`.
+
 Scope (Touko, 14:05): the "24-hour" version minus evaluation/safety, humans-in-QM and self-repairing paths.
 
 1. **Real data.** Public customer-support dataset (Bitext customer-support, Hugging Face) → knowledge base in GBrain + a stream of real ticket texts. Shop tools stay a local mock seeded to match the dataset.

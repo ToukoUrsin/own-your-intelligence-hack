@@ -2,7 +2,7 @@
 
 LoRA fine-tune of `Qwen/Qwen3.6-35B-A3B-FP8` on River that maps a customer's opening message to one of the
 55 ABCD subflows in `data/ROUTER.md` (the saved-path key). Separate from `river/` (canonical-request-v1
-normalizer): own River session tag `experiment=claude-router`, own checkpoint names `claude-router-*`, port 8789.
+normalizer, branch `codex/river-normalizer`): own River session tag `experiment=claude-router`, own checkpoint names `claude-router-*`, port 8789.
 
 - Data: ABCD train + dev openings (same `opening`/`label`/`genericize` rules as `data/build.py`), minus every
   `tickets.jsonl` and `heldout.jsonl` conversation. 8,316 train, 300 dev as validation. ABCD test is never used

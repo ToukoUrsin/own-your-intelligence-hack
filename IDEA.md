@@ -1,5 +1,7 @@
 # Agreed design: a support agent that reuses its work
 
+> Design record from the start of the build (~14:05). What shipped: ABCD data and the Northwind Outfitters store instead of Kettle & Co, a River-trained subflow router instead of the canonical-v1 normalizer, and compiled JSON plans for model-free execution. Final state and results: `README.md`, `PLATFORMS.md`.
+
 Agreed on September 27, 2026. This document records the product and architecture we converged on. Integration behavior, training quality, and cost savings still need to be demonstrated.
 
 ## Product and target customer

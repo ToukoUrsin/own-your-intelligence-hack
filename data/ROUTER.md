@@ -1,5 +1,7 @@
 # River normalizer spec (for Marc)
 
+> **What shipped (final):** the River model on `main` is the subflow router in `router/`: opening message → one of the 55 subflows below plus a confidence (`POST /route {"text"}` → `{"intent", "confidence"}`), and that label is the key recall and compiled plans match on. The canonical-v1 normalizer this spec describes is on the unmerged branch `codex/river-normalizer`. Results: `router/REPORT.md`, `PLATFORMS.md`.
+
 River implements **Marc's own contract, [`CANONICAL_REQUEST_V1.md`](../CANONICAL_REQUEST_V1.md)**. It does not classify tickets into intents, subflows or workflows.
 
 - **Input:** the customer's messages: `text` from `tickets.jsonl` / `heldout.jsonl` (the opening customer turns of an ABCD conversation, max 3; brand names genericized, emails → `@example.com`). The harness keeps the originals, identity and context.
