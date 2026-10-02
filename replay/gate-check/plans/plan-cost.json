@@ -1,0 +1,124 @@
+{
+  "id": "plan-cost",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "assess",
+    "subject": "delivery",
+    "topic": "cost",
+    "key": "Task 1: shipping issue: cost."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's cost claim a company error?"
+      }
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out about the shipping cost!\n\nHere's what I found on order **{{s.pick_order.id}}** ({{s.pick_order.items.0.name}}), placed {{s.pick_order.placedAt}}:\n\n- Amount charged: **{{s.pick_order.total|money}}** — invoice {{s.pick_order.invoiceId}}, paid by {{s.pick_order.payment.method}} ({{s.pick_order.payment.status}}), with no other charge on file for this order.\n- Billing check on your shipping-cost question: {{s.check_system.meaning}}.\n- Shipping to {{s.pick_order.shipTo}}: {{s.shipping_status.shippingStatus}}, shipped {{s.shipping_status.shippedAt}} under tracking **{{s.shipping_status.tracking}}** (last scan: {{s.shipping_status.scan.lastScan}} on {{s.shipping_status.scan.date}}, estimated delivery {{s.shipping_status.scan.eta}}).\n\nI've verified your identity and confirmed the purchase is valid, so nothing further is needed on your side.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-19",
+    "intent": "cost",
+    "uses": 10,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 6,
+    "correct": 0,
+    "precision": 0
+  },
+  "enabled": false
+}

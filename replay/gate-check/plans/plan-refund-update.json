@@ -1,0 +1,93 @@
+{
+  "id": "plan-refund-update",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "refund",
+    "topic": "refund_update",
+    "key": "Task 1: product defect: refund update."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": true
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "get_refunds",
+      "tool": "get_refunds",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.get_refunds",
+          "op": "len_eq",
+          "value": 1,
+          "why": "exactly one refund on the order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out — I've verified your account and your refund.\n\nHere's where things stand: refund **{{s.get_refunds.0.id}}** for order **{{s.pick_order.id}}** ({{s.pick_order.items.0.name}}, {{s.pick_order.items.0.price|money}}) is currently **{{s.get_refunds.0.status}}**, for {{s.get_refunds.0.amount|money}} back to your {{s.get_refunds.0.method}}. Refunds typically land 5–7 business days after they're issued.\n\nIf you'd like to add another item to this same refund, just send me:\n1. The brand and type of the item (for example, \"{{s.pick_order.items.0.name}}\")\n2. The price you paid for it\n3. The reason you're returning it\n\nOnce I have those, I'll add it to your existing refund right away. Is there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-25",
+    "intent": "refund_update",
+    "uses": 3,
+    "examples": 4,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 4,
+    "compiled": 4,
+    "correct": 4,
+    "precision": 1
+  },
+  "enabled": true
+}

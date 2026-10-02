@@ -1,0 +1,92 @@
+{
+  "id": "plan-status",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "delivery",
+    "topic": "status",
+    "key": "Task 1: shipping issue: status."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out — I've looked up your order and here's where things stand.\n\n**Order #{{s.pick_order.id}}** (placed {{s.pick_order.placedAt}}, total {{s.pick_order.total|money}})\n- Order status: **{{s.shipping_status.status}}** — shipping status: **{{s.shipping_status.shippingStatus}}**\n- Tracking number: **{{s.shipping_status.tracking}}**\n- Shipped on: {{s.shipping_status.shippedAt}}\n- Latest scan: \"{{s.shipping_status.scan.lastScan}}\" on {{s.shipping_status.scan.date}}\n- Estimated delivery: {{s.shipping_status.scan.eta}}\n- Shipping to: {{s.pick_order.shipTo}}\n- Payment: {{s.pick_order.payment.method}} — {{s.pick_order.payment.status}} (invoice {{s.pick_order.invoiceId}})\n\nI've verified this purchase on your account ({{s.pull_up_account.account.email}}), so everything checks out on our side. You can follow the latest carrier updates any time using the tracking number above.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-20",
+    "intent": "status",
+    "uses": 31,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 3,
+    "correct": 3,
+    "precision": 1
+  },
+  "enabled": true
+}

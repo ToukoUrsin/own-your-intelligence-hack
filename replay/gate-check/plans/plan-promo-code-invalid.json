@@ -1,0 +1,88 @@
+{
+  "id": "plan-promo-code-invalid",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "troubleshoot",
+    "subject": "promo_code",
+    "topic": "promo_code_invalid",
+    "key": "Task 1: purchase dispute: promo code invalid."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's promo code invalid claim a company error?"
+      }
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "promo_rule",
+      "tool": "policy_check",
+      "args": {
+        "rule": "promo_allowed",
+        "level": "$.s.membership.level",
+        "answer": "$.s.check_system.answer"
+      }
+    },
+    {
+      "id": "promo_code",
+      "tool": "promo_code",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "reason": "promo code invalid",
+        "percent": 10
+      },
+      "guards": [
+        {
+          "ref": "$.s.promo_rule.ok",
+          "op": "true",
+          "why": "policies/membership: level may get a new code and system confirms company error"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for your patience!\n\nI looked into the promo code issue on your account, and I'm sorry for the trouble. As a valued {{s.membership.level}} member, I've gone ahead and issued you a brand-new code: **{{s.promo_code.code}}**, good for {{s.promo_code.percent}}% off your next purchase. It's valid through {{s.promo_code.expires}} — just enter it at checkout. (Promo codes are only good for 7 days after they're issued, so an older code will show as invalid.)\n\nIs there anything else I can help you with today?",
+  "source": {
+    "procedureId": "proc-10",
+    "intent": "promo_code_invalid",
+    "uses": 7,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.369Z",
+  "validation": {
+    "tested": 8,
+    "compiled": 3,
+    "correct": 2,
+    "precision": 0.667
+  },
+  "enabled": false
+}

@@ -1,0 +1,112 @@
+{
+  "id": "plan-return-color",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "return",
+    "topic": "return_color",
+    "key": "Task 1: product defect: return color."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "find_orders",
+      "tool": "find_orders",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "record_reason",
+      "tool": "record_reason",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "reason": "return color"
+      }
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "details": "return color"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for the details! I found your order #{{s.pick_order.id}} for the {{s.pick_order.items.0.name}} ({{s.pick_order.items.0.price|money}}), placed {{s.pick_order.placedAt}}.\n\nGood news — as a {{s.membership.level}} member, your purchase qualifies, so I've gone ahead and recorded the return for the wrong color. I have your address on file for the return label: {{s.pick_order.shipTo}}, and confirmations will go to {{s.pull_up_account.account.email}}.\n\nHow would you like to send it back — **by mail** (we'll email you a prepaid label to print), **in store**, or at a **drop-off center**? Just let me know and I'll set it up right away.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-23",
+    "intent": "return_color",
+    "uses": 7,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 8,
+    "compiled": 8,
+    "correct": 4,
+    "precision": 0.5
+  },
+  "enabled": false
+}

@@ -1,0 +1,105 @@
+{
+  "id": "plan-return-size",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "return",
+    "topic": "return_size",
+    "key": "Task 1: product defect: return size."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "validate_purchase",
+      "tool": "validate_purchase",
+      "args": {
+        "username": "$.s.pull_up_account.account.username",
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.validate_purchase.valid",
+          "op": "true",
+          "why": "purchase valid"
+        }
+      ]
+    },
+    {
+      "id": "membership",
+      "tool": "membership",
+      "args": {
+        "email": "$.bind.email"
+      }
+    },
+    {
+      "id": "record_reason",
+      "tool": "record_reason",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "reason": "return size"
+      }
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "details": "return size"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}},\n\nSorry about the size mix-up! I've pulled up order {{s.pick_order.id}} ({{s.pick_order.items.0.name}}, {{s.pick_order.total|money}}, placed {{s.pick_order.placedAt}}) and confirmed it's eligible for a return under your {{s.membership.level}} membership — returns within 6 months or with receipt/original packaging.\n\nYour return request is logged and the details are saved. I have this address on file for the return label: {{s.pick_order.shipTo}}.\n\nJust let me know how you'd like to send it back — **by mail** (we'll email a prepaid label to {{s.pull_up_account.account.email}}), **in store**, or at a **drop-off center** — and I'll finish setting it up. Once we receive the item, your {{s.pick_order.total|money}} refund goes back to your original {{s.pick_order.payment.method}} payment.\n\nAnything else I can help you with?",
+  "source": {
+    "procedureId": "proc-6",
+    "intent": "return_size",
+    "uses": 20,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.369Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 8,
+    "correct": 5,
+    "precision": 0.625
+  },
+  "enabled": false
+}

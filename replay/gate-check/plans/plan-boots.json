@@ -1,0 +1,59 @@
+{
+  "id": "plan-boots",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "product_information",
+    "topic": "boots",
+    "key": "Task 1: single item query: boots."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "search_kb",
+      "tool": "search_kb",
+      "args": {
+        "query": "boots faq"
+      }
+    },
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/boots"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there — thanks for reaching out about our boots!\n\nI'd be glad to help with that. So I can get you the exact details, could you let me know which style you're asking about and what you'd like to know — price, sizing, materials, or care instructions? Once I have that, I'll send the specifics right over.\n\nIs there anything else I can help you with in the meantime?",
+  "source": {
+    "procedureId": "proc-32",
+    "intent": "boots",
+    "uses": 11,
+    "examples": 2,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (search_kb → read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 3,
+    "compiled": 2,
+    "correct": 0,
+    "precision": 0
+  },
+  "enabled": false
+}

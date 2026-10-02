@@ -1,0 +1,59 @@
+{
+  "id": "plan-pricing",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "policy",
+    "topic": "pricing",
+    "key": "Task 1: storewide query: pricing."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "search_kb",
+      "tool": "search_kb",
+      "args": {
+        "query": "pricing faq"
+      }
+    },
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/pricing"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there, thanks for reaching out about pricing!\n\nI've checked our pricing policy and help center for you. The prices shown on the product page at the time you place your order are the ones that apply to that order, and they're listed in your order confirmation so you can compare them line by line. If something you're seeing doesn't match what you expected, just send me the order number and the items in question, and I'll review the details and explain exactly how the total was calculated.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-16",
+    "intent": "pricing",
+    "uses": 11,
+    "examples": 1,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (search_kb → read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T21:53:22.369Z",
+  "validation": {
+    "tested": 4,
+    "compiled": 1,
+    "correct": 0,
+    "precision": 0
+  },
+  "enabled": false
+}

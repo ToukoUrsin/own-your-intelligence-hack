@@ -1,0 +1,59 @@
+{
+  "id": "plan-timing",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "policy",
+    "topic": "timing",
+    "key": "Task 1: storewide query: timing."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "search_kb",
+      "tool": "search_kb",
+      "args": {
+        "query": "timing faq"
+      }
+    },
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/timing"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there! Happy to help with the timing on this. 😊\n\nHere's what we have on file for **{{s.select_faq.question}}**: {{s.select_faq.answer}}\n\nThat's the schedule we follow, so you can plan around it — and we'll always announce any updates by email and on the site first.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-51",
+    "intent": "timing",
+    "uses": 11,
+    "examples": 3,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (search_kb → read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T21:53:22.372Z",
+  "validation": {
+    "tested": 3,
+    "compiled": 2,
+    "correct": 1,
+    "precision": 0.5
+  },
+  "enabled": false
+}

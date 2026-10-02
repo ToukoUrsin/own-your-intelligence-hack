@@ -1,0 +1,67 @@
+{
+  "id": "plan-reset-2fa",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "account",
+    "topic": "reset_2fa",
+    "key": "Task 1: account access: reset 2fa."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "enter_details",
+      "tool": "enter_details",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "-",
+        "details": "reset 2fa"
+      }
+    },
+    {
+      "id": "send_link",
+      "tool": "send_link",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "kind": "reset 2fa"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}} — thanks for reaching out! I've sent a two-factor reset link to {{s.send_link.sentTo}}. Just open that email and follow the link to clear the old device, then you can sign in and set up 2FA again on your current phone. If it doesn't show up in a few minutes, check your spam folder. Anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-2",
+    "intent": "reset_2fa",
+    "uses": 8,
+    "examples": 1,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T22:50:43.821Z",
+  "enabled": false,
+  "shadowPending": true
+}

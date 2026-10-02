@@ -1,0 +1,59 @@
+{
+  "id": "plan-jeans",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "explain",
+    "subject": "product_information",
+    "topic": "jeans",
+    "key": "Task 1: single item query: jeans."
+  },
+  "requires": [],
+  "steps": [
+    {
+      "id": "search_kb",
+      "tool": "search_kb",
+      "args": {
+        "query": "jeans faq"
+      }
+    },
+    {
+      "id": "read_page",
+      "tool": "read_page",
+      "args": {
+        "slug": "faq/jeans"
+      }
+    },
+    {
+      "id": "select_faq",
+      "tool": "select_faq",
+      "args": {
+        "page": "$.s.read_page"
+      },
+      "guards": [
+        {
+          "ref": "$.s.select_faq.found",
+          "op": "true",
+          "why": "exactly one FAQ answer matches the question"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi there! Thanks for reaching out about our jeans — happy to help.\n\nI can fill you in on details like:\n\n- Sizes and fits available\n- Leg length / inseam options\n- Colours and styles\n- Washing, care and stain removal\n- Tailoring and hemming\n\nJust let me know which of these you'd like to hear about (or anything else you're wondering), and I'll send over the full details.\n\nIs there anything else I can help you with?",
+  "source": {
+    "procedureId": "proc-45",
+    "intent": "jeans",
+    "uses": 11,
+    "examples": 1,
+    "replyTemplate": "model",
+    "note": "FAQ family: steps from GBrain procedure (search_kb → read_page faq/<topic> → select-faq)"
+  },
+  "compiledAt": "2026-09-27T21:53:22.372Z",
+  "validation": {
+    "tested": 2,
+    "compiled": 0,
+    "correct": 0,
+    "precision": null
+  },
+  "enabled": false
+}

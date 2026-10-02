@@ -1,0 +1,129 @@
+T0003 refund_status            explore [I am looking for the sta] sim=0 steps=4 11.5s $0.1125 lib=0
+T0005 reset_2fa                explore [I can't access my accoun] sim=0 steps=4 12.8s $0.1304 lib=0
+T0001 status                   explore [I’m good thank you! Can ] sim=0 steps=7 12.9s $0.1856 lib=0
+T0002 status                   explore [Hi! I received an email ] sim=0 steps=6 15.3s $0.2042 lib=0
+T0007 refund_initiate          explore [i would like a refund. i] sim=0 steps=3 9.6s $0.1088 lib=0
+T0006 return_size              explore [Hello. I need to return ] sim=0 steps=5 22.7s $0.1637 lib=0
+T0010 recover_password         explore [Hello, I am having troub] sim=0 steps=2 8.0s $0.0621 lib=0
+T0009 manage_payment_method    explore [I would like to update m] sim=0 steps=2 12.0s $0.0684 lib=0
+T0004 status                   explore [Hello, I would like to c] sim=0 steps=7 28.5s $0.2604 lib=0
+T0008 status                   explore [HI I want to confirm my ] sim=0 steps=5 16.7s $0.1608 lib=0
+T0012 refund_status            explore [I want to know state of ] sim=0 steps=4 9.4s $0.1093 lib=0
+T0014 refund_status            explore [Yes I am checking on the] sim=0 steps=4 8.8s $0.1097 lib=0
+T0015 manage                   explore [Joyce Wu] sim=0 steps=2 5.4s $0.0602 lib=0
+T0013 status_due_date          explore [Hey I'm trying to find o] sim=0 steps=6 17.3s $0.1667 lib=0
+T0011 status                   explore [Hi, I think I need to do] sim=0 steps=5 19.8s $0.1898 lib=0
+T0016 bad_price_yesterday      explore [Yes i put an item in my ] sim=0 steps=5 13.0s $0.1470 lib=0
+T0017 refund_status            explore [Hello I have a question ] sim=0 steps=4 11.1s $0.1093 lib=0
+T0018 promo_code_invalid       explore [Hi, I received a prmo co] sim=0 steps=5 11.7s $0.1754 lib=0
+T0022 refund_status            explore [Hi. I would like to know] sim=0 steps=4 8.7s $0.1080 lib=0
+T0019 status                   explore [Hi, I'm checking to make] sim=0 steps=6 17.8s $0.2544 lib=0
+T0024 recover_password         explore [Hi, I'm trying to get in] sim=0 steps=3 7.6s $0.1005 lib=0
+T0021 bad_price_competitor     explore [Hi. I see a pair of boot] sim=0 steps=5 15.9s $0.1439 lib=0
+T0023 status_active            explore [Hi! I'm having some issu] sim=0 steps=7 20.3s $0.2240 lib=0
+T0020 return_stain             explore [I want to return a produ] sim=0 steps=6 23.8s $0.2311 lib=0
+T0026 status                   explore [I just want to check if ] sim=0 steps=6 15.9s $0.2088 lib=0
+T0025 manage_change_phone      explore [Good morning. I would li] sim=0 steps=3 16.7s $0.1138 lib=0
+T0028 return_size              explore [I bought the wrong size.] sim=0 steps=5 16.6s $0.1642 lib=0
+T0031 refund_status            explore [Hi, can you check the st] sim=0 steps=4 9.1s $0.1110 lib=0
+T0029 policy                   explore [Hello there I am Sanya A] sim=0 steps=6 15.8s $0.1526 lib=0
+T0032 return_stain             explore [Hi, I bough a coat for a] sim=0 steps=5 14.2s $0.1991 lib=0
+T0030 status_delivery_time     explore [Hello I would like to ch] sim=0 steps=6 22.5s $0.2206 lib=0
+T0027 status                   explore [Hi, I would like to chec] sim=0 steps=6 34.2s $0.2122 lib=0
+T0033 status_due_date          explore [I was wondering the stat] sim=0 steps=6 15.5s $0.2062 lib=0
+T0034 status                   explore [Hi, i want to confirm th] sim=0 steps=5 16.1s $0.1693 lib=0
+T0035 status                   explore [Hi can I confirm my ship] sim=0 steps=5 17.1s $0.1673 lib=0
+T0038 refund_status            explore [Hey, sorry to bother you] sim=0 steps=4 11.3s $0.1124 lib=0
+T0039 refund_status            explore [Hello,  I am trying to f] sim=0 steps=4 10.3s $0.1110 lib=0
+T0037 manage_pay_bill          explore [Hi there, I have subscri] sim=0 steps=3 17.6s $0.1145 lib=0
+T0042 promo_code_invalid       explore [Hi, I'm trying to use my] sim=0 steps=5 11.0s $0.1641 lib=0
+T0040 manage                   explore [Hey I was trying to trac] sim=0 steps=4 17.4s $0.1208 lib=0
+T0036 status                   explore [Hi, I want to check on t] sim=0 steps=6 28.4s $0.2278 lib=0
+T0043 status                   explore [Hi I want to confirm the] sim=0 steps=5 13.7s $0.1556 lib=0
+T0041 status                   explore [Hello, I placed an order] sim=0 steps=4 17.5s $0.1664 lib=0
+T0044 status                   explore [I want to make sure that] sim=0 steps=5 13.0s $0.1651 lib=0
+T0049 refund_update            explore [I want to find out about] sim=0 steps=4 10.1s $0.1127 lib=0
+T0046 return_color             explore [Hi...I bought Gale jeans] sim=0 steps=6 14.9s $0.2082 lib=0
+T0047 return_color             explore [I want to return the boo] sim=0 steps=5 15.0s $0.1633 lib=0
+T0045 return_color             explore [I would like to return a] sim=0 steps=6 18.8s $0.2429 lib=0
+T0050 status_service_removed   explore [I just want to make sure] sim=0 steps=3 11.1s $0.0752 lib=0
+T0048 status                   explore [hi I would like you to c] sim=0 steps=6 19.8s $0.2185 lib=0
+T0053 refund_status            explore [I was getting a refund o] sim=0 steps=4 8.5s $0.1094 lib=0
+T0052 status_due_date          explore [Hi, I would like to know] sim=0 steps=6 15.5s $0.1680 lib=0
+T0055 status                   explore [Hi, I'm curious if shipp] sim=0 steps=5 12.4s $0.1567 lib=0
+T0051 status                   explore [I need to confirm what p] sim=0 steps=6 17.1s $0.3208 lib=0
+T0056 return_size              explore [Hi there I have an issue] sim=0 steps=3 10.7s $0.1097 lib=0
+T0054 membership               explore [hii i am looking for inf] sim=0 steps=3 17.6s $0.1028 lib=0
+T0060 reset_2fa                explore [I want to remove the pho] sim=0 steps=4 11.2s $0.1422 lib=0
+T0059 cost                     explore [Hi these shipping costs ] sim=0 steps=6 13.6s $0.1806 lib=0
+T0062 manage                   explore [Hi . I’ve ordered wrong ] sim=0 steps=5 18.9s $0.1761 lib=0
+T0063 bad_price_yesterday      explore [Hi I saw an item on sale] sim=0 steps=5 13.0s $0.1449 lib=0
+T0057 status_service_added     explore [Hi I see in my email I w] sim=0 steps=10 35.9s $0.4395 lib=0
+T0061 status                   explore [I ordered a coat and a p] sim=0 steps=6 28.8s $0.2312 lib=0
+T0064 out_of_stock_general     explore [You can help me by letti] sim=0 steps=5 18.8s $0.1678 lib=0
+T0058 missing                  explore [Hi! i wanted to check on] sim=0 steps=9 35.0s $0.6820 lib=0
+T0066 promo_code_invalid       explore [Hello, I tried placing a] sim=0 steps=5 12.7s $0.1781 lib=0
+T0065 manage_dispute_bill      explore [Hi, I just checked my st] sim=0 steps=6 19.6s $0.1760 lib=0
+T0069 status                   explore [Hi, I just wanted to mak] sim=0 steps=6 14.3s $0.1644 lib=0
+T0067 bad_price_yesterday      explore [hi! I was calling to res] sim=0 steps=5 19.8s $0.2015 lib=0
+T0071 status                   explore [HI! I received an email ] sim=0 steps=5 17.3s $0.1579 lib=0
+T0068 return_size              explore [yes i would like to see ] sim=0 steps=8 23.1s $0.2665 lib=0
+T0072 missing                  explore [Hi I just want to check ] sim=0 steps=3 13.1s $0.1106 lib=0
+T0073 status                   explore [I got an email saying th] sim=0 steps=5 14.7s $0.1599 lib=0
+T0070 missing                  explore [Yes i still haven't rece] sim=0 steps=9 27.1s $0.4456 lib=0
+T0074 return_color             explore [Hello! i want to return ] sim=0 steps=6 16.7s $0.3173 lib=0
+T0076 manage                   explore [I need to change my ship] sim=0 steps=4 11.2s $0.1063 lib=0
+T0079 status                   explore [HI. How much are the Har] sim=0 steps=3 9.5s $0.1211 lib=0
+T0080 recover_username         explore [I forgot my username. No] sim=0 steps=3 11.6s $0.1046 lib=0
+T0078 status                   explore [yes i want to confirm my] sim=0 steps=7 19.4s $0.2154 lib=0
+T0082 recover_password         explore [I forgot my password - n] sim=0 steps=2 10.8s $0.0674 lib=0
+T0075 manage_cancel            explore [I recently ordered 2 jac] sim=0 steps=7 28.9s $0.2329 lib=0
+T0081 return_color             explore [Hi! I would like to retu] sim=0 steps=5 17.9s $0.1712 lib=0
+T0083 recover_password         explore [I am trying to log into ] sim=0 steps=2 6.6s $0.0622 lib=0
+T0077 missing                  explore [Hi, I want to check on m] sim=0 steps=10 31.9s $0.4318 lib=0
+T0085 mistimed_billing_already_returned explore [I have a question about ] sim=0 steps=3 10.1s $0.1069 lib=0
+T0086 reset_2fa                explore [I was going to check up ] sim=0 steps=4 10.5s $0.1066 lib=0
+T0088 status_service_added     explore [Hi! I need to check my a] sim=0 steps=6 16.0s $0.2006 lib=0
+T0089 shopping_cart            explore [Hi, I want to buy someth] sim=0 steps=5 13.5s $0.1576 lib=0
+T0090 status                   explore [Hi, I'm trying to make s] sim=0 steps=3 11.5s $0.1120 lib=0
+T0087 refund_initiate          explore [I need to request a refu] sim=0 steps=4 21.8s $0.1923 lib=0
+T0084 status                   explore [Hi, my name is Joseph Ba] sim=0 steps=8 28.3s $0.4144 lib=0
+T0094 refund_initiate          explore [Hi I have a question abo] sim=0 steps=3 10.8s $0.1065 lib=0
+T0091 jeans                    explore [What is the brand of the] sim=0 steps=6 21.5s $0.2680 lib=0
+T0093 manage_cancel            explore [Hello I would like to re] sim=0 steps=7 16.4s $0.2231 lib=0
+T0092 missing                  explore [will you check on my pac] sim=0 steps=6 19.0s $0.2450 lib=0
+T0096 jacket                   explore [Hi I am thinking about b] sim=0 steps=5 12.9s $0.2380 lib=0
+T0098 recover_password         explore [I forgot my password.  C] sim=0 steps=2 7.1s $0.0626 lib=0
+T0097 status_quantity          explore [Hello, I would like to c] sim=0 steps=4 10.6s $0.1547 lib=0
+T0100 status_delivery_time     explore [hi, i need to change my ] sim=0 steps=6 15.5s $0.2018 lib=0
+T0099 status                   explore [Hi, I want to confirm th] sim=0 steps=7 20.7s $0.2258 lib=0
+T0095 status                   explore [Hello yes I would like t] sim=0 steps=10 48.2s $0.6097 lib=0
+normalizer: none (baseline)
+┌───┬─────────┬────┬────────────┬─────────────────┬───────────────┬──────────────────┬────────────────────┬─────────────────────┬──────────────┐
+│   │ tickets │ n  │ recallRate │ recallPrecision │ costPerTicket │ secondsPerTicket │ toolCallsPerTicket │ modelCallsPerTicket │ libraryAtEnd │
+├───┼─────────┼────┼────────────┼─────────────────┼───────────────┼──────────────────┼────────────────────┼─────────────────────┼──────────────┤
+│ 0 │ 1-25    │ 25 │ 0.24       │ 0.83            │ 0.1783        │ 15.1             │ 4.8                │ 3.9                 │ 16           │
+│ 1 │ 26-50   │ 25 │ 0.52       │ 0.77            │ 0.1691        │ 16.1             │ 5.4                │ 4.1                 │ 26           │
+│ 2 │ 51-75   │ 25 │ 0.76       │ 0.58            │ 0.1794        │ 17.1             │ 5.7                │ 4.1                 │ 31           │
+│ 3 │ 76-96   │ 21 │ 0.81       │ 0.65            │ 0.1684        │ 17.5             │ 5.8                │ 4                   │ 35           │
+└───┴─────────┴────┴────────────┴─────────────────┴───────────────┴──────────────────┴────────────────────┴─────────────────────┴──────────────┘
+{
+  "costPerTicketFirstBucket": 0.1783,
+  "costPerTicketLastBucket": 0.1684,
+  "costFirstVsLast": "-6%",
+  "timeFirstVsLast": "16%",
+  "toolCallsFirstVsLast": "21%",
+  "recalledInLastBucket": "81%",
+  "librarySize": 35,
+  "recallPrecision": 0.673,
+  "recalledPathsMatchingHumanWorkflow": "7%",
+  "baselineCostPerTicket": 0.1832,
+  "lastBucketVsBaseline": "-8%",
+  "sameTicketsVsBaseline": {
+    "tickets": 96,
+    "memoryCost": 0.174,
+    "baselineCost": 0.1775,
+    "change": "-2%"
+  },
+  "lastBucketBaselineOverlap": 25
+}

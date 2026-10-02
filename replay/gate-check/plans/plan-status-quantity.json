@@ -1,0 +1,101 @@
+{
+  "id": "plan-status-quantity",
+  "version": 1,
+  "risk": "read",
+  "match": {
+    "operation": "retrieve",
+    "subject": "delivery",
+    "topic": "status_quantity",
+    "key": "Task 1: order issue: status quantity."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "pick_order",
+      "tool": "pick_order",
+      "args": {
+        "orders": "$.s.pull_up_account.account.orders",
+        "orderId": "$.bind.order_id",
+        "preferRefunded": false
+      },
+      "guards": [
+        {
+          "ref": "$.s.pick_order.id",
+          "op": "exists",
+          "why": "one unambiguous order"
+        }
+      ]
+    },
+    {
+      "id": "verify_identity",
+      "tool": "verify_identity",
+      "args": {
+        "name": "$.s.pull_up_account.account.name",
+        "accountId": "$.s.pull_up_account.account.accountId",
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.verify_identity.verified",
+          "op": "true",
+          "why": "identity verified"
+        }
+      ]
+    },
+    {
+      "id": "check_system",
+      "tool": "check_system",
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "$.s.pick_order.id",
+        "question": "Is the customer's status quantity claim a company error?"
+      }
+    },
+    {
+      "id": "shipping_status",
+      "tool": "shipping_status",
+      "args": {
+        "orderId": "$.s.pick_order.id"
+      },
+      "guards": [
+        {
+          "ref": "$.s.shipping_status.ok",
+          "op": "true",
+          "why": "order found"
+        }
+      ]
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out — I've verified your account and pulled up order {{s.pick_order.id}}.\n\n**Status:** placed {{s.pick_order.placedAt}}, shipped {{s.pick_order.shippedAt}}, and currently **{{s.shipping_status.shippingStatus}}** (tracking {{s.shipping_status.tracking}}; last scan \"{{s.shipping_status.scan.lastScan}}\" on {{s.shipping_status.scan.date}}, ETA {{s.shipping_status.scan.eta}}). It's headed to {{s.pick_order.shipTo}}, and the order total is {{s.pick_order.total|money}}, paid by {{s.pick_order.payment.method}} ({{s.pick_order.payment.status}}, invoice {{s.pick_order.invoiceId}}).\n\nOn your question about the items and quantities: I reviewed it in our system, and the result is \"{{s.check_system.meaning}}\".\n\nSince the package is already on its way, we can't change what's in this shipment. Please accept the delivery, and if anything inside doesn't match what you ordered, just reply here and we'll start a return and refund for you right away.\n\nAnything else I can help you with?",
+  "source": {
+    "procedureId": "proc-21",
+    "intent": "status_quantity",
+    "uses": 6,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 7,
+    "compiled": 4,
+    "correct": 3,
+    "precision": 0.75
+  },
+  "enabled": true
+}

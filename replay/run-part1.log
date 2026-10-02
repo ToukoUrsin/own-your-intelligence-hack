@@ -1,0 +1,278 @@
+T0003 refund_status            EXPLORED [Task 1: product defect: ] sim=0 steps=4 8.4s $0.1115 lib=3 +proc-1
+T0001 status                   EXPLORED [Task 1: shipping issue: ] sim=0 steps=8 15.2s $0.2408 lib=3 +proc-3
+T0005 reset_2fa                EXPLORED [Task 1: account access: ] sim=0 steps=4 10.8s $0.1072 lib=4 +proc-2
+T0006 return_size              EXPLORED [Task 1: product defect: ] sim=0 steps=5 18.1s $0.2020 lib=4 +proc-4
+T0002 status                   EXPLORED [Task 1: shipping issue: ] sim=0 steps=5 21.7s $0.1641 lib=4 ^proc-3
+T0008 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 8.3s $0.0990 lib=4 ^proc-3
+T0007 refund_initiate          EXPLORED [Task 1: product defect: ] sim=0.651 steps=3 11.1s $0.1119 lib=6 +proc-5
+H001 return_color             EXPLORED [Task 1: product defect: ] sim=0.667 steps=3 8.4s $0.1045 lib=8 +proc-6
+T0004 status                   EXPLORED [Task 1: shipping issue: ] sim=0 steps=7 36.4s $0.2845 lib=8 ^proc-3
+T0009 manage_payment_method    EXPLORED [Task 1: manage account: ] sim=0.56 steps=2 10.4s $0.0674 lib=8 +proc-7
+T0010 recover_password         EXPLORED [Task 1: account access: ] sim=0.632 steps=2 8.1s $0.0632 lib=8 +proc-8
+T0012 refund_status            RECALLED [Task 1: product defect: ] sim=1 steps=3 5.1s $0.0339 lib=8 ^proc-1
+T0014 refund_status            RECALLED [Task 1: product defect: ] sim=1 steps=3 5.6s $0.0332 lib=8 ^proc-1
+T0015 manage                   EXPLORED [Task 1: shipping issue: ] sim=0.581 steps=2 7.0s $0.0611 lib=9 +proc-9
+T0011 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 16.3s $0.1053 lib=9 ^proc-3
+T0017 refund_status            RECALLED [Task 1: product defect: ] sim=1 steps=3 7.0s $0.0332 lib=10 ^proc-1
+T0016 bad_price_yesterday      EXPLORED [Task 1: purchase dispute] sim=0 steps=5 13.8s $0.1517 lib=10 +proc-10
+T0013 status_due_date          EXPLORED [Task 1: subscription inq] sim=0.613 steps=7 20.3s $0.2837 lib=11 +proc-11
+T0018 promo_code_invalid       EXPLORED [Task 1: purchase dispute] sim=0 steps=5 13.9s $0.1741 lib=12 +proc-12
+H002 shopping_cart            EXPLORED [Task 1: troubleshoot sit] sim=0 steps=5 13.6s $0.1242 lib=13 +proc-13
+T0022 refund_status            RECALLED [Task 1: product defect: ] sim=1 steps=3 6.0s $0.0338 lib=13 ^proc-1
+T0024 recover_password         RECALLED [Task 1: account access: ] sim=1 steps=1 4.1s $0.0171 lib=13 ^proc-8
+T0020 return_stain             EXPLORED [Task 1: product defect: ] sim=0.526 steps=5 16.7s $0.1779 lib=15 +proc-14
+T0021 bad_price_competitor     EXPLORED [Task 1: purchase dispute] sim=0.642 steps=5 16.3s $0.1751 lib=15 +proc-15
+T0023 status_active            EXPLORED [Task 1: subscription inq] sim=0.646 steps=3 12.0s $0.1134 lib=16 +proc-16
+T0025 manage_change_phone      EXPLORED [Task 1: manage account: ] sim=0.626 steps=3 11.9s $0.0927 lib=17 +proc-17
+T0027 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 7.0s $0.0531 lib=17 ^proc-3
+T0026 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 12.7s $0.1104 lib=17 ^proc-3
+T0028 return_size              RECALLED [Task 1: product defect: ] sim=1 steps=4 9.1s $0.0559 lib=17 ^proc-4
+T0019 status                   EXPLORED [Task 1: storewide query:] sim=0 steps=9 36.3s $0.5347 lib=19 +proc-18
+H003 cost                     EXPLORED [Task 1: shipping issue: ] sim=0.711 steps=5 11.0s $0.1627 lib=19 +proc-19
+T0031 refund_status            RECALLED [Task 1: product defect: ] sim=1 steps=3 5.1s $0.0325 lib=19 ^proc-1
+T0033 status_due_date          RECALLED [Task 1: subscription inq] sim=1 steps=5 6.8s $0.0395 lib=19 ^proc-11
+T0032 return_stain             EXPLORED [Hi, I bough a coat for a] sim=0 steps=5 12.6s $0.1562 lib=19
+T0034 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 11.1s $0.0832 lib=21 ^proc-3
+T0029 policy                   EXPLORED [Task 1: storewide query:] sim=0 steps=6 17.8s $0.1250 lib=21 +proc-20
+T0030 status_delivery_time     EXPLORED [Task 1: order issue: sta] sim=0.698 steps=6 16.0s $0.2158 lib=21 +proc-21
+T0035 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 9.2s $0.0824 lib=21 ^proc-3
+T0038 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=21
+T0039 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=21
+T0036 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=5 6.6s $0.0652 lib=21 ^proc-3
+T0040 manage                   RECALLED [Task 1: shipping issue: ] sim=1 steps=3 3.4s $0.0412 lib=21 ^proc-3
+T0037 manage_pay_bill          RECALLED [Task 1: subscription inq] sim=1 steps=3 6.9s $0.0354 lib=21 ~proc-16
+T0042 promo_code_invalid       RECALLED [Task 1: purchase dispute] sim=1 steps=4 5.5s $0.0551 lib=21 ^proc-12
+H004 bad_price_competitor     RECALLED [Task 1: purchase dispute] sim=1 steps=3 13.9s $0.0508 lib=21 ^proc-15
+T0041 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 9.5s $0.0831 lib=21 ^proc-3
+T0045 return_color             RECALLED [Task 1: product defect: ] sim=1 steps=2 3.1s $0.0175 lib=21 ^proc-6
+T0043 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 9.4s $0.0823 lib=21 ^proc-3
+T0044 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 8.9s $0.0731 lib=21 ^proc-3
+T0046 return_color             RECALLED [Task 1: product defect: ] sim=1 steps=2 3.1s $0.0186 lib=21 ^proc-6
+H005 refund_initiate          RECALLED [Task 1: product defect: ] sim=1 steps=2 6.3s $0.0295 lib=21 ^proc-5
+T0051 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=5 4.4s $0.0478 lib=21 ^proc-3
+T0048 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 10.9s $0.0795 lib=21 ^proc-3
+T0050 status_service_removed   RECALLED [Task 1: subscription inq] sim=1 steps=6 7.9s $0.0612 lib=22 ^proc-11
+T0049 refund_update            EXPLORED [Task 1: product defect: ] sim=0.688 steps=4 9.3s $0.1129 lib=22 +proc-22
+T0047 return_color             RECALLED [Task 1: product defect: ] sim=1 steps=2 6.5s $0.0189 lib=22 ^proc-6
+T0053 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=22
+T0055 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=5 5.0s $0.0664 lib=23 ^proc-3
+T0052 status_due_date          EXPLORED [Task 1: subscription inq] sim=0.766 steps=6 13.4s $0.1659 lib=23 +proc-23
+T0056 return_size              RECALLED [Task 1: product defect: ] sim=1 steps=4 12.4s $0.0646 lib=23 ^proc-4
+T0054 membership               EXPLORED [Task 1: storewide query:] sim=0.647 steps=4 14.8s $0.1136 lib=24 +proc-24
+T0059 cost                     RECALLED [Task 1: shipping issue: ] sim=1 steps=4 7.6s $0.0570 lib=24 ^proc-19
+T0060 reset_2fa                RECALLED [Task 1: manage account: ] sim=1 steps=2 5.8s $0.0336 lib=24 ^proc-17
+T0058 missing                  EXPLORED [Task 1: shipping issue: ] sim=0.648 steps=4 12.6s $0.1544 lib=25 +proc-25
+T0062 manage                   RECALLED [Task 1: shipping issue: ] sim=1 steps=3 7.2s $0.0715 lib=25 ~proc-9
+T0057 status_service_added     EXPLORED [Task 1: purchase dispute] sim=0 steps=9 28.8s $0.5881 lib=26 +proc-26
+T0063 bad_price_yesterday      RECALLED [Task 1: purchase dispute] sim=1 steps=4 6.8s $0.0564 lib=26 ^proc-10
+H006 manage_change_address    EXPLORED [Task 1: single item quer] sim=0 steps=11 37.3s $0.6675 lib=27 +proc-27
+T0061 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 19.8s $0.0873 lib=27 ^proc-3
+T0066 promo_code_invalid       RECALLED [Task 1: purchase dispute] sim=1 steps=4 5.9s $0.0556 lib=27 ^proc-12
+T0067 bad_price_yesterday      RECALLED [Task 1: purchase dispute] sim=1 steps=5 10.5s $0.0866 lib=28 ^proc-10
+H007 search_results           EXPLORED [Task 1: troubleshoot sit] sim=0 steps=6 21.9s $0.1737 lib=29 +proc-28
+T0064 out_of_stock_general     EXPLORED [Task 1: purchase dispute] sim=0 steps=5 20.9s $0.1662 lib=29 +proc-29
+T0069 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 8.3s $0.0788 lib=29 ^proc-3
+T0068 return_size              RECALLED [Task 1: product defect: ] sim=1 steps=5 14.6s $0.0853 lib=29 ^proc-4
+T0070 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 7.2s $0.0411 lib=29 ^proc-25
+H008 shopping_cart            RECALLED [Task 1: troubleshoot sit] sim=1 steps=4 4.5s $0.0386 lib=29 ^proc-13
+T0072 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 9.5s $0.0433 lib=29 ^proc-25
+T0065 manage_dispute_bill      EXPLORED [Task 1: subscription inq] sim=0.683 steps=6 33.2s $0.1972 lib=30 +proc-30
+T0071 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 15.3s $0.1034 lib=30 ^proc-3
+T0074 return_color             RECALLED [Task 1: product defect: ] sim=1 steps=4 8.4s $0.0426 lib=30 ~proc-6
+T0073 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 14.8s $0.1124 lib=30 ^proc-3
+T0079 status                   RECALLED [Task 1: single item quer] sim=1 steps=2 1.6s $0.0341 lib=30 ^proc-27
+T0078 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 9.5s $0.0968 lib=30 ^proc-3
+T0081 return_color             RECALLED [Task 1: product defect: ] sim=1 steps=2 4.5s $0.0212 lib=30 ^proc-6
+T0077 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 10.1s $0.0549 lib=30 ^proc-25
+T0075 manage_cancel            EXPLORED [Task 1: order issue: man] sim=0.59 steps=8 24.6s $0.2282 lib=31 +proc-31
+T0076 manage                   EXPLORED [Task 1: order issue: man] sim=0.607 steps=4 20.6s $0.1075 lib=32 +proc-32
+T0082 recover_password         RECALLED [Task 1: account access: ] sim=1 steps=1 4.1s $0.0149 lib=32 ^proc-8
+T0080 recover_username         EXPLORED [Task 1: account access: ] sim=0.67 steps=3 14.7s $0.1093 lib=33 +proc-33
+T0083 recover_password         RECALLED [Task 1: account access: ] sim=1 steps=1 3.9s $0.0163 lib=33 ^proc-8
+T0084 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 7.6s $0.0749 lib=34 ^proc-3
+H009 bad_price_competitor     EXPLORED [Task 1: single item quer] sim=0.661 steps=6 14.0s $0.2063 lib=34 +proc-34
+T0086 reset_2fa                RECALLED [Task 1: account access: ] sim=1 steps=3 6.7s $0.0330 lib=34 ^proc-2
+T0087 refund_initiate          RECALLED [Task 1: product defect: ] sim=1 steps=2 6.2s $0.0305 lib=35 ^proc-5
+T0085 mistimed_billing_already_returned EXPLORED [Task 1: purchase dispute] sim=0.625 steps=3 9.4s $0.1068 lib=35 +proc-35
+T0089 shopping_cart            RECALLED [Task 1: troubleshoot sit] sim=1 steps=4 4.5s $0.0372 lib=35 ^proc-13
+T0092 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 7.7s $0.0542 lib=35 ^proc-25
+T0090 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 14.2s $0.0853 lib=35 ^proc-3
+T0088 status_service_added     EXPLORED [Task 1: manage account: ] sim=0.604 steps=6 15.6s $0.2342 lib=36 +proc-36
+H010 mistimed_billing_never_bought RECALLED [Task 1: purchase dispute] sim=1 steps=6 20.7s $0.1231 lib=36 ^proc-26
+T0093 manage_cancel            RECALLED [Task 1: order issue: man] sim=1 steps=8 16.6s $0.1178 lib=36 ^proc-31
+T0096 jacket                   RECALLED [Task 1: single item quer] sim=1 steps=2 6.4s $0.0481 lib=36 ^proc-34
+T0095 status                   RECALLED [Task 1: storewide query:] sim=1 steps=3 8.1s $0.0665 lib=36 ^proc-18
+T0094 refund_initiate          RECALLED [Task 1: product defect: ] sim=1 steps=2 7.0s $0.0296 lib=36 ^proc-5
+T0091 jeans                    EXPLORED [Task 1: single item quer] sim=0.629 steps=6 24.2s $0.2979 lib=37 +proc-37
+T0098 recover_password         RECALLED [Task 1: account access: ] sim=1 steps=1 4.0s $0.0154 lib=37 ^proc-8
+H011 manage_payment_method    RECALLED [Task 1: manage account: ] sim=1 steps=1 3.6s $0.0158 lib=37 ^proc-7
+T0100 status_delivery_time     RECALLED [Task 1: order issue: sta] sim=1 steps=5 6.1s $0.0616 lib=38 ^proc-21
+T0097 status_quantity          EXPLORED [Task 1: order issue: sta] sim=0.642 steps=4 9.7s $0.1527 lib=38 +proc-38
+T0102 recover_username         RECALLED [Task 1: account access: ] sim=1 steps=1 4.8s $0.0176 lib=38 ^proc-33
+T0099 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 12.9s $0.1062 lib=38 ^proc-3
+T0103 manage_change_address    RECALLED [Task 1: shipping issue: ] sim=1 steps=6 7.7s $0.0526 lib=38 ^proc-3
+T0107 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=38
+T0101 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 13.4s $0.0816 lib=38 ^proc-3
+T0104 status_due_amount        RECALLED [Task 1: subscription inq] sim=1 steps=5 7.0s $0.0387 lib=39 ^proc-11
+T0105 manage_change_address    EXPLORED [Task 1: manage account: ] sim=0.648 steps=2 6.9s $0.0633 lib=39 +proc-39
+T0108 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 10.2s $0.0967 lib=39 ^proc-3
+T0110 manage_change_address    RECALLED [Task 1: manage account: ] sim=1 steps=1 2.3s $0.0146 lib=39 ^proc-39
+T0111 recover_password         RECALLED [Task 1: account access: ] sim=1 steps=1 4.6s $0.0159 lib=39 ^proc-8
+T0106 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=9 17.3s $0.2169 lib=39 ^proc-3
+T0109 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 13.8s $0.0747 lib=39 ^proc-3
+T0113 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=5 5.2s $0.0493 lib=39 ^proc-3
+H012 manage_change_phone      EXPLORED [Task 1: single item quer] sim=0.535 steps=6 16.7s $0.2377 lib=40 +proc-40
+T0117 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0003 lib=41
+T0112 refund_status            EXPLORED [Task 1: order issue: sta] sim=0.638 steps=2 7.7s $0.0678 lib=41 +proc-41
+T0114 manage_change_name       EXPLORED [Task 1: manage account: ] sim=0.684 steps=2 6.5s $0.0624 lib=42 +proc-42
+H013 manage_change_name       RECALLED [Task 1: manage account: ] sim=1 steps=1 3.0s $0.0163 lib=42 ^proc-42
+T0120 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=42
+T0115 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 15.8s $0.0834 lib=42 ^proc-3
+T0118 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 12.7s $0.1095 lib=42 ^proc-3
+T0119 status_delivery_time     RECALLED [Task 1: order issue: sta] sim=1 steps=5 14.5s $0.0669 lib=42 ^proc-21
+T0116 return_size              RECALLED [Task 1: product defect: ] sim=1 steps=3 20.5s $0.0577 lib=42 ^proc-4
+T0121 manage_create            EXPLORED [Task 1: order issue: man] sim=0.669 steps=6 14.4s $0.1716 lib=43 +proc-43
+T0123 manage_cancel            RECALLED [Task 1: order issue: man] sim=1 steps=8 15.0s $0.1191 lib=43 ^proc-31
+T0122 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 19.8s $0.1136 lib=43 ^proc-3
+T0125 reset_2fa                RECALLED [Task 1: account access: ] sim=1 steps=3 7.3s $0.0327 lib=43 ^proc-2
+T0126 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=3 8.6s $0.0917 lib=43 ^proc-25
+T0127 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=3 3.6s $0.0410 lib=43 ^proc-3
+T0130 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0003 lib=43
+T0128 pricing                  RECALLED [Task 1: storewide query:] sim=1 steps=3 3.3s $0.0617 lib=43 ^proc-18
+T0124 manage_cancel            RECALLED [Task 1: order issue: man] sim=1 steps=8 9.6s $0.1179 lib=43 ^proc-31
+H014 out_of_stock_one_item    EXPLORED [Task 1: purchase dispute] sim=0.58 steps=2 9.4s $0.0633 lib=44 +proc-44
+T0131 boots                    RECALLED [Task 1: single item quer] sim=1 steps=2 2.4s $0.0363 lib=44 ^proc-27
+T0133 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 8.5s $0.1022 lib=44 ^proc-3
+T0132 promo_code_invalid       RECALLED [Task 1: purchase dispute] sim=1 steps=3 6.7s $0.0369 lib=44 ^proc-12
+T0129 status_mystery_fee       EXPLORED [Task 1: order issue: sta] sim=0.635 steps=6 20.1s $0.2149 lib=45 +proc-45
+T0134 status_delivery_time     RECALLED [Task 1: shipping issue: ] sim=1 steps=6 13.9s $0.0768 lib=45 ^proc-3
+H015 promo_code_out_of_date   RECALLED [Task 1: purchase dispute] sim=1 steps=3 5.4s $0.0385 lib=45 ^proc-12
+T0135 status_delivery_time     RECALLED [Task 1: order issue: sta] sim=1 steps=5 7.3s $0.0787 lib=45 ^proc-21
+T0138 return_color             RECALLED [Task 1: product defect: ] sim=1 steps=2 2.8s $0.0199 lib=45 ^proc-6
+T0136 manage_cancel            RECALLED [Task 1: order issue: man] sim=1 steps=8 11.6s $0.1238 lib=45 ^proc-31
+T0139 policy                   RECALLED [Task 1: storewide query:] sim=1 steps=3 4.7s $0.0401 lib=45 ^proc-20
+T0141 out_of_stock_general     RECALLED [Task 1: purchase dispute] sim=1 steps=2 4.6s $0.0378 lib=45 ^proc-29
+T0140 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 10.5s $0.0838 lib=45 ^proc-3
+H016 multi                    COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0004 lib=45
+T0142 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 8.0s $0.0742 lib=45 ^proc-3
+T0143 reset_2fa                RECALLED [Task 1: account access: ] sim=1 steps=3 4.9s $0.0323 lib=45 ^proc-2
+T0144 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=3 6.6s $0.0401 lib=45 ^proc-3
+T0145 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=45
+T0137 status_credit_missing    EXPLORED [Task 1: manage account: ] sim=0.6 steps=5 18.1s $0.1613 lib=46 +proc-46
+T0146 jeans                    RECALLED [Task 1: single item quer] sim=1 steps=3 5.6s $0.0545 lib=46 ^proc-40
+T0147 status_credit_missing    RECALLED [Task 1: manage account: ] sim=1 steps=1 4.5s $0.0198 lib=46 ^proc-46
+T0150 refund_status            RECALLED [Task 1: product defect: ] sim=1 steps=4 5.9s $0.0361 lib=46 ^proc-1
+T0148 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=5 7.0s $0.0480 lib=46 ^proc-3
+T0149 status_delivery_time     RECALLED [Task 1: order issue: sta] sim=1 steps=5 6.4s $0.0790 lib=46 ^proc-21
+T0151 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 5.1s $0.0371 lib=46 ^proc-25
+T0155 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0003 lib=46
+T0156 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0003 lib=46
+T0152 refund_update            RECALLED [Task 1: product defect: ] sim=1 steps=3 6.5s $0.0352 lib=46 ^proc-22
+T0154 recover_username         RECALLED [Task 1: account access: ] sim=1 steps=1 4.7s $0.0170 lib=46 ^proc-33
+T0158 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0003 lib=46
+T0153 refund_initiate          RECALLED [Task 1: product defect: ] sim=1 steps=3 6.8s $0.0363 lib=46 ^proc-5
+T0159 manage_payment_method    RECALLED [Task 1: manage account: ] sim=1 steps=1 1.8s $0.0147 lib=46 ^proc-7
+T0157 refund_initiate          RECALLED [Task 1: product defect: ] sim=1 steps=2 7.1s $0.0332 lib=46 ~proc-5
+H017 multi                    RECALLED [Task 1: order issue: man] sim=1 steps=7 12.8s $0.1050 lib=46 ^proc-31
+T0162 refund_status            RECALLED [Task 1: purchase dispute] sim=1 steps=2 5.0s $0.0309 lib=46 ^proc-35
+T0164 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0003 lib=46
+T0161 refund_initiate          RECALLED [Task 1: product defect: ] sim=1 steps=2 6.7s $0.0310 lib=46 ^proc-5
+T0160 status_mystery_fee       RECALLED [Task 1: order issue: sta] sim=1 steps=5 8.9s $0.0616 lib=46 ^proc-45
+T0166 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0004 lib=46
+T0168 status_payment_method    RECALLED [Task 1: order issue: sta] sim=1 steps=1 3.4s $0.0173 lib=46 ^proc-41
+H018 multi                    RECALLED [Task 1: shipping issue: ] sim=1 steps=2 12.4s $0.0626 lib=46 ~proc-9
+T0167 promo_code_invalid       RECALLED [Task 1: purchase dispute] sim=1 steps=4 8.3s $0.0554 lib=46 ^proc-12
+T0165 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 12.7s $0.1006 lib=46 ^proc-3
+T0172 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=48
+T0169 status_shipping_question EXPLORED [Task 1: manage account: ] sim=0.725 steps=4 10.1s $0.1238 lib=48 +proc-48
+T0163 credit_card              EXPLORED [Task 1: troubleshoot sit] sim=0 steps=5 19.3s $0.1173 lib=48 +proc-47
+H019 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=3 7.1s $0.0393 lib=48 ^proc-25
+T0171 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 5.8s $0.0374 lib=48 ^proc-25
+T0170 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 6.8s $0.0518 lib=48 ^proc-3
+T0175 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=48
+T0176 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=48
+T0173 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 9.3s $0.0425 lib=48 ^proc-25
+T0178 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 8.1s $0.0711 lib=48 ^proc-3
+T0180 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 6.5s $0.0394 lib=48 ^proc-25
+T0177 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 11.4s $0.0783 lib=48 ^proc-3
+T0174 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 13.9s $0.1617 lib=48 ^proc-3
+T0179 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 9.1s $0.0784 lib=48 ^proc-3
+T0182 credit_card              RECALLED [Task 1: troubleshoot sit] sim=1 steps=4 5.3s $0.0371 lib=48 ^proc-47
+H020 manage_cancel            RECALLED [Task 1: shipping issue: ] sim=1 steps=2 7.4s $0.0510 lib=48 ~proc-9
+T0185 manage_upgrade           RECALLED [Task 1: shipping issue: ] sim=1 steps=3 4.4s $0.0387 lib=48 ^proc-3
+T0181 return_stain             RECALLED [Task 1: product defect: ] sim=1 steps=4 8.4s $0.0590 lib=48 ^proc-14
+T0183 status_active            RECALLED [Task 1: subscription inq] sim=1 steps=5 6.3s $0.0403 lib=48 ^proc-11
+T0186 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0004 lib=48
+T0184 timing                   EXPLORED [Task 1: storewide query:] sim=0.634 steps=2 5.7s $0.0611 lib=49 +proc-49
+T0187 refund_initiate          RECALLED [Task 1: product defect: ] sim=1 steps=1 3.9s $0.0153 lib=49 ^proc-5
+T0189 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=3 3.9s $0.0472 lib=49 ^proc-3
+T0190 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 9.9s $0.0790 lib=49 ^proc-3
+H021 mistimed_billing_never_bought RECALLED [Task 1: purchase dispute] sim=1 steps=4 11.1s $0.0887 lib=49 ^proc-26
+T0192 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=3 5.8s $0.0378 lib=49 ^proc-25
+T0191 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 9.1s $0.0806 lib=49 ^proc-3
+T0188 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 13.5s $0.0829 lib=49 ^proc-3
+T0193 boots                    RECALLED [Task 1: single item quer] sim=1 steps=2 6.5s $0.0459 lib=49 ^proc-34
+T0194 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=49
+T0198 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=49
+H022 missing                  RECALLED [Task 1: order issue: sta] sim=1 steps=4 6.3s $0.0442 lib=49 ^proc-38
+T0197 timing                   RECALLED [Task 1: storewide query:] sim=1 steps=2 6.1s $0.0381 lib=49 ~proc-49
+T0195 return_size              RECALLED [Task 1: product defect: ] sim=1 steps=4 9.5s $0.0561 lib=49 ^proc-4
+T0199 manage_pay_bill          RECALLED [Task 1: subscription inq] sim=1 steps=5 6.2s $0.0404 lib=49 ^proc-11
+T0196 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 13.5s $0.1183 lib=49 ^proc-3
+T0203 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0003 lib=49
+T0200 recover_username         RECALLED [Task 1: account access: ] sim=1 steps=1 5.7s $0.0202 lib=49 ^proc-33
+T0202 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=5 7.2s $0.0649 lib=49 ^proc-3
+T0205 refund_initiate          RECALLED [Task 1: product defect: ] sim=1 steps=1 3.0s $0.0144 lib=49 ^proc-5
+T0204 status_delivery_time     RECALLED [Task 1: order issue: sta] sim=1 steps=5 8.3s $0.0796 lib=49 ^proc-21
+T0201 promo_code_invalid       RECALLED [Task 1: purchase dispute] sim=1 steps=5 10.9s $0.0860 lib=49 ^proc-12
+T0207 policy                   RECALLED [Task 1: storewide query:] sim=1 steps=3 3.8s $0.0384 lib=49 ^proc-20
+T0206 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=6 7.4s $0.0538 lib=49 ^proc-3
+T0212 recover_password         COMPILED [Task 1: account access: ] sim=1 steps=1 0.0s $0.0003 lib=49
+T0208 status_quantity          RECALLED [Task 1: order issue: sta] sim=1 steps=3 5.3s $0.0364 lib=49 ^proc-38
+H023 return_size              RECALLED [Task 1: product defect: ] sim=1 steps=4 7.6s $0.0553 lib=49 ^proc-4
+T0209 return_size              RECALLED [Task 1: product defect: ] sim=1 steps=4 10.3s $0.0635 lib=49 ^proc-14
+T0215 refund_status            COMPILED [Task 1: product defect: ] sim=1 steps=3 0.0s $0.0003 lib=49
+T0210 status                   RECALLED [Task 1: shipping issue: ] sim=1 steps=7 11.7s $0.0924 lib=49 ^proc-3
+T0211 manage_downgrade         EXPLORED [Task 1: order issue: man] sim=0.716 steps=5 10.4s $0.1502 lib=50 +proc-50
+T0213 promo_code_invalid       RECALLED [Task 1: purchase dispute] sim=1 steps=4 9.7s $0.0672 lib=50 ^proc-12
+H024 refund_status            RECALLED [Task 1: purchase dispute] sim=1 steps=2 3.5s $0.0312 lib=50 ^proc-35
+T0214 cost                     RECALLED [Task 1: shipping issue: ] sim=1 steps=5 11.1s $0.0883 lib=50 ^proc-19
+T0217 status_payment_method    RECALLED [Task 1: order issue: sta] sim=1 steps=1 3.7s $0.0178 lib=50 ^proc-41
+T0219 shirt                    RECALLED [Task 1: single item quer] sim=1 steps=1 4.1s $0.0249 lib=50 ^proc-37
+T0218 search_results           RECALLED [Task 1: troubleshoot sit] sim=1 steps=4 6.6s $0.0521 lib=50 ^proc-28
+T0220 return_size              RECALLED [Task 1: product defect: ] sim=1 steps=4 8.6s $0.0559 lib=50 ^proc-4
+T0216 missing                  RECALLED [Task 1: shipping issue: ] sim=1 steps=9 21.0s $0.1780 lib=50 ^proc-3
+normalizer: river
+┌───┬─────────┬────┬────────────┬─────────────────┬───────────────┬──────────────────┬────────────────────┬─────────────────────┬──────────────┬────────────────────────────────────────────────────┬──────────────────────────────────────────────────────────┐
+│   │ tickets │ n  │ recallRate │ recallPrecision │ costPerTicket │ secondsPerTicket │ toolCallsPerTicket │ modelCallsPerTicket │ libraryAtEnd │ tierShare                                          │ costByTier                                               │
+├───┼─────────┼────┼────────────┼─────────────────┼───────────────┼──────────────────┼────────────────────┼─────────────────────┼──────────────┼────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────┤
+│ 0 │ 1-25    │ 25 │ 0.28       │ 1               │ 0.1389        │ 13.6             │ 4.4                │ 3.6                 │ 19           │ { explored: 0.72, recalled: 0.28, compiled: 0 }    │ { explored: 0.1732, recalled: 0.0508, compiled: null }   │
+│ 1 │ 26-50   │ 25 │ 0.76       │ 0.84            │ 0.068         │ 7.9              │ 4.7                │ 2.5                 │ 22           │ { explored: 0.16, recalled: 0.76, compiled: 0.08 } │ { explored: 0.1525, recalled: 0.0573, compiled: 0.0003 } │
+│ 2 │ 51-75   │ 25 │ 0.68       │ 0.94            │ 0.1099        │ 12.5             │ 5                  │ 3.3                 │ 31           │ { explored: 0.28, recalled: 0.68, compiled: 0.04 } │ { explored: 0.2305, recalled: 0.0667, compiled: 0.0003 } │
+│ 3 │ 76-100  │ 25 │ 0.76       │ 0.89            │ 0.0803        │ 9.4              │ 3.8                │ 2.7                 │ 38           │ { explored: 0.24, recalled: 0.76, compiled: 0 }    │ { explored: 0.1681, recalled: 0.0526, compiled: null }   │
+│ 4 │ 101-125 │ 25 │ 0.72       │ 0.89            │ 0.069         │ 9.5              │ 4.6                │ 2.5                 │ 43           │ { explored: 0.16, recalled: 0.72, compiled: 0.12 } │ { explored: 0.0913, recalled: 0.0755, compiled: 0.0003 } │
+│ 5 │ 126-150 │ 25 │ 0.84       │ 0.76            │ 0.0637        │ 7                │ 3.9                │ 2.4                 │ 46           │ { explored: 0.08, recalled: 0.84, compiled: 0.08 } │ { explored: 0.1881, recalled: 0.0578, compiled: 0.0003 } │
+│ 6 │ 151-175 │ 25 │ 0.64       │ 0.88            │ 0.0403        │ 5.7              │ 2.9                │ 1.7                 │ 48           │ { explored: 0.08, recalled: 0.64, compiled: 0.28 } │ { explored: 0.1206, recalled: 0.0477, compiled: 0.0003 } │
+│ 7 │ 176-200 │ 25 │ 0.8        │ 0.8             │ 0.0466        │ 6.4              │ 3.9                │ 2                   │ 49           │ { explored: 0.04, recalled: 0.8, compiled: 0.16 }  │ { explored: 0.0611, recalled: 0.0552, compiled: 0.0003 } │
+│ 8 │ 201-220 │ 20 │ 0.8        │ 0.75            │ 0.0582        │ 7.1              │ 3.9                │ 2.5                 │ 50           │ { explored: 0.05, recalled: 0.8, compiled: 0.15 }  │ { explored: 0.1502, recalled: 0.0634, compiled: 0.0003 } │
+└───┴─────────┴────┴────────────┴─────────────────┴───────────────┴──────────────────┴────────────────────┴─────────────────────┴──────────────┴────────────────────────────────────────────────────┴──────────────────────────────────────────────────────────┘
+{
+  "costPerTicketFirstBucket": 0.1389,
+  "costPerTicketLastBucket": 0.0582,
+  "costFirstVsLast": "-58%",
+  "timeFirstVsLast": "-48%",
+  "toolCallsFirstVsLast": "-11%",
+  "recalledInLastBucket": "80%",
+  "librarySize": 50,
+  "recallPrecision": 0.85,
+  "recalledPathsMatchingHumanWorkflow": "17%",
+  "baselineCostPerTicket": 0.1832,
+  "lastBucketVsBaseline": "-68%",
+  "sameTicketsVsBaseline": {
+    "tickets": 100,
+    "memoryCost": 0.0993,
+    "baselineCost": 0.1832,
+    "change": "-46%"
+  },
+  "lastBucketBaselineOverlap": 0
+}

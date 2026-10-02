@@ -1,0 +1,56 @@
+{
+  "id": "plan-manage-change-address",
+  "version": 1,
+  "risk": "write",
+  "match": {
+    "operation": "request",
+    "subject": "address",
+    "topic": "manage_change_address",
+    "key": "Task 1: manage account: manage change address."
+  },
+  "requires": [
+    "email"
+  ],
+  "steps": [
+    {
+      "id": "pull_up_account",
+      "tool": "pull_up_account",
+      "args": {
+        "email": "$.bind.email"
+      },
+      "guards": [
+        {
+          "ref": "$.s.pull_up_account.found",
+          "op": "true",
+          "why": "account found"
+        }
+      ]
+    },
+    {
+      "id": "record_reason",
+      "tool": "record_reason",
+      "write": true,
+      "args": {
+        "email": "$.bind.email",
+        "orderId": "-",
+        "reason": "manage change address"
+      }
+    }
+  ],
+  "reply": "Hi {{s.pull_up_account.account.name|first}}, thanks for reaching out!\n\nI verified your identity and pulled up your account. The address we have on file for you is:\n\n**{{s.pull_up_account.account.defaultAddress}}**\n\nThat's the address your orders are set to ship to, and I've noted your request about the shipping address on your account so it's on record.\n\nIf that address isn't the one you want used going forward, just reply with the full new address (street, city, state, ZIP and country) and I'll get it updated for you.\n\nIs there anything else I can help you with today?",
+  "source": {
+    "procedureId": "proc-18",
+    "intent": "manage_change_address",
+    "uses": 12,
+    "examples": 5,
+    "replyTemplate": "model"
+  },
+  "compiledAt": "2026-09-27T21:53:22.371Z",
+  "validation": {
+    "tested": 10,
+    "compiled": 10,
+    "correct": 4,
+    "precision": 0.4
+  },
+  "enabled": false
+}
